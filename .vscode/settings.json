@@ -1,0 +1,24 @@
+{
+    "al.codeAnalyzers": [
+        "${CodeCop}",
+        "${UICop}",
+        "${PerTenantExtensionCop}"
+    ],
+    "al.enableCodeAnalysis": true,
+    "al.ruleSetPath": ".codeanalysis/lider.ruleset.json",
+    "al.enableCodeActions": true,
+    "CRS.FileNamePattern": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+    "CRS.FileNamePatternExtensions": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+    "CRS.FileNamePatternPageCustomizations": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+    //"CRS.OnSaveAlFileAction": "Rename",
+    "CRS.RenameWithGit": true,
+    //"CRS.RemovePrefixFromFilename": true,
+    "editor.formatOnSave": true,
+    "CRS.ObjectNamePrefix": "LDR_",    
+    "alOutline.codeActionsOnSave": [
+        "SortProperties",
+        "SortVariables",
+        "FormatDocument"
+    ]
+ 
+}
