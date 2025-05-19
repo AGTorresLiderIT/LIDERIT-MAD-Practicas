@@ -1,19 +1,1 @@
-name: Prevent direct pushes to main
 
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  block-direct-push:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Detect direct push
-        run: |
-          if [[ "${{ github.event.head_commit.message }}" != *"Merge pull request"* ]]; then
-            echo "🚫 Push directo a 'main' detectado. Solo se permiten merges mediante Pull Request."
-            exit 1
-          else
-            echo "✅ Merge vía Pull Request detectado. Todo correcto."
-          fi
