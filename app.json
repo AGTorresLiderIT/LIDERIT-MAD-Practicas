@@ -1,0 +1,34 @@
+{
+  "id": "205359b2-020e-4ed1-89f1-61e55a423585",
+  "name": "LIDERIT-MAD-Practicas",
+  "publisher": "LiderIT",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "26.0.0.0",
+  "idRanges": [
+    {
+      "from": 50000,
+      "to": 50200
+    }
+  ],
+  "features": [
+        "TranslationFile",
+        "NoImplicitWith"
+    ],
+    "target": "Cloud",
+    "resourceExposurePolicy": {
+        "allowDebugging": true,
+        "allowDownloadingSource": false,
+        "includeSourceInSymbolFile": false
+    },
+    "runtime": "14.0"
+}
