@@ -1,7 +1,7 @@
 {
-  "id": "205359b2-020e-4ed1-89f1-61e55a423585",
-  "name": "LIDERIT-MAD-Practicas",
-  "publisher": "LiderIT",
+  "id": "ef74728a-e091-4545-bd25-6ea4a51765ac",
+  "name": "Gestion de contratos",
+  "publisher": "Default Publisher",
   "version": "1.0.0.0",
   "brief": "",
   "description": "",
@@ -13,22 +13,20 @@
   "dependencies": [],
   "screenshots": [],
   "platform": "1.0.0.0",
-  "application": "26.0.0.0",
+  "application": "25.0.0.0",
   "idRanges": [
     {
       "from": 50000,
-      "to": 50200
+      "to": 50099
     }
   ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "14.0",
   "features": [
-        "TranslationFile",
-        "NoImplicitWith"
-    ],
-    "target": "Cloud",
-    "resourceExposurePolicy": {
-        "allowDebugging": true,
-        "allowDownloadingSource": false,
-        "includeSourceInSymbolFile": false
-    },
-    "runtime": "14.0"
+    "NoImplicitWith"
+  ]
 }
