@@ -31,7 +31,7 @@ using System.Reflection;
 using System.Text;
 using System.Utilities;
 
-report 1306 "Standard Sales - Invoice"
+report 50002 "Factura de ventas"
 {
     Caption = 'Sales - Invoice';
     EnableHyperlinks = true;

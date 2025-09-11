@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Your own server",
+            "name": "Docker mio",
             "request": "launch",
             "type": "al",
             "environmentType": "OnPrem",
@@ -17,6 +17,21 @@
             "enableSqlInformationDebugger": true,
             "tenant": "default",
             "usePublicURLFromServer": true
+        },
+        {
+            "name": "Desarrollo",
+            "request": "launch",
+            "type": "al",
+            "tenant": "3c5e9041-65bc-4d09-90b4-48ac680f3811",
+            "environmentType": "Sandbox",
+            "environmentName": "Desarrollo",
+            "startupObjectId": 22,
+            "startupObjectType": "Page",
+            "breakOnError": "All",
+            "launchBrowser": true,
+            "enableLongRunningSqlStatements": true,
+            "enableSqlInformationDebugger": true,
+            "schemaUpdateMode": "Synchronize"
         }
     ]
 }
