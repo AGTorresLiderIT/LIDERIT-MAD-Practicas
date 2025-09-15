@@ -1,44 +1,13 @@
-namespace Microsoft.Sales.History;
-
-using Microsoft.Assembly.History;
-using Microsoft.Bank.BankAccount;
-using Microsoft.Bank.Setup;
-using Microsoft.CRM.Contact;
-using Microsoft.CRM.Interaction;
-using Microsoft.CRM.Segment;
-using Microsoft.CRM.Team;
-using Microsoft.Finance.Currency;
-using Microsoft.Finance.GeneralLedger.Setup;
-using Microsoft.Finance.VAT.Calculation;
-using Microsoft.Finance.VAT.Clause;
-using Microsoft.Foundation.Address;
-using Microsoft.Foundation.Company;
-using Microsoft.Foundation.PaymentTerms;
-using Microsoft.Foundation.Reporting;
-using Microsoft.Foundation.Shipping;
-using Microsoft.Foundation.UOM;
-using Microsoft.Inventory.Ledger;
-using Microsoft.Inventory.Location;
-using Microsoft.Projects.Project.Job;
-using Microsoft.Sales.Customer;
-using Microsoft.Sales.Receivables;
-using Microsoft.Sales.Reminder;
-using Microsoft.Sales.Setup;
-using Microsoft.Utilities;
-using System.Email;
-using System.Globalization;
-using System.Reflection;
-using System.Text;
-using System.Utilities;
-
-report 50002 "Factura de ventas"
+report 50002 "factura ventas"
 {
-    Caption = 'Sales - Invoice';
+    Caption = 'Informe factura ventas';
     EnableHyperlinks = true;
     Permissions = TableData "Sales Shipment Buffer" = rimd;
     PreviewMode = PrintLayout;
-    WordMergeDataItem = Header;
-    DefaultRenderingLayout = "src/report/layout/FacturaVentas.rdl";
+    DefaultLayout = RDLC;
+    RDLCLayout = 'src/report/layout/FacturaVentas.rdl';
+    UsageCategory = ReportsAndAnalysis;
+    ApplicationArea = All;
 
     dataset
     {
@@ -46,7 +15,7 @@ report 50002 "Factura de ventas"
         {
             DataItemTableView = sorting("No.");
             RequestFilterFields = "No.", "Sell-to Customer No.", "No. Printed";
-            RequestFilterHeading = 'Posted Sales Invoice';
+            RequestFilterHeading = 'Posted Sales Invoice', Comment = 'ESP="Factura de ventas registrada"';
             column(CompanyAddress1; CompanyAddr[1])
             {
             }
@@ -1163,9 +1132,6 @@ report 50002 "Factura de ventas"
                 Currency: Record Currency;
                 GeneralLedgerSetup: Record "General Ledger Setup";
             begin
-                CurrReport.Language := LanguageMgt.GetLanguageIdOrDefault("Language Code");
-                CurrReport.FormatRegion := LanguageMgt.GetFormatRegionOrDefault("Format Region");
-                FormatAddr.SetLanguageCode("Language Code");
 
                 if not IsReportInPreviewMode() then
                     CODEUNIT.Run(CODEUNIT::"Sales Inv.-Printed", Header);
@@ -1249,37 +1215,38 @@ report 50002 "Factura de ventas"
             {
                 group(Options)
                 {
-                    Caption = 'Options';
+                    Caption = 'Options', Comment = 'ESP="Opciones"';
+
                     field(LogInteraction; LogInteraction)
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'Log Interaction';
+                        Caption = 'Log Interaction', Comment = 'ESP="Registrar interacción"';
                         Enabled = LogInteractionEnable;
-                        ToolTip = 'Specifies that interactions with the contact are logged.';
+                        ToolTip = 'Specifies that interactions with the contact are logged.', Comment = 'ESP="Especifica que las interacciones con el contacto se registran."';
                     }
                     field(DisplayAsmInformation; DisplayAssemblyInformation)
                     {
                         ApplicationArea = Assembly;
-                        Caption = 'Show Assembly Components';
-                        ToolTip = 'Specifies if you want the report to include information about components that were used in linked assembly orders that supplied the item(s) being sold. (Only possible for RDLC report layout.)';
+                        Caption = 'Show Assembly Components', Comment = 'ESP="Mostrar componentes de ensamblado"';
+                        ToolTip = 'Specifies if you want the report to include information about components that were used in linked assembly orders that supplied the item(s) being sold. (Only possible for RDLC report layout.)', Comment = 'ESP="Especifica si desea que el informe incluya información sobre componentes utilizados en pedidos de ensamblado vinculados que abastecieron los artículos vendidos. (Solo posible para diseño RDLC.)"';
                     }
                     field(DisplayShipmentInformation; DisplayShipmentInformation)
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'Show Shipments';
-                        ToolTip = 'Specifies that shipments are shown on the document.';
+                        Caption = 'Show Shipments', Comment = 'ESP="Mostrar envíos"';
+                        ToolTip = 'Specifies that shipments are shown on the document.', Comment = 'ESP="Especifica que los envíos se muestren en el documento."';
                     }
                     field(DisplayAdditionalFeeNote; DisplayAdditionalFeeNote)
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'Show Additional Fee Note';
-                        ToolTip = 'Specifies if you want notes about additional fees to be shown on the document.';
+                        Caption = 'Show Additional Fee Note', Comment = 'ESP="Mostrar nota de recargo adicional"';
+                        ToolTip = 'Specifies if you want notes about additional fees to be shown on the document.', Comment = 'ESP="Especifica si desea que se muestren en el documento notas sobre cargos adicionales."';
                     }
                     field(HideLinesWithZeroQuantityControl; HideLinesWithZeroQuantity)
                     {
                         ApplicationArea = Basic, Suite;
-                        ToolTip = 'Specifies if the lines with zero quantity are printed.';
-                        Caption = 'Hide lines with zero quantity';
+                        ToolTip = 'Specifies if the lines with zero quantity are printed.', Comment = 'ESP="Especifica si se imprimen las líneas con cantidad cero."';
+                        Caption = 'Hide lines with zero quantity', Comment = 'ESP="Ocultar líneas con cantidad cero"';
                     }
                 }
             }
@@ -1294,52 +1261,6 @@ report 50002 "Factura de ventas"
             LogInteraction := LogInteractionTemplateExists();
             LogInteractionEnable := LogInteraction;
         end;
-    }
-
-    rendering
-    {
-        layout("StandardSalesInvoice.rdlc")
-        {
-            Type = RDLC;
-            LayoutFile = './Sales/History/StandardSalesInvoice.rdlc';
-            Caption = 'Standard Sales Invoice (RDLC)';
-            Summary = 'The Standard Sales Invoice (RDLC) is the most detailed layout and provides most flexible layout options.';
-        }
-        layout("StandardSalesInvoice.docx")
-        {
-            Type = Word;
-            LayoutFile = './Sales/History/StandardSalesInvoice.docx';
-            Caption = 'Standard Sales Invoice (Word)';
-            Summary = 'The Standard Sales Invoice (Word) provides a simple layout that is also relatively easy for an end-user to modify.';
-        }
-        layout("StandardSalesInvoiceBlueSimple.docx")
-        {
-            Type = Word;
-            LayoutFile = './Sales/History/StandardSalesInvoiceBlueSimple.docx';
-            Caption = 'Standard Sales Invoice - Blue (Word)';
-            Summary = 'The Standard Sales Invoice - Blue (Word) provides a simple layout with a blue theme.';
-        }
-        layout("StandardSalesInvoiceBlueSimpleThemable.docx")
-        {
-            Type = Word;
-            LayoutFile = './Sales/History/StandardSalesInvoiceBlueSimpleThemable.docx';
-            Caption = 'Standard Sales Invoice - themable Word layout';
-            Summary = 'The Standard Sales Invoice - Themable (Word) provides a simple Themable layout.';
-        }
-        layout("StandardSalesInvoiceVatSpec.docx")
-        {
-            Type = Word;
-            LayoutFile = './Sales/History/StandardSalesInvoiceVatSpec.docx';
-            Caption = 'Standard Sales Invoice - VAT Spec (Word)';
-            Summary = 'The Standard Sales Invoice - VAT Spec (Word) provides a layout with VAT Specification.';
-        }
-        layout("StandardSalesInvoiceDefEmail.docx")
-        {
-            Type = Word;
-            LayoutFile = './Sales/History/StandardSalesInvoiceDefEmail.docx';
-            Caption = 'Standard Sales Invoice Email (Word)';
-            Summary = 'The Standard Sales Invoice Email (Word) provides the default email body layout.';
-        }
     }
 
     labels
@@ -1422,68 +1343,70 @@ report 50002 "Factura de ventas"
         TotalECAmountLCY: Decimal;
         PrevLineAmount: Decimal;
         TotalECAmount: Decimal;
-        ECAmountLCYLbl: Label 'EC Amount (LCY)';
-        SalespersonLbl: Label 'Salesperson';
-        CompanyInfoBankAccNoLbl: Label 'Account No.';
-        CompanyInfoBankNameLbl: Label 'Bank';
-        CompanyInfoGiroNoLbl: Label 'Giro No.';
-        CompanyInfoPhoneNoLbl: Label 'Phone No.';
-        CopyLbl: Label 'Copy';
-        EMailLbl: Label 'Email';
-        HomePageLbl: Label 'Home Page';
-        InvDiscBaseAmtLbl: Label 'Invoice Discount Base Amount';
-        InvDiscountAmtLbl: Label 'Invoice Discount';
-        InvNoLbl: Label 'Invoice No.';
-        LineAmtAfterInvDiscLbl: Label 'Payment Discount on VAT';
-        LocalCurrencyLbl: Label 'Local Currency';
-        PageLbl: Label 'Page';
-        PaymentMethodDescLbl: Label 'Payment Method';
-        PostedShipmentDateLbl: Label 'Shipment Date';
-        SalesInvLineDiscLbl: Label 'Discount %';
-        SalesInvoiceLbl: Label 'Invoice';
-        YourSalesInvoiceLbl: Label 'Your Invoice';
-        ShipmentLbl: Label 'Shipment';
-        SubtotalLbl: Label 'Subtotal';
-        TotalLbl: Label 'Total';
-        VATAmtSpecificationLbl: Label 'VAT Amount Specification';
-        VATAmtLbl: Label 'VAT Amount';
-        VATAmountLCYLbl: Label 'VAT Amount (LCY)';
-        VATBaseLbl: Label 'VAT Base';
-        VATBaseLCYLbl: Label 'VAT Base (LCY)';
-        VATClausesLbl: Label 'VAT Clause';
-        VATIdentifierLbl: Label 'VAT Identifier';
-        VATPercentageLbl: Label 'VAT %';
-        SellToContactPhoneNoLbl: Label 'Sell-to Contact Phone No.';
-        SellToContactMobilePhoneNoLbl: Label 'Sell-to Contact Mobile Phone No.';
-        SellToContactEmailLbl: Label 'Sell-to Contact E-Mail';
-        BillToContactPhoneNoLbl: Label 'Bill-to Contact Phone No.';
-        BillToContactMobilePhoneNoLbl: Label 'Bill-to Contact Mobile Phone No.';
-        BillToContactEmailLbl: Label 'Bill-to Contact E-Mail';
-        ExchangeRateTxt: Label 'Exchange rate: %1/%2', Comment = '%1 and %2 are both amounts.';
-        NoFilterSetErr: Label 'You must specify one or more filters to avoid accidently printing all documents.';
-        GreetingLbl: Label 'Hello';
-        ClosingLbl: Label 'Sincerely';
-        PmtDiscTxt: Label 'If we receive the payment before %1, you are eligible for a %2% payment discount.', Comment = '%1 Discount Due Date %2 = value of Payment Discount % ';
-        BodyLbl: Label 'Thank you for your business. Your invoice is attached to this message.';
-        AlreadyPaidLbl: Label 'The invoice has been paid.';
-        PartiallyPaidLbl: Label 'The invoice has been partially paid. The remaining amount is %1', Comment = '%1=an amount';
-        FromLbl: Label 'From';
-        BilledToLbl: Label 'Billed to';
-        ChecksPayableLbl: Label 'Please make checks payable to %1', Comment = '%1 = company name';
-        QuestionsLbl: Label 'Questions?';
-        ThanksLbl: Label 'Thank You!';
+        ECAmountLCYLbl: Label 'EC Amount (LCY)', Comment = 'ESP="Importe EC (DL)"';
+        SalespersonLbl: Label 'Salesperson', Comment = 'ESP="Vendedor"';
+        CompanyInfoBankAccNoLbl: Label 'Account No.', Comment = 'ESP="N.º de cuenta"';
+        CompanyInfoBankNameLbl: Label 'Bank', Comment = 'ESP="Banco"';
+        CompanyInfoGiroNoLbl: Label 'Giro No.', Comment = 'ESP="N.º de giro"';
+        CompanyInfoPhoneNoLbl: Label 'Phone No.', Comment = 'ESP="Teléfono"';
+        CopyLbl: Label 'Copy', Comment = 'ESP="Copia"';
+        EMailLbl: Label 'Email', Comment = 'ESP="Correo electrónico"';
+        HomePageLbl: Label 'Home Page', Comment = 'ESP="Página web"';
+        InvDiscBaseAmtLbl: Label 'Invoice Discount Base Amount', Comment = 'ESP="Base para descuento de factura"';
+        InvDiscountAmtLbl: Label 'Invoice Discount', Comment = 'ESP="Descuento de factura"';
+        InvNoLbl: Label 'Invoice No.', Comment = 'ESP="N.º de factura"';
+        LineAmtAfterInvDiscLbl: Label 'Payment Discount on VAT', Comment = 'ESP="Descuento por pronto pago sobre IVA"';
+        LocalCurrencyLbl: Label 'Local Currency', Comment = 'ESP="Divisa local"';
+        PageLbl: Label 'Page', Comment = 'ESP="Página"';
+        PaymentMethodDescLbl: Label 'Payment Method', Comment = 'ESP="Forma de pago"';
+        PostedShipmentDateLbl: Label 'Shipment Date', Comment = 'ESP="Fecha de envío"';
+        SalesInvLineDiscLbl: Label 'Discount %', Comment = 'ESP="Descuento %"';
+        SalesInvoiceLbl: Label 'Invoice', Comment = 'ESP="Factura"';
+        YourSalesInvoiceLbl: Label 'Your Invoice', Comment = 'ESP="Su factura"';
+        ShipmentLbl: Label 'Shipment', Comment = 'ESP="Envío"';
+        SubtotalLbl: Label 'Subtotal', Comment = 'ESP="Subtotal"';
+        TotalLbl: Label 'Total', Comment = 'ESP="Total"';
+        VATAmtSpecificationLbl: Label 'VAT Amount Specification', Comment = 'ESP="Especificación del importe de IVA"';
+        VATAmtLbl: Label 'VAT Amount', Comment = 'ESP="Importe de IVA"';
+        VATAmountLCYLbl: Label 'VAT Amount (LCY)', Comment = 'ESP="Importe de IVA (DL)"';
+        VATBaseLbl: Label 'VAT Base', Comment = 'ESP="Base imponible"';
+        VATBaseLCYLbl: Label 'VAT Base (LCY)', Comment = 'ESP="Base imponible (DL)"';
+        VATClausesLbl: Label 'VAT Clause', Comment = 'ESP="Cláusula de IVA"';
+        VATIdentifierLbl: Label 'VAT Identifier', Comment = 'ESP="Identificador de IVA"';
+        VATPercentageLbl: Label 'VAT %', Comment = 'ESP="IVA %"';
+        SellToContactPhoneNoLbl: Label 'Sell-to Contact Phone No.', Comment = 'ESP="Teléfono del contacto de venta"';
+        SellToContactMobilePhoneNoLbl: Label 'Sell-to Contact Mobile Phone No.', Comment = 'ESP="Móvil del contacto de venta"';
+        SellToContactEmailLbl: Label 'Sell-to Contact E-Mail', Comment = 'ESP="Correo del contacto de venta"';
+        BillToContactPhoneNoLbl: Label 'Bill-to Contact Phone No.', Comment = 'ESP="Teléfono del contacto de facturación"';
+        BillToContactMobilePhoneNoLbl: Label 'Bill-to Contact Mobile Phone No.', Comment = 'ESP="Móvil del contacto de facturación"';
+        BillToContactEmailLbl: Label 'Bill-to Contact E-Mail', Comment = 'ESP="Correo del contacto de facturación"';
+        ExchangeRateTxt: Label 'Exchange rate: %1/%2', Comment = 'ESP="Tipo de cambio: %1/%2"';
+        NoFilterSetErr: Label 'You must specify one or more filters to avoid accidently printing all documents.', Comment = 'ESP="Debe especificar uno o más filtros para evitar imprimir todos los documentos por error."';
+        GreetingLbl: Label 'Hello', Comment = 'ESP="Hola"';
+        ClosingLbl: Label 'Sincerely', Comment = 'ESP="Atentamente"';
+        PmtDiscTxt: Label 'If we receive the payment before %1, you are eligible for a %2% payment discount.', Comment = 'ESP="Si recibimos el pago antes de %1, tendrá derecho a un descuento del %2% por pronto pago."';
+
+        BodyLbl: Label 'Thank you for your business. Your invoice is attached to this message.', Comment = 'ESP="Gracias por su confianza. Adjuntamos su factura a este mensaje."';
+        AlreadyPaidLbl: Label 'The invoice has been paid.', Comment = 'ESP="La factura ha sido pagada."';
+        PartiallyPaidLbl: Label 'The invoice has been partially paid. The remaining amount is %1', Comment = 'ESP="La factura ha sido pagada parcialmente. El importe pendiente es %1"';
+        FromLbl: Label 'From', Comment = 'ESP="De"';
+        BilledToLbl: Label 'Billed to', Comment = 'ESP="Facturado a"';
+        ChecksPayableLbl: Label 'Please make checks payable to %1', Comment = 'ESP="Extienda los cheques a nombre de %1"';
+        QuestionsLbl: Label 'Questions?', Comment = 'ESP="¿Preguntas?"';
+        ThanksLbl: Label 'Thank You!', Comment = 'ESP="¡Gracias!"';
 #pragma warning disable AA0074
-        JobNoLbl2: Label 'Project No.';
-        JobTaskNoLbl2: Label 'Project Task No.';
+        JobNoLbl2: Label 'Project No.', Comment = 'ESP="N.º de proyecto"';
+        JobTaskNoLbl2: Label 'Project Task No.', Comment = 'ESP="N.º de tarea de proyecto"';
 #pragma warning restore AA0074
         JobTaskDescription: Text[100];
-        JobTaskDescLbl: Label 'Project Task Description';
-        UnitLbl: Label 'Unit';
+        JobTaskDescLbl: Label 'Project Task Description', Comment = 'ESP="Descripción de la tarea de proyecto"';
+        UnitLbl: Label 'Unit', Comment = 'ESP="Unidad"';
+        QtyLbl: Label 'Qty', Comment = 'ESP="Abreviatura de Cantidad"';
+        PriceLbl: Label 'Price', Comment = 'ESP="Precio"';
+        PricePerLbl: Label 'Price per', Comment = 'ESP="Precio por"';
+        LCYTxt: label ' (LCY)', Comment = 'ESP=" (DL)"';
+
         VATClausesText: Text;
-        QtyLbl: Label 'Qty', Comment = 'Short form of Quantity';
-        PriceLbl: Label 'Price';
-        PricePerLbl: Label 'Price per';
-        LCYTxt: label ' (LCY)';
         VATClauseText: Text;
         LegalOfficeTxt, LegalOfficeLbl, CustomGiroTxt, CustomGiroLbl, LegalStatementLbl : Text;
 
@@ -1530,9 +1453,10 @@ report 50002 "Factura de ventas"
         TotalVATAmountOnVATAmtLine: Decimal;
         CurrCode: Text[10];
         CurrSymbol: Text[10];
-        PaymentTermsDescLbl: Label 'Payment Terms';
-        ShptMethodDescLbl: Label 'Shipment Method';
-        ShiptoAddrLbl: Label 'Ship-to Address';
+        PaymentTermsDescLbl: Label 'Payment Terms', Comment = 'ESP="Condiciones de pago"';
+        ShptMethodDescLbl: Label 'Shipment Method', Comment = 'ESP="Método de envío"';
+        ShiptoAddrLbl: Label 'Ship-to Address', Comment = 'ESP="Dirección de envío"';
+
         HideLinesWithZeroQuantity: Boolean;
 
     local procedure LogInteractionTemplateExists(): Boolean

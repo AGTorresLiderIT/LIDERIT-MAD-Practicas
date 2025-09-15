@@ -1,0 +1,379 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="en-US" original="LuChiLu">
+    <body>
+      <group id="body">
+        <trans-unit id="Report 2185938143 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Informe factura ventas</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 3630968764" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The invoice has been paid.</source>
+          <note from="Developer" annotates="general" priority="2">ESP="La factura ha sido pagada."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType AlreadyPaidLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 1694087509" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Billed to</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Facturado a"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType BilledToLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 1851005282" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Bill-to Contact E-Mail</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Correo del contacto de facturación"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType BillToContactEmailLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 2423794985" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Bill-to Contact Mobile Phone No.</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Móvil del contacto de facturación"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType BillToContactMobilePhoneNoLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 24137681" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Bill-to Contact Phone No.</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Teléfono del contacto de facturación"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType BillToContactPhoneNoLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 1908025102" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Thank you for your business. Your invoice is attached to this message.</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Gracias por su confianza. Adjuntamos su factura a este mensaje."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType BodyLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 857124111" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Please make checks payable to %1</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Extienda los cheques a nombre de %1"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType ChecksPayableLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 2771379227" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sincerely</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Atentamente"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType ClosingLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 3280613231" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Account No.</source>
+          <note from="Developer" annotates="general" priority="2">ESP="N.º de cuenta"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType CompanyInfoBankAccNoLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 3338143750" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Bank</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Banco"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType CompanyInfoBankNameLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 1810908995" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Giro No.</source>
+          <note from="Developer" annotates="general" priority="2">ESP="N.º de giro"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType CompanyInfoGiroNoLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 1970452706" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Phone No.</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Teléfono"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType CompanyInfoPhoneNoLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 3701423681" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Copy</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Copia"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType CopyLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 1754387386" size-unit="char" translate="yes" xml:space="preserve">
+          <source>EC Amount (LCY)</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Importe EC (DL)"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType ECAmountLCYLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 1198791402" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Email</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Correo electrónico"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType EMailLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 3642584667" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Exchange rate: %1/%2</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Tipo de cambio: %1/%2"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType ExchangeRateTxt</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 901740384" size-unit="char" translate="yes" xml:space="preserve">
+          <source>From</source>
+          <note from="Developer" annotates="general" priority="2">ESP="De"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType FromLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 514421613" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Hello</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Hola"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType GreetingLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 1243851074" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Home Page</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Página web"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType HomePageLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 3479778493" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Invoice Discount Base Amount</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Base para descuento de factura"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType InvDiscBaseAmtLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 3079811618" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Invoice Discount</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Descuento de factura"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType InvDiscountAmtLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 259914550" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Invoice No.</source>
+          <note from="Developer" annotates="general" priority="2">ESP="N.º de factura"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType InvNoLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 327693762" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Project No.</source>
+          <note from="Developer" annotates="general" priority="2">ESP="N.º de proyecto"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType JobNoLbl2</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 194808771" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Project Task Description</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Descripción de la tarea de proyecto"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType JobTaskDescLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 1518908157" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Project Task No.</source>
+          <note from="Developer" annotates="general" priority="2">ESP="N.º de tarea de proyecto"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType JobTaskNoLbl2</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 2751058498" size-unit="char" translate="yes" xml:space="preserve">
+          <source> (LCY)</source>
+          <note from="Developer" annotates="general" priority="2">ESP=" (DL)"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType LCYTxt</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 1448166496" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Payment Discount on VAT</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Descuento por pronto pago sobre IVA"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType LineAmtAfterInvDiscLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 2284888724" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Local Currency</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Divisa local"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType LocalCurrencyLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 2491107794" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You must specify one or more filters to avoid accidently printing all documents.</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Debe especificar uno o más filtros para evitar imprimir todos los documentos por error."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType NoFilterSetErr</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 1877187315" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Page</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Página"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType PageLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 3539596564" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The invoice has been partially paid. The remaining amount is %1</source>
+          <note from="Developer" annotates="general" priority="2">ESP="La factura ha sido pagada parcialmente. El importe pendiente es %1"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType PartiallyPaidLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 36769898" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Payment Method</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Forma de pago"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType PaymentMethodDescLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 2906320672" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Payment Terms</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Condiciones de pago"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType PaymentTermsDescLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 3007589352" size-unit="char" translate="yes" xml:space="preserve">
+          <source>If we receive the payment before %1, you are eligible for a %2% payment discount.</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Si recibimos el pago antes de %1, tendrá derecho a un descuento del %2% por pronto pago."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType PmtDiscTxt</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 3763377721" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Shipment Date</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Fecha de envío"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType PostedShipmentDateLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 3790346625" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Price</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Precio"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType PriceLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 822797676" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Price per</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Precio por"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType PricePerLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 3259830970" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Qty</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Abreviatura de Cantidad"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType QtyLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 3984626017" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Questions?</source>
+          <note from="Developer" annotates="general" priority="2">ESP="¿Preguntas?"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType QuestionsLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 2105550444" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Discount %</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Descuento %"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType SalesInvLineDiscLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 1989518965" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Invoice</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Factura"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType SalesInvoiceLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 1075159697" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Salesperson</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Vendedor"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType SalespersonLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 2518404021" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sell-to Contact E-Mail</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Correo del contacto de venta"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType SellToContactEmailLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 689955230" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sell-to Contact Mobile Phone No.</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Móvil del contacto de venta"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType SellToContactMobilePhoneNoLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 1096796838" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sell-to Contact Phone No.</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Teléfono del contacto de venta"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType SellToContactPhoneNoLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 2531235046" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Shipment</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Envío"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType ShipmentLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 2039684796" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ship-to Address</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Dirección de envío"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType ShiptoAddrLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 2175793069" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Shipment Method</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Método de envío"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType ShptMethodDescLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 3014721408" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Subtotal</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Subtotal"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType SubtotalLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 1291367939" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Thank You!</source>
+          <note from="Developer" annotates="general" priority="2">ESP="¡Gracias!"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType ThanksLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 2410138484" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Total"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType TotalLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 984818344" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Unit</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Unidad"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType UnitLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 803899421" size-unit="char" translate="yes" xml:space="preserve">
+          <source>VAT Amount (LCY)</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Importe de IVA (DL)"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType VATAmountLCYLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 3751533915" size-unit="char" translate="yes" xml:space="preserve">
+          <source>VAT Amount</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Importe de IVA"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType VATAmtLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 3978645464" size-unit="char" translate="yes" xml:space="preserve">
+          <source>VAT Amount Specification</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Especificación del importe de IVA"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType VATAmtSpecificationLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 3259128960" size-unit="char" translate="yes" xml:space="preserve">
+          <source>VAT Base</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Base imponible"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType VATBaseLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 282000566" size-unit="char" translate="yes" xml:space="preserve">
+          <source>VAT Base (LCY)</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Base imponible (DL)"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType VATBaseLCYLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 2760006609" size-unit="char" translate="yes" xml:space="preserve">
+          <source>VAT Clause</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Cláusula de IVA"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType VATClausesLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 1071970054" size-unit="char" translate="yes" xml:space="preserve">
+          <source>VAT Identifier</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Identificador de IVA"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType VATIdentifierLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 1532992371" size-unit="char" translate="yes" xml:space="preserve">
+          <source>VAT %</source>
+          <note from="Developer" annotates="general" priority="2">ESP="IVA %"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType VATPercentageLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - NamedType 1899552902" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Your Invoice</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Su factura"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - NamedType YourSalesInvoiceLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - ReportDataItem 907109761 - Property 1806354803" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Posted Sales Invoice</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Factura de ventas registrada"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - ReportDataItem Header - Property RequestFilterHeading</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - Control 2346885236 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Options</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Opciones"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - Control Options - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - Control 215716959 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies if you want notes about additional fees to be shown on the document.</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica si desea que se muestren en el documento notas sobre cargos adicionales."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - Control DisplayAdditionalFeeNote - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - Control 215716959 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Show Additional Fee Note</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Mostrar nota de recargo adicional"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - Control DisplayAdditionalFeeNote - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - Control 1885540899 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies if you want the report to include information about components that were used in linked assembly orders that supplied the item(s) being sold. (Only possible for RDLC report layout.)</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica si desea que el informe incluya información sobre componentes utilizados en pedidos de ensamblado vinculados que abastecieron los artículos vendidos. (Solo posible para diseño RDLC.)"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - Control DisplayAsmInformation - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - Control 1885540899 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Show Assembly Components</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Mostrar componentes de ensamblado"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - Control DisplayAsmInformation - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - Control 4222219250 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies that shipments are shown on the document.</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica que los envíos se muestren en el documento."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - Control DisplayShipmentInformation - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - Control 4222219250 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Show Shipments</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Mostrar envíos"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - Control DisplayShipmentInformation - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - Control 2931590387 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies if the lines with zero quantity are printed.</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica si se imprimen las líneas con cantidad cero."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - Control HideLinesWithZeroQuantityControl - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - Control 2931590387 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Hide lines with zero quantity</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Ocultar líneas con cantidad cero"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - Control HideLinesWithZeroQuantityControl - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - Control 816368762 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies that interactions with the contact are logged.</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica que las interacciones con el contacto se registran."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - Control LogInteraction - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Report 2185938143 - Control 816368762 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Log Interaction</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Registrar interacción"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report factura ventas - Control LogInteraction - Property Caption</note>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

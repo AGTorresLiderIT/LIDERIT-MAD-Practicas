@@ -24,7 +24,7 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>24.84781cm</Height>
+                  <Height>22.31169cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -4165,12 +4165,28 @@
                                             <KeepWithGroup>After</KeepWithGroup>
                                           </TablixMember>
                                           <TablixMember>
-                                            <Visibility>
-                                              <Hidden>=Fields!Quantity_ShipmentLine.Value = 0</Hidden>
-                                            </Visibility>
-                                          </TablixMember>
-                                          <TablixMember>
                                             <TablixMembers>
+                                              <TablixMember>
+                                                <Group Name="DocumentNo_ShipmentLine">
+                                                  <GroupExpressions>
+                                                    <GroupExpression>=Fields!DocumentNo_ShipmentLine.Value</GroupExpression>
+                                                  </GroupExpressions>
+                                                  <Filters>
+                                                    <Filter>
+                                                      <FilterExpression>=CStr(Fields!Quantity_ShipmentLine.Value) = String.Empty</FilterExpression>
+                                                      <Operator>Equal</Operator>
+                                                      <FilterValues>
+                                                        <FilterValue DataType="Boolean">=false</FilterValue>
+                                                      </FilterValues>
+                                                    </Filter>
+                                                  </Filters>
+                                                </Group>
+                                                <SortExpressions>
+                                                  <SortExpression>
+                                                    <Value>=Fields!DocumentNo_ShipmentLine.Value</Value>
+                                                  </SortExpression>
+                                                </SortExpressions>
+                                              </TablixMember>
                                               <TablixMember>
                                                 <Group Name="LineNo_AssemblyLine">
                                                   <GroupExpressions>
@@ -4479,104 +4495,6 @@
                                       </TablixCell>
                                     </TablixCells>
                                   </TablixRow>
-                                  <TablixRow>
-                                    <Height>0.38806cm</Height>
-                                    <TablixCells>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox45">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value />
-                                                    <Style>
-                                                      <FontFamily>segoe ui</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style />
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>Textbox45</rd:DefaultName>
-                                            <Style>
-                                              <Border>
-                                                <Color>LightGrey</Color>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Description2_VATClauseLine">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>=Fields!Description2_VATClauseLine.Value</Value>
-                                                    <Style>
-                                                      <FontFamily>segoe ui</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style />
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>Description2_VATClauseLine</rd:DefaultName>
-                                            <Style>
-                                              <Border>
-                                                <Color>LightGrey</Color>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox46">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value />
-                                                    <Style>
-                                                      <FontFamily>segoe ui</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style />
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>Textbox46</rd:DefaultName>
-                                            <Style>
-                                              <Border>
-                                                <Color>LightGrey</Color>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                    </TablixCells>
-                                  </TablixRow>
                                 </TablixRows>
                               </TablixBody>
                               <TablixColumnHierarchy>
@@ -4601,11 +4519,6 @@
                                     <Group Name="Details2" />
                                     <TablixMembers>
                                       <TablixMember />
-                                      <TablixMember>
-                                        <Visibility>
-                                          <Hidden>=Len(Fields!Description2_VATClauseLine.Value) = 0</Hidden>
-                                        </Visibility>
-                                      </TablixMember>
                                     </TablixMembers>
                                   </TablixMember>
                                 </TablixMembers>
@@ -4621,8 +4534,8 @@
                                   </FilterValues>
                                 </Filter>
                               </Filters>
-                              <Top>17.66548cm</Top>
-                              <Height>1.55224cm</Height>
+                              <Top>16.07798cm</Top>
+                              <Height>1.16418cm</Height>
                               <Width>18.39999cm</Width>
                               <ZIndex>2</ZIndex>
                               <Visibility>
@@ -6003,7 +5916,7 @@
                                   </FilterValues>
                                 </Filter>
                               </Filters>
-                              <Top>15.41378cm</Top>
+                              <Top>13.82628cm</Top>
                               <Height>1.55224cm</Height>
                               <Width>17.20462cm</Width>
                               <ZIndex>3</ZIndex>
@@ -6568,7 +6481,7 @@
                                   </FilterValues>
                                 </Filter>
                               </Filters>
-                              <Top>20.52978cm</Top>
+                              <Top>17.67228cm</Top>
                               <Height>3.88058cm</Height>
                               <Width>17.12907cm</Width>
                               <ZIndex>4</ZIndex>
@@ -6895,78 +6808,6 @@
                                     <TablixCells>
                                       <TablixCell>
                                         <CellContents>
-                                          <Textbox Name="Textbox87">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>=Fields!ACTIVEIRIRPFAmountText_LDR.Value</Value>
-                                                    <Style>
-                                                      <FontFamily>Segoe UI</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style />
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>Textbox87</rd:DefaultName>
-                                            <Style>
-                                              <Border>
-                                                <Color>LightGrey</Color>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                          <ColSpan>3</ColSpan>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell />
-                                      <TablixCell />
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox23">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>=Fields!ACTIVEIRIRPFAmount_LDR.Value</Value>
-                                                    <Style>
-                                                      <FontFamily>Segoe UI</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Right</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>Textbox23</rd:DefaultName>
-                                            <Style>
-                                              <Border>
-                                                <Color>LightGrey</Color>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                    </TablixCells>
-                                  </TablixRow>
-                                  <TablixRow>
-                                    <Height>0.38806cm</Height>
-                                    <TablixCells>
-                                      <TablixCell>
-                                        <CellContents>
                                           <Textbox Name="TotalIncludingVATText">
                                             <CanGrow>true</CanGrow>
                                             <KeepTogether>true</KeepTogether>
@@ -7023,82 +6864,6 @@
                                               </Paragraph>
                                             </Paragraphs>
                                             <rd:DefaultName>TotalAmountIncludingVAT</rd:DefaultName>
-                                            <Style>
-                                              <Border>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <TopBorder>
-                                                <Style>Solid</Style>
-                                              </TopBorder>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                    </TablixCells>
-                                  </TablixRow>
-                                  <TablixRow>
-                                    <Height>0.38806cm</Height>
-                                    <TablixCells>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox83">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>=Last(Fields!TotalIncludingVATText.Value)</Value>
-                                                    <Style>
-                                                      <FontFamily>Segoe UI</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                      <FontWeight>Bold</FontWeight>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style />
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>Textbox83</rd:DefaultName>
-                                            <Style>
-                                              <Border>
-                                                <Color>LightGrey</Color>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                          <ColSpan>3</ColSpan>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell />
-                                      <TablixCell />
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox86">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>=Last(Fields!ACTIVEIRTotalAmountIRPFVAT_LDR.Value)</Value>
-                                                    <Style>
-                                                      <FontFamily>Segoe UI</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                      <FontWeight>Bold</FontWeight>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Right</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>Textbox86</rd:DefaultName>
                                             <Style>
                                               <Border>
                                                 <Style>None</Style>
@@ -7328,78 +7093,6 @@
                                     <TablixCells>
                                       <TablixCell>
                                         <CellContents>
-                                          <Textbox Name="Textbox91">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>=Fields!ACTIVEIRIRPFAmountText_LDR.Value</Value>
-                                                    <Style>
-                                                      <FontFamily>Segoe UI</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style />
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>Textbox91</rd:DefaultName>
-                                            <Style>
-                                              <Border>
-                                                <Color>LightGrey</Color>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                          <ColSpan>3</ColSpan>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell />
-                                      <TablixCell />
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox94">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>=Fields!ACTIVEIRIRPFAmount_LDR.Value</Value>
-                                                    <Style>
-                                                      <FontFamily>Segoe UI</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Right</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>Textbox94</rd:DefaultName>
-                                            <Style>
-                                              <Border>
-                                                <Color>LightGrey</Color>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                    </TablixCells>
-                                  </TablixRow>
-                                  <TablixRow>
-                                    <Height>0.38806cm</Height>
-                                    <TablixCells>
-                                      <TablixCell>
-                                        <CellContents>
                                           <Textbox Name="TotalExcludingVATText_2">
                                             <CanGrow>true</CanGrow>
                                             <KeepTogether>true</KeepTogether>
@@ -7469,80 +7162,6 @@
                                       </TablixCell>
                                     </TablixCells>
                                   </TablixRow>
-                                  <TablixRow>
-                                    <Height>0.38806cm</Height>
-                                    <TablixCells>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox79">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>=Last(Fields!TotalExcludingVATText.Value)</Value>
-                                                    <Style>
-                                                      <FontFamily>Segoe UI</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                      <FontWeight>Bold</FontWeight>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style />
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>Textbox79</rd:DefaultName>
-                                            <Style>
-                                              <Border>
-                                                <Color>LightGrey</Color>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                          <ColSpan>3</ColSpan>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell />
-                                      <TablixCell />
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox85">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>=Last(Fields!ACTIVEIRTotalAmountIRPFVAT_LDR.Value)</Value>
-                                                    <Style>
-                                                      <FontFamily>Segoe UI</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                      <FontWeight>Bold</FontWeight>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Right</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>Textbox82</rd:DefaultName>
-                                            <Style>
-                                              <Border>
-                                                <Color>LightGrey</Color>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                    </TablixCells>
-                                  </TablixRow>
                                 </TablixRows>
                               </TablixBody>
                               <TablixColumnHierarchy>
@@ -7571,21 +7190,7 @@
                                       <Hidden>=(Last(Fields!TotalVATAmount.Value) = 0) Or (Fields!PricesIncludingVAT.Value = True)</Hidden>
                                     </Visibility>
                                   </TablixMember>
-                                  <TablixMember>
-                                    <Visibility>
-                                      <Hidden>=((Last(Fields!TotalVATAmount.Value) = 0) Or (Fields!PricesIncludingVAT.Value = True)) Or (Last(Fields!ACTIVEIRIRPFAmount_LDR.Value) = 0)</Hidden>
-                                    </Visibility>
-                                  </TablixMember>
-                                  <TablixMember>
-                                    <Visibility>
-                                      <Hidden>=(Last(Fields!ACTIVEIRIRPFAmount_LDR.Value) &lt;&gt; 0)</Hidden>
-                                    </Visibility>
-                                  </TablixMember>
-                                  <TablixMember>
-                                    <Visibility>
-                                      <Hidden>=((Last(Fields!TotalVATAmount.Value) = 0) Or (Fields!PricesIncludingVAT.Value = True)) Or (Last(Fields!ACTIVEIRIRPFAmount_LDR.Value) = 0)</Hidden>
-                                    </Visibility>
-                                  </TablixMember>
+                                  <TablixMember />
                                   <TablixMember>
                                     <Visibility>
                                       <Hidden>=(LAST(Fields!TotalVATAmount.Value) = 0) OR (Fields!PricesIncludingVAT.Value = FALSE)</Hidden>
@@ -7598,17 +7203,7 @@
                                   </TablixMember>
                                   <TablixMember>
                                     <Visibility>
-                                      <Hidden>=(Last(Fields!TotalVATAmount.Value) = 0) Or (Fields!PricesIncludingVAT.Value = False) Or (Last(Fields!ACTIVEIRIRPFAmount_LDR.Value) = 0)</Hidden>
-                                    </Visibility>
-                                  </TablixMember>
-                                  <TablixMember>
-                                    <Visibility>
-                                      <Hidden>=((Last(Fields!TotalVATAmount.Value) = 0) Or (Fields!PricesIncludingVAT.Value = False)) Or (Last(Fields!ACTIVEIRIRPFAmount_LDR.Value) &lt;&gt; 0)</Hidden>
-                                    </Visibility>
-                                  </TablixMember>
-                                  <TablixMember>
-                                    <Visibility>
-                                      <Hidden>=((Last(Fields!TotalVATAmount.Value) = 0) Or (Fields!PricesIncludingVAT.Value = False)) Or (Last(Fields!ACTIVEIRIRPFAmount_LDR.Value) = 0)</Hidden>
+                                      <Hidden>=(Last(Fields!TotalVATAmount.Value) = 0) Or (Fields!PricesIncludingVAT.Value = False)</Hidden>
                                     </Visibility>
                                   </TablixMember>
                                 </TablixMembers>
@@ -7618,7 +7213,7 @@
                               <DataSetName>DataSet_Result</DataSetName>
                               <Top>10.12781cm</Top>
                               <Left>11.58047cm</Left>
-                              <Height>4.49824cm</Height>
+                              <Height>2.946cm</Height>
                               <Width>7cm</Width>
                               <ZIndex>5</ZIndex>
                               <Style>
@@ -7645,7 +7240,7 @@
                                 </Paragraph>
                               </Paragraphs>
                               <rd:DefaultName>CompanyLegalStatement</rd:DefaultName>
-                              <Top>24.45975cm</Top>
+                              <Top>21.60225cm</Top>
                               <Height>11pt</Height>
                               <Width>17.20845cm</Width>
                               <ZIndex>6</ZIndex>
@@ -7764,7 +7359,7 @@
                                   </FilterValues>
                                 </Filter>
                               </Filters>
-                              <Top>17.10231cm</Top>
+                              <Top>15.61006cm</Top>
                               <Left>0.16301cm</Left>
                               <Height>0.42333cm</Height>
                               <Width>17.04544cm</Width>
@@ -8002,473 +7597,40 @@
                                 </Border>
                               </Style>
                             </Tablix>
-                            <Tablix Name="Tablix10">
-                              <TablixBody>
-                                <TablixColumns>
-                                  <TablixColumn>
-                                    <Width>2.13798cm</Width>
-                                  </TablixColumn>
-                                  <TablixColumn>
-                                    <Width>2.35127cm</Width>
-                                  </TablixColumn>
-                                  <TablixColumn>
-                                    <Width>2.6458cm</Width>
-                                  </TablixColumn>
-                                  <TablixColumn>
-                                    <Width>2.43023cm</Width>
-                                  </TablixColumn>
-                                  <TablixColumn>
-                                    <Width>3.95784cm</Width>
-                                  </TablixColumn>
-                                </TablixColumns>
-                                <TablixRows>
-                                  <TablixRow>
-                                    <Height>0.38806cm</Height>
-                                    <TablixCells>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox73">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>=Fields!ACTIVEIRIRPFClausesLbl_LDR.Value</Value>
-                                                    <Style>
-                                                      <FontStyle>Normal</FontStyle>
-                                                      <FontFamily>Segoe UI</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                      <FontWeight>Bold</FontWeight>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style />
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>Textbox11</rd:DefaultName>
-                                            <Style>
-                                              <Border>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <VerticalAlign>Bottom</VerticalAlign>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                          <ColSpan>5</ColSpan>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell />
-                                      <TablixCell />
-                                      <TablixCell />
-                                      <TablixCell />
-                                    </TablixCells>
-                                  </TablixRow>
-                                  <TablixRow>
-                                    <Height>0.38806cm</Height>
-                                    <TablixCells>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox162">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>=Fields!ACTIVEIRIRPFCodeLbl_LDR.Value</Value>
-                                                    <Style>
-                                                      <FontFamily>Segoe UI</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                      <FontWeight>Bold</FontWeight>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Left</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>Textbox152</rd:DefaultName>
-                                            <Style>
-                                              <Border>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <BottomBorder>
-                                                <Color>Black</Color>
-                                                <Style>Solid</Style>
-                                                <Width>1pt</Width>
-                                              </BottomBorder>
-                                              <VerticalAlign>Bottom</VerticalAlign>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox165">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>=Fields!ACTIVEIRIRPFBaseLbl_LDR.Value</Value>
-                                                    <Style>
-                                                      <FontFamily>Segoe UI</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                      <FontWeight>Bold</FontWeight>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Right</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>Textbox158</rd:DefaultName>
-                                            <Style>
-                                              <Border>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <BottomBorder>
-                                                <Color>Black</Color>
-                                                <Style>Solid</Style>
-                                                <Width>1pt</Width>
-                                              </BottomBorder>
-                                              <VerticalAlign>Bottom</VerticalAlign>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox166">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>=Fields!ACTIVEIRIRPFPctLbl_LDR.Value</Value>
-                                                    <Style>
-                                                      <FontFamily>Segoe UI</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                      <FontWeight>Bold</FontWeight>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Right</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>Textbox160</rd:DefaultName>
-                                            <Style>
-                                              <Border>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <BottomBorder>
-                                                <Color>Black</Color>
-                                                <Style>Solid</Style>
-                                                <Width>1pt</Width>
-                                              </BottomBorder>
-                                              <VerticalAlign>Bottom</VerticalAlign>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox168">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>=Fields!ACTIVEIRIRPFAmountLbl_LDR.Value</Value>
-                                                    <Style>
-                                                      <FontFamily>Segoe UI</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                      <FontWeight>Bold</FontWeight>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Right</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>Textbox158</rd:DefaultName>
-                                            <Style>
-                                              <Border>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <BottomBorder>
-                                                <Color>Black</Color>
-                                                <Style>Solid</Style>
-                                                <Width>1pt</Width>
-                                              </BottomBorder>
-                                              <VerticalAlign>Bottom</VerticalAlign>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox107">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value />
-                                                    <Style>
-                                                      <FontFamily>Segoe UI</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                      <FontWeight>Bold</FontWeight>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Right</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>Textbox107</rd:DefaultName>
-                                            <Style>
-                                              <Border>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <VerticalAlign>Bottom</VerticalAlign>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                    </TablixCells>
-                                  </TablixRow>
-                                  <TablixRow>
-                                    <Height>0.38806cm</Height>
-                                    <TablixCells>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox167">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>=Fields!ACTIVEIRTaxRetentionCode_LDR.Value</Value>
-                                                    <Style>
-                                                      <FontFamily>Segoe UI</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Left</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>Textbox153</rd:DefaultName>
-                                            <Style>
-                                              <Border>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox170">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>=Fields!ACTIVEIRBaseIRPF_LDR.Value</Value>
-                                                    <Style>
-                                                      <FontFamily>Segoe UI</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Right</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>Textbox159</rd:DefaultName>
-                                            <Style>
-                                              <Border>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox171">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>=Fields!ACTIVEIRRetentionPct_LDR.Value</Value>
-                                                    <Style>
-                                                      <FontFamily>Segoe UI</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Right</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>Textbox161</rd:DefaultName>
-                                            <Style>
-                                              <Border>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox24">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>=-Fields!ACTIVEIRIRPFAmount_LDR.Value</Value>
-                                                    <Style>
-                                                      <FontFamily>Segoe UI</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                      <Format>f2</Format>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Right</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>Textbox23</rd:DefaultName>
-                                            <Style>
-                                              <Border>
-                                                <Color>LightGrey</Color>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                          <rd:Selected>true</rd:Selected>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox108">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value />
-                                                    <Style>
-                                                      <FontFamily>Segoe UI</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Right</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>Textbox108</rd:DefaultName>
-                                            <Style>
-                                              <Border>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                    </TablixCells>
-                                  </TablixRow>
-                                </TablixRows>
-                              </TablixBody>
-                              <TablixColumnHierarchy>
-                                <TablixMembers>
-                                  <TablixMember />
-                                  <TablixMember />
-                                  <TablixMember />
-                                  <TablixMember />
-                                  <TablixMember />
-                                </TablixMembers>
-                              </TablixColumnHierarchy>
-                              <TablixRowHierarchy>
-                                <TablixMembers>
-                                  <TablixMember>
-                                    <KeepWithGroup>After</KeepWithGroup>
-                                  </TablixMember>
-                                  <TablixMember>
-                                    <KeepWithGroup>After</KeepWithGroup>
-                                  </TablixMember>
-                                  <TablixMember>
-                                    <Group Name="Details8">
-                                      <GroupExpressions>
-                                        <GroupExpression>=Fields!DocumentNo.Value</GroupExpression>
-                                      </GroupExpressions>
-                                    </Group>
-                                  </TablixMember>
-                                </TablixMembers>
-                              </TablixRowHierarchy>
-                              <Top>19.26532cm</Top>
-                              <Height>1.16418cm</Height>
-                              <Width>13.52312cm</Width>
+                            <Textbox Name="RemainingAmountText">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=First(Fields!RemainingAmountText.Value)</Value>
+                                      <Style>
+                                        <FontFamily>Segoe ui</FontFamily>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>RemainingAmountText</rd:DefaultName>
+                              <Top>13.17964cm</Top>
+                              <Left>5.71214cm</Left>
+                              <Height>0.5cm</Height>
+                              <Width>12.86833cm</Width>
                               <ZIndex>10</ZIndex>
-                              <Visibility>
-                                <Hidden>=(Last(Fields!ACTIVEIRIRPFAmount_LDR.Value) = 0)</Hidden>
-                              </Visibility>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
                                 </Border>
+                                <PaddingLeft>5pt</PaddingLeft>
+                                <PaddingRight>5pt</PaddingRight>
                               </Style>
-                            </Tablix>
+                            </Textbox>
                           </ReportItems>
                           <KeepTogether>true</KeepTogether>
                           <OmitBorderOnPageBreak>true</OmitBorderOnPageBreak>
@@ -8506,7 +7668,7 @@
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
             <Top>0.22049cm</Top>
-            <Height>24.84781cm</Height>
+            <Height>22.31169cm</Height>
             <Width>18.6cm</Width>
             <Style>
               <Border>
@@ -8515,7 +7677,7 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>25.0683cm</Height>
+        <Height>22.53218cm</Height>
         <Style />
       </Body>
       <Width>18.65824cm</Width>
@@ -9674,42 +8836,6 @@ End Function
         </Field>
         <Field Name="CurrencySymbol">
           <DataField>CurrencySymbol</DataField>
-        </Field>
-        <Field Name="ACTIVEIRTaxRetentionCode_LDR">
-          <DataField>ACTIVEIRTaxRetentionCode_LDR</DataField>
-        </Field>
-        <Field Name="ACTIVEIRBaseIRPF_LDR">
-          <DataField>ACTIVEIRBaseIRPF_LDR</DataField>
-        </Field>
-        <Field Name="ACTIVEIRRetentionPct_LDR">
-          <DataField>ACTIVEIRRetentionPct_LDR</DataField>
-        </Field>
-        <Field Name="ACTIVEIRRetentionPct_LDRFormat">
-          <DataField>ACTIVEIRRetentionPct_LDRFormat</DataField>
-        </Field>
-        <Field Name="ACTIVEIRIRPFAmountText_LDR">
-          <DataField>ACTIVEIRIRPFAmountText_LDR</DataField>
-        </Field>
-        <Field Name="ACTIVEIRIRPFAmount_LDR">
-          <DataField>ACTIVEIRIRPFAmount_LDR</DataField>
-        </Field>
-        <Field Name="ACTIVEIRIRPFClausesLbl_LDR">
-          <DataField>ACTIVEIRIRPFClausesLbl_LDR</DataField>
-        </Field>
-        <Field Name="ACTIVEIRIRPFBaseLbl_LDR">
-          <DataField>ACTIVEIRIRPFBaseLbl_LDR</DataField>
-        </Field>
-        <Field Name="ACTIVEIRIRPFPctLbl_LDR">
-          <DataField>ACTIVEIRIRPFPctLbl_LDR</DataField>
-        </Field>
-        <Field Name="ACTIVEIRIRPFCodeLbl_LDR">
-          <DataField>ACTIVEIRIRPFCodeLbl_LDR</DataField>
-        </Field>
-        <Field Name="ACTIVEIRIRPFAmountLbl_LDR">
-          <DataField>ACTIVEIRIRPFAmountLbl_LDR</DataField>
-        </Field>
-        <Field Name="ACTIVEIRTotalAmountIRPFVAT_LDR">
-          <DataField>ACTIVEIRTotalAmountIRPFVAT_LDR</DataField>
         </Field>
       </Fields>
       <Query>
