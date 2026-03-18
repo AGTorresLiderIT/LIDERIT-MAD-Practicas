@@ -17,6 +17,21 @@
             "enableSqlInformationDebugger": true,
             "tenant": "default",
             "usePublicURLFromServer": true
+        },
+        {
+            "name": "desarrollo-CDX",
+            "request": "launch",
+            "type": "al",
+            "environmentType": "Sandbox",
+            "environmentName": "Desarollo",
+            "tenant": "09d5a8cc-bcd3-4c18-b6fc-fbc6d9cd8b74",
+            "startupObjectId": 31,
+            "startupObjectType": "Page",
+            "breakOnError": "All",
+            "launchBrowser": true,
+            "enableLongRunningSqlStatements": true,
+            "enableSqlInformationDebugger": true,
+            "schemaUpdateMode": "ForceSync"
         }
     ]
 }
