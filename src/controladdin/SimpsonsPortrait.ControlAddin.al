@@ -33,62 +33,62 @@
 
 controladdin "Simpsons Portrait"
 {
-  // ── Dimensiones del área del ControlAddin en la página ───────────────────
-  RequestedHeight = 380;    // Alto solicitado en píxeles
-  RequestedWidth = 320;     // Ancho solicitado en píxeles
-  MinimumHeight = 200;      // Alto mínimo (no puede reducirse más)
-  MinimumWidth = 200;       // Ancho mínimo
-  VerticalStretch = true;   // Puede expandirse verticalmente
-  HorizontalStretch = true; // Puede expandirse horizontalmente
+    // ── Dimensiones del área del ControlAddin en la página ───────────────────
+    RequestedHeight = 380;    // Alto solicitado en píxeles
+    RequestedWidth = 320;     // Ancho solicitado en píxeles
+    MinimumHeight = 200;      // Alto mínimo (no puede reducirse más)
+    MinimumWidth = 200;       // Ancho mínimo
+    VerticalStretch = true;   // Puede expandirse verticalmente
+    HorizontalStretch = true; // Puede expandirse horizontalmente
 
-  // ── Ficheros JavaScript ───────────────────────────────────────────────────
-  // Scripts: ficheros cargados como bibliotecas. Las funciones en estos ficheros
-  //          son las que AL puede invocar con CurrPage.Addin.FunctionName()
-  Scripts = 'src/controladdin/js/SimpsonsPortrait.js';
+    // ── Ficheros JavaScript ───────────────────────────────────────────────────
+    // Scripts: ficheros cargados como bibliotecas. Las funciones en estos ficheros
+    //          son las que AL puede invocar con CurrPage.Addin.FunctionName()
+    Scripts = 'src/controladdin/js/SimpsonsPortrait.js';
 
-  // StartupScript: se ejecuta UNA SOLA VEZ cuando el addin se inicializa.
-  //               Es aquí donde creamos la estructura HTML del addin.
-  StartupScript = 'src/controladdin/js/SimpsonsPortrait.startup.js';
+    // StartupScript: se ejecuta UNA SOLA VEZ cuando el addin se inicializa.
+    //               Es aquí donde creamos la estructura HTML del addin.
+    StartupScript = 'src/controladdin/js/SimpsonsPortrait.startup.js';
 
-  // ── Ficheros CSS ───────────────────────────────────────────────────────────────
-  StyleSheets = 'src/controladdin/css/SimpsonsPortrait.css';
+    // ── Ficheros CSS ───────────────────────────────────────────────────────────────
+    StyleSheets = 'src/controladdin/css/SimpsonsPortrait.css';
 
-  // ===========================================================================
-  // EVENTOS: JavaScript → AL
-  // ===========================================================================
-  // Los eventos se declaran aquí pero se IMPLEMENTAN en la página que usa el addin
-  // (en los triggers usercontrol).
-  // JavaScript los dispara con: Microsoft.Dynamics.NAV.InvokeExtensibilityMethod(...)
+    // ===========================================================================
+    // EVENTOS: JavaScript → AL
+    // ===========================================================================
+    // Los eventos se declaran aquí pero se IMPLEMENTAN en la página que usa el addin
+    // (en los triggers usercontrol).
+    // JavaScript los dispara con: Microsoft.Dynamics.NAV.InvokeExtensibilityMethod(...)
 
-  /// <summary>
-  /// Se dispara cuando el JavaScript ha cargado y el addin está listo.
-  /// Usar este evento para enviar datos iniciales al addin desde AL.
-  /// </summary>
-  event ControlAddinReady();
+    /// <summary>
+    /// Se dispara cuando el JavaScript ha cargado y el addin está listo.
+    /// Usar este evento para enviar datos iniciales al addin desde AL.
+    /// </summary>
+    event ControlAddinReady();
 
-  /// <summary>
-  /// Se dispara cuando el usuario pulsa el botón de una frase en el addin.
-  /// SelectedPhrase contiene el texto de la frase que se está reproduciendo.
-  /// </summary>
-  event PhraseButtonClicked(SelectedPhrase: Text);
+    /// <summary>
+    /// Se dispara cuando el usuario pulsa el botón de una frase en el addin.
+    /// SelectedPhrase contiene el texto de la frase que se está reproduciendo.
+    /// </summary>
+    event PhraseButtonClicked(SelectedPhrase: Text);
 
-  // ===========================================================================
-  // PROCEDIMIENTOS: AL → JavaScript
-  // ===========================================================================
-  // Los procedimientos se declaran aquí pero se IMPLEMENTAN en los ficheros .js.
-  // AL los llama con: CurrPage.NombreAddinEnPagina.NombreProcedimiento(params)
+    // ===========================================================================
+    // PROCEDIMIENTOS: AL → JavaScript
+    // ===========================================================================
+    // Los procedimientos se declaran aquí pero se IMPLEMENTAN en los ficheros .js.
+    // AL los llama con: CurrPage.NombreAddinEnPagina.NombreProcedimiento(params)
 
-  /// <summary>
-  /// Muestra la imagen del personaje/lugar en el addin.
-  /// </summary>
-  /// <param name="ImageUrl">URL completa de la imagen (ej: https://...webp).</param>
-  /// <param name="Name">Nombre del personaje o lugar para el texto alternativo.</param>
-  procedure DisplayPortrait(ImageUrl: Text; Name: Text);
+    /// <summary>
+    /// Muestra la imagen del personaje/lugar en el addin.
+    /// </summary>
+    /// <param name="ImageUrl">URL completa de la imagen (ej: https://...webp).</param>
+    /// <param name="Name">Nombre del personaje o lugar para el texto alternativo.</param>
+    procedure DisplayPortrait(ImageUrl: Text; Name: Text);
 
-  /// <summary>
-  /// Envía las frases célebres del personaje al addin.
-  /// El addin creará botones de reproducción para cada frase.
-  /// </summary>
-  /// <param name="PhrasesText">Texto con las frases separadas por " • ".</param>
-  procedure SetPhrases(PhrasesText: Text);
+    /// <summary>
+    /// Envía las frases célebres del personaje al addin.
+    /// El addin creará botones de reproducción para cada frase.
+    /// </summary>
+    /// <param name="PhrasesText">Texto con las frases separadas por " • ".</param>
+    procedure SetPhrases(PhrasesText: Text);
 }

@@ -188,7 +188,7 @@ function speakPhrase(phrase, button) {
     // ── Verificamos soporte del navegador ──────────────────────────────────
     if (!('speechSynthesis' in window)) {
         alert('Tu navegador no soporta síntesis de voz (Web Speech API).\n' +
-              'Prueba con Google Chrome o Microsoft Edge.');
+            'Prueba con Google Chrome o Microsoft Edge.');
         return;
     }
 
