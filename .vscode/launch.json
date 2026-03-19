@@ -2,21 +2,19 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Your own server",
+            "name": "desarrollovs-CDX",
             "request": "launch",
             "type": "al",
-            "environmentType": "OnPrem",
-            "server": "http://bcserver",
-            "serverInstance": "BC",
-            "authentication": "UserPassword",
-            "startupObjectId": 22,
+            "environmentType": "Sandbox",
+            "environmentName": "Desarollovs",
+            "tenant": "09d5a8cc-bcd3-4c18-b6fc-fbc6d9cd8b74",
+            "startupObjectId": 31,
             "startupObjectType": "Page",
             "breakOnError": "All",
             "launchBrowser": true,
             "enableLongRunningSqlStatements": true,
             "enableSqlInformationDebugger": true,
-            "tenant": "default",
-            "usePublicURLFromServer": true
+            //"schemaUpdateMode": "ForceSync"
         }
     ]
 }
