@@ -1,0 +1,202 @@
+/* =============================================================================
+   CONTROL ADDIN: Simpsons Portrait - Estilos CSS
+   FICHERO: SimpsonsPortrait.css
+   =============================================================================
+   Estilos para el ControlAddin de Los Simpson.
+   La paleta de colores está inspirada en la serie:
+     Amarillo Springfield: #FED90F
+     Azul Burns:           #003594
+     Naranja acento:       #F7941D
+     Fondo claro:          #FFFDE7
+   ============================================================================= */
+
+/* ── Reset básico para el body del iframe del addin ──────────────────────── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 13px;
+  background-color: transparent;
+  color: #333;
+  overflow-x: hidden;
+}
+
+/* ── Contenedor principal del addin ─────────────────────────────────────── */
+#simpsons-addin-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 8px;
+  gap: 10px;
+  min-height: 100%;
+}
+
+/* ── Área de la imagen ───────────────────────────────────────────────────── */
+#portrait-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 260px;
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#portrait-img {
+  max-width: 100%;
+  max-height: 220px;
+  border-radius: 10px;
+  border: 3px solid #FED90F;   /* Borde amarillo Simpson */
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+  object-fit: contain;
+  background-color: #FFFDE7;
+  transition: opacity 0.3s ease;
+}
+
+/* ── Placeholder cuando no hay imagen ───────────────────────────────────── */
+#portrait-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 180px;
+  border: 2px dashed #FED90F;
+  border-radius: 10px;
+  background-color: #FFFDE7;
+  color: #999;
+  text-align: center;
+  gap: 8px;
+}
+
+#portrait-placeholder span {
+  font-size: 48px;
+}
+
+#portrait-placeholder p {
+  font-size: 12px;
+  color: #888;
+  line-height: 1.4;
+}
+
+/* ── Nombre del personaje ────────────────────────────────────────────────── */
+#character-name {
+  font-size: 14px;
+  font-weight: bold;
+  color: #003594;             /* Azul Burns */
+  text-align: center;
+  max-width: 280px;
+  word-break: break-word;
+}
+
+/* ── Separador ───────────────────────────────────────────────────────────── */
+hr#phrases-divider {
+  width: 100%;
+  border: none;
+  border-top: 1px solid #FED90F;
+  margin: 4px 0;
+}
+
+/* ── Sección de frases ───────────────────────────────────────────────────── */
+#phrases-section {
+  width: 100%;
+}
+
+#phrases-title {
+  font-size: 12px;
+  font-weight: bold;
+  color: #F7941D;             /* Naranja acento */
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+#phrases-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Scrollbar personalizada para el contenedor de frases */
+#phrases-container::-webkit-scrollbar {
+  width: 4px;
+}
+#phrases-container::-webkit-scrollbar-thumb {
+  background: #FED90F;
+  border-radius: 2px;
+}
+
+/* ── Elemento de frase individual ────────────────────────────────────────── */
+.phrase-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px;
+  background-color: #FFFDE7;
+  border-radius: 6px;
+  border-left: 3px solid #FED90F;
+  transition: background-color 0.15s ease;
+}
+
+.phrase-item:hover {
+  background-color: #FFF9C4;
+}
+
+.phrase-text {
+  flex: 1;
+  font-size: 11px;
+  color: #444;
+  line-height: 1.3;
+  cursor: default;
+}
+
+/* ── Botón de reproducción de frase ─────────────────────────────────────── */
+.phrase-play-btn {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background-color: #FED90F;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  padding: 0;
+}
+
+.phrase-play-btn:hover {
+  background-color: #F7941D;
+  color: white;
+  transform: scale(1.1);
+}
+
+/* Estado "reproduciendo": el botón se anima ──────────────────────────────── */
+.phrase-play-btn.playing {
+  background-color: #e53935;  /* Rojo al reproducir */
+  color: white;
+  animation: pulse 0.8s infinite alternate;
+}
+
+@keyframes pulse {
+  from { transform: scale(1.0); }
+  to   { transform: scale(1.15); }
+}
+
+/* ── Indicador de más frases ─────────────────────────────────────────────── */
+.phrases-more {
+  font-size: 11px;
+  color: #999;
+  text-align: center;
+  padding: 4px;
+  font-style: italic;
+}

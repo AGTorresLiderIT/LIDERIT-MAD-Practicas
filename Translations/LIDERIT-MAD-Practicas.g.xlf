@@ -1,0 +1,289 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="en-US" original="LIDERIT-MAD-Practicas">
+    <body>
+      <group id="body">
+        <trans-unit id="Table 1818004294 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Characters</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Characters - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1818004294 - Field 2809060278 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Fecha Actualización</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Characters - Field Fecha Actualización - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1818004294 - Field 456233642 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>ID Personaje</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Characters - Field ID Personaje - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1818004294 - Field 1945024670 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Nombre Personaje</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Characters - Field Nombre Personaje - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 827875204 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Characters List</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Characters List - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 827875204 - Control 2809060278 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Fecha y hora en que se importaron los datos de este personaje.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Characters List - Control Fecha Actualización - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 827875204 - Control 456233642 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Identificador único del personaje en la API de los Simpsons.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Characters List - Control ID Personaje - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 827875204 - Control 1945024670 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Nombre completo del personaje de Springfield.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Characters List - Control Nombre Personaje - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 827875204 - Action 375858295 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Descarga los personajes desde la API de los Simpsons y los guarda en BC.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Characters List - Action ImportarDesdeAPI - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 827875204 - Action 375858295 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Importar Personajes desde API</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Characters List - Action ImportarDesdeAPI - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 827875204 - Action 2395192980 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Abre la ficha detallada de este personaje consultando la API.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Characters List - Action VerDetalle - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 827875204 - Action 2395192980 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ver Habitante de Springfield</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Characters List - Action VerDetalle - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 331872414 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Habitante de Springfield</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Habitante de Springfield - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 331872414 - Control 2734429705 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>🔍 Buscar Habitante de Springfield</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Habitante de Springfield - Control GrupoBusqueda - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 331872414 - Control 3225694491 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Introduce el nombre del personaje a buscar (ej: Homer, Burns, Flanders...)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Habitante de Springfield - Control NombreBusqueda - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 331872414 - Control 3225694491 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Nombre del Personaje</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Habitante de Springfield - Control NombreBusqueda - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 331872414 - Control 2578861465 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>💬 Frases Célebres</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Habitante de Springfield - Control GrupoFrases - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 331872414 - Control 419371172 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Frases célebres del personaje. Separadas por el símbolo •</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Habitante de Springfield - Control Frases - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 331872414 - Control 419371172 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Frases</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Habitante de Springfield - Control Frases - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 331872414 - Control 3459830456 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>👤 Datos del Personaje</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Habitante de Springfield - Control GrupoInformacion - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 331872414 - Control 168017712 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Edad del personaje (0 si no está registrada en la API).</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Habitante de Springfield - Control Edad - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 331872414 - Control 168017712 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Edad</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Habitante de Springfield - Control Edad - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 331872414 - Control 2950845476 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Estado vital del personaje: Alive (vivo) o Deceased (fallecido).</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Habitante de Springfield - Control Estado - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 331872414 - Control 2950845476 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Estado</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Habitante de Springfield - Control Estado - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 331872414 - Control 3409127012 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Fecha de nacimiento del personaje en formato AAAA-MM-DD (puede estar vacío).</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Habitante de Springfield - Control FechaNacimiento - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 331872414 - Control 3409127012 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Fecha de Nacimiento</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Habitante de Springfield - Control FechaNacimiento - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 331872414 - Control 2273344040 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Género del personaje: Male o Female.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Habitante de Springfield - Control Genero - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 331872414 - Control 2273344040 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Género</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Habitante de Springfield - Control Genero - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 331872414 - Control 3563004382 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Nombre completo del personaje de Springfield.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Habitante de Springfield - Control NombrePersonaje - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 331872414 - Control 3563004382 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Nombre Completo</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Habitante de Springfield - Control NombrePersonaje - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 331872414 - Control 1436286525 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Descripción de la ocupación o trabajo del personaje.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Habitante de Springfield - Control Ocupacion - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 331872414 - Control 1436286525 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ocupación</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Habitante de Springfield - Control Ocupacion - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 331872414 - Control 1002299248 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>URL de la fotografía del personaje. Haz clic en el icono para abrirla en el navegador.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Habitante de Springfield - Control PortraitUrl - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 331872414 - Control 1002299248 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Fotografía (URL)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Habitante de Springfield - Control PortraitUrl - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 331872414 - Control 378509888 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>🖼️ Retrato</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Habitante de Springfield - Control GrupoRetrato - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 331872414 - Action 1513332967 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Busca el personaje introducido en la API de los Simpsons.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Habitante de Springfield - Action AccionBuscar - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 331872414 - Action 1513332967 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>🔍 Buscar Personaje</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Habitante de Springfield - Action AccionBuscar - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 331872414 - Action 1947384303 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Guarda este personaje en la tabla Characters de Business Central.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Habitante de Springfield - Action GuardarPersonaje - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 331872414 - Action 1947384303 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>💾 Guardar en Characters</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Habitante de Springfield - Action GuardarPersonaje - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 575740524 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>🐶 Paseo de Perros - Localizaciones de Springfield</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Paseo de Perros - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 575740524 - Control 1288972162 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>🗺️ Vista del Lugar</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Paseo de Perros - Control GrupoImagen - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 575740524 - Control 1017621732 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>📋 Orden del Sr. Burns para Smithers</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Paseo de Perros - Control GrupoInstruccion - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 575740524 - Control 1609545361 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Mensaje de instrucciones del Sr. Burns para Smithers.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Paseo de Perros - Control Instruccion - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 575740524 - Control 1609545361 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Orden del Sr. Burns</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Paseo de Perros - Control Instruccion - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 575740524 - Control 1622339621 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>📍 Destino del Paseo</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Paseo de Perros - Control GrupoLocalizacion - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 575740524 - Control 3096075186 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ciudad donde está ubicado el lugar (normalmente Springfield).</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Paseo de Perros - Control Ciudad - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 575740524 - Control 3096075186 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ciudad</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Paseo de Perros - Control Ciudad - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 575740524 - Control 2992130958 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>URL de la imagen del lugar. Haz clic para verla en el navegador.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Paseo de Perros - Control ImagenUrl - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 575740524 - Control 2992130958 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Imagen del Lugar (URL)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Paseo de Perros - Control ImagenUrl - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 575740524 - Control 249536904 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Nombre del lugar de Springfield al que Smithers debe acudir.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Paseo de Perros - Control NombreLugar - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 575740524 - Control 249536904 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Nombre del Lugar</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Paseo de Perros - Control NombreLugar - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 575740524 - Control 1332448432 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Categoría o uso principal del lugar (Bar, Residencial, Educación, etc.).</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Paseo de Perros - Control UsoLugar - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 575740524 - Control 1332448432 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tipo de Lugar</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Paseo de Perros - Control UsoLugar - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 575740524 - Action 599399489 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Genera una nueva localización aleatoria de Springfield para el paseo.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Paseo de Perros - Action NuevoPaseo - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 575740524 - Action 599399489 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>🎲 Nuevo Paseo Aleatorio</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Paseo de Perros - Action NuevoPaseo - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PermissionSet 2495388818 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Simpsons API - Acceso Completo</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PermissionSet Simpsons API - Property Caption</note>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>
