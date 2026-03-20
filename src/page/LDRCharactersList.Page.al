@@ -33,7 +33,7 @@ page 50000 "Characters List"
         {
             action(MostrarDatos)
             {
-                Caption = 'MostrarDatos';
+                Caption = 'MostrarDatos2';
                 Image = Refresh;
                 trigger OnAction()
                 begin
