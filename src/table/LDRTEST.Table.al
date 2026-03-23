@@ -1,4 +1,4 @@
-table 50000 TEST
+/*table 50000 TEST
 {
     Caption = 'TEST';
     DataClassification = ToBeClassified;
@@ -17,4 +17,4 @@ table 50000 TEST
             Clustered = true;
         }
     }
-}
+}*/
