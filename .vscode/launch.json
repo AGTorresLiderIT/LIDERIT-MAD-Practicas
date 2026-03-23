@@ -1,22 +1,52 @@
 {
     "version": "0.2.0",
     "configurations": [
+        // {
+        //     "name": "Your own server",
+        //     "request": "launch",
+        //     "type": "al",
+        //     "environmentType": "OnPrem",
+        //     "server": "http://bcserver",
+        //     "serverInstance": "BC",
+        //     "authentication": "UserPassword",
+        //     "startupObjectId": 22,
+        //     "startupObjectType": "Page",
+        //     "breakOnError": "All",
+        //     "launchBrowser": true,
+        //     "enableLongRunningSqlStatements": true,
+        //     "enableSqlInformationDebugger": true,
+        //     "tenant": "default",
+        //     "usePublicURLFromServer": true
+        // },
         {
-            "name": "Your own server",
+            "name": "Desarrollo-CDX",
             "request": "launch",
             "type": "al",
-            "environmentType": "OnPrem",
-            "server": "http://bcserver",
-            "serverInstance": "BC",
-            "authentication": "UserPassword",
+            "environmentType": "Sandbox",
+            "environmentName": "Desarrollo",
+            "tenant": "2563d938-99d5-42f9-83f8-999c6615338f",
             "startupObjectId": 22,
             "startupObjectType": "Page",
             "breakOnError": "All",
             "launchBrowser": true,
             "enableLongRunningSqlStatements": true,
             "enableSqlInformationDebugger": true,
-            "tenant": "default",
-            "usePublicURLFromServer": true
+            "schemaUpdateMode": "Synchronize"
+        },
+        {
+            "name": "DesarrolloVS",
+            "request": "launch",
+            "type": "al",
+            "environmentType": "Sandbox",
+            "environmentName": "DesarrolloVS",
+            "tenant": "2563d938-99d5-42f9-83f8-999c6615338f",
+            "startupObjectId": 22,
+            "startupObjectType": "Page",
+            "breakOnError": "All",
+            "launchBrowser": true,
+            "enableLongRunningSqlStatements": true,
+            "enableSqlInformationDebugger": true,
+            "schemaUpdateMode": "Synchronize"
         }
     ]
 }
