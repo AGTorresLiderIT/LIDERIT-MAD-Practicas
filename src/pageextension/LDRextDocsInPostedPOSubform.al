@@ -8,7 +8,6 @@ pageextension 50001 extDocsInPostedPOSubform extends "Docs. in Posted PO Subform
             {
                 ApplicationArea = All;
                 Caption = 'IBAN';
-                Editable = false;
             }
         }
     }

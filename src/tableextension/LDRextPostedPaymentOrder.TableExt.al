@@ -6,6 +6,7 @@ tableextension 50002 extPostedCarteraDoc extends "Posted Cartera Doc."
         {
             Caption = 'IBAN';
             DataClassification = ToBeClassified;
+            Editable = false;
         }
     }
 }

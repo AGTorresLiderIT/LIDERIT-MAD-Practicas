@@ -6,6 +6,7 @@ tableextension 50001 extClosedCarteraDoc extends "Closed Cartera Doc."
         {
             Caption = 'IBAN';
             DataClassification = ToBeClassified;
+            Editable = false;
         }
     }
 }
