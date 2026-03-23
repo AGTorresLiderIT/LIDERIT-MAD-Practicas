@@ -3,15 +3,45 @@
   <file datatype="xml" source-language="en-US" target-language="en-US" original="LIDERIT-MAD-Practicas">
     <body>
       <group id="body">
-        <trans-unit id="PageExtension 885681437 - Control 1176583840 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 478700588">
+        <trans-unit id="PageExtension 885681437 - Control 19276738 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 478700588">
           <source>IBAN</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension extCarteraDocsPage - Control IBAN - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension extCarteraDocsPage - Control IBAN Proveedor - Property Caption</note>
         </trans-unit>
-        <trans-unit id="TableExtension 1774713477 - Field 1176583840 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 2898919088">
+        <trans-unit id="PageExtension 3796068382 - Control 1176583840 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2575130239">
           <source>IBAN</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">TableExtension extCarteraDoc - Field IBAN - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension extDocsinClosedPOSubform - Control IBAN - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 3204729435 - Control 1176583840 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2539573266">
+          <source>IBAN</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension extDocsInPostedPOSubform - Control IBAN - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 3501788340 - Control 1176583840 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3741655169">
+          <source>IBAN</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension extDocsinPOSubform - Control IBAN - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 1774713477 - Field 1821103476 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 2898919088">
+          <source>IBAN</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension extCarteraDoc - Field IBAN Cliente - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 1774713477 - Field 19276738 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 2898919088">
+          <source>IBAN</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension extCarteraDoc - Field IBAN Proveedor - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 1850288059 - Field 1176583840 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 1631311266">
+          <source>IBAN</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension extClosedCarteraDoc - Field IBAN - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 4169774118 - Field 1176583840 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 930347903">
+          <source>IBAN</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension extPostedCarteraDoc - Field IBAN - Property Caption</note>
         </trans-unit>
       </group>
     </body>
