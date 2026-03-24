@@ -501,7 +501,7 @@ report 50000 "Standard Sales - Invoice2"
                     AutoFormatExpression = GetCurrencyCode();
                     AutoFormatType = 1;
                 }
-                column(AmountExcludingVAT_Line_Lbl; FieldCaption(Amount))
+                column(luAmountExcdingVAT_Line_Lbl; FieldCaption(Amount))
                 {
                 }
                 column(AmountIncludingVAT_Line; "Amount Including VAT")
