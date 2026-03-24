@@ -11,7 +11,7 @@
       <am:Name>MSRB</am:Name>
       <am:Version>15.1.30001.02</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-03-20T12:55:09.9878318Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-03-24T12:44:16.4797812Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -31,6 +31,9 @@
         <CommandText />
       </Query>
       <Fields>
+        <Field Name="Logo">
+          <DataField>Logo</DataField>
+        </Field>
         <Field Name="CompanyAddress1">
           <DataField>CompanyAddress1</DataField>
         </Field>
@@ -939,7 +942,7 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>18.65837cm</Width>
+                  <Width>18.69763cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -1254,6 +1257,7 @@
                                     <TablixCells>
                                       <TablixCell>
                                         <CellContents>
+                                          <rd:Selected>true</rd:Selected>
                                           <Textbox Name="Description_Line_2">
                                             <rd:DefaultName>Description_Line_2</rd:DefaultName>
                                             <CanGrow>true</CanGrow>
@@ -1390,6 +1394,7 @@
                                     <TablixCells>
                                       <TablixCell>
                                         <CellContents>
+                                          <rd:Selected>true</rd:Selected>
                                           <Textbox Name="Textbox28">
                                             <rd:DefaultName>Textbox28</rd:DefaultName>
                                             <CanGrow>true</CanGrow>
@@ -1621,7 +1626,13 @@ Cstr(Fields!CompanyAddress4.Value) + Chr(177) +
 Cstr(Fields!CompanyIBAN.Value) + Chr(177) + 
 Cstr(Fields!CompanyHomePage.Value) + Chr(177) + 
 Cstr(Fields!CompanyEMail.Value) + Chr(177) + 
-Cstr(Fields!CompanyRegistrationNumber.Value), 1)</Hidden>
+Cstr(Fields!CompanyRegistrationNumber.Value) + Chr(177) + 
+Cstr(Fields!CustomerAddress1.Value) + Chr(177) + 
+Cstr(Fields!CustomerAddress3.Value) + Chr(177) + 
+Cstr(Fields!CustomerAddress4.Value) + Chr(177) + 
+Cstr(Fields!DocumentDate.Value) + Chr(177) + 
+Cstr(Fields!DocumentNo.Value) + Chr(177) + 
+Cstr(Fields!VATRegistrationNo.Value), 1)</Hidden>
                               </Visibility>
                               <Style>
                                 <Border>
@@ -2006,7 +2017,9 @@ Cstr(Fields!CompanyRegistrationNumber.Value), 1)</Hidden>
                                                     </Style>
                                                   </TextRun>
                                                 </TextRuns>
-                                                <Style />
+                                                <Style>
+                                                  <TextAlign>Right</TextAlign>
+                                                </Style>
                                               </Paragraph>
                                             </Paragraphs>
                                             <Style>
@@ -2062,8 +2075,8 @@ Cstr(Fields!CompanyRegistrationNumber.Value), 1)</Hidden>
                                   </TablixMember>
                                 </TablixMembers>
                               </TablixRowHierarchy>
-                              <Top>12.90967cm</Top>
-                              <Left>13.30151cm</Left>
+                              <Top>10.53446cm</Top>
+                              <Left>13.34077cm</Left>
                               <Height>2.4cm</Height>
                               <Width>5.35686cm</Width>
                               <ZIndex>2</ZIndex>
@@ -2077,7 +2090,7 @@ Cstr(Fields!CompanyRegistrationNumber.Value), 1)</Hidden>
                               <TablixBody>
                                 <TablixColumns>
                                   <TablixColumn>
-                                    <Width>3.89361cm</Width>
+                                    <Width>7.88882cm</Width>
                                   </TablixColumn>
                                 </TablixColumns>
                                 <TablixRows>
@@ -2154,52 +2167,20 @@ Cstr(Fields!CompanyRegistrationNumber.Value), 1)</Hidden>
                                       </TablixCell>
                                     </TablixCells>
                                   </TablixRow>
-                                </TablixRows>
-                              </TablixBody>
-                              <TablixColumnHierarchy>
-                                <TablixMembers>
-                                  <TablixMember />
-                                </TablixMembers>
-                              </TablixColumnHierarchy>
-                              <TablixRowHierarchy>
-                                <TablixMembers>
-                                  <TablixMember />
-                                  <TablixMember />
-                                </TablixMembers>
-                              </TablixRowHierarchy>
-                              <Top>15.68779cm</Top>
-                              <Left>14.4816cm</Left>
-                              <Height>1.2cm</Height>
-                              <Width>3.89361cm</Width>
-                              <ZIndex>3</ZIndex>
-                              <Style>
-                                <Border>
-                                  <Style>None</Style>
-                                </Border>
-                              </Style>
-                            </Tablix>
-                            <Tablix Name="Tablix3">
-                              <TablixBody>
-                                <TablixColumns>
-                                  <TablixColumn>
-                                    <Width>7.95042cm</Width>
-                                  </TablixColumn>
-                                </TablixColumns>
-                                <TablixRows>
                                   <TablixRow>
                                     <Height>0.6cm</Height>
                                     <TablixCells>
                                       <TablixCell>
                                         <CellContents>
-                                          <Textbox Name="Textbox3">
-                                            <rd:DefaultName>Textbox3</rd:DefaultName>
+                                          <Textbox Name="Textbox5">
+                                            <rd:DefaultName>Textbox5</rd:DefaultName>
                                             <CanGrow>true</CanGrow>
                                             <KeepTogether>true</KeepTogether>
                                             <Paragraphs>
                                               <Paragraph>
                                                 <TextRuns>
                                                   <TextRun>
-                                                    <Value>Terms of Payement</Value>
+                                                    <Value />
                                                     <Style />
                                                   </TextRun>
                                                 </TextRuns>
@@ -2223,6 +2204,119 @@ Cstr(Fields!CompanyRegistrationNumber.Value), 1)</Hidden>
                                   </TablixRow>
                                   <TablixRow>
                                     <Height>0.6cm</Height>
+                                    <TablixCells>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox6">
+                                            <rd:DefaultName>Textbox6</rd:DefaultName>
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value />
+                                                    <Style />
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style />
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Color>LightGrey</Color>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <PaddingLeft>2pt</PaddingLeft>
+                                              <PaddingRight>2pt</PaddingRight>
+                                              <PaddingTop>2pt</PaddingTop>
+                                              <PaddingBottom>2pt</PaddingBottom>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                    </TablixCells>
+                                  </TablixRow>
+                                </TablixRows>
+                              </TablixBody>
+                              <TablixColumnHierarchy>
+                                <TablixMembers>
+                                  <TablixMember />
+                                </TablixMembers>
+                              </TablixColumnHierarchy>
+                              <TablixRowHierarchy>
+                                <TablixMembers>
+                                  <TablixMember />
+                                  <TablixMember />
+                                  <TablixMember />
+                                  <TablixMember />
+                                </TablixMembers>
+                              </TablixRowHierarchy>
+                              <Top>13.53446cm</Top>
+                              <Left>10.52565cm</Left>
+                              <Height>2.4cm</Height>
+                              <Width>7.88882cm</Width>
+                              <ZIndex>3</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                              </Style>
+                            </Tablix>
+                            <Tablix Name="Tablix3">
+                              <TablixBody>
+                                <TablixColumns>
+                                  <TablixColumn>
+                                    <Width>4.52407cm</Width>
+                                  </TablixColumn>
+                                  <TablixColumn>
+                                    <Width>4.76219cm</Width>
+                                  </TablixColumn>
+                                </TablixColumns>
+                                <TablixRows>
+                                  <TablixRow>
+                                    <Height>0.6189cm</Height>
+                                    <TablixCells>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox3">
+                                            <rd:DefaultName>Textbox3</rd:DefaultName>
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>=Fields!PaymentTermsDescription_Lbl.Value</Value>
+                                                    <Style />
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Center</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Color>LightGrey</Color>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <BackgroundColor>LightGrey</BackgroundColor>
+                                              <VerticalAlign>Middle</VerticalAlign>
+                                              <PaddingLeft>2pt</PaddingLeft>
+                                              <PaddingRight>2pt</PaddingRight>
+                                              <PaddingTop>2pt</PaddingTop>
+                                              <PaddingBottom>2pt</PaddingBottom>
+                                            </Style>
+                                          </Textbox>
+                                          <ColSpan>2</ColSpan>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell />
+                                    </TablixCells>
+                                  </TablixRow>
+                                  <TablixRow>
+                                    <Height>0.6189cm</Height>
                                     <TablixCells>
                                       <TablixCell>
                                         <CellContents>
@@ -2252,12 +2346,14 @@ Cstr(Fields!CompanyRegistrationNumber.Value), 1)</Hidden>
                                               <PaddingBottom>2pt</PaddingBottom>
                                             </Style>
                                           </Textbox>
+                                          <ColSpan>2</ColSpan>
                                         </CellContents>
                                       </TablixCell>
+                                      <TablixCell />
                                     </TablixCells>
                                   </TablixRow>
                                   <TablixRow>
-                                    <Height>0.6cm</Height>
+                                    <Height>0.6189cm</Height>
                                     <TablixCells>
                                       <TablixCell>
                                         <CellContents>
@@ -2269,7 +2365,11 @@ Cstr(Fields!CompanyRegistrationNumber.Value), 1)</Hidden>
                                               <Paragraph>
                                                 <TextRuns>
                                                   <TextRun>
-                                                    <Value />
+                                                    <Value>Bank: </Value>
+                                                    <Style />
+                                                  </TextRun>
+                                                  <TextRun>
+                                                    <Value>=Fields!CompanyBankName.Value</Value>
                                                     <Style />
                                                   </TextRun>
                                                 </TextRuns>
@@ -2287,12 +2387,14 @@ Cstr(Fields!CompanyRegistrationNumber.Value), 1)</Hidden>
                                               <PaddingBottom>2pt</PaddingBottom>
                                             </Style>
                                           </Textbox>
+                                          <ColSpan>2</ColSpan>
                                         </CellContents>
                                       </TablixCell>
+                                      <TablixCell />
                                     </TablixCells>
                                   </TablixRow>
                                   <TablixRow>
-                                    <Height>0.6cm</Height>
+                                    <Height>0.6189cm</Height>
                                     <TablixCells>
                                       <TablixCell>
                                         <CellContents>
@@ -2304,7 +2406,11 @@ Cstr(Fields!CompanyRegistrationNumber.Value), 1)</Hidden>
                                               <Paragraph>
                                                 <TextRuns>
                                                   <TextRun>
-                                                    <Value />
+                                                    <Value>IBAN: </Value>
+                                                    <Style />
+                                                  </TextRun>
+                                                  <TextRun>
+                                                    <Value>=Fields!CompanyIBAN.Value</Value>
                                                     <Style />
                                                   </TextRun>
                                                 </TextRuns>
@@ -2322,12 +2428,14 @@ Cstr(Fields!CompanyRegistrationNumber.Value), 1)</Hidden>
                                               <PaddingBottom>2pt</PaddingBottom>
                                             </Style>
                                           </Textbox>
+                                          <ColSpan>2</ColSpan>
                                         </CellContents>
                                       </TablixCell>
+                                      <TablixCell />
                                     </TablixCells>
                                   </TablixRow>
                                   <TablixRow>
-                                    <Height>0.6cm</Height>
+                                    <Height>0.6189cm</Height>
                                     <TablixCells>
                                       <TablixCell>
                                         <CellContents>
@@ -2339,7 +2447,89 @@ Cstr(Fields!CompanyRegistrationNumber.Value), 1)</Hidden>
                                               <Paragraph>
                                                 <TextRuns>
                                                   <TextRun>
-                                                    <Value />
+                                                    <Value>SWIFT/BIC: </Value>
+                                                    <Style />
+                                                  </TextRun>
+                                                  <TextRun>
+                                                    <Value>=Fields!CompanySWIFT.Value</Value>
+                                                    <Style />
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style />
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Color>LightGrey</Color>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <PaddingLeft>2pt</PaddingLeft>
+                                              <PaddingRight>2pt</PaddingRight>
+                                              <PaddingTop>2pt</PaddingTop>
+                                              <PaddingBottom>2pt</PaddingBottom>
+                                            </Style>
+                                          </Textbox>
+                                          <ColSpan>2</ColSpan>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell />
+                                    </TablixCells>
+                                  </TablixRow>
+                                  <TablixRow>
+                                    <Height>0.6189cm</Height>
+                                    <TablixCells>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox9">
+                                            <rd:DefaultName>Textbox9</rd:DefaultName>
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>Due in date</Value>
+                                                    <Style />
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Center</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Color>LightGrey</Color>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <BackgroundColor>LightGrey</BackgroundColor>
+                                              <VerticalAlign>Middle</VerticalAlign>
+                                              <PaddingLeft>2pt</PaddingLeft>
+                                              <PaddingRight>2pt</PaddingRight>
+                                              <PaddingTop>2pt</PaddingTop>
+                                              <PaddingBottom>2pt</PaddingBottom>
+                                            </Style>
+                                          </Textbox>
+                                          <ColSpan>2</ColSpan>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell />
+                                    </TablixCells>
+                                  </TablixRow>
+                                  <TablixRow>
+                                    <Height>0.6189cm</Height>
+                                    <TablixCells>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox7">
+                                            <rd:DefaultName>Textbox7</rd:DefaultName>
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>=Format(CDate(Fields!DueDate.Value), "dd/MM/yyyy")</Value>
                                                     <Style />
                                                   </TextRun>
                                                 </TextRuns>
@@ -2359,26 +2549,26 @@ Cstr(Fields!CompanyRegistrationNumber.Value), 1)</Hidden>
                                           </Textbox>
                                         </CellContents>
                                       </TablixCell>
-                                    </TablixCells>
-                                  </TablixRow>
-                                  <TablixRow>
-                                    <Height>0.6cm</Height>
-                                    <TablixCells>
                                       <TablixCell>
                                         <CellContents>
-                                          <Textbox Name="Textbox9">
-                                            <rd:DefaultName>Textbox9</rd:DefaultName>
+                                          <Textbox Name="Textbox25">
+                                            <rd:DefaultName>Textbox25</rd:DefaultName>
                                             <CanGrow>true</CanGrow>
                                             <KeepTogether>true</KeepTogether>
                                             <Paragraphs>
                                               <Paragraph>
                                                 <TextRuns>
                                                   <TextRun>
-                                                    <Value />
-                                                    <Style />
+                                                    <Value>=Last(Fields!TotalAmountIncludingVAT.Value)</Value>
+                                                    <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
+                                                      <FontSize>8pt</FontSize>
+                                                    </Style>
                                                   </TextRun>
                                                 </TextRuns>
-                                                <Style />
+                                                <Style>
+                                                  <TextAlign>Right</TextAlign>
+                                                </Style>
                                               </Paragraph>
                                             </Paragraphs>
                                             <Style>
@@ -2401,6 +2591,7 @@ Cstr(Fields!CompanyRegistrationNumber.Value), 1)</Hidden>
                               <TablixColumnHierarchy>
                                 <TablixMembers>
                                   <TablixMember />
+                                  <TablixMember />
                                 </TablixMembers>
                               </TablixColumnHierarchy>
                               <TablixRowHierarchy>
@@ -2411,12 +2602,13 @@ Cstr(Fields!CompanyRegistrationNumber.Value), 1)</Hidden>
                                   <TablixMember />
                                   <TablixMember />
                                   <TablixMember />
+                                  <TablixMember />
                                 </TablixMembers>
                               </TablixRowHierarchy>
-                              <Top>16.79904cm</Top>
-                              <Left>0.86032cm</Left>
-                              <Height>3.6cm</Height>
-                              <Width>7.95042cm</Width>
+                              <Top>12.74926cm</Top>
+                              <Left>0.89958cm</Left>
+                              <Height>4.3323cm</Height>
+                              <Width>9.28626cm</Width>
                               <ZIndex>4</ZIndex>
                               <Style>
                                 <Border>
@@ -2462,7 +2654,7 @@ Cstr(Fields!CompanyRegistrationNumber.Value), 1)</Hidden>
             <DataSetName>DataSet_Result</DataSetName>
             <Top>0.22049cm</Top>
             <Height>22.31169cm</Height>
-            <Width>18.65837cm</Width>
+            <Width>18.69763cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2476,51 +2668,412 @@ Cstr(Fields!CompanyRegistrationNumber.Value), 1)</Hidden>
       <Width>20.57334cm</Width>
       <Page>
         <PageHeader>
-          <Height>3.8cm</Height>
+          <Height>6.0737cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
-            <Rectangle Name="Rectangle2">
-              <ReportItems>
-                <Image Name="Image2">
-                  <Source>Database</Source>
-                  <Value>=System.Convert.ToBase64String(Fields!CompanyPicture.Value)</Value>
-                  <MIMEType>image/bmp</MIMEType>
-                  <Sizing>FitProportional</Sizing>
-                  <Height>14mm</Height>
-                  <Width>60mm</Width>
-                  <Visibility>
-                    <Hidden>=iif(First(Fields!CompanyLogoPosition.Value, "DataSet_Result")=1,false,true)</Hidden>
-                  </Visibility>
-                  <Style>
-                    <Border>
-                      <Style>None</Style>
-                    </Border>
-                  </Style>
-                </Image>
-                <Line Name="Line1">
-                  <Height>0cm</Height>
-                  <Width>6cm</Width>
-                  <ZIndex>1</ZIndex>
-                  <Visibility>
-                    <Hidden>true</Hidden>
-                  </Visibility>
-                  <Style>
-                    <Border>
-                      <Style>Solid</Style>
-                    </Border>
-                  </Style>
-                </Line>
-              </ReportItems>
+            <Textbox Name="Textbox8">
+              <rd:DefaultName>Textbox8</rd:DefaultName>
+              <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
-              <Height>3cm</Height>
-              <Width>6cm</Width>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value />
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.79057cm</Top>
+              <Left>11.34745cm</Left>
+              <Height>3.56333cm</Height>
+              <Width>7.35018cm</Width>
+              <Style>
+                <Border>
+                  <Style>Solid</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox17">
+              <rd:DefaultName>Textbox17</rd:DefaultName>
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Client:</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.79057cm</Top>
+              <Left>11.34745cm</Left>
+              <Height>0.6cm</Height>
+              <Width>2.5cm</Width>
+              <ZIndex>1</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
                 </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
               </Style>
-            </Rectangle>
+            </Textbox>
+            <Textbox Name="Textbox18">
+              <rd:DefaultName>Textbox18</rd:DefaultName>
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Code.GetData(8,1)</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <Top>1.39057cm</Top>
+              <Left>11.9912cm</Left>
+              <Height>0.6cm</Height>
+              <Width>6.70643cm</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox19">
+              <rd:DefaultName>Textbox19</rd:DefaultName>
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Code.GetData(9,1)</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <Top>2.43099cm</Top>
+              <Left>11.9912cm</Left>
+              <Height>0.44125cm</Height>
+              <Width>6.74176cm</Width>
+              <ZIndex>3</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox20">
+              <rd:DefaultName>Textbox20</rd:DefaultName>
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Code.GetData(10,1)</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <Top>3.21592cm</Top>
+              <Left>11.93326cm</Left>
+              <Height>0.41479cm</Height>
+              <Width>6.70643cm</Width>
+              <ZIndex>4</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox21">
+              <rd:DefaultName>Textbox21</rd:DefaultName>
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>INVOICE</Value>
+                      <Style>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>3.8862cm</Top>
+              <Left>1.50495cm</Left>
+              <Height>0.46771cm</Height>
+              <Width>5.83375cm</Width>
+              <ZIndex>5</ZIndex>
+              <Style>
+                <Border>
+                  <Color>Silver</Color>
+                  <Style>Solid</Style>
+                </Border>
+                <BackgroundColor>LightGrey</BackgroundColor>
+                <VerticalAlign>Middle</VerticalAlign>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox27">
+              <rd:DefaultName>Textbox27</rd:DefaultName>
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Number</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>4.35391cm</Top>
+              <Left>1.50968cm</Left>
+              <Height>0.50299cm</Height>
+              <Width>2.91451cm</Width>
+              <ZIndex>6</ZIndex>
+              <Style>
+                <Border>
+                  <Color>Silver</Color>
+                  <Style>Solid</Style>
+                  <Width>0.5pt</Width>
+                </Border>
+                <BackgroundColor>LightGrey</BackgroundColor>
+                <VerticalAlign>Middle</VerticalAlign>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox29">
+              <rd:DefaultName>Textbox27</rd:DefaultName>
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Date</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>4.35391cm</Top>
+              <Left>4.41946cm</Left>
+              <Height>0.50299cm</Height>
+              <Width>2.91924cm</Width>
+              <ZIndex>7</ZIndex>
+              <Style>
+                <Border>
+                  <Color>Silver</Color>
+                  <Style>Solid</Style>
+                </Border>
+                <BackgroundColor>LightGrey</BackgroundColor>
+                <VerticalAlign>Middle</VerticalAlign>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox32">
+              <rd:DefaultName>Textbox32</rd:DefaultName>
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Format(CDate(Code.GetData(11,1)), "dd/MM/yyyy")</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>4.85689cm</Top>
+              <Left>4.41946cm</Left>
+              <Height>0.6cm</Height>
+              <Width>2.91924cm</Width>
+              <ZIndex>8</ZIndex>
+              <Style>
+                <Border>
+                  <Color>Silver</Color>
+                  <Style>Solid</Style>
+                </Border>
+                <VerticalAlign>Middle</VerticalAlign>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox33">
+              <rd:DefaultName>Textbox32</rd:DefaultName>
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Code.GetData(12,1)</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>4.85689cm</Top>
+              <Left>1.50968cm</Left>
+              <Height>0.6cm</Height>
+              <Width>2.91451cm</Width>
+              <ZIndex>9</ZIndex>
+              <Style>
+                <Border>
+                  <Color>Silver</Color>
+                  <Style>Solid</Style>
+                </Border>
+                <VerticalAlign>Middle</VerticalAlign>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox34">
+              <rd:DefaultName>Textbox34</rd:DefaultName>
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Code.GetData(13,1)</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <Top>3.63071cm</Top>
+              <Left>13.31816cm</Left>
+              <Height>0.47206cm</Height>
+              <Width>5.32153cm</Width>
+              <ZIndex>10</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox35">
+              <rd:DefaultName>Textbox14</rd:DefaultName>
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>VAT nr.</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <Top>3.63071cm</Top>
+              <Left>11.95587cm</Left>
+              <Height>0.47206cm</Height>
+              <Width>1.36229cm</Width>
+              <ZIndex>11</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Image Name="Image1">
+              <Source>Database</Source>
+              <Value>=Convert.ToBase64String(Fields!Logo.Value)</Value>
+              <MIMEType>image/bmp</MIMEType>
+              <Sizing>FitProportional</Sizing>
+              <Top>0.79057cm</Top>
+              <Left>1.50495cm</Left>
+              <Height>2.63771cm</Height>
+              <Width>2.52237cm</Width>
+              <ZIndex>12</ZIndex>
+              <Style>
+                <Border>
+                  <Style>Solid</Style>
+                  <Width>0.5pt</Width>
+                </Border>
+              </Style>
+            </Image>
           </ReportItems>
           <Style>
             <Border>

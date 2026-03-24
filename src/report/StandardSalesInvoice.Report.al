@@ -16,6 +16,10 @@ report 50200 "LDRStandard Sales - Invoice"
             DataItemTableView = sorting("No.");
             RequestFilterFields = "No.", "Sell-to Customer No.", "No. Printed";
             RequestFilterHeading = 'Posted Sales Invoice';
+            column(Logo; CompanyInformation.Picture)
+            {
+
+            }
             column(CompanyAddress1; CompanyAddr[1])
             {
             }
@@ -46,7 +50,7 @@ report 50200 "LDRStandard Sales - Invoice"
             column(CompanyEMail; CompanyInfo."E-Mail")
             {
             }
-            column(CompanyPicture; DummyCompanyInfo.Picture)
+            column(CompanyPicture; CompanyInfo.Picture)
             {
             }
             column(CompanyPhoneNo; CompanyInfo."Phone No.")
@@ -652,6 +656,7 @@ report 50200 "LDRStandard Sales - Invoice"
 
                 trigger OnAfterGetRecord()
                 begin
+                    CompanyInformation.CalcFields(Picture);
                     InitializeShipmentLine();
                     if Type = Type::"G/L Account" then
                         "No." := '';
@@ -1308,9 +1313,11 @@ report 50200 "LDRStandard Sales - Invoice"
             Error(NoFilterSetErr);
 
         CompanyLogoPosition := SalesSetup."Logo Position on Documents";
+        CompanyInformation.Get();
     end;
 
     var
+        CompanyInformation: Record "Company Information";
         GLSetup: Record "General Ledger Setup";
         DummyCompanyInfo: Record "Company Information";
         Cust: Record Customer;
