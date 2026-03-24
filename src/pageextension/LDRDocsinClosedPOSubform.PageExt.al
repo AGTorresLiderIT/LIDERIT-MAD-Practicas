@@ -1,8 +1,8 @@
-pageextension 50252 "Closed Payment Orders" extends "Closed Payment Orders"
+pageextension 50203 "Docs. in Closed PO Subform" extends "Docs. in Closed PO Subform"
 {
     layout
     {
-        addlast(Content)
+        addlast(Control1)
         {
             field(IBAN; Rec.IBAN)
             {

@@ -1,8 +1,8 @@
-tableextension 50204 "Posted Payment Order" extends "Posted Payment Order"
+tableextension 50201 "Posted Cartera Doc." extends "Posted Cartera Doc."
 {
     fields
     {
-        field(50200; IBAN; Code[50])
+        field(50000; IBAN; Code[50])
         {
             Caption = 'IBAN';
             DataClassification = ToBeClassified;

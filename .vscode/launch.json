@@ -8,13 +8,13 @@
             "environmentType": "Sandbox",
             "environmentName": "Desarrollovs",
             "tenant": "09d5a8cc-bcd3-4c18-b6fc-fbc6d9cd8b74",
-            "startupObjectId": 7000002,
+            "startupObjectId": 7000003,
             "startupObjectType": "Page",
             "breakOnError": "All",
             "launchBrowser": true,
             "enableLongRunningSqlStatements": true,
             "enableSqlInformationDebugger": true,
-            //"schemaUpdateMode": "ForceSync"
+            "schemaUpdateMode": "ForceSync"
         }
     ]
 }

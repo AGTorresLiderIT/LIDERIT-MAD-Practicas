@@ -3,11 +3,6 @@
   <file datatype="xml" source-language="en-US" target-language="en-US" original="LIDERIT-MAD-Practicas">
     <body>
       <group id="body">
-        <trans-unit id="TableExtension 18652612 - Field 1176583840 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 4061249831">
-          <source>IBAN</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">TableExtension  - Field IBAN - Property Caption</note>
-        </trans-unit>
         <trans-unit id="TableExtension 2898919088 - Field 1176583840 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 2898919088">
           <source>IBAN</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -18,15 +13,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension Closed Cartera Doc. - Field IBAN - Property Caption</note>
         </trans-unit>
-        <trans-unit id="TableExtension 2834401554 - Field 1176583840 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 2834401554">
+        <trans-unit id="TableExtension 930347903 - Field 1176583840 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 930347903">
           <source>IBAN</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">TableExtension Closed Payment Order - Field IBAN - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="TableExtension 1806786327 - Field 1176583840 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 1806786327">
-          <source>IBAN</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">TableExtension Gen. Journal Line - Field IBAN - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension Posted Cartera Doc. - Field IBAN - Property Caption</note>
         </trans-unit>
       </group>
     </body>
