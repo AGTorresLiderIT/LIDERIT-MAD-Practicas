@@ -11,7 +11,11 @@
       <am:Name>MSRB</am:Name>
       <am:Version>15.1.30001.02</am:Version>
     </am:UpdatedBy>
+<<<<<<< Updated upstream
     <am:LastModifiedTimestamp>2026-03-23T16:41:25.6472891Z</am:LastModifiedTimestamp>
+=======
+    <am:LastModifiedTimestamp>2026-03-24T10:09:52.8171792Z</am:LastModifiedTimestamp>
+>>>>>>> Stashed changes
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -960,7 +964,7 @@
     CStr(Fields!CustomerAddress4.Value) + Chr(177) + 
     CStr(Fields!VATRegistrationNo.Value) + Chr(177) + 
     CStr(Fields!DocumentNo.Value) + Chr(177) + 
-    CStr(Fields!DocumentDate.Value) + Chr(177) +
+    Format(CDate(Fields!DocumentDate.Value), "dd-MM-yyyy") + Chr(177) +
     CStr(Fields!CustomerAddress1.Value) + Chr(177) +
     CStr(Fields!CompanyAddress1.Value) + Chr(177) +
     CStr(Fields!CompanyAddress2.Value) + Chr(177) +
@@ -1035,7 +1039,7 @@
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontWeight>Normal</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1069,7 +1073,7 @@
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </RightBorder>
-                            <BackgroundColor>Gray</BackgroundColor>
+                            <BackgroundColor>Silver</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>5pt</PaddingLeft>
                             <PaddingRight>5pt</PaddingRight>
@@ -1091,7 +1095,7 @@
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontWeight>Normal</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1125,7 +1129,7 @@
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </RightBorder>
-                            <BackgroundColor>Gray</BackgroundColor>
+                            <BackgroundColor>Silver</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>5pt</PaddingLeft>
                             <PaddingRight>5pt</PaddingRight>
@@ -1147,7 +1151,7 @@
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontWeight>Normal</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1181,7 +1185,7 @@
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </RightBorder>
-                            <BackgroundColor>Gray</BackgroundColor>
+                            <BackgroundColor>Silver</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>5pt</PaddingLeft>
                             <PaddingRight>5pt</PaddingRight>
@@ -1203,7 +1207,7 @@
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontWeight>Normal</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1237,7 +1241,7 @@
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </RightBorder>
-                            <BackgroundColor>Gray</BackgroundColor>
+                            <BackgroundColor>Silver</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>5pt</PaddingLeft>
                             <PaddingRight>5pt</PaddingRight>
@@ -1259,7 +1263,7 @@
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontWeight>Normal</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1293,7 +1297,7 @@
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </RightBorder>
-                            <BackgroundColor>Gray</BackgroundColor>
+                            <BackgroundColor>Silver</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>5pt</PaddingLeft>
                             <PaddingRight>5pt</PaddingRight>
@@ -1315,7 +1319,7 @@
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontWeight>Normal</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1349,7 +1353,7 @@
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </RightBorder>
-                            <BackgroundColor>Gray</BackgroundColor>
+                            <BackgroundColor>Silver</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>5pt</PaddingLeft>
                             <PaddingRight>5pt</PaddingRight>
@@ -1371,7 +1375,7 @@
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontWeight>Normal</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1405,7 +1409,7 @@
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </RightBorder>
-                            <BackgroundColor>Gray</BackgroundColor>
+                            <BackgroundColor>Silver</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>5pt</PaddingLeft>
                             <PaddingRight>5pt</PaddingRight>
@@ -1427,7 +1431,7 @@
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontWeight>Normal</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1461,7 +1465,7 @@
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </RightBorder>
-                            <BackgroundColor>Gray</BackgroundColor>
+                            <BackgroundColor>Silver</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>5pt</PaddingLeft>
                             <PaddingRight>5pt</PaddingRight>
@@ -1483,7 +1487,7 @@
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontWeight>Normal</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1517,7 +1521,7 @@
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </RightBorder>
-                            <BackgroundColor>Gray</BackgroundColor>
+                            <BackgroundColor>Silver</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>5pt</PaddingLeft>
                             <PaddingRight>5pt</PaddingRight>
@@ -1539,7 +1543,7 @@
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontWeight>Normal</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1573,7 +1577,7 @@
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </RightBorder>
-                            <BackgroundColor>Gray</BackgroundColor>
+                            <BackgroundColor>Silver</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>5pt</PaddingLeft>
                             <PaddingRight>5pt</PaddingRight>
@@ -1613,7 +1617,7 @@
                             <Border>
                               <Style>None</Style>
                             </Border>
-                            <BackgroundColor>Silver</BackgroundColor>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>5pt</PaddingLeft>
                             <PaddingRight>5pt</PaddingRight>
@@ -1648,7 +1652,7 @@
                             <Border>
                               <Style>None</Style>
                             </Border>
-                            <BackgroundColor>Silver</BackgroundColor>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>5pt</PaddingLeft>
                             <PaddingRight>5pt</PaddingRight>
@@ -1688,7 +1692,7 @@
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </RightBorder>
-                            <BackgroundColor>Silver</BackgroundColor>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>5pt</PaddingLeft>
                             <PaddingRight>5pt</PaddingRight>
@@ -1723,7 +1727,7 @@
                             <Border>
                               <Style>None</Style>
                             </Border>
-                            <BackgroundColor>Silver</BackgroundColor>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>5pt</PaddingLeft>
                             <PaddingRight>5pt</PaddingRight>
@@ -1758,7 +1762,7 @@
                             <Border>
                               <Style>None</Style>
                             </Border>
-                            <BackgroundColor>Silver</BackgroundColor>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>5pt</PaddingLeft>
                             <PaddingRight>5pt</PaddingRight>
@@ -1793,7 +1797,7 @@
                             <Border>
                               <Style>None</Style>
                             </Border>
-                            <BackgroundColor>Silver</BackgroundColor>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>5pt</PaddingLeft>
                             <PaddingRight>5pt</PaddingRight>
@@ -1828,7 +1832,7 @@
                             <Border>
                               <Style>None</Style>
                             </Border>
-                            <BackgroundColor>Silver</BackgroundColor>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>5pt</PaddingLeft>
                             <PaddingRight>5pt</PaddingRight>
@@ -1863,7 +1867,7 @@
                             <Border>
                               <Style>None</Style>
                             </Border>
-                            <BackgroundColor>Silver</BackgroundColor>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>5pt</PaddingLeft>
                             <PaddingRight>5pt</PaddingRight>
@@ -1898,7 +1902,7 @@
                             <Border>
                               <Style>None</Style>
                             </Border>
-                            <BackgroundColor>Silver</BackgroundColor>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>5pt</PaddingLeft>
                             <PaddingRight>5pt</PaddingRight>
@@ -1933,7 +1937,7 @@
                             <Border>
                               <Style>None</Style>
                             </Border>
-                            <BackgroundColor>Silver</BackgroundColor>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>5pt</PaddingLeft>
                             <PaddingRight>5pt</PaddingRight>
@@ -2530,7 +2534,7 @@
                               <Color>LightGrey</Color>
                               <Style>None</Style>
                             </Border>
-                            <BackgroundColor>Silver</BackgroundColor>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>5pt</PaddingLeft>
                             <PaddingRight>5pt</PaddingRight>
@@ -2563,7 +2567,7 @@
                               <Color>LightGrey</Color>
                               <Style>None</Style>
                             </Border>
-                            <BackgroundColor>Silver</BackgroundColor>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>5pt</PaddingLeft>
                             <PaddingRight>5pt</PaddingRight>
@@ -2636,7 +2640,7 @@
                               <Color>LightGrey</Color>
                               <Style>None</Style>
                             </Border>
-                            <BackgroundColor>Silver</BackgroundColor>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>5pt</PaddingLeft>
                             <PaddingRight>5pt</PaddingRight>
@@ -2704,7 +2708,7 @@
                               <Color>LightGrey</Color>
                               <Style>None</Style>
                             </Border>
-                            <BackgroundColor>Silver</BackgroundColor>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>5pt</PaddingLeft>
                             <PaddingRight>5pt</PaddingRight>
@@ -2774,7 +2778,7 @@
                               <Color>LightGrey</Color>
                               <Style>None</Style>
                             </Border>
-                            <BackgroundColor>Silver</BackgroundColor>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>5pt</PaddingLeft>
                             <PaddingRight>5pt</PaddingRight>
@@ -2807,7 +2811,7 @@
                               <Color>LightGrey</Color>
                               <Style>None</Style>
                             </Border>
-                            <BackgroundColor>Silver</BackgroundColor>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>5pt</PaddingLeft>
                             <PaddingRight>5pt</PaddingRight>
@@ -3796,10 +3800,14 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>2.5cm</Width>
+                  <Width>2.16768cm</Width>
                 </TablixColumn>
                 <TablixColumn>
+<<<<<<< Updated upstream
                   <Width>1.41271cm</Width>
+=======
+                  <Width>1.16463cm</Width>
+>>>>>>> Stashed changes
                 </TablixColumn>
                 <TablixColumn>
                   <Width>2.16768cm</Width>
@@ -3807,7 +3815,11 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
+<<<<<<< Updated upstream
                   <Height>0.5cm</Height>
+=======
+                  <Height>0.4cm</Height>
+>>>>>>> Stashed changes
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -3821,7 +3833,7 @@
                                 <TextRun>
                                   <Value>Base IVA</Value>
                                   <Style>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3835,7 +3847,7 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>Gray</BackgroundColor>
+                            <BackgroundColor>Silver</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -3857,7 +3869,7 @@
                                 <TextRun>
                                   <Value>%IVA</Value>
                                   <Style>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3871,7 +3883,7 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>Gray</BackgroundColor>
+                            <BackgroundColor>Silver</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -3893,7 +3905,7 @@
                                 <TextRun>
                                   <Value>Cuota IVA</Value>
                                   <Style>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3907,7 +3919,7 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>Gray</BackgroundColor>
+                            <BackgroundColor>Silver</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -3920,7 +3932,11 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
+<<<<<<< Updated upstream
                   <Height>0.5cm</Height>
+=======
+                  <Height>0.4cm</Height>
+>>>>>>> Stashed changes
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -3933,7 +3949,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!UnitPrice.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -3966,7 +3984,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!Quantity_Line.Value * (Fields!VATPct_Line.Value / 100)</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -3999,7 +4019,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!VATAmount_VatAmountLine.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -4024,7 +4046,11 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
+<<<<<<< Updated upstream
                   <Height>0.5cm</Height>
+=======
+                  <Height>0.4cm</Height>
+>>>>>>> Stashed changes
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -4037,7 +4063,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value />
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -4069,7 +4097,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value />
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -4101,7 +4131,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value />
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -4125,7 +4157,11 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
+<<<<<<< Updated upstream
                   <Height>0.5cm</Height>
+=======
+                  <Height>0.4cm</Height>
+>>>>>>> Stashed changes
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -4138,7 +4174,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value />
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -4170,7 +4208,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value />
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -4202,7 +4242,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value />
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -4226,7 +4268,11 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
+<<<<<<< Updated upstream
                   <Height>0.5cm</Height>
+=======
+                  <Height>0.4cm</Height>
+>>>>>>> Stashed changes
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -4239,7 +4285,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>Líquido(EUR):</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -4275,7 +4323,9 @@
                                 <TextRun>
                                   <Value>=Sum(CDec(Fields!UnitPrice.Value), "DataSet_Result") 
  + Sum(CDec(Fields!VATAmount_VatAmountLine.Value), "DataSet_Result")</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -4330,10 +4380,17 @@
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
+<<<<<<< Updated upstream
             <Top>10.70895cm</Top>
             <Left>12.7359cm</Left>
             <Height>2.5cm</Height>
             <Width>6.08039cm</Width>
+=======
+            <Top>10.26962cm</Top>
+            <Left>13.72788cm</Left>
+            <Height>2cm</Height>
+            <Width>5.49999cm</Width>
+>>>>>>> Stashed changes
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -4356,7 +4413,11 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
+<<<<<<< Updated upstream
                   <Height>0.5cm</Height>
+=======
+                  <Height>0.43333cm</Height>
+>>>>>>> Stashed changes
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -4370,7 +4431,7 @@
                                 <TextRun>
                                   <Value>Forma de pago</Value>
                                   <Style>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -4384,7 +4445,7 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>Gray</BackgroundColor>
+                            <BackgroundColor>Silver</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -4399,7 +4460,11 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
+<<<<<<< Updated upstream
                   <Height>0.5cm</Height>
+=======
+                  <Height>0.375cm</Height>
+>>>>>>> Stashed changes
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -4412,7 +4477,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>TRANSFERENCIA</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -4437,7 +4504,11 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
+<<<<<<< Updated upstream
                   <Height>0.5cm</Height>
+=======
+                  <Height>0.375cm</Height>
+>>>>>>> Stashed changes
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -4450,7 +4521,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>="Banco: " &amp; First(Fields!CompanyBankName.Value, "DataSet_Result")</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -4475,7 +4548,11 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
+<<<<<<< Updated upstream
                   <Height>0.5cm</Height>
+=======
+                  <Height>0.375cm</Height>
+>>>>>>> Stashed changes
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -4488,7 +4565,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>="IBAN: " &amp; First(Fields!CompanyIBAN.Value, "DataSet_Result")</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -4513,7 +4592,11 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
+<<<<<<< Updated upstream
                   <Height>0.5cm</Height>
+=======
+                  <Height>0.375cm</Height>
+>>>>>>> Stashed changes
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -4527,7 +4610,7 @@
                                 <TextRun>
                                   <Value>Vencimientos</Value>
                                   <Style>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -4541,7 +4624,7 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>Gray</BackgroundColor>
+                            <BackgroundColor>Silver</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -4556,7 +4639,11 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
+<<<<<<< Updated upstream
                   <Height>0.5cm</Height>
+=======
+                  <Height>0.375cm</Height>
+>>>>>>> Stashed changes
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -4569,7 +4656,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=First(Fields!DueDate.Value)</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -4603,7 +4692,9 @@
                                 <TextRun>
                                   <Value>=Sum(CDec(Fields!UnitPrice.Value), "DataSet_Result") 
  + Sum(CDec(Fields!VATAmount_VatAmountLine.Value), "DataSet_Result")</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -4648,10 +4739,16 @@
                 <TablixMember />
               </TablixMembers>
             </TablixRowHierarchy>
+<<<<<<< Updated upstream
             <Top>13.07319cm</Top>
             <Left>0.32037cm</Left>
             <Height>3cm</Height>
             <Width>8.5cm</Width>
+=======
+            <Top>13.19069cm</Top>
+            <Height>2.30833cm</Height>
+            <Width>10.05149cm</Width>
+>>>>>>> Stashed changes
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -4663,6 +4760,7 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
+<<<<<<< Updated upstream
                   <Width>6.71011cm</Width>
                 </TablixColumn>
                 <TablixColumn>
@@ -4670,11 +4768,24 @@
                 </TablixColumn>
                 <TablixColumn>
                   <Width>1.78525cm</Width>
+=======
+                  <Width>6.54344cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.83798cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.61858cm</Width>
+>>>>>>> Stashed changes
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
+<<<<<<< Updated upstream
                   <Height>0.5cm</Height>
+=======
+                  <Height>0.375cm</Height>
+>>>>>>> Stashed changes
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -4688,7 +4799,7 @@
                                 <TextRun>
                                   <Value>Observaciones</Value>
                                   <Style>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -4702,7 +4813,7 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>Gray</BackgroundColor>
+                            <BackgroundColor>Silver</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -4717,7 +4828,11 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
+<<<<<<< Updated upstream
                   <Height>0.5cm</Height>
+=======
+                  <Height>0.375cm</Height>
+>>>>>>> Stashed changes
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -4729,7 +4844,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>-</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -4755,7 +4870,11 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
+<<<<<<< Updated upstream
                   <Height>0.5cm</Height>
+=======
+                  <Height>0.375cm</Height>
+>>>>>>> Stashed changes
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -4767,7 +4886,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>-</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -4793,7 +4912,11 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
+<<<<<<< Updated upstream
                   <Height>0.5cm</Height>
+=======
+                  <Height>0.375cm</Height>
+>>>>>>> Stashed changes
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -4805,7 +4928,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>-</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -4847,10 +4970,17 @@
                 <TablixMember />
               </TablixMembers>
             </TablixRowHierarchy>
+<<<<<<< Updated upstream
             <Top>13.57319cm</Top>
             <Left>9.31629cm</Left>
             <Height>2cm</Height>
             <Width>9.5cm</Width>
+=======
+            <Top>13.99902cm</Top>
+            <Left>10.22788cm</Left>
+            <Height>1.5cm</Height>
+            <Width>9cm</Width>
+>>>>>>> Stashed changes
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -4859,7 +4989,11 @@
             </Style>
           </Tablix>
         </ReportItems>
+<<<<<<< Updated upstream
         <Height>18.06069cm</Height>
+=======
+        <Height>19.52119cm</Height>
+>>>>>>> Stashed changes
         <Style />
       </Body>
       <Width>27.79827cm</Width>
@@ -4910,7 +5044,7 @@
                         <TextRun>
                           <Value>=Code.GetData(6,1)</Value>
                           <Style>
-                            <FontSize>14pt</FontSize>
+                            <FontSize>12pt</FontSize>
                             <FontWeight>Bold</FontWeight>
                           </Style>
                         </TextRun>
@@ -4920,10 +5054,15 @@
                       </Style>
                     </Paragraph>
                   </Paragraphs>
-                  <Top>0.51181cm</Top>
+                  <Top>0.82931cm</Top>
                   <Left>0.617cm</Left>
+<<<<<<< Updated upstream
                   <Height>0.6cm</Height>
                   <Width>3.92547cm</Width>
+=======
+                  <Height>0.4cm</Height>
+                  <Width>6.41584cm</Width>
+>>>>>>> Stashed changes
                   <ZIndex>1</ZIndex>
                   <Style>
                     <Border>
@@ -4944,15 +5083,17 @@
                       <TextRuns>
                         <TextRun>
                           <Value>=Code.GetData(1,1)</Value>
-                          <Style />
+                          <Style>
+                            <FontSize>8pt</FontSize>
+                          </Style>
                         </TextRun>
                       </TextRuns>
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>1.2882cm</Top>
-                  <Left>0.657cm</Left>
-                  <Height>0.49417cm</Height>
+                  <Top>1.22931cm</Top>
+                  <Left>0.617cm</Left>
+                  <Height>0.4cm</Height>
                   <Width>3.6184cm</Width>
                   <ZIndex>2</ZIndex>
                   <Style>
@@ -4974,15 +5115,17 @@
                       <TextRuns>
                         <TextRun>
                           <Value>CIF/DNI:</Value>
-                          <Style />
+                          <Style>
+                            <FontSize>8pt</FontSize>
+                          </Style>
                         </TextRun>
                       </TextRuns>
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>2.75279cm</Top>
-                  <Left>0.657cm</Left>
-                  <Height>0.49417cm</Height>
+                  <Top>2.02931cm</Top>
+                  <Left>0.617cm</Left>
+                  <Height>0.4cm</Height>
                   <Width>1.74153cm</Width>
                   <ZIndex>3</ZIndex>
                   <Style>
@@ -5004,15 +5147,17 @@
                       <TextRuns>
                         <TextRun>
                           <Value>=Code.GetData(2,1)</Value>
-                          <Style />
+                          <Style>
+                            <FontSize>8pt</FontSize>
+                          </Style>
                         </TextRun>
                       </TextRuns>
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>2.08223cm</Top>
-                  <Left>0.657cm</Left>
-                  <Height>0.49417cm</Height>
+                  <Top>1.62931cm</Top>
+                  <Left>0.617cm</Left>
+                  <Height>0.4cm</Height>
                   <Width>6.37584cm</Width>
                   <ZIndex>4</ZIndex>
                   <Style>
@@ -5034,15 +5179,17 @@
                       <TextRuns>
                         <TextRun>
                           <Value>=Code.GetData(3,1)</Value>
-                          <Style />
+                          <Style>
+                            <FontSize>8pt</FontSize>
+                          </Style>
                         </TextRun>
                       </TextRuns>
                       <Style />
                     </Paragraph>
                   </Paragraphs>
-                  <Top>2.75279cm</Top>
-                  <Left>3.79436cm</Left>
-                  <Height>0.49417cm</Height>
+                  <Top>2.02931cm</Top>
+                  <Left>2.84857cm</Left>
+                  <Height>0.4cm</Height>
                   <Width>2.4612cm</Width>
                   <ZIndex>5</ZIndex>
                   <Style>
@@ -5057,10 +5204,17 @@
                 </Textbox>
               </ReportItems>
               <KeepTogether>true</KeepTogether>
+<<<<<<< Updated upstream
               <Top>1.55304cm</Top>
               <Left>7.83979cm</Left>
               <Height>3.24696cm</Height>
               <Width>10.9765cm</Width>
+=======
+              <Top>1.89143cm</Top>
+              <Left>9.88685cm</Left>
+              <Height>2.8cm</Height>
+              <Width>8.5cm</Width>
+>>>>>>> Stashed changes
               <Style>
                 <Border>
                   <Color>Silver</Color>
@@ -5093,9 +5247,16 @@
               <Value>=First(Fields!CompanyPicture.Value, "DataSet_Result")</Value>
               <MIMEType>image/bmp</MIMEType>
               <Sizing>FitProportional</Sizing>
+<<<<<<< Updated upstream
               <Left>0.32037cm</Left>
               <Height>4.8cm</Height>
               <Width>4.8cm</Width>
+=======
+              <Top>0.19143cm</Top>
+              <Left>0.22707cm</Left>
+              <Height>4.5cm</Height>
+              <Width>4.5cm</Width>
+>>>>>>> Stashed changes
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
@@ -5113,6 +5274,7 @@
                     <TextRun>
                       <Value>FACTURA</Value>
                       <Style>
+                        <FontSize>8pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
@@ -5122,36 +5284,44 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
+<<<<<<< Updated upstream
               <Top>4.98171cm</Top>
               <Left>0.32037cm</Left>
               <Height>0.6cm</Height>
               <Width>6cm</Width>
+=======
+              <Top>5.09171cm</Top>
+              <Left>0.23186cm</Left>
+              <Height>0.4cm</Height>
+              <Width>5.5cm</Width>
+>>>>>>> Stashed changes
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>
                   <Style>Solid</Style>
+                  <Width>0.5pt</Width>
                 </Border>
                 <TopBorder>
                   <Color>Black</Color>
                   <Style>Solid</Style>
-                  <Width>1pt</Width>
+                  <Width>0.5pt</Width>
                 </TopBorder>
                 <BottomBorder>
                   <Color>Black</Color>
                   <Style>Solid</Style>
-                  <Width>1pt</Width>
+                  <Width>0.5pt</Width>
                 </BottomBorder>
                 <LeftBorder>
                   <Color>Black</Color>
                   <Style>Solid</Style>
-                  <Width>1pt</Width>
+                  <Width>0.5pt</Width>
                 </LeftBorder>
                 <RightBorder>
                   <Color>Black</Color>
                   <Style>Solid</Style>
-                  <Width>1pt</Width>
+                  <Width>0.5pt</Width>
                 </RightBorder>
-                <BackgroundColor>Gray</BackgroundColor>
+                <BackgroundColor>Silver</BackgroundColor>
                 <VerticalAlign>Middle</VerticalAlign>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
@@ -5169,6 +5339,7 @@
                     <TextRun>
                       <Value>Serie</Value>
                       <Style>
+                        <FontSize>8pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
@@ -5178,36 +5349,43 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
+<<<<<<< Updated upstream
               <Top>5.58171cm</Top>
               <Left>0.32037cm</Left>
               <Height>0.6cm</Height>
+=======
+              <Top>5.49171cm</Top>
+              <Left>0.22707cm</Left>
+              <Height>0.4cm</Height>
+>>>>>>> Stashed changes
               <Width>1.5cm</Width>
               <ZIndex>3</ZIndex>
               <Style>
                 <Border>
                   <Style>Solid</Style>
+                  <Width>0.5pt</Width>
                 </Border>
                 <TopBorder>
                   <Color>Black</Color>
                   <Style>Solid</Style>
-                  <Width>1pt</Width>
+                  <Width>0.5pt</Width>
                 </TopBorder>
                 <BottomBorder>
                   <Color>Black</Color>
                   <Style>Solid</Style>
-                  <Width>1pt</Width>
+                  <Width>0.5pt</Width>
                 </BottomBorder>
                 <LeftBorder>
                   <Color>Black</Color>
                   <Style>Solid</Style>
-                  <Width>1pt</Width>
+                  <Width>0.5pt</Width>
                 </LeftBorder>
                 <RightBorder>
                   <Color>Black</Color>
                   <Style>Solid</Style>
-                  <Width>1pt</Width>
+                  <Width>0.5pt</Width>
                 </RightBorder>
-                <BackgroundColor>Gray</BackgroundColor>
+                <BackgroundColor>Silver</BackgroundColor>
                 <VerticalAlign>Middle</VerticalAlign>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
@@ -5225,6 +5403,7 @@
                     <TextRun>
                       <Value>Número</Value>
                       <Style>
+                        <FontSize>8pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
@@ -5234,36 +5413,43 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
+<<<<<<< Updated upstream
               <Top>5.58171cm</Top>
               <Left>1.82037cm</Left>
               <Height>0.6cm</Height>
+=======
+              <Top>5.49171cm</Top>
+              <Left>1.72707cm</Left>
+              <Height>0.4cm</Height>
+>>>>>>> Stashed changes
               <Width>2cm</Width>
               <ZIndex>4</ZIndex>
               <Style>
                 <Border>
                   <Style>Solid</Style>
+                  <Width>0.5pt</Width>
                 </Border>
                 <TopBorder>
                   <Color>Black</Color>
                   <Style>Solid</Style>
-                  <Width>1pt</Width>
+                  <Width>0.5pt</Width>
                 </TopBorder>
                 <BottomBorder>
                   <Color>Black</Color>
                   <Style>Solid</Style>
-                  <Width>1pt</Width>
+                  <Width>0.5pt</Width>
                 </BottomBorder>
                 <LeftBorder>
                   <Color>Black</Color>
                   <Style>Solid</Style>
-                  <Width>1pt</Width>
+                  <Width>0.5pt</Width>
                 </LeftBorder>
                 <RightBorder>
                   <Color>Black</Color>
                   <Style>Solid</Style>
-                  <Width>1pt</Width>
+                  <Width>0.5pt</Width>
                 </RightBorder>
-                <BackgroundColor>Gray</BackgroundColor>
+                <BackgroundColor>Silver</BackgroundColor>
                 <VerticalAlign>Middle</VerticalAlign>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
@@ -5281,6 +5467,7 @@
                     <TextRun>
                       <Value>Fecha</Value>
                       <Style>
+                        <FontSize>8pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
@@ -5290,36 +5477,44 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
+<<<<<<< Updated upstream
               <Top>5.58171cm</Top>
               <Left>3.82037cm</Left>
               <Height>0.6cm</Height>
               <Width>2.5cm</Width>
+=======
+              <Top>5.49171cm</Top>
+              <Left>3.72707cm</Left>
+              <Height>0.4cm</Height>
+              <Width>2cm</Width>
+>>>>>>> Stashed changes
               <ZIndex>5</ZIndex>
               <Style>
                 <Border>
                   <Style>Solid</Style>
+                  <Width>0.5pt</Width>
                 </Border>
                 <TopBorder>
                   <Color>Black</Color>
                   <Style>Solid</Style>
-                  <Width>1pt</Width>
+                  <Width>0.5pt</Width>
                 </TopBorder>
                 <BottomBorder>
                   <Color>Black</Color>
                   <Style>Solid</Style>
-                  <Width>1pt</Width>
+                  <Width>0.5pt</Width>
                 </BottomBorder>
                 <LeftBorder>
                   <Color>Black</Color>
                   <Style>Solid</Style>
-                  <Width>1pt</Width>
+                  <Width>0.5pt</Width>
                 </LeftBorder>
                 <RightBorder>
                   <Color>Black</Color>
                   <Style>Solid</Style>
-                  <Width>1pt</Width>
+                  <Width>0.5pt</Width>
                 </RightBorder>
-                <BackgroundColor>Gray</BackgroundColor>
+                <BackgroundColor>Silver</BackgroundColor>
                 <VerticalAlign>Middle</VerticalAlign>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
@@ -5335,8 +5530,10 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value />
-                      <Style />
+                      <Value>N/A</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style>
@@ -5344,34 +5541,41 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
+<<<<<<< Updated upstream
               <Top>6.18171cm</Top>
               <Left>0.32037cm</Left>
               <Height>0.6cm</Height>
+=======
+              <Top>5.89171cm</Top>
+              <Left>0.23186cm</Left>
+              <Height>0.4cm</Height>
+>>>>>>> Stashed changes
               <Width>1.5cm</Width>
               <ZIndex>6</ZIndex>
               <Style>
                 <Border>
                   <Style>Solid</Style>
+                  <Width>0.5pt</Width>
                 </Border>
                 <TopBorder>
                   <Color>Black</Color>
                   <Style>Solid</Style>
-                  <Width>1pt</Width>
+                  <Width>0.5pt</Width>
                 </TopBorder>
                 <BottomBorder>
                   <Color>Black</Color>
                   <Style>Solid</Style>
-                  <Width>1pt</Width>
+                  <Width>0.5pt</Width>
                 </BottomBorder>
                 <LeftBorder>
                   <Color>Black</Color>
                   <Style>Solid</Style>
-                  <Width>1pt</Width>
+                  <Width>0.5pt</Width>
                 </LeftBorder>
                 <RightBorder>
                   <Color>Black</Color>
                   <Style>Solid</Style>
-                  <Width>1pt</Width>
+                  <Width>0.5pt</Width>
                 </RightBorder>
                 <VerticalAlign>Middle</VerticalAlign>
                 <PaddingLeft>2pt</PaddingLeft>
@@ -5389,7 +5593,9 @@
                   <TextRuns>
                     <TextRun>
                       <Value>=Code.GetData(4,1)</Value>
-                      <Style />
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style>
@@ -5397,34 +5603,41 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
+<<<<<<< Updated upstream
               <Top>6.17491cm</Top>
               <Left>1.82037cm</Left>
               <Height>0.6cm</Height>
+=======
+              <Top>5.89171cm</Top>
+              <Left>1.73186cm</Left>
+              <Height>0.4cm</Height>
+>>>>>>> Stashed changes
               <Width>2cm</Width>
               <ZIndex>7</ZIndex>
               <Style>
                 <Border>
                   <Style>Solid</Style>
+                  <Width>0.5pt</Width>
                 </Border>
                 <TopBorder>
                   <Color>Black</Color>
                   <Style>Solid</Style>
-                  <Width>1pt</Width>
+                  <Width>0.5pt</Width>
                 </TopBorder>
                 <BottomBorder>
                   <Color>Black</Color>
                   <Style>Solid</Style>
-                  <Width>1pt</Width>
+                  <Width>0.5pt</Width>
                 </BottomBorder>
                 <LeftBorder>
                   <Color>Black</Color>
                   <Style>Solid</Style>
-                  <Width>1pt</Width>
+                  <Width>0.5pt</Width>
                 </LeftBorder>
                 <RightBorder>
                   <Color>Black</Color>
                   <Style>Solid</Style>
-                  <Width>1pt</Width>
+                  <Width>0.5pt</Width>
                 </RightBorder>
                 <VerticalAlign>Middle</VerticalAlign>
                 <PaddingLeft>2pt</PaddingLeft>
@@ -5442,7 +5655,10 @@
                   <TextRuns>
                     <TextRun>
                       <Value>=Code.GetData(5,1)</Value>
-                      <Style />
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                        <Format>d</Format>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style>
@@ -5450,35 +5666,23 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
+<<<<<<< Updated upstream
               <Top>6.17491cm</Top>
               <Left>3.82037cm</Left>
               <Height>0.6cm</Height>
               <Width>2.5cm</Width>
+=======
+              <Top>5.89171cm</Top>
+              <Left>3.72707cm</Left>
+              <Height>0.4cm</Height>
+              <Width>2cm</Width>
+>>>>>>> Stashed changes
               <ZIndex>8</ZIndex>
               <Style>
                 <Border>
                   <Style>Solid</Style>
+                  <Width>0.5pt</Width>
                 </Border>
-                <TopBorder>
-                  <Color>Black</Color>
-                  <Style>Solid</Style>
-                  <Width>1pt</Width>
-                </TopBorder>
-                <BottomBorder>
-                  <Color>Black</Color>
-                  <Style>Solid</Style>
-                  <Width>1pt</Width>
-                </BottomBorder>
-                <LeftBorder>
-                  <Color>Black</Color>
-                  <Style>Solid</Style>
-                  <Width>1pt</Width>
-                </LeftBorder>
-                <RightBorder>
-                  <Color>Black</Color>
-                  <Style>Solid</Style>
-                  <Width>1pt</Width>
-                </RightBorder>
                 <VerticalAlign>Middle</VerticalAlign>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
@@ -5494,7 +5698,7 @@
           </Style>
         </PageHeader>
         <PageFooter>
-          <Height>4cm</Height>
+          <Height>4.37583cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -5517,15 +5721,24 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
+<<<<<<< Updated upstream
               <Top>0.97421cm</Top>
               <Left>7.21664cm</Left>
+=======
+              <Top>1.65833cm</Top>
+              <Left>7.08182cm</Left>
+>>>>>>> Stashed changes
               <Height>0.6cm</Height>
               <Width>2.98106cm</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
                 </Border>
+<<<<<<< Updated upstream
                 <VerticalAlign>Middle</VerticalAlign>
+=======
+                <VerticalAlign>Top</VerticalAlign>
+>>>>>>> Stashed changes
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -5551,16 +5764,27 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
+<<<<<<< Updated upstream
               <Top>1.00949cm</Top>
               <Left>10.1977cm</Left>
               <Height>0.56472cm</Height>
               <Width>3.76403cm</Width>
+=======
+              <Top>1.65833cm</Top>
+              <Left>10.69788cm</Left>
+              <Height>0.6cm</Height>
+              <Width>2.5cm</Width>
+>>>>>>> Stashed changes
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
                 </Border>
+<<<<<<< Updated upstream
                 <VerticalAlign>Middle</VerticalAlign>
+=======
+                <VerticalAlign>Top</VerticalAlign>
+>>>>>>> Stashed changes
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -5584,8 +5808,13 @@
                   <Style />
                 </Paragraph>
               </Paragraphs>
+<<<<<<< Updated upstream
               <Top>1.57421cm</Top>
               <Left>9.49159cm</Left>
+=======
+              <Top>2.25833cm</Top>
+              <Left>9.74538cm</Left>
+>>>>>>> Stashed changes
               <Height>0.6cm</Height>
               <Width>3.55982cm</Width>
               <ZIndex>2</ZIndex>
@@ -5593,7 +5822,11 @@
                 <Border>
                   <Style>None</Style>
                 </Border>
+<<<<<<< Updated upstream
                 <VerticalAlign>Middle</VerticalAlign>
+=======
+                <VerticalAlign>Top</VerticalAlign>
+>>>>>>> Stashed changes
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -5617,16 +5850,27 @@
                   <Style />
                 </Paragraph>
               </Paragraphs>
+<<<<<<< Updated upstream
               <Top>2.17421cm</Top>
               <Left>7.75788cm</Left>
               <Height>0.6cm</Height>
               <Width>2.43982cm</Width>
+=======
+              <Top>2.85833cm</Top>
+              <Left>7.56547cm</Left>
+              <Height>0.6cm</Height>
+              <Width>2.61735cm</Width>
+>>>>>>> Stashed changes
               <ZIndex>3</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
                 </Border>
+<<<<<<< Updated upstream
                 <VerticalAlign>Middle</VerticalAlign>
+=======
+                <VerticalAlign>Top</VerticalAlign>
+>>>>>>> Stashed changes
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -5652,8 +5896,13 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
+<<<<<<< Updated upstream
               <Top>2.77421cm</Top>
               <Left>8.21372cm</Left>
+=======
+              <Top>3.45833cm</Top>
+              <Left>8.62932cm</Left>
+>>>>>>> Stashed changes
               <Height>0.6cm</Height>
               <Width>3.61606cm</Width>
               <ZIndex>4</ZIndex>
@@ -5661,7 +5910,11 @@
                 <Border>
                   <Style>None</Style>
                 </Border>
+<<<<<<< Updated upstream
                 <VerticalAlign>Middle</VerticalAlign>
+=======
+                <VerticalAlign>Top</VerticalAlign>
+>>>>>>> Stashed changes
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -5682,11 +5935,18 @@
                       </Style>
                     </TextRun>
                   </TextRuns>
-                  <Style />
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
                 </Paragraph>
               </Paragraphs>
+<<<<<<< Updated upstream
               <Top>2.17421cm</Top>
               <Left>11.3996cm</Left>
+=======
+              <Top>2.85833cm</Top>
+              <Left>11.38472cm</Left>
+>>>>>>> Stashed changes
               <Height>0.6cm</Height>
               <Width>2.48076cm</Width>
               <ZIndex>5</ZIndex>
@@ -5694,7 +5954,11 @@
                 <Border>
                   <Style>None</Style>
                 </Border>
+<<<<<<< Updated upstream
                 <VerticalAlign>Middle</VerticalAlign>
+=======
+                <VerticalAlign>Top</VerticalAlign>
+>>>>>>> Stashed changes
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -5720,8 +5984,13 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
+<<<<<<< Updated upstream
               <Top>1.57421cm</Top>
               <Left>8.4108cm</Left>
+=======
+              <Top>2.25833cm</Top>
+              <Left>6.09405cm</Left>
+>>>>>>> Stashed changes
               <Height>0.6cm</Height>
               <Width>1.08079cm</Width>
               <ZIndex>6</ZIndex>
@@ -5729,7 +5998,11 @@
                 <Border>
                   <Style>None</Style>
                 </Border>
+<<<<<<< Updated upstream
                 <VerticalAlign>Middle</VerticalAlign>
+=======
+                <VerticalAlign>Top</VerticalAlign>
+>>>>>>> Stashed changes
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -5751,12 +6024,17 @@
                     </TextRun>
                   </TextRuns>
                   <Style>
-                    <TextAlign>Right</TextAlign>
+                    <TextAlign>Left</TextAlign>
                   </Style>
                 </Paragraph>
               </Paragraphs>
+<<<<<<< Updated upstream
               <Top>2.17421cm</Top>
               <Left>10.1977cm</Left>
+=======
+              <Top>2.85833cm</Top>
+              <Left>10.18282cm</Left>
+>>>>>>> Stashed changes
               <Height>0.6cm</Height>
               <Width>1.2019cm</Width>
               <ZIndex>7</ZIndex>
@@ -5764,7 +6042,11 @@
                 <Border>
                   <Style>None</Style>
                 </Border>
+<<<<<<< Updated upstream
                 <VerticalAlign>Middle</VerticalAlign>
+=======
+                <VerticalAlign>Top</VerticalAlign>
+>>>>>>> Stashed changes
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -5790,8 +6072,13 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
+<<<<<<< Updated upstream
               <Top>2.17421cm</Top>
               <Left>6.55598cm</Left>
+=======
+              <Top>2.85833cm</Top>
+              <Left>6.36357cm</Left>
+>>>>>>> Stashed changes
               <Height>0.6cm</Height>
               <Width>1.2019cm</Width>
               <ZIndex>8</ZIndex>
@@ -5799,7 +6086,11 @@
                 <Border>
                   <Style>None</Style>
                 </Border>
+<<<<<<< Updated upstream
                 <VerticalAlign>Middle</VerticalAlign>
+=======
+                <VerticalAlign>Top</VerticalAlign>
+>>>>>>> Stashed changes
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -5822,11 +6113,19 @@
                     </TextRun>
                   </TextRuns>
                   <Style>
+<<<<<<< Updated upstream
                     <TextAlign>Center</TextAlign>
                   </Style>
                 </Paragraph>
               </Paragraphs>
               <Top>0.30366cm</Top>
+=======
+                    <TextAlign>Left</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.9525cm</Top>
+>>>>>>> Stashed changes
               <Left>6.97025cm</Left>
               <Height>0.70583cm</Height>
               <Width>6.74509cm</Width>
@@ -5835,7 +6134,11 @@
                 <Border>
                   <Style>None</Style>
                 </Border>
+<<<<<<< Updated upstream
                 <VerticalAlign>Middle</VerticalAlign>
+=======
+                <VerticalAlign>Bottom</VerticalAlign>
+>>>>>>> Stashed changes
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
