@@ -1,5 +1,5 @@
 // ------------------------------------------------------------------------------------------------
-// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.dataitem
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 // using Microsoft.Assembly.History;
@@ -299,13 +299,13 @@ report 50000 "Standard Sales - Invoice2"
             column(BilltoCustomerNo_Lbl; FieldCaption("Bill-to Customer No."))
             {
             }
-            column(DocumentDate; Format("Document Date", 0, 4))
+            column(DocumentDate; Format("Document Date", 0, '<Day,2>-<Month,2>-<Year4>'))
             {
             }
             column(DocumentDate_Lbl; FieldCaption("Document Date"))
             {
             }
-            column(DueDate; Format("Due Date", 0, 4))
+            column(DueDate; Format("Due Date", 0, '<Day,2>/<Month,2>/<Year4>'))
             {
             }
             column(DueDate_Lbl; FieldCaption("Due Date"))
@@ -501,7 +501,7 @@ report 50000 "Standard Sales - Invoice2"
                     AutoFormatExpression = GetCurrencyCode();
                     AutoFormatType = 1;
                 }
-                column(AmountExcludingVAT_Line_Lbl; FieldCaption(Amount))
+                column(luAmountExcdingVAT_Line_Lbl; FieldCaption(Amount))
                 {
                 }
                 column(AmountIncludingVAT_Line; "Amount Including VAT")
@@ -1158,7 +1158,25 @@ report 50000 "Standard Sales - Invoice2"
                     end;
                 end;
             }
+            dataitem(LineasBlancas; Integer)
+            {
+                DataItemTableView = sorting(Number);
 
+                column(LineasBlancas_Number; LineasBlancas.Number)
+                {
+                }
+
+                trigger OnPreDataItem()
+                var
+                    BlankLines: Integer;
+                begin
+                    BlankLines := CalcularLineasBlancas();
+                    if BlankLines <= 0 then
+                        CurrReport.Break();
+
+                    SetRange(Number, 1, BlankLines);
+                end;
+            }
             trigger OnAfterGetRecord()
             var
                 CurrencyExchangeRate: Record "Currency Exchange Rate";
@@ -1828,5 +1846,149 @@ report 50000 "Standard Sales - Invoice2"
     local procedure OnHeaderOnAfterGetRecordOnAfterUpdateNoPrinted(ReportInPreviewMode: Boolean; var SalesInvoiceHeader: Record "Sales Invoice Header")
     begin
     end;
+
+    local procedure CalcularLineasBlancas() lineas: Integer;
+    var
+        regLineas: Record "Sales Invoice Line";
+        contador2: Decimal;
+        aux: Integer;
+        capacidadLineas: Integer;
+        contador: Integer;
+        lineasFactura: Integer;
+        lineasLastPage: Integer;
+        lineasFijas: Integer;
+        MoreSalesLines: Boolean;
+    begin
+        //DEFINIMOS CUANTAS LINEAS ENTRAN EN EL CUERPO
+        capacidadLineas := 26;
+        //LINEAS FIJAS DE LA ULTIMA PAGINA (tablas inferiores: totales, IVA, vencimientos, etc.)
+        lineasFijas := 17;
+        //INICIALIZAMOS LA VARIABLE QUE CUENTA LAS LINEAS DE LA FAC.
+        lineasFactura := 0;
+        //BUSCAMOS LAS LINEAS DE LA FAC.
+        regLineas.Reset();
+        regLineas.SetRange("Document No.", Header."No.");
+        MoreSalesLines := regLineas.Find('+');
+        while MoreSalesLines and (not EsLineaFacturaImprimible(regLineas)) do
+            MoreSalesLines := regLineas.Next(-1) <> 0;
+        if MoreSalesLines then begin
+            regLineas.SetRange("Line No.", 0, regLineas."Line No.");
+            if regLineas.FindSet() then
+                repeat
+                    if EsLineaFacturaImprimible(regLineas) then
+                        lineasFactura += 1;
+                until regLineas.Next() = 0;
+        end;
+
+        // El espacio fijo de la ultima pagina incluye lineasFijas (base)
+        // mas el crecimiento variable de tablas inferiores (IVA extra, vencimientos extra, comentarios)
+        lineasLastPage := lineasFijas + this.ContadorDescripcionCalidades + CalcularLineasCrecimiento();
+
+        // Calculamos cuantas lineas de factura caben en el resto de paginas anteriores
+        // sabiendo que la ultima pagina reserva lineasLastPage para las tablas inferiores
+        aux := lineasFactura + lineasLastPage;
+
+        contador := aux div capacidadLineas;
+        contador2 := aux / capacidadLineas;
+
+        if contador2 > contador then
+            contador += 1;
+
+        //LINEAS A IMPRIMIR (relleno hasta completar la ultima pagina)
+        lineas := (contador * capacidadLineas) - aux;
+    end;
+
+    local procedure CalcularLineasCrecimiento() LineasCrecimiento: Integer
+    var
+        VATLineas: Integer;
+        Vencimientos: Integer;
+    begin
+        VATLineas := CalcularLineasIVAFactura();
+        if VATLineas > 0 then
+            LineasCrecimiento += VATLineas;
+
+        Vencimientos := CalcularVencimientosFactura();
+        if Vencimientos > 0 then
+            LineasCrecimiento += Vencimientos;
+
+        LineasCrecimiento += CalcularLineasExtraComentarios();
+    end;
+
+    local procedure EsLineaFacturaImprimible(SalesInvoiceLine: Record "Sales Invoice Line"): Boolean
+    begin
+        if (SalesInvoiceLine.Description = '') and (SalesInvoiceLine."No." = '') and (SalesInvoiceLine.Quantity = 0) and (SalesInvoiceLine.Amount = 0) then
+            exit(false);
+
+        if FormatDocument.HideDocumentLine(HideLinesWithZeroQuantity, SalesInvoiceLine, SalesInvoiceLine.FieldNo(Quantity)) then
+            exit(false);
+
+        exit(true);
+    end;
+
+    local procedure CalcularLineasIVAFactura(): Integer
+    var
+        TempVATAmountLine: Record "VAT Amount Line" temporary;
+    begin
+        TempVATAmountLine.Copy(VATAmountLine, true);
+        TempVATAmountLine.SetFilter("VAT Base", '<>%1', 0);
+        exit(TempVATAmountLine.Count);
+    end;
+
+    local procedure CalcularVencimientosFactura(): Integer
+    var
+        DueDateAmountLineTemp: Record "Cust. Ledger Entry";
+        PaymentMethodTemp: Record "Payment Method";
+        CreatesBills: Boolean;
+    begin
+        DueDateAmountLineTemp.SetRange("Document No.", Header."No.");
+        DueDateAmountLineTemp.SetRange("Customer No.", Header."Bill-to Customer No.");
+
+        CreatesBills := false;
+        if Header."Payment Method Code" <> '' then
+            if PaymentMethodTemp.Get(Header."Payment Method Code") then
+                CreatesBills := PaymentMethodTemp."Create Bills";
+
+        if CreatesBills then
+            DueDateAmountLineTemp.SetRange("Document Type", DueDateAmountLineTemp."Document Type"::Bill)
+        else
+            DueDateAmountLineTemp.SetFilter("Document Type", '<>%1', DueDateAmountLineTemp."Document Type"::Bill);
+
+        DueDateAmountLineTemp.SetFilter("Original Amount", '<>%1', 0);
+        DueDateAmountLineTemp.SetFilter("Due Date", '<>%1', 0D);
+
+        exit(DueDateAmountLineTemp.Count);
+    end;
+
+    local procedure CalcularLineasExtraComentarios(): Integer
+    var
+        SalesCommentLineTemp: Record "Sales Comment Line";
+        ComentariosProcesados: Integer;
+        MaxCharsPorLinea: Integer;
+        LineasTexto: Integer;
+        LineasExtra: Integer;
+    begin
+        MaxCharsPorLinea := 60;
+
+        SalesCommentLineTemp.SetRange("Document Type", SalesCommentLineTemp."Document Type"::"Posted Invoice");
+        SalesCommentLineTemp.SetRange("No.", Header."No.");
+        SalesCommentLineTemp.SetFilter(Comment, '<>%1', '');
+
+        if SalesCommentLineTemp.FindSet() then
+            repeat
+                if DelChr(SalesCommentLineTemp.Comment, '<>', ' ') <> '' then begin
+                    ComentariosProcesados += 1;
+                    LineasTexto := Round(StrLen(SalesCommentLineTemp.Comment) / MaxCharsPorLinea, 1, '>');
+                    if LineasTexto > 1 then
+                        LineasExtra += LineasTexto - 1;
+                end;
+            until (SalesCommentLineTemp.Next() = 0) or (ComentariosProcesados >= 3);
+
+        exit(LineasExtra);
+    end;
+
+    var
+        ContadorDescripcionCalidades: Integer;
+
 }
+
 
