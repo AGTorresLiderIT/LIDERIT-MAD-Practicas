@@ -11,7 +11,7 @@
       <am:Name>MSRB</am:Name>
       <am:Version>15.1.30001.02</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-03-24T16:38:13.8812103Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-03-25T12:50:17.6532253Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -928,6 +928,9 @@
         <Field Name="CurrencySymbol">
           <DataField>CurrencySymbol</DataField>
         </Field>
+        <Field Name="LineasBlancas_Number">
+          <DataField>LineasBlancas_Number</DataField>
+        </Field>
       </Fields>
     </DataSet>
   </DataSets>
@@ -939,66 +942,17 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>19.5cm</Width>
+                  <Width>19.26392cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>16.4cm</Height>
+                  <Height>8.5901cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
                         <Rectangle Name="DocumentContainer">
                           <ReportItems>
-                            <Textbox Name="Textbox13">
-                              <rd:DefaultName>Textbox13</rd:DefaultName>
-                              <CanGrow>true</CanGrow>
-                              <KeepTogether>true</KeepTogether>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value EvaluationMode="Constant" />
-                                      <Style />
-                                    </TextRun>
-                                  </TextRuns>
-                                  <Style />
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>6.40879cm</Top>
-                              <Left>15.52548cm</Left>
-                              <Height>0.33061cm</Height>
-                              <Width>0.37597cm</Width>
-                              <Visibility>
-                                <Hidden>=Code.SetData(
-    CStr(Fields!CustomerAddress2.Value) + Chr(177) + 
-    CStr(Fields!CustomerAddress4.Value) + Chr(177) + 
-    CStr(Fields!VATRegistrationNo.Value) + Chr(177) + 
-    CStr(Fields!DocumentNo.Value) + Chr(177) + 
-    
-Cstr(Fields!DocumentDate.Value) + Chr(177) +
-    CStr(Fields!CustomerAddress1.Value) + Chr(177) +
-    CStr(Fields!CompanyAddress1.Value) + Chr(177) +
-    CStr(Fields!CompanyAddress2.Value) + Chr(177) +
-    CStr(Fields!CompanyAddress4.Value) + Chr(177) +
-    CStr(Fields!CompanyVATRegNo.Value) + Chr(177) +
-    CStr(Fields!CompanyHomePage.Value) + Chr(177) +
-    CStr(Fields!CompanyEMail.Value) + Chr(177) +
-    CStr(Fields!CompanyRegistrationNumber.Value), 
-    1
-)</Hidden>
-                              </Visibility>
-                              <Style>
-                                <Border>
-                                  <Style>None</Style>
-                                </Border>
-                                <BackgroundColor>Khaki</BackgroundColor>
-                                <PaddingLeft>2pt</PaddingLeft>
-                                <PaddingRight>2pt</PaddingRight>
-                                <PaddingTop>2pt</PaddingTop>
-                                <PaddingBottom>2pt</PaddingBottom>
-                              </Style>
-                            </Textbox>
                             <Tablix Name="LinesTable">
                               <TablixBody>
                                 <TablixColumns>
@@ -1009,19 +963,19 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                     <Width>0.07938cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>11.96043cm</Width>
+                                    <Width>11.66624cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
                                     <Width>0.07938cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>1.64182cm</Width>
+                                    <Width>2cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
                                     <Width>0.07938cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>1.54411cm</Width>
+                                    <Width>1.64411cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
                                     <Width>0.07938cm</Width>
@@ -1062,28 +1016,28 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>White</Color>
                                                 <Style>Solid</Style>
+                                                <Width>0.5pt</Width>
                                               </Border>
                                               <TopBorder>
-                                                <Color>White</Color>
+                                                <Color>Black</Color>
                                                 <Style>Solid</Style>
-                                                <Width>1pt</Width>
+                                                <Width>0.5pt</Width>
                                               </TopBorder>
                                               <BottomBorder>
-                                                <Color>White</Color>
+                                                <Color>Black</Color>
                                                 <Style>Solid</Style>
-                                                <Width>1pt</Width>
+                                                <Width>0.5pt</Width>
                                               </BottomBorder>
                                               <LeftBorder>
-                                                <Color>White</Color>
+                                                <Color>Black</Color>
                                                 <Style>Solid</Style>
-                                                <Width>1pt</Width>
+                                                <Width>0.5pt</Width>
                                               </LeftBorder>
                                               <RightBorder>
-                                                <Color>White</Color>
+                                                <Color>Black</Color>
                                                 <Style>Solid</Style>
-                                                <Width>1pt</Width>
+                                                <Width>0.5pt</Width>
                                               </RightBorder>
                                               <BackgroundColor>Silver</BackgroundColor>
                                               <VerticalAlign>Middle</VerticalAlign>
@@ -1118,28 +1072,28 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>White</Color>
                                                 <Style>Solid</Style>
+                                                <Width>0.5pt</Width>
                                               </Border>
                                               <TopBorder>
-                                                <Color>White</Color>
+                                                <Color>Black</Color>
                                                 <Style>Solid</Style>
-                                                <Width>1pt</Width>
+                                                <Width>0.5pt</Width>
                                               </TopBorder>
                                               <BottomBorder>
-                                                <Color>White</Color>
+                                                <Color>Black</Color>
                                                 <Style>Solid</Style>
-                                                <Width>1pt</Width>
+                                                <Width>0.5pt</Width>
                                               </BottomBorder>
                                               <LeftBorder>
-                                                <Color>White</Color>
+                                                <Color>Black</Color>
                                                 <Style>Solid</Style>
-                                                <Width>1pt</Width>
+                                                <Width>0.5pt</Width>
                                               </LeftBorder>
                                               <RightBorder>
-                                                <Color>White</Color>
+                                                <Color>Black</Color>
                                                 <Style>Solid</Style>
-                                                <Width>1pt</Width>
+                                                <Width>0.5pt</Width>
                                               </RightBorder>
                                               <BackgroundColor>Silver</BackgroundColor>
                                               <VerticalAlign>Middle</VerticalAlign>
@@ -1174,24 +1128,8 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
+                                                <Style>None</Style>
                                               </Border>
-                                              <TopBorder>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
-                                                <Width>1pt</Width>
-                                              </TopBorder>
-                                              <BottomBorder>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
-                                                <Width>1pt</Width>
-                                              </BottomBorder>
-                                              <LeftBorder>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
-                                                <Width>1pt</Width>
-                                              </LeftBorder>
                                               <RightBorder>
                                                 <Color>White</Color>
                                                 <Style>Solid</Style>
@@ -1230,29 +1168,8 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
+                                                <Style>None</Style>
                                               </Border>
-                                              <TopBorder>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
-                                                <Width>1pt</Width>
-                                              </TopBorder>
-                                              <BottomBorder>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
-                                                <Width>1pt</Width>
-                                              </BottomBorder>
-                                              <LeftBorder>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
-                                                <Width>1pt</Width>
-                                              </LeftBorder>
-                                              <RightBorder>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
-                                                <Width>1pt</Width>
-                                              </RightBorder>
                                               <BackgroundColor>Silver</BackgroundColor>
                                               <VerticalAlign>Middle</VerticalAlign>
                                               <PaddingLeft>5pt</PaddingLeft>
@@ -1286,29 +1203,13 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
+                                                <Style>None</Style>
                                               </Border>
-                                              <TopBorder>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
-                                                <Width>1pt</Width>
-                                              </TopBorder>
-                                              <BottomBorder>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
-                                                <Width>1pt</Width>
-                                              </BottomBorder>
                                               <LeftBorder>
                                                 <Color>White</Color>
                                                 <Style>Solid</Style>
                                                 <Width>1pt</Width>
                                               </LeftBorder>
-                                              <RightBorder>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
-                                                <Width>1pt</Width>
-                                              </RightBorder>
                                               <BackgroundColor>Silver</BackgroundColor>
                                               <VerticalAlign>Middle</VerticalAlign>
                                               <PaddingLeft>5pt</PaddingLeft>
@@ -1342,29 +1243,8 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
+                                                <Style>None</Style>
                                               </Border>
-                                              <TopBorder>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
-                                                <Width>1pt</Width>
-                                              </TopBorder>
-                                              <BottomBorder>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
-                                                <Width>1pt</Width>
-                                              </BottomBorder>
-                                              <LeftBorder>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
-                                                <Width>1pt</Width>
-                                              </LeftBorder>
-                                              <RightBorder>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
-                                                <Width>1pt</Width>
-                                              </RightBorder>
                                               <BackgroundColor>Silver</BackgroundColor>
                                               <VerticalAlign>Middle</VerticalAlign>
                                               <PaddingLeft>5pt</PaddingLeft>
@@ -1398,29 +1278,8 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
+                                                <Style>None</Style>
                                               </Border>
-                                              <TopBorder>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
-                                                <Width>1pt</Width>
-                                              </TopBorder>
-                                              <BottomBorder>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
-                                                <Width>1pt</Width>
-                                              </BottomBorder>
-                                              <LeftBorder>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
-                                                <Width>1pt</Width>
-                                              </LeftBorder>
-                                              <RightBorder>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
-                                                <Width>1pt</Width>
-                                              </RightBorder>
                                               <BackgroundColor>Silver</BackgroundColor>
                                               <VerticalAlign>Middle</VerticalAlign>
                                               <PaddingLeft>5pt</PaddingLeft>
@@ -1456,26 +1315,27 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                               <Border>
                                                 <Color>White</Color>
                                                 <Style>Solid</Style>
+                                                <Width>0.25pt</Width>
                                               </Border>
                                               <TopBorder>
                                                 <Color>White</Color>
                                                 <Style>Solid</Style>
-                                                <Width>1pt</Width>
+                                                <Width>0.25pt</Width>
                                               </TopBorder>
                                               <BottomBorder>
                                                 <Color>White</Color>
                                                 <Style>Solid</Style>
-                                                <Width>1pt</Width>
+                                                <Width>0.25pt</Width>
                                               </BottomBorder>
                                               <LeftBorder>
                                                 <Color>White</Color>
                                                 <Style>Solid</Style>
-                                                <Width>1pt</Width>
+                                                <Width>0.25pt</Width>
                                               </LeftBorder>
                                               <RightBorder>
                                                 <Color>White</Color>
                                                 <Style>Solid</Style>
-                                                <Width>1pt</Width>
+                                                <Width>0.25pt</Width>
                                               </RightBorder>
                                               <BackgroundColor>Silver</BackgroundColor>
                                               <VerticalAlign>Middle</VerticalAlign>
@@ -1510,29 +1370,8 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
+                                                <Style>None</Style>
                                               </Border>
-                                              <TopBorder>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
-                                                <Width>1pt</Width>
-                                              </TopBorder>
-                                              <BottomBorder>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
-                                                <Width>1pt</Width>
-                                              </BottomBorder>
-                                              <LeftBorder>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
-                                                <Width>1pt</Width>
-                                              </LeftBorder>
-                                              <RightBorder>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
-                                                <Width>1pt</Width>
-                                              </RightBorder>
                                               <BackgroundColor>Silver</BackgroundColor>
                                               <VerticalAlign>Middle</VerticalAlign>
                                               <PaddingLeft>5pt</PaddingLeft>
@@ -1566,29 +1405,8 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
+                                                <Style>None</Style>
                                               </Border>
-                                              <TopBorder>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
-                                                <Width>1pt</Width>
-                                              </TopBorder>
-                                              <BottomBorder>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
-                                                <Width>1pt</Width>
-                                              </BottomBorder>
-                                              <LeftBorder>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
-                                                <Width>1pt</Width>
-                                              </LeftBorder>
-                                              <RightBorder>
-                                                <Color>White</Color>
-                                                <Style>Solid</Style>
-                                                <Width>1pt</Width>
-                                              </RightBorder>
                                               <BackgroundColor>Silver</BackgroundColor>
                                               <VerticalAlign>Middle</VerticalAlign>
                                               <PaddingLeft>5pt</PaddingLeft>
@@ -1700,7 +1518,7 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                                 <Style>None</Style>
                                               </Border>
                                               <RightBorder>
-                                                <Color>Black</Color>
+                                                <Color>White</Color>
                                                 <Style>Solid</Style>
                                                 <Width>1pt</Width>
                                               </RightBorder>
@@ -1774,6 +1592,10 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                               <Border>
                                                 <Style>None</Style>
                                               </Border>
+                                              <LeftBorder>
+                                                <Color>White</Color>
+                                                <Style>Solid</Style>
+                                              </LeftBorder>
                                               <BackgroundColor>LightGrey</BackgroundColor>
                                               <VerticalAlign>Middle</VerticalAlign>
                                               <PaddingLeft>5pt</PaddingLeft>
@@ -1960,373 +1782,11 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                     </TablixCells>
                                   </TablixRow>
                                   <TablixRow>
-                                    <Height>0.53901cm</Height>
-                                    <TablixCells>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox67">
-                                            <rd:DefaultName>Textbox63</rd:DefaultName>
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>=Fields!JobTaskNo_Lbl.Value</Value>
-                                                    <Style>
-                                                      <FontFamily>Segoe UI</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                      <FontWeight>Bold</FontWeight>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style />
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <Style>
-                                              <Border>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <BottomBorder>
-                                                <Style>Solid</Style>
-                                              </BottomBorder>
-                                              <VerticalAlign>Bottom</VerticalAlign>
-                                              <PaddingLeft>10pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox74">
-                                            <rd:DefaultName>Textbox64</rd:DefaultName>
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>=Fields!JobTaskDesc_Lbl.Value</Value>
-                                                    <Style>
-                                                      <FontFamily>Segoe UI</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                      <FontWeight>Bold</FontWeight>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style />
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <Style>
-                                              <Border>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <BottomBorder>
-                                                <Style>Solid</Style>
-                                              </BottomBorder>
-                                              <VerticalAlign>Bottom</VerticalAlign>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox75">
-                                            <rd:DefaultName>Textbox65</rd:DefaultName>
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value />
-                                                    <Style>
-                                                      <FontFamily>Segoe UI</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                      <FontWeight>Bold</FontWeight>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style />
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <Style>
-                                              <Border>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <BottomBorder>
-                                                <Style>Solid</Style>
-                                              </BottomBorder>
-                                              <VerticalAlign>Bottom</VerticalAlign>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox76">
-                                            <rd:DefaultName>Textbox66</rd:DefaultName>
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value />
-                                                    <Style>
-                                                      <FontFamily>Segoe UI</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                      <FontWeight>Bold</FontWeight>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style />
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <Style>
-                                              <Border>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <BottomBorder>
-                                                <Style>Solid</Style>
-                                              </BottomBorder>
-                                              <VerticalAlign>Bottom</VerticalAlign>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox77">
-                                            <rd:DefaultName>Textbox67</rd:DefaultName>
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value />
-                                                    <Style>
-                                                      <FontFamily>Segoe UI</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                      <FontWeight>Bold</FontWeight>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Right</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <Style>
-                                              <Border>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <BottomBorder>
-                                                <Style>Solid</Style>
-                                              </BottomBorder>
-                                              <VerticalAlign>Bottom</VerticalAlign>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox78">
-                                            <rd:DefaultName>Textbox68</rd:DefaultName>
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value />
-                                                    <Style>
-                                                      <FontFamily>Segoe UI</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                      <FontWeight>Bold</FontWeight>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style />
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <Style>
-                                              <Border>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <BottomBorder>
-                                                <Style>Solid</Style>
-                                              </BottomBorder>
-                                              <VerticalAlign>Bottom</VerticalAlign>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox79">
-                                            <rd:DefaultName>Textbox69</rd:DefaultName>
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value />
-                                                    <Style>
-                                                      <FontFamily>Segoe UI</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                      <FontWeight>Bold</FontWeight>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Right</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <Style>
-                                              <Border>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <BottomBorder>
-                                                <Style>Solid</Style>
-                                              </BottomBorder>
-                                              <VerticalAlign>Bottom</VerticalAlign>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox81">
-                                            <rd:DefaultName>Textbox70</rd:DefaultName>
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value />
-                                                    <Style>
-                                                      <FontFamily>Segoe UI</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                      <FontWeight>Bold</FontWeight>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style />
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <Style>
-                                              <Border>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <BottomBorder>
-                                                <Style>Solid</Style>
-                                              </BottomBorder>
-                                              <VerticalAlign>Bottom</VerticalAlign>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox82">
-                                            <rd:DefaultName>Textbox71</rd:DefaultName>
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value />
-                                                    <Style>
-                                                      <FontFamily>Segoe UI</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                      <FontWeight>Bold</FontWeight>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Right</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <Style>
-                                              <Border>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <BottomBorder>
-                                                <Style>Solid</Style>
-                                              </BottomBorder>
-                                              <VerticalAlign>Bottom</VerticalAlign>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox83">
-                                            <rd:DefaultName>Textbox72</rd:DefaultName>
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value />
-                                                    <Style>
-                                                      <FontFamily>Segoe UI</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                      <FontWeight>Bold</FontWeight>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Right</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <Style>
-                                              <Border>
-                                                <Style>None</Style>
-                                              </Border>
-                                              <BottomBorder>
-                                                <Style>Solid</Style>
-                                              </BottomBorder>
-                                              <VerticalAlign>Bottom</VerticalAlign>
-                                              <PaddingLeft>5pt</PaddingLeft>
-                                              <PaddingRight>5pt</PaddingRight>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                    </TablixCells>
-                                  </TablixRow>
-                                  <TablixRow>
                                     <Height>0.38806cm</Height>
                                     <TablixCells>
                                       <TablixCell>
                                         <CellContents>
+                                          <rd:Selected>true</rd:Selected>
                                           <Textbox Name="Textbox34">
                                             <rd:DefaultName>Textbox15</rd:DefaultName>
                                             <CanGrow>true</CanGrow>
@@ -2523,6 +1983,7 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                     <TablixCells>
                                       <TablixCell>
                                         <CellContents>
+                                          <rd:Selected>true</rd:Selected>
                                           <Textbox Name="JobTaskNo">
                                             <rd:DefaultName>JobTaskNo</rd:DefaultName>
                                             <CanGrow>true</CanGrow>
@@ -2543,7 +2004,6 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>LightGrey</Color>
                                                 <Style>None</Style>
                                               </Border>
                                               <BackgroundColor>LightGrey</BackgroundColor>
@@ -2576,7 +2036,6 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>LightGrey</Color>
                                                 <Style>None</Style>
                                               </Border>
                                               <BackgroundColor>LightGrey</BackgroundColor>
@@ -2601,6 +2060,7 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                                     <Style>
                                                       <FontFamily>Segoe UI</FontFamily>
                                                       <FontSize>8pt</FontSize>
+                                                      <FontWeight>Bold</FontWeight>
                                                     </Style>
                                                   </TextRun>
                                                 </TextRuns>
@@ -2609,12 +2069,12 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>LightGrey</Color>
                                                 <Style>None</Style>
                                               </Border>
                                               <RightBorder>
                                                 <Color>White</Color>
                                                 <Style>Solid</Style>
+                                                <Width>1pt</Width>
                                               </RightBorder>
                                               <BackgroundColor>=IIf(Fields!AmountExcludingVAT_Line.Value = 0, "White", "LightGrey")</BackgroundColor>
                                               <VerticalAlign>Middle</VerticalAlign>
@@ -2649,7 +2109,6 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>LightGrey</Color>
                                                 <Style>None</Style>
                                               </Border>
                                               <BackgroundColor>LightGrey</BackgroundColor>
@@ -2684,7 +2143,6 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>LightGrey</Color>
                                                 <Style>None</Style>
                                               </Border>
                                               <BackgroundColor>=IIf(Fields!AmountExcludingVAT_Line.Value = 0, "White", "LightGrey")</BackgroundColor>
@@ -2717,7 +2175,6 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>LightGrey</Color>
                                                 <Style>None</Style>
                                               </Border>
                                               <BackgroundColor>LightGrey</BackgroundColor>
@@ -2752,7 +2209,6 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>LightGrey</Color>
                                                 <Style>None</Style>
                                               </Border>
                                               <BackgroundColor>=IIf(Fields!AmountExcludingVAT_Line.Value = 0, "White", "LightGrey")</BackgroundColor>
@@ -2787,7 +2243,6 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>LightGrey</Color>
                                                 <Style>None</Style>
                                               </Border>
                                               <BackgroundColor>LightGrey</BackgroundColor>
@@ -2820,7 +2275,6 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>LightGrey</Color>
                                                 <Style>None</Style>
                                               </Border>
                                               <BackgroundColor>LightGrey</BackgroundColor>
@@ -2855,7 +2309,6 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>LightGrey</Color>
                                                 <Style>None</Style>
                                               </Border>
                                               <BackgroundColor>=IIf(Fields!AmountExcludingVAT_Line.Value = 0, "White", "LightGrey")</BackgroundColor>
@@ -2873,6 +2326,7 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                     <TablixCells>
                                       <TablixCell>
                                         <CellContents>
+                                          <rd:Selected>true</rd:Selected>
                                           <Textbox Name="JobTaskNo1">
                                             <rd:DefaultName>JobTaskNo1</rd:DefaultName>
                                             <CanGrow>true</CanGrow>
@@ -3011,6 +2465,7 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                     <TablixCells>
                                       <TablixCell>
                                         <CellContents>
+                                          <rd:Selected>true</rd:Selected>
                                           <Textbox Name="Textbox47">
                                             <rd:DefaultName>Textbox22</rd:DefaultName>
                                             <CanGrow>true</CanGrow>
@@ -3019,7 +2474,7 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                               <Paragraph>
                                                 <TextRuns>
                                                   <TextRun>
-                                                    <Value />
+                                                    <Value>=Fields!CompanyGiroNo.Value</Value>
                                                     <Style>
                                                       <FontFamily>Segoe UI</FontFamily>
                                                       <FontSize>8pt</FontSize>
@@ -3322,6 +2777,322 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                       </TablixCell>
                                     </TablixCells>
                                   </TablixRow>
+                                  <TablixRow>
+                                    <Height>0.6cm</Height>
+                                    <TablixCells>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <rd:Selected>true</rd:Selected>
+                                          <Textbox Name="Textbox41">
+                                            <rd:DefaultName>Textbox41</rd:DefaultName>
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value />
+                                                    <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
+                                                      <FontSize>8pt</FontSize>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style />
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Color>LightGrey</Color>
+                                                <Style>None</Style>
+                                              </Border>
+                                              <PaddingLeft>5pt</PaddingLeft>
+                                              <PaddingRight>5pt</PaddingRight>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox42">
+                                            <rd:DefaultName>Textbox42</rd:DefaultName>
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value />
+                                                    <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
+                                                      <FontSize>8pt</FontSize>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style />
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Color>LightGrey</Color>
+                                                <Style>None</Style>
+                                              </Border>
+                                              <PaddingLeft>10pt</PaddingLeft>
+                                              <PaddingRight>5pt</PaddingRight>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox43">
+                                            <rd:DefaultName>Textbox43</rd:DefaultName>
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value />
+                                                    <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
+                                                      <FontSize>8pt</FontSize>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style />
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Color>LightGrey</Color>
+                                                <Style>None</Style>
+                                              </Border>
+                                              <PaddingLeft>5pt</PaddingLeft>
+                                              <PaddingRight>5pt</PaddingRight>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox44">
+                                            <rd:DefaultName>Textbox44</rd:DefaultName>
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value />
+                                                    <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
+                                                      <FontSize>8pt</FontSize>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style />
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Color>LightGrey</Color>
+                                                <Style>None</Style>
+                                              </Border>
+                                              <PaddingLeft>5pt</PaddingLeft>
+                                              <PaddingRight>5pt</PaddingRight>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox45">
+                                            <rd:DefaultName>Textbox45</rd:DefaultName>
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value />
+                                                    <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
+                                                      <FontSize>8pt</FontSize>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style />
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Color>LightGrey</Color>
+                                                <Style>None</Style>
+                                              </Border>
+                                              <PaddingLeft>5pt</PaddingLeft>
+                                              <PaddingRight>5pt</PaddingRight>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox46">
+                                            <rd:DefaultName>Textbox46</rd:DefaultName>
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value />
+                                                    <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
+                                                      <FontSize>8pt</FontSize>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style />
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Color>LightGrey</Color>
+                                                <Style>None</Style>
+                                              </Border>
+                                              <PaddingLeft>5pt</PaddingLeft>
+                                              <PaddingRight>5pt</PaddingRight>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox53">
+                                            <rd:DefaultName>Textbox53</rd:DefaultName>
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value />
+                                                    <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
+                                                      <FontSize>8pt</FontSize>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style />
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Color>LightGrey</Color>
+                                                <Style>None</Style>
+                                              </Border>
+                                              <PaddingLeft>5pt</PaddingLeft>
+                                              <PaddingRight>5pt</PaddingRight>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox54">
+                                            <rd:DefaultName>Textbox54</rd:DefaultName>
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value />
+                                                    <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
+                                                      <FontSize>8pt</FontSize>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style />
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Color>LightGrey</Color>
+                                                <Style>None</Style>
+                                              </Border>
+                                              <PaddingLeft>5pt</PaddingLeft>
+                                              <PaddingRight>5pt</PaddingRight>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox55">
+                                            <rd:DefaultName>Textbox55</rd:DefaultName>
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value />
+                                                    <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
+                                                      <FontSize>8pt</FontSize>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style />
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Color>LightGrey</Color>
+                                                <Style>None</Style>
+                                              </Border>
+                                              <PaddingLeft>5pt</PaddingLeft>
+                                              <PaddingRight>5pt</PaddingRight>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox56">
+                                            <rd:DefaultName>Textbox56</rd:DefaultName>
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value />
+                                                    <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
+                                                      <FontSize>8pt</FontSize>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style />
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Color>LightGrey</Color>
+                                                <Style>None</Style>
+                                              </Border>
+                                              <PaddingLeft>5pt</PaddingLeft>
+                                              <PaddingRight>5pt</PaddingRight>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                    </TablixCells>
+                                  </TablixRow>
                                 </TablixRows>
                               </TablixBody>
                               <TablixColumnHierarchy>
@@ -3379,13 +3150,6 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                     <RepeatOnNewPage>true</RepeatOnNewPage>
                                   </TablixMember>
                                   <TablixMember>
-                                    <Visibility>
-                                      <Hidden>true</Hidden>
-                                    </Visibility>
-                                    <KeepWithGroup>After</KeepWithGroup>
-                                    <RepeatOnNewPage>true</RepeatOnNewPage>
-                                  </TablixMember>
-                                  <TablixMember>
                                     <Group Name="InvoiceNo">
                                       <GroupExpressions>
                                         <GroupExpression>=Fields!DocumentNo.Value</GroupExpression>
@@ -3400,12 +3164,18 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                       <TablixMember>
                                         <Group Name="LineNo">
                                           <GroupExpressions>
-                                            <GroupExpression>=Fields!LineNo_Line.Value</GroupExpression>
+                                            <GroupExpression>=CStr(Fields!LineNo_Line.Value) + "-" + CStr(Fields!LineasBlancas_Number.Value)</GroupExpression>
                                           </GroupExpressions>
                                         </Group>
                                         <SortExpressions>
                                           <SortExpression>
+                                            <Value>=IIf(IsNothing(Fields!LineasBlancas_Number.Value), 0, 1)</Value>
+                                          </SortExpression>
+                                          <SortExpression>
                                             <Value>=Fields!LineNo_Line.Value</Value>
+                                          </SortExpression>
+                                          <SortExpression>
+                                            <Value>=Fields!LineasBlancas_Number.Value</Value>
                                           </SortExpression>
                                         </SortExpressions>
                                         <TablixMembers>
@@ -3416,18 +3186,22 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                           </TablixMember>
                                           <TablixMember>
                                             <Visibility>
-                                              <Hidden>=CStr(Fields!ItemNo_Line.Value) = ""</Hidden>
+                                              <Hidden>=IIf(Fields!LineasBlancas_Number.Value &gt; 0, True, False)</Hidden>
                                             </Visibility>
                                           </TablixMember>
-                                          <TablixMember>
-                                            <Visibility>
-                                              <Hidden>=Fields!JobTaskNo.Value = ""</Hidden>
-                                            </Visibility>
-                                          </TablixMember>
+                                          <TablixMember />
                                           <TablixMember>
                                             <TablixMembers>
                                               <TablixMember />
                                             </TablixMembers>
+                                            <Visibility>
+                                              <Hidden>true</Hidden>
+                                            </Visibility>
+                                          </TablixMember>
+                                          <TablixMember>
+                                            <Visibility>
+                                              <Hidden>=IIf(Fields!LineasBlancas_Number.Value &gt; 0, False, True)</Hidden>
+                                            </Visibility>
                                           </TablixMember>
                                         </TablixMembers>
                                       </TablixMember>
@@ -3437,10 +3211,10 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                               </TablixRowHierarchy>
                               <RepeatRowHeaders>true</RepeatRowHeaders>
                               <DataSetName>DataSet_Result</DataSetName>
-                              <Top>0.1886cm</Top>
-                              <Height>3.29125cm</Height>
-                              <Width>18.86807cm</Width>
-                              <ZIndex>1</ZIndex>
+                              <Top>0.16096cm</Top>
+                              <Left>0.23186cm</Left>
+                              <Height>3.35224cm</Height>
+                              <Width>19.03206cm</Width>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -3451,19 +3225,56 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                               <TablixBody>
                                 <TablixColumns>
                                   <TablixColumn>
+                                    <Width>2.5cm</Width>
+                                  </TablixColumn>
+                                  <TablixColumn>
                                     <Width>2.16768cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
                                     <Width>1.16463cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>2.16768cm</Width>
+                                    <Width>3.16769cm</Width>
                                   </TablixColumn>
                                 </TablixColumns>
                                 <TablixRows>
                                   <TablixRow>
                                     <Height>0.4cm</Height>
                                     <TablixCells>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox103">
+                                            <rd:DefaultName>Textbox103</rd:DefaultName>
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value />
+                                                    <Style>
+                                                      <FontSize>8pt</FontSize>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Center</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Style>None</Style>
+                                              </Border>
+                                              <VerticalAlign>Middle</VerticalAlign>
+                                              <PaddingLeft>2pt</PaddingLeft>
+                                              <PaddingRight>2pt</PaddingRight>
+                                              <PaddingTop>2pt</PaddingTop>
+                                              <PaddingBottom>2pt</PaddingBottom>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
                                       <TablixCell>
                                         <CellContents>
                                           <Textbox Name="Textbox161">
@@ -3487,9 +3298,30 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>LightGrey</Color>
+                                                <Color>Gray</Color>
                                                 <Style>Solid</Style>
+                                                <Width>0.25pt</Width>
                                               </Border>
+                                              <TopBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.25pt</Width>
+                                              </TopBorder>
+                                              <BottomBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.25pt</Width>
+                                              </BottomBorder>
+                                              <LeftBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.25pt</Width>
+                                              </LeftBorder>
+                                              <RightBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.25pt</Width>
+                                              </RightBorder>
                                               <BackgroundColor>Silver</BackgroundColor>
                                               <VerticalAlign>Middle</VerticalAlign>
                                               <PaddingLeft>2pt</PaddingLeft>
@@ -3523,9 +3355,30 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>LightGrey</Color>
+                                                <Color>Gray</Color>
                                                 <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
                                               </Border>
+                                              <TopBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </TopBorder>
+                                              <BottomBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </BottomBorder>
+                                              <LeftBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </LeftBorder>
+                                              <RightBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </RightBorder>
                                               <BackgroundColor>Silver</BackgroundColor>
                                               <VerticalAlign>Middle</VerticalAlign>
                                               <PaddingLeft>2pt</PaddingLeft>
@@ -3559,9 +3412,30 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>LightGrey</Color>
+                                                <Color>Gray</Color>
                                                 <Style>Solid</Style>
+                                                <Width>0.25pt</Width>
                                               </Border>
+                                              <TopBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.25pt</Width>
+                                              </TopBorder>
+                                              <BottomBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.25pt</Width>
+                                              </BottomBorder>
+                                              <LeftBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.25pt</Width>
+                                              </LeftBorder>
+                                              <RightBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.25pt</Width>
+                                              </RightBorder>
                                               <BackgroundColor>Silver</BackgroundColor>
                                               <VerticalAlign>Middle</VerticalAlign>
                                               <PaddingLeft>2pt</PaddingLeft>
@@ -3577,6 +3451,40 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                   <TablixRow>
                                     <Height>0.4cm</Height>
                                     <TablixCells>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox104">
+                                            <rd:DefaultName>Textbox104</rd:DefaultName>
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value />
+                                                    <Style>
+                                                      <FontSize>8pt</FontSize>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Right</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Style>None</Style>
+                                              </Border>
+                                              <VerticalAlign>Middle</VerticalAlign>
+                                              <PaddingLeft>2pt</PaddingLeft>
+                                              <PaddingRight>2pt</PaddingRight>
+                                              <PaddingTop>2pt</PaddingTop>
+                                              <PaddingBottom>2pt</PaddingBottom>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
                                       <TablixCell>
                                         <CellContents>
                                           <Textbox Name="Textbox162">
@@ -3600,9 +3508,30 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>LightGrey</Color>
+                                                <Color>Gray</Color>
                                                 <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
                                               </Border>
+                                              <TopBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </TopBorder>
+                                              <BottomBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </BottomBorder>
+                                              <LeftBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </LeftBorder>
+                                              <RightBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </RightBorder>
                                               <VerticalAlign>Middle</VerticalAlign>
                                               <PaddingLeft>2pt</PaddingLeft>
                                               <PaddingRight>2pt</PaddingRight>
@@ -3635,9 +3564,30 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>LightGrey</Color>
+                                                <Color>Gray</Color>
                                                 <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
                                               </Border>
+                                              <TopBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </TopBorder>
+                                              <BottomBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </BottomBorder>
+                                              <LeftBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </LeftBorder>
+                                              <RightBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </RightBorder>
                                               <VerticalAlign>Middle</VerticalAlign>
                                               <PaddingLeft>2pt</PaddingLeft>
                                               <PaddingRight>2pt</PaddingRight>
@@ -3670,9 +3620,30 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>LightGrey</Color>
+                                                <Color>Gray</Color>
                                                 <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
                                               </Border>
+                                              <TopBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </TopBorder>
+                                              <BottomBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </BottomBorder>
+                                              <LeftBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </LeftBorder>
+                                              <RightBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </RightBorder>
                                               <VerticalAlign>Middle</VerticalAlign>
                                               <PaddingLeft>2pt</PaddingLeft>
                                               <PaddingRight>2pt</PaddingRight>
@@ -3687,6 +3658,40 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                   <TablixRow>
                                     <Height>0.4cm</Height>
                                     <TablixCells>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox105">
+                                            <rd:DefaultName>Textbox105</rd:DefaultName>
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value />
+                                                    <Style>
+                                                      <FontSize>8pt</FontSize>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Right</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Style>None</Style>
+                                              </Border>
+                                              <VerticalAlign>Middle</VerticalAlign>
+                                              <PaddingLeft>2pt</PaddingLeft>
+                                              <PaddingRight>2pt</PaddingRight>
+                                              <PaddingTop>2pt</PaddingTop>
+                                              <PaddingBottom>2pt</PaddingBottom>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
                                       <TablixCell>
                                         <CellContents>
                                           <Textbox Name="Textbox7">
@@ -3796,6 +3801,40 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                     <TablixCells>
                                       <TablixCell>
                                         <CellContents>
+                                          <Textbox Name="Textbox106">
+                                            <rd:DefaultName>Textbox106</rd:DefaultName>
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value />
+                                                    <Style>
+                                                      <FontSize>8pt</FontSize>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Right</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Style>None</Style>
+                                              </Border>
+                                              <VerticalAlign>Middle</VerticalAlign>
+                                              <PaddingLeft>2pt</PaddingLeft>
+                                              <PaddingRight>2pt</PaddingRight>
+                                              <PaddingTop>2pt</PaddingTop>
+                                              <PaddingBottom>2pt</PaddingBottom>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
                                           <Textbox Name="Textbox62">
                                             <rd:DefaultName>Textbox62</rd:DefaultName>
                                             <CanGrow>true</CanGrow>
@@ -3903,6 +3942,40 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                     <TablixCells>
                                       <TablixCell>
                                         <CellContents>
+                                          <Textbox Name="Textbox107">
+                                            <rd:DefaultName>Textbox107</rd:DefaultName>
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value />
+                                                    <Style>
+                                                      <FontSize>8pt</FontSize>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Left</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Style>None</Style>
+                                              </Border>
+                                              <VerticalAlign>Middle</VerticalAlign>
+                                              <PaddingLeft>2pt</PaddingLeft>
+                                              <PaddingRight>2pt</PaddingRight>
+                                              <PaddingTop>2pt</PaddingTop>
+                                              <PaddingBottom>2pt</PaddingBottom>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
                                           <Textbox Name="Textbox10">
                                             <rd:DefaultName>Textbox10</rd:DefaultName>
                                             <CanGrow>true</CanGrow>
@@ -3924,9 +3997,30 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>LightGrey</Color>
+                                                <Color>Gray</Color>
                                                 <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
                                               </Border>
+                                              <TopBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </TopBorder>
+                                              <BottomBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </BottomBorder>
+                                              <LeftBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </LeftBorder>
+                                              <RightBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </RightBorder>
                                               <VerticalAlign>Middle</VerticalAlign>
                                               <PaddingLeft>2pt</PaddingLeft>
                                               <PaddingRight>2pt</PaddingRight>
@@ -3961,8 +4055,170 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>LightGrey</Color>
+                                                <Color>Gray</Color>
                                                 <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </Border>
+                                              <TopBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </TopBorder>
+                                              <BottomBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </BottomBorder>
+                                              <LeftBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </LeftBorder>
+                                              <RightBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </RightBorder>
+                                              <VerticalAlign>Middle</VerticalAlign>
+                                              <PaddingLeft>2pt</PaddingLeft>
+                                              <PaddingRight>2pt</PaddingRight>
+                                              <PaddingTop>2pt</PaddingTop>
+                                              <PaddingBottom>2pt</PaddingBottom>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                    </TablixCells>
+                                  </TablixRow>
+                                  <TablixRow>
+                                    <Height>0.99879cm</Height>
+                                    <TablixCells>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox108">
+                                            <rd:DefaultName>Textbox108</rd:DefaultName>
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value />
+                                                    <Style>
+                                                      <FontSize>8pt</FontSize>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Left</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Style>None</Style>
+                                              </Border>
+                                              <VerticalAlign>Middle</VerticalAlign>
+                                              <PaddingLeft>2pt</PaddingLeft>
+                                              <PaddingRight>2pt</PaddingRight>
+                                              <PaddingTop>2pt</PaddingTop>
+                                              <PaddingBottom>2pt</PaddingBottom>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox109">
+                                            <rd:DefaultName>Textbox109</rd:DefaultName>
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value />
+                                                    <Style>
+                                                      <FontSize>8pt</FontSize>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Left</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Style>None</Style>
+                                              </Border>
+                                              <VerticalAlign>Middle</VerticalAlign>
+                                              <PaddingLeft>2pt</PaddingLeft>
+                                              <PaddingRight>2pt</PaddingRight>
+                                              <PaddingTop>2pt</PaddingTop>
+                                              <PaddingBottom>2pt</PaddingBottom>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox110">
+                                            <rd:DefaultName>Textbox110</rd:DefaultName>
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value />
+                                                    <Style>
+                                                      <FontSize>8pt</FontSize>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Left</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Style>None</Style>
+                                              </Border>
+                                              <VerticalAlign>Middle</VerticalAlign>
+                                              <PaddingLeft>2pt</PaddingLeft>
+                                              <PaddingRight>2pt</PaddingRight>
+                                              <PaddingTop>2pt</PaddingTop>
+                                              <PaddingBottom>2pt</PaddingBottom>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox111">
+                                            <rd:DefaultName>Textbox111</rd:DefaultName>
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value />
+                                                    <Style>
+                                                      <FontSize>8pt</FontSize>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Right</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Style>None</Style>
                                               </Border>
                                               <VerticalAlign>Middle</VerticalAlign>
                                               <PaddingLeft>2pt</PaddingLeft>
@@ -3975,10 +4231,272 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                       </TablixCell>
                                     </TablixCells>
                                   </TablixRow>
+                                  <TablixRow>
+                                    <Height>0.375cm</Height>
+                                    <TablixCells>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox116">
+                                            <rd:DefaultName>Textbox116</rd:DefaultName>
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>Observaciones</Value>
+                                                    <Style>
+                                                      <FontSize>8pt</FontSize>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Center</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </Border>
+                                              <TopBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </TopBorder>
+                                              <BottomBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </BottomBorder>
+                                              <LeftBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </LeftBorder>
+                                              <RightBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </RightBorder>
+                                              <BackgroundColor>Silver</BackgroundColor>
+                                              <VerticalAlign>Middle</VerticalAlign>
+                                              <PaddingLeft>2pt</PaddingLeft>
+                                              <PaddingRight>2pt</PaddingRight>
+                                              <PaddingTop>2pt</PaddingTop>
+                                              <PaddingBottom>2pt</PaddingBottom>
+                                            </Style>
+                                          </Textbox>
+                                          <ColSpan>4</ColSpan>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell />
+                                      <TablixCell />
+                                      <TablixCell />
+                                    </TablixCells>
+                                  </TablixRow>
+                                  <TablixRow>
+                                    <Height>0.375cm</Height>
+                                    <TablixCells>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox120">
+                                            <rd:DefaultName>Textbox120</rd:DefaultName>
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>- </Value>
+                                                    <Style>
+                                                      <FontSize>8pt</FontSize>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Left</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </Border>
+                                              <TopBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </TopBorder>
+                                              <BottomBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </BottomBorder>
+                                              <LeftBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </LeftBorder>
+                                              <RightBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </RightBorder>
+                                              <VerticalAlign>Middle</VerticalAlign>
+                                              <PaddingLeft>2pt</PaddingLeft>
+                                              <PaddingRight>2pt</PaddingRight>
+                                              <PaddingTop>2pt</PaddingTop>
+                                              <PaddingBottom>2pt</PaddingBottom>
+                                            </Style>
+                                          </Textbox>
+                                          <ColSpan>4</ColSpan>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell />
+                                      <TablixCell />
+                                      <TablixCell />
+                                    </TablixCells>
+                                  </TablixRow>
+                                  <TablixRow>
+                                    <Height>0.375cm</Height>
+                                    <TablixCells>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox124">
+                                            <rd:DefaultName>Textbox124</rd:DefaultName>
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>- </Value>
+                                                    <Style>
+                                                      <FontSize>8pt</FontSize>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Left</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </Border>
+                                              <TopBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </TopBorder>
+                                              <BottomBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </BottomBorder>
+                                              <LeftBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </LeftBorder>
+                                              <RightBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </RightBorder>
+                                              <VerticalAlign>Middle</VerticalAlign>
+                                              <PaddingLeft>2pt</PaddingLeft>
+                                              <PaddingRight>2pt</PaddingRight>
+                                              <PaddingTop>2pt</PaddingTop>
+                                              <PaddingBottom>2pt</PaddingBottom>
+                                            </Style>
+                                          </Textbox>
+                                          <ColSpan>4</ColSpan>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell />
+                                      <TablixCell />
+                                      <TablixCell />
+                                    </TablixCells>
+                                  </TablixRow>
+                                  <TablixRow>
+                                    <Height>0.375cm</Height>
+                                    <TablixCells>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox128">
+                                            <rd:DefaultName>Textbox128</rd:DefaultName>
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>-</Value>
+                                                    <Style>
+                                                      <FontSize>8pt</FontSize>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Left</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </Border>
+                                              <TopBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </TopBorder>
+                                              <BottomBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </BottomBorder>
+                                              <LeftBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </LeftBorder>
+                                              <RightBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </RightBorder>
+                                              <VerticalAlign>Middle</VerticalAlign>
+                                              <PaddingLeft>2pt</PaddingLeft>
+                                              <PaddingRight>2pt</PaddingRight>
+                                              <PaddingTop>2pt</PaddingTop>
+                                              <PaddingBottom>2pt</PaddingBottom>
+                                            </Style>
+                                          </Textbox>
+                                          <ColSpan>4</ColSpan>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell />
+                                      <TablixCell />
+                                      <TablixCell />
+                                    </TablixCells>
+                                  </TablixRow>
                                 </TablixRows>
                               </TablixBody>
                               <TablixColumnHierarchy>
                                 <TablixMembers>
+                                  <TablixMember />
                                   <TablixMember />
                                   <TablixMember />
                                   <TablixMember />
@@ -4004,13 +4522,28 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                   <TablixMember>
                                     <KeepWithGroup>Before</KeepWithGroup>
                                   </TablixMember>
+                                  <TablixMember>
+                                    <KeepWithGroup>Before</KeepWithGroup>
+                                  </TablixMember>
+                                  <TablixMember>
+                                    <KeepWithGroup>Before</KeepWithGroup>
+                                  </TablixMember>
+                                  <TablixMember>
+                                    <KeepWithGroup>Before</KeepWithGroup>
+                                  </TablixMember>
+                                  <TablixMember>
+                                    <KeepWithGroup>Before</KeepWithGroup>
+                                  </TablixMember>
+                                  <TablixMember>
+                                    <KeepWithGroup>Before</KeepWithGroup>
+                                  </TablixMember>
                                 </TablixMembers>
                               </TablixRowHierarchy>
-                              <Top>10.26962cm</Top>
-                              <Left>13.72788cm</Left>
-                              <Height>2cm</Height>
-                              <Width>5.49999cm</Width>
-                              <ZIndex>2</ZIndex>
+                              <Top>4.02075cm</Top>
+                              <Left>9.80574cm</Left>
+                              <Height>4.49879cm</Height>
+                              <Width>9cm</Width>
+                              <ZIndex>1</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -4021,18 +4554,59 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                               <TablixBody>
                                 <TablixColumns>
                                   <TablixColumn>
-                                    <Width>5.15161cm</Width>
+                                    <Width>4cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
                                     <Width>0.07938cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>4.8205cm</Width>
+                                    <Width>3.92062cm</Width>
                                   </TablixColumn>
                                 </TablixColumns>
                                 <TablixRows>
                                   <TablixRow>
-                                    <Height>0.43333cm</Height>
+                                    <Height>2.24879cm</Height>
+                                    <TablixCells>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox135">
+                                            <rd:DefaultName>Textbox135</rd:DefaultName>
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value />
+                                                    <Style>
+                                                      <FontSize>8pt</FontSize>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Center</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Style>None</Style>
+                                              </Border>
+                                              <PaddingLeft>2pt</PaddingLeft>
+                                              <PaddingRight>2pt</PaddingRight>
+                                              <PaddingTop>2pt</PaddingTop>
+                                              <PaddingBottom>2pt</PaddingBottom>
+                                            </Style>
+                                          </Textbox>
+                                          <ColSpan>3</ColSpan>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell />
+                                      <TablixCell />
+                                    </TablixCells>
+                                  </TablixRow>
+                                  <TablixRow>
+                                    <Height>0.375cm</Height>
                                     <TablixCells>
                                       <TablixCell>
                                         <CellContents>
@@ -4057,9 +4631,30 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>LightGrey</Color>
+                                                <Color>Gray</Color>
                                                 <Style>Solid</Style>
+                                                <Width>0.25pt</Width>
                                               </Border>
+                                              <TopBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.25pt</Width>
+                                              </TopBorder>
+                                              <BottomBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.25pt</Width>
+                                              </BottomBorder>
+                                              <LeftBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.25pt</Width>
+                                              </LeftBorder>
+                                              <RightBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.25pt</Width>
+                                              </RightBorder>
                                               <BackgroundColor>Silver</BackgroundColor>
                                               <PaddingLeft>2pt</PaddingLeft>
                                               <PaddingRight>2pt</PaddingRight>
@@ -4087,7 +4682,7 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                               <Paragraph>
                                                 <TextRuns>
                                                   <TextRun>
-                                                    <Value>TRANSFERENCIA</Value>
+                                                    <Value>=Fields!PaymentMethodDescription.Value</Value>
                                                     <Style>
                                                       <FontSize>9pt</FontSize>
                                                     </Style>
@@ -4098,9 +4693,30 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>LightGrey</Color>
+                                                <Color>Gray</Color>
                                                 <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
                                               </Border>
+                                              <TopBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </TopBorder>
+                                              <BottomBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </BottomBorder>
+                                              <LeftBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </LeftBorder>
+                                              <RightBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </RightBorder>
                                               <PaddingLeft>2pt</PaddingLeft>
                                               <PaddingRight>2pt</PaddingRight>
                                               <PaddingTop>2pt</PaddingTop>
@@ -4138,9 +4754,30 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>LightGrey</Color>
+                                                <Color>Gray</Color>
                                                 <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
                                               </Border>
+                                              <TopBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </TopBorder>
+                                              <BottomBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </BottomBorder>
+                                              <LeftBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </LeftBorder>
+                                              <RightBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </RightBorder>
                                               <PaddingLeft>2pt</PaddingLeft>
                                               <PaddingRight>2pt</PaddingRight>
                                               <PaddingTop>2pt</PaddingTop>
@@ -4178,9 +4815,30 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>LightGrey</Color>
+                                                <Color>Gray</Color>
                                                 <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
                                               </Border>
+                                              <TopBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </TopBorder>
+                                              <BottomBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </BottomBorder>
+                                              <LeftBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </LeftBorder>
+                                              <RightBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </RightBorder>
                                               <PaddingLeft>2pt</PaddingLeft>
                                               <PaddingRight>2pt</PaddingRight>
                                               <PaddingTop>2pt</PaddingTop>
@@ -4220,9 +4878,30 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>LightGrey</Color>
+                                                <Color>Gray</Color>
                                                 <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
                                               </Border>
+                                              <TopBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </TopBorder>
+                                              <BottomBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </BottomBorder>
+                                              <LeftBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </LeftBorder>
+                                              <RightBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </RightBorder>
                                               <BackgroundColor>Silver</BackgroundColor>
                                               <PaddingLeft>2pt</PaddingLeft>
                                               <PaddingRight>2pt</PaddingRight>
@@ -4242,7 +4921,6 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                     <TablixCells>
                                       <TablixCell>
                                         <CellContents>
-                                          <rd:Selected>true</rd:Selected>
                                           <Textbox Name="Textbox40">
                                             <rd:DefaultName>Textbox40</rd:DefaultName>
                                             <CanGrow>true</CanGrow>
@@ -4251,7 +4929,7 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                               <Paragraph>
                                                 <TextRuns>
                                                   <TextRun>
-                                                    <Value>=Format(CDate(Code.GetData(5,1)), "dd/MM/yyyy")</Value>
+                                                    <Value>=Fields!LineasBlancas_Number.Value</Value>
                                                     <Style>
                                                       <FontSize>8pt</FontSize>
                                                     </Style>
@@ -4264,9 +4942,30 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>LightGrey</Color>
+                                                <Color>Gray</Color>
                                                 <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
                                               </Border>
+                                              <TopBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </TopBorder>
+                                              <BottomBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </BottomBorder>
+                                              <LeftBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </LeftBorder>
+                                              <RightBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </RightBorder>
                                               <VerticalAlign>Middle</VerticalAlign>
                                               <PaddingLeft>2pt</PaddingLeft>
                                               <PaddingRight>2pt</PaddingRight>
@@ -4299,9 +4998,30 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Color>LightGrey</Color>
+                                                <Color>Gray</Color>
                                                 <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
                                               </Border>
+                                              <TopBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </TopBorder>
+                                              <BottomBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </BottomBorder>
+                                              <LeftBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </LeftBorder>
+                                              <RightBorder>
+                                                <Color>Gray</Color>
+                                                <Style>Solid</Style>
+                                                <Width>0.75pt</Width>
+                                              </RightBorder>
                                               <VerticalAlign>Middle</VerticalAlign>
                                               <PaddingLeft>2pt</PaddingLeft>
                                               <PaddingRight>2pt</PaddingRight>
@@ -4332,211 +5052,14 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                                   <TablixMember />
                                   <TablixMember />
                                   <TablixMember />
-                                </TablixMembers>
-                              </TablixRowHierarchy>
-                              <Top>13.19069cm</Top>
-                              <Height>2.30833cm</Height>
-                              <Width>10.05149cm</Width>
-                              <ZIndex>3</ZIndex>
-                              <Style>
-                                <Border>
-                                  <Style>None</Style>
-                                </Border>
-                              </Style>
-                            </Tablix>
-                            <Tablix Name="Tablix2">
-                              <TablixBody>
-                                <TablixColumns>
-                                  <TablixColumn>
-                                    <Width>6.54344cm</Width>
-                                  </TablixColumn>
-                                  <TablixColumn>
-                                    <Width>0.83798cm</Width>
-                                  </TablixColumn>
-                                  <TablixColumn>
-                                    <Width>1.61858cm</Width>
-                                  </TablixColumn>
-                                </TablixColumns>
-                                <TablixRows>
-                                  <TablixRow>
-                                    <Height>0.375cm</Height>
-                                    <TablixCells>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox53">
-                                            <rd:DefaultName>Textbox11</rd:DefaultName>
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>Observaciones</Value>
-                                                    <Style>
-                                                      <FontSize>8pt</FontSize>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Center</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <Style>
-                                              <Border>
-                                                <Color>LightGrey</Color>
-                                                <Style>Solid</Style>
-                                              </Border>
-                                              <BackgroundColor>Silver</BackgroundColor>
-                                              <PaddingLeft>2pt</PaddingLeft>
-                                              <PaddingRight>2pt</PaddingRight>
-                                              <PaddingTop>2pt</PaddingTop>
-                                              <PaddingBottom>2pt</PaddingBottom>
-                                            </Style>
-                                          </Textbox>
-                                          <ColSpan>3</ColSpan>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell />
-                                      <TablixCell />
-                                    </TablixCells>
-                                  </TablixRow>
-                                  <TablixRow>
-                                    <Height>0.375cm</Height>
-                                    <TablixCells>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox54">
-                                            <rd:DefaultName>Textbox52</rd:DefaultName>
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>-</Value>
-                                                    <Style />
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style />
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <Style>
-                                              <Border>
-                                                <Color>LightGrey</Color>
-                                                <Style>Solid</Style>
-                                              </Border>
-                                              <PaddingLeft>2pt</PaddingLeft>
-                                              <PaddingRight>2pt</PaddingRight>
-                                              <PaddingTop>2pt</PaddingTop>
-                                              <PaddingBottom>2pt</PaddingBottom>
-                                            </Style>
-                                          </Textbox>
-                                          <ColSpan>3</ColSpan>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell />
-                                      <TablixCell />
-                                    </TablixCells>
-                                  </TablixRow>
-                                  <TablixRow>
-                                    <Height>0.375cm</Height>
-                                    <TablixCells>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox61">
-                                            <rd:DefaultName>Textbox60</rd:DefaultName>
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>-</Value>
-                                                    <Style />
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style />
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <Style>
-                                              <Border>
-                                                <Color>LightGrey</Color>
-                                                <Style>Solid</Style>
-                                              </Border>
-                                              <PaddingLeft>2pt</PaddingLeft>
-                                              <PaddingRight>2pt</PaddingRight>
-                                              <PaddingTop>2pt</PaddingTop>
-                                              <PaddingBottom>2pt</PaddingBottom>
-                                            </Style>
-                                          </Textbox>
-                                          <ColSpan>3</ColSpan>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell />
-                                      <TablixCell />
-                                    </TablixCells>
-                                  </TablixRow>
-                                  <TablixRow>
-                                    <Height>0.375cm</Height>
-                                    <TablixCells>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox58">
-                                            <rd:DefaultName>Textbox57</rd:DefaultName>
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>-</Value>
-                                                    <Style />
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style />
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <Style>
-                                              <Border>
-                                                <Color>LightGrey</Color>
-                                                <Style>Solid</Style>
-                                              </Border>
-                                              <PaddingLeft>2pt</PaddingLeft>
-                                              <PaddingRight>2pt</PaddingRight>
-                                              <PaddingTop>2pt</PaddingTop>
-                                              <PaddingBottom>2pt</PaddingBottom>
-                                            </Style>
-                                          </Textbox>
-                                          <ColSpan>3</ColSpan>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell />
-                                      <TablixCell />
-                                    </TablixCells>
-                                  </TablixRow>
-                                </TablixRows>
-                              </TablixBody>
-                              <TablixColumnHierarchy>
-                                <TablixMembers>
-                                  <TablixMember />
-                                  <TablixMember />
-                                  <TablixMember />
-                                </TablixMembers>
-                              </TablixColumnHierarchy>
-                              <TablixRowHierarchy>
-                                <TablixMembers>
-                                  <TablixMember />
-                                  <TablixMember />
-                                  <TablixMember />
                                   <TablixMember />
                                 </TablixMembers>
                               </TablixRowHierarchy>
-                              <Top>13.99902cm</Top>
-                              <Left>10.22788cm</Left>
-                              <Height>1.5cm</Height>
-                              <Width>9cm</Width>
-                              <ZIndex>4</ZIndex>
+                              <Top>4.02075cm</Top>
+                              <Left>0.23186cm</Left>
+                              <Height>4.49879cm</Height>
+                              <Width>8cm</Width>
+                              <ZIndex>2</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -4578,19 +5101,92 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
-            <Height>16.4cm</Height>
-            <Width>19.5cm</Width>
+            <Top>0.01534cm</Top>
+            <Height>8.5901cm</Height>
+            <Width>19.26392cm</Width>
+            <Style>
+              <Border>
+                <Color>White</Color>
+                <Style>Solid</Style>
+                <Width>0.25pt</Width>
+              </Border>
+              <TopBorder>
+                <Color>White</Color>
+                <Style>Solid</Style>
+                <Width>0.25pt</Width>
+              </TopBorder>
+              <BottomBorder>
+                <Color>White</Color>
+                <Style>Solid</Style>
+                <Width>0.25pt</Width>
+              </BottomBorder>
+              <LeftBorder>
+                <Color>White</Color>
+                <Style>Solid</Style>
+                <Width>0.25pt</Width>
+              </LeftBorder>
+              <RightBorder>
+                <Color>White</Color>
+                <Style>Solid</Style>
+                <Width>0.25pt</Width>
+              </RightBorder>
+            </Style>
+          </Tablix>
+          <Textbox Name="Textbox13">
+            <rd:DefaultName>Textbox13</rd:DefaultName>
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Constant" />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>0.17639cm</Top>
+            <Left>19.16392cm</Left>
+            <Height>0.34595cm</Height>
+            <Width>0.37597cm</Width>
+            <ZIndex>1</ZIndex>
+            <Visibility>
+              <Hidden>=Code.SetData(
+    CStr(Fields!CustomerAddress2.Value) + Chr(177) + 
+    CStr(Fields!CustomerAddress4.Value) + Chr(177) + 
+    CStr(Fields!VATRegistrationNo.Value) + Chr(177) + 
+    CStr(Fields!DocumentNo.Value) + Chr(177) + 
+    
+Cstr(Fields!DocumentDate.Value) + Chr(177) +
+    CStr(Fields!CustomerAddress1.Value) + Chr(177) +
+    CStr(Fields!CompanyAddress1.Value) + Chr(177) +
+    CStr(Fields!CompanyAddress2.Value) + Chr(177) +
+    CStr(Fields!CompanyAddress4.Value) + Chr(177) +
+    CStr(Fields!CompanyVATRegNo.Value) + Chr(177) +
+    CStr(Fields!CompanyHomePage.Value) + Chr(177) +
+    CStr(Fields!CompanyEMail.Value) + Chr(177) +
+    CStr(Fields!CompanyRegistrationNumber.Value), 
+    1
+)</Hidden>
+            </Visibility>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
+              <BackgroundColor>Red</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
             </Style>
-          </Tablix>
+          </Textbox>
         </ReportItems>
-        <Height>16.4cm</Height>
+        <Height>8.60544cm</Height>
         <Style />
       </Body>
-      <Width>19.5cm</Width>
+      <Width>19.54374cm</Width>
       <Page>
         <PageHeader>
           <Height>7.78992cm</Height>
@@ -4794,7 +5390,7 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
               </ReportItems>
               <KeepTogether>true</KeepTogether>
               <Top>1.89143cm</Top>
-              <Left>9.88685cm</Left>
+              <Left>10.31117cm</Left>
               <Height>2.8cm</Height>
               <Width>8.5cm</Width>
               <Style>
@@ -4851,7 +5447,6 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                       <Value>FACTURA</Value>
                       <Style>
                         <FontSize>8pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -4909,7 +5504,6 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                       <Value>Serie</Value>
                       <Style>
                         <FontSize>8pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -4967,7 +5561,6 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                       <Value>Número</Value>
                       <Style>
                         <FontSize>8pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -5025,7 +5618,6 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                       <Value>Fecha</Value>
                       <Style>
                         <FontSize>8pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -5192,7 +5784,7 @@ Cstr(Fields!DocumentDate.Value) + Chr(177) +
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=Format(CDate(Code.GetData(5,1)), "dd-MM-yyyy")</Value>
+                      <Value>=Code.GetData(5,1)</Value>
                       <Style>
                         <FontSize>8pt</FontSize>
                         <Format>d</Format>
