@@ -173,7 +173,7 @@ report 50200 "LDRStandard Sales - Invoice"
             column(ShipmentMethodDescription_Lbl; ShptMethodDescLbl)
             {
             }
-            column(ShipmentDate; Format("Shipment Date", 0, 4))
+            column(ShipmentDate; Format("Shipment Date", 0, '<Day,2>/<Month,2>/<Year4>'))
             {
             }
             column(ShipmentDate_Lbl; FieldCaption("Shipment Date"))
@@ -269,13 +269,13 @@ report 50200 "LDRStandard Sales - Invoice"
             column(BilltoCustomerNo_Lbl; FieldCaption("Bill-to Customer No."))
             {
             }
-            column(DocumentDate; Format("Document Date", 0, 4))
+            column(DocumentDate; Format("Document Date", 0, '<Day,2>/<Month,2>/<Year4>'))
             {
             }
             column(DocumentDate_Lbl; FieldCaption("Document Date"))
             {
             }
-            column(DueDate; Format("Due Date", 0, 4))
+            column(DueDate; Format("Due Date", 0, '<Day,2>/<Month,2>/<Year4>'))
             {
             }
             column(DueDate_Lbl; FieldCaption("Due Date"))
@@ -1597,8 +1597,8 @@ report 50200 "LDRStandard Sales - Invoice"
         FillNameValueTable(LeftHeader, Header.GetCustomerGlobalLocationNumberLbl(), Header.GetCustomerGlobalLocationNumber());
         FillNameValueTable(LeftHeader, InvNoLbl, Header."No.");
         FillNameValueTable(LeftHeader, Header.FieldCaption("Order No."), Header."Order No.");
-        FillNameValueTable(LeftHeader, Header.FieldCaption("Document Date"), Format(Header."Document Date", 0, 4));
-        FillNameValueTable(LeftHeader, Header.FieldCaption("Due Date"), Format(Header."Due Date", 0, 4));
+        FillNameValueTable(LeftHeader, Header.FieldCaption("Document Date"), Format(Header."Document Date", 0, '<Day,2>/<Month,2>/<Year4>'));
+        FillNameValueTable(LeftHeader, Header.FieldCaption("Due Date"), Format(Header."Due Date", 0, '<Day,2>/<Month,2>/<Year4>'));
         FillNameValueTable(LeftHeader, PaymentTermsDescLbl, PaymentTerms.Description);
         FillNameValueTable(LeftHeader, PaymentMethodDescLbl, PaymentMethod.Description);
         FillNameValueTable(LeftHeader, Cust.GetLegalEntityTypeLbl(), Cust.GetLegalEntityType());
