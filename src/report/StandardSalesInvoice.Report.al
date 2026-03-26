@@ -716,6 +716,7 @@ report 50200 "LDRStandard Sales - Invoice"
                         MoreLines := Next(-1) <> 0;
                     if not MoreLines then
                         CurrReport.Break();
+                    LastPrintableSalesLineNo := "Line No.";
                     SetRange("Line No.", 0, "Line No.");
                     TransHeaderAmount := 0;
                     PrevLineAmount := 0;
@@ -1340,7 +1341,6 @@ report 50200 "LDRStandard Sales - Invoice"
 
     var
         LastPrintableSalesLineNo: Integer;
-        ContadorDescripcionCalidades: Integer;
         CompanyInformation: Record "Company Information";
         GLSetup: Record "General Ledger Setup";
         DummyCompanyInfo: Record "Company Information";
@@ -1488,146 +1488,7 @@ report 50200 "LDRStandard Sales - Invoice"
         ShptMethodDescLbl: Label 'Shipment Method';
         ShiptoAddrLbl: Label 'Ship-to Address';
         HideLinesWithZeroQuantity: Boolean;
-
-    local procedure CalcularLineasBlancas() lineas: Integer;
-    var
-        regLineas: Record "Sales Invoice Line";
-        contador2: Decimal;
-        aux: Integer;
-        capacidadLineas: Integer;
-        contador: Integer;
-        lineasFactura: Integer;
-        lineasLastPage: Integer;
-        lineasFijas: Integer;
-        MoreSalesLines: Boolean;
-    begin
-        //DEFINIMOS CUANTAS LINEAS ENTRAN EN EL CUERPO
-        capacidadLineas := 37;
-        //LINEAS FIJAS DE LA ULTIMA PAGINA (tablas inferiores: totales, IVA, vencimientos, etc.)
-        lineasFijas := 17;
-        //INICIALIZAMOS LA VARIABLE QUE CUENTA LAS LINEAS DE LA FAC.
-        lineasFactura := 0;
-        //BUSCAMOS LAS LINEAS DE LA FAC.
-        regLineas.Reset();
-        regLineas.SetRange("Document No.", Header."No.");
-        MoreSalesLines := regLineas.Find('+');
-        while MoreSalesLines and (not EsLineaFacturaImprimible(regLineas)) do
-            MoreSalesLines := regLineas.Next(-1) <> 0;
-        if MoreSalesLines then begin
-            regLineas.SetRange("Line No.", 0, regLineas."Line No.");
-            if regLineas.FindSet() then
-                repeat
-                    if EsLineaFacturaImprimible(regLineas) then
-                        lineasFactura += 1;
-                until regLineas.Next() = 0;
-        end;
-
-        // El espacio fijo de la ultima pagina incluye lineasFijas (base)
-        // mas el crecimiento variable de tablas inferiores (IVA extra, vencimientos extra, comentarios)
-        lineasLastPage := lineasFijas + this.ContadorDescripcionCalidades + CalcularLineasCrecimiento();
-
-        // Calculamos cuantas lineas de factura caben en el resto de paginas anteriores
-        // sabiendo que la ultima pagina reserva lineasLastPage para las tablas inferiores
-        aux := lineasFactura + lineasLastPage;
-
-        contador := aux div capacidadLineas;
-        contador2 := aux / capacidadLineas;
-
-        if contador2 > contador then
-            contador += 1;
-
-        //LINEAS A IMPRIMIR (relleno hasta completar la ultima pagina)
-        lineas := (contador * capacidadLineas) - aux;
-    end;
-
-    local procedure CalcularLineasCrecimiento() LineasCrecimiento: Integer
-    var
-        VATLineas: Integer;
-        Vencimientos: Integer;
-    begin
-        VATLineas := CalcularLineasIVAFactura();
-        if VATLineas > 0 then
-            LineasCrecimiento += VATLineas;
-
-        Vencimientos := CalcularVencimientosFactura();
-        if Vencimientos > 0 then
-            LineasCrecimiento += Vencimientos;
-
-        LineasCrecimiento += CalcularLineasExtraComentarios();
-    end;
-
-    local procedure EsLineaFacturaImprimible(SalesInvoiceLine: Record "Sales Invoice Line"): Boolean
-    begin
-        if (SalesInvoiceLine.Description = '') and (SalesInvoiceLine."No." = '') and (SalesInvoiceLine.Quantity = 0) and (SalesInvoiceLine.Amount = 0) then
-            exit(false);
-
-        if FormatDocument.HideDocumentLine(HideLinesWithZeroQuantity, SalesInvoiceLine, SalesInvoiceLine.FieldNo(Quantity)) then
-            exit(false);
-
-        exit(true);
-    end;
-
-    local procedure CalcularLineasIVAFactura(): Integer
-    var
-        TempVATAmountLine: Record "VAT Amount Line" temporary;
-    begin
-        TempVATAmountLine.Copy(VATAmountLine, true);
-        TempVATAmountLine.SetFilter("VAT Base", '<>%1', 0);
-        exit(TempVATAmountLine.Count);
-    end;
-
-    local procedure CalcularVencimientosFactura(): Integer
-    var
-        DueDateAmountLineTemp: Record "Cust. Ledger Entry";
-        PaymentMethodTemp: Record "Payment Method";
-        CreatesBills: Boolean;
-    begin
-        DueDateAmountLineTemp.SetRange("Document No.", Header."No.");
-        DueDateAmountLineTemp.SetRange("Customer No.", Header."Bill-to Customer No.");
-
-        CreatesBills := false;
-        if Header."Payment Method Code" <> '' then
-            if PaymentMethodTemp.Get(Header."Payment Method Code") then
-                CreatesBills := PaymentMethodTemp."Create Bills";
-
-        if CreatesBills then
-            DueDateAmountLineTemp.SetRange("Document Type", DueDateAmountLineTemp."Document Type"::Bill)
-        else
-            DueDateAmountLineTemp.SetFilter("Document Type", '<>%1', DueDateAmountLineTemp."Document Type"::Bill);
-
-        DueDateAmountLineTemp.SetFilter("Original Amount", '<>%1', 0);
-        DueDateAmountLineTemp.SetFilter("Due Date", '<>%1', 0D);
-
-        exit(DueDateAmountLineTemp.Count);
-    end;
-
-    local procedure CalcularLineasExtraComentarios(): Integer
-    var
-        SalesCommentLineTemp: Record "Sales Comment Line";
-        ComentariosProcesados: Integer;
-        MaxCharsPorLinea: Integer;
-        LineasTexto: Integer;
-        LineasExtra: Integer;
-    begin
-        MaxCharsPorLinea := 60;
-
-        SalesCommentLineTemp.SetRange("Document Type", SalesCommentLineTemp."Document Type"::"Posted Invoice");
-        SalesCommentLineTemp.SetRange("No.", Header."No.");
-        SalesCommentLineTemp.SetFilter(Comment, '<>%1', '');
-
-        if SalesCommentLineTemp.FindSet() then
-            repeat
-                if DelChr(SalesCommentLineTemp.Comment, '<>', ' ') <> '' then begin
-                    ComentariosProcesados += 1;
-                    LineasTexto := Round(StrLen(SalesCommentLineTemp.Comment) / MaxCharsPorLinea, 1, '>');
-                    if LineasTexto > 1 then
-                        LineasExtra += LineasTexto - 1;
-                end;
-            until (SalesCommentLineTemp.Next() = 0) or (ComentariosProcesados >= 3);
-
-        exit(LineasExtra);
-    end;
-
+        ContadorDescripcionCalidades: Integer;
 
     local procedure LogInteractionTemplateExists(): Boolean
     begin
@@ -1929,6 +1790,148 @@ report 50200 "LDRStandard Sales - Invoice"
 
         exit(TempVATClauseLine.IsEmpty());
     end;
+
+    local procedure CalcularLineasBlancas() lineas: Integer;
+    var
+        regLineas: Record "Sales Invoice Line";
+        contador2: Decimal;
+        aux: Integer;
+        capacidadLineas: Integer;
+        contador: Integer;
+        lineasFactura: Integer;
+        lineasLastPage: Integer;
+        lineasFijas: Integer;
+        MoreSalesLines: Boolean;
+    begin
+        //DEFINIMOS CUANTAS LINEAS ENTRAN EN EL CUERPO
+        capacidadLineas := 37;
+        //LINEAS FIJAS DE LA ULTIMA PAGINA (tablas inferiores: totales, IVA, vencimientos, etc.)
+        lineasFijas := 17;
+        //INICIALIZAMOS LA VARIABLE QUE CUENTA LAS LINEAS DE LA FAC.
+        lineasFactura := 1;
+        //BUSCAMOS LAS LINEAS DE LA FAC.
+        regLineas.Reset();
+        regLineas.SetRange("Document No.", Header."No.");
+        MoreSalesLines := regLineas.Find('+');
+        while MoreSalesLines and (not EsLineaFacturaImprimible(regLineas)) do
+            MoreSalesLines := regLineas.Next(-1) <> 0;
+        if MoreSalesLines then begin
+            regLineas.SetRange("Line No.", 0, regLineas."Line No.");
+            if regLineas.FindSet() then
+                repeat
+                    if EsLineaFacturaImprimible(regLineas) then
+                        lineasFactura += 1;
+                until regLineas.Next() = 0;
+        end;
+
+        // El espacio fijo de la ultima pagina incluye lineasFijas (base)
+        // mas el crecimiento variable de tablas inferiores (IVA extra, vencimientos extra, comentarios)
+        lineasLastPage := lineasFijas + this.ContadorDescripcionCalidades + CalcularLineasCrecimiento();
+
+        // Calculamos cuantas lineas de factura caben en el resto de paginas anteriores
+        // sabiendo que la ultima pagina reserva lineasLastPage para las tablas inferiores
+        aux := lineasFactura + lineasLastPage;
+
+
+        contador := aux div capacidadLineas;
+        contador2 := aux / capacidadLineas;
+
+        if contador2 > contador then
+            contador += 1; //esta linea hace que se dupliquen las tablas de abajo XD contador += 1
+
+
+        //LINEAS A IMPRIMIR (relleno hasta completar la ultima pagina)
+        lineas := (contador * capacidadLineas) - aux;
+    end;
+
+    local procedure CalcularLineasCrecimiento() LineasCrecimiento: Integer
+    var
+        VATLineas: Integer;
+        Vencimientos: Integer;
+    begin
+        VATLineas := CalcularLineasIVAFactura();
+        if VATLineas > 0 then
+            LineasCrecimiento += VATLineas;
+
+        Vencimientos := CalcularVencimientosFactura();
+        if Vencimientos > 0 then
+            LineasCrecimiento += Vencimientos;
+
+        LineasCrecimiento += CalcularLineasExtraComentarios();
+    end;
+
+    local procedure EsLineaFacturaImprimible(SalesInvoiceLine: Record "Sales Invoice Line"): Boolean
+    begin
+        if (SalesInvoiceLine.Description = '') and (SalesInvoiceLine."No." = '') and (SalesInvoiceLine.Quantity = 0) and (SalesInvoiceLine.Amount = 0) then
+            exit(false);
+
+        if FormatDocument.HideDocumentLine(HideLinesWithZeroQuantity, SalesInvoiceLine, SalesInvoiceLine.FieldNo(Quantity)) then
+            exit(false);
+
+        exit(true);
+    end;
+
+    local procedure CalcularLineasIVAFactura(): Integer
+    var
+        TempVATAmountLine: Record "VAT Amount Line" temporary;
+    begin
+        TempVATAmountLine.Copy(VATAmountLine, true);
+        TempVATAmountLine.SetFilter("VAT Base", '<>%1', 0);
+        exit(TempVATAmountLine.Count);
+    end;
+
+    local procedure CalcularVencimientosFactura(): Integer
+    var
+        DueDateAmountLineTemp: Record "Cust. Ledger Entry";
+        PaymentMethodTemp: Record "Payment Method";
+        CreatesBills: Boolean;
+    begin
+        DueDateAmountLineTemp.SetRange("Document No.", Header."No.");
+        DueDateAmountLineTemp.SetRange("Customer No.", Header."Bill-to Customer No.");
+
+        CreatesBills := false;
+        if Header."Payment Method Code" <> '' then
+            if PaymentMethodTemp.Get(Header."Payment Method Code") then
+                CreatesBills := PaymentMethodTemp."Create Bills";
+
+        if CreatesBills then
+            DueDateAmountLineTemp.SetRange("Document Type", DueDateAmountLineTemp."Document Type"::Bill)
+        else
+            DueDateAmountLineTemp.SetFilter("Document Type", '<>%1', DueDateAmountLineTemp."Document Type"::Bill);
+
+        DueDateAmountLineTemp.SetFilter("Original Amount", '<>%1', 0);
+        DueDateAmountLineTemp.SetFilter("Due Date", '<>%1', 0D);
+
+        exit(DueDateAmountLineTemp.Count);
+    end;
+
+    local procedure CalcularLineasExtraComentarios(): Integer
+    var
+        SalesCommentLineTemp: Record "Sales Comment Line";
+        ComentariosProcesados: Integer;
+        MaxCharsPorLinea: Integer;
+        LineasTexto: Integer;
+        LineasExtra: Integer;
+    begin
+        MaxCharsPorLinea := 60;
+
+        SalesCommentLineTemp.SetRange("Document Type", SalesCommentLineTemp."Document Type"::"Posted Invoice");
+        SalesCommentLineTemp.SetRange("No.", Header."No.");
+        SalesCommentLineTemp.SetFilter(Comment, '<>%1', '');
+
+        if SalesCommentLineTemp.FindSet() then
+            repeat
+                if DelChr(SalesCommentLineTemp.Comment, '<>', ' ') <> '' then begin
+                    ComentariosProcesados += 1;
+                    LineasTexto := Round(StrLen(SalesCommentLineTemp.Comment) / MaxCharsPorLinea, 1, '>');
+                    if LineasTexto > 1 then
+                        LineasExtra += LineasTexto - 1;
+                end;
+            until (SalesCommentLineTemp.Next() = 0) or (ComentariosProcesados >= 3);
+
+        exit(LineasExtra);
+    end;
+
 
     [IntegrationEvent(false, false)]
     local procedure OnBeforeFormatLineValues(SalesInvoiceLine: Record "Sales Invoice Line"; var FormattedQuantity: Text; var FormattedUnitPrice: Text; var FormattedVATPercentage: Text; var FormattedLineAmount: Text; var IsHandled: Boolean)
