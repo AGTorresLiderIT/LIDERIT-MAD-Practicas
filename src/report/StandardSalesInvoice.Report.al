@@ -1717,7 +1717,7 @@ report 50200 "LDRStandard Sales - Invoice"
         MoreSalesLines: Boolean;
     begin
         //DEFINIMOS CUANTAS LINEAS ENTRAN EN EL CUERPO
-        capacidadLineas := 1007;
+        capacidadLineas := 35;
         //LINEAS FIJAS DE LA ULTIMA PAGINA (tablas inferiores: totales, IVA, vencimientos, etc.)
         lineasFijas := 17;
         //INICIALIZAMOS LA VARIABLE QUE CUENTA LAS LINEAS DE LA FAC.
