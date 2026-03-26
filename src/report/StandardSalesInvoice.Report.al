@@ -95,9 +95,6 @@ report 50200 "LDRStandard Sales - Invoice"
             column(CompanySWIFT_Lbl; CompanyBankAccount.FieldCaption("SWIFT Code"))
             {
             }
-            column(CompanyLogoPosition; CompanyLogoPosition)
-            {
-            }
             column(CompanyRegistrationNumber; CompanyInfo.GetRegistrationNumber())
             {
             }
@@ -449,6 +446,15 @@ report 50200 "LDRStandard Sales - Invoice"
             column(ShippingAgentCode_Lbl; FieldCaption("Shipping Agent Code"))
             {
             }
+            column(BankLbl; BankLbl)
+            {
+            }
+            column(DueInDateLbl; DueInDateLbl)
+            {
+            }
+            column(ObservationsLbl; ObservationsLbl)
+            {
+            }
             column(PaymentInstructions_Txt; PaymentInstructionsTxt)
             {
             }
@@ -592,6 +598,29 @@ report 50200 "LDRStandard Sales - Invoice"
                 column(PricePer_Lbl; PricePerLbl)
                 {
                 }
+                dataitem(LineasBlancas; Integer)
+                {
+                    DataItemTableView = sorting(Number);
+
+                    column(LineasBlancas_Number; LineasBlancas.Number)
+                    {
+                    }
+
+                    trigger OnPreDataItem()
+                    var
+                        BlankLines: Integer;
+                    begin
+                        if Line."Line No." <> LastPrintableSalesLineNo then
+                            CurrReport.Break();
+
+                        BlankLines := CalcularLineasBlancas();
+                        if BlankLines <= 0 then
+                            CurrReport.Break();
+
+                        SetRange(Number, 1, BlankLines);
+                    end;
+                }
+
                 dataitem(ShipmentLine; "Sales Shipment Buffer")
                 {
                     DataItemTableView = sorting("Document No.", "Line No.", "Entry No.");
@@ -712,7 +741,7 @@ report 50200 "LDRStandard Sales - Invoice"
                     ShipmentLine.Reset();
                     ShipmentLine.DeleteAll();
                     MoreLines := Find('+');
-                    while MoreLines and (Description = '') and ("No." = '') and (Quantity = 0) and (Amount = 0) do
+                    while MoreLines and (not EsLineaFacturaImprimible(Line)) do
                         MoreLines := Next(-1) <> 0;
                     if not MoreLines then
                         CurrReport.Break();
@@ -1004,28 +1033,7 @@ report 50200 "LDRStandard Sales - Invoice"
                 {
                 }
             }
-            dataitem(LeftHeader; "Name/Value Buffer")
-            {
-                DataItemTableView = sorting(ID);
-                UseTemporary = true;
-                column(LeftHeaderName; Name)
-                {
-                }
-                column(LeftHeaderValue; Value)
-                {
-                }
-            }
-            dataitem(RightHeader; "Name/Value Buffer")
-            {
-                DataItemTableView = sorting(ID);
-                UseTemporary = true;
-                column(RightHeaderName; Name)
-                {
-                }
-                column(RightHeaderValue; Value)
-                {
-                }
-            }
+
             dataitem(LetterText; "Integer")
             {
                 DataItemTableView = sorting(Number) where(Number = const(1));
@@ -1160,9 +1168,6 @@ report 50200 "LDRStandard Sales - Invoice"
                 if not CompanyBankAccount.Get(Header."Company Bank Account Code") then
                     CompanyBankAccount.CopyBankFieldsFromCompanyInfo(CompanyInfo);
 
-                FillLeftHeader();
-                FillRightHeader();
-
                 if not Cust.Get("Bill-to Customer No.") then
                     Clear(Cust);
 
@@ -1210,28 +1215,6 @@ report 50200 "LDRStandard Sales - Invoice"
             trigger OnPreDataItem()
             begin
                 FirstLineHasBeenOutput := false;
-            end;
-        }
-        dataitem(LineasBlancas; Integer)
-        {
-            DataItemTableView = sorting(Number);
-
-            column(LineasBlancas_Number; LineasBlancas.Number)
-            {
-            }
-
-            trigger OnPreDataItem()
-            var
-                BlankLines: Integer;
-            begin
-                if Line."Line No." <> LastPrintableSalesLineNo then
-                    CurrReport.Break();
-
-                BlankLines := CalcularLineasBlancas();
-                if BlankLines <= 0 then
-                    CurrReport.Break();
-
-                SetRange(Number, 1, BlankLines);
             end;
         }
     }
@@ -1335,7 +1318,6 @@ report 50200 "LDRStandard Sales - Invoice"
         if Header.GetFilters = '' then
             Error(NoFilterSetErr);
 
-        CompanyLogoPosition := SalesSetup."Logo Position on Documents";
         CompanyInformation.Get();
     end;
 
@@ -1368,7 +1350,6 @@ report 50200 "LDRStandard Sales - Invoice"
         ShowWorkDescription: Boolean;
         TransHeaderAmount: Decimal;
         LogInteractionEnable: Boolean;
-        CompanyLogoPosition: Integer;
         CalculatedExchRate: Decimal;
         PaymentInstructionsTxt: Text;
         ExchangeRateText: Text;
@@ -1440,6 +1421,9 @@ report 50200 "LDRStandard Sales - Invoice"
         LCYTxt: label ' (LCY)';
         VATClauseText: Text;
         LegalOfficeTxt, LegalOfficeLbl, CustomGiroTxt, CustomGiroLbl, LegalStatementLbl : Text;
+        BankLbl: Label 'Bank', Comment = 'ESP="Banco"';
+        DueInDateLbl: Label 'Due in date', Comment = 'ESP="Vencimientos"';
+        ObservationsLbl: Label 'Observations', Comment = 'ESP="Observaciones"';
 
     protected var
         CompanyInfo: Record "Company Information";
@@ -1612,67 +1596,6 @@ report 50200 "LDRStandard Sales - Invoice"
         end;
     end;
 
-    local procedure FillLeftHeader()
-    begin
-        LeftHeader.DeleteAll();
-
-        FillNameValueTable(LeftHeader, Header.FieldCaption("External Document No."), Header."External Document No.");
-        FillNameValueTable(LeftHeader, Header.FieldCaption("Bill-to Customer No."), Header."Bill-to Customer No.");
-        FillNameValueTable(LeftHeader, Header.GetCustomerVATRegistrationNumberLbl(), Header.GetCustomerVATRegistrationNumber());
-        FillNameValueTable(LeftHeader, Header.GetCustomerGlobalLocationNumberLbl(), Header.GetCustomerGlobalLocationNumber());
-        FillNameValueTable(LeftHeader, InvNoLbl, Header."No.");
-        FillNameValueTable(LeftHeader, Header.FieldCaption("Order No."), Header."Order No.");
-        FillNameValueTable(LeftHeader, Header.FieldCaption("Document Date"), Format(Header."Document Date", 0, '<Day,2>/<Month,2>/<Year4>'));
-        FillNameValueTable(LeftHeader, Header.FieldCaption("Due Date"), Format(Header."Due Date", 0, '<Day,2>/<Month,2>/<Year4>'));
-        FillNameValueTable(LeftHeader, PaymentTermsDescLbl, PaymentTerms.Description);
-        FillNameValueTable(LeftHeader, PaymentMethodDescLbl, PaymentMethod.Description);
-        FillNameValueTable(LeftHeader, Cust.GetLegalEntityTypeLbl(), Cust.GetLegalEntityType());
-        FillNameValueTable(LeftHeader, ShptMethodDescLbl, ShipmentMethod.Description);
-
-        OnAfterFillLeftHeader(LeftHeader, Header);
-    end;
-
-    local procedure FillRightHeader()
-    var
-        IsHandled: Boolean;
-    begin
-        IsHandled := false;
-        OnBeforeFillRightHeader(Header, SalespersonPurchaser, SalesPersonText, RightHeader, IsHandled);
-        if not IsHandled then begin
-            RightHeader.DeleteAll();
-
-            FillNameValueTable(RightHeader, EMailLbl, CompanyInfo."E-Mail");
-            FillNameValueTable(RightHeader, HomePageLbl, CompanyInfo."Home Page");
-            FillNameValueTable(RightHeader, CompanyInfoPhoneNoLbl, CompanyInfo."Phone No.");
-            FillNameValueTable(RightHeader, CompanyInfo.GetRegistrationNumberLbl(), CompanyInfo.GetRegistrationNumber());
-            FillNameValueTable(RightHeader, CompanyInfo.GetVATRegistrationNumberLbl(), CompanyInfo.GetVATRegistrationNumber());
-            FillNameValueTable(RightHeader, CompanyInfoBankNameLbl, CompanyBankAccount.Name);
-            FillNameValueTable(RightHeader, CompanyInfoGiroNoLbl, CompanyInfo."Giro No.");
-            FillNameValueTable(RightHeader, CompanyBankAccount.FieldCaption(IBAN), CompanyBankAccount.IBAN);
-            FillNameValueTable(RightHeader, CompanyBankAccount.FieldCaption("SWIFT Code"), CompanyBankAccount."SWIFT Code");
-            FillNameValueTable(RightHeader, Header.GetPaymentReferenceLbl(), Header.GetPaymentReference());
-
-            OnAfterFillRightHeader(RightHeader, Header);
-        end;
-    end;
-
-    local procedure FillNameValueTable(var NameValueBuffer: Record "Name/Value Buffer"; Name: Text; Value: Text)
-    var
-        KeyIndex: Integer;
-    begin
-        if Value <> '' then begin
-            Clear(NameValueBuffer);
-            if NameValueBuffer.FindLast() then
-                KeyIndex := NameValueBuffer.ID + 1;
-
-            NameValueBuffer.Init();
-            NameValueBuffer.ID := KeyIndex;
-            NameValueBuffer.Name := CopyStr(Name, 1, MaxStrLen(NameValueBuffer.Name));
-            NameValueBuffer.Value := CopyStr(Value, 1, MaxStrLen(NameValueBuffer.Value));
-            NameValueBuffer.Insert();
-        end;
-    end;
-
     local procedure FormatAddressFields(var SalesInvoiceHeader: Record "Sales Invoice Header")
     begin
         FormatAddr.GetCompanyAddr(SalesInvoiceHeader."Responsibility Center", RespCenter, CompanyInfo, CompanyAddr);
@@ -1705,16 +1628,6 @@ report 50200 "LDRStandard Sales - Invoice"
 
     [IntegrationEvent(false, false)]
     local procedure OnAfterLineOnPreDataItem(var SalesInvoiceHeader: Record "Sales Invoice Header"; var SalesInvoiceLine: Record "Sales Invoice Line")
-    begin
-    end;
-
-    [IntegrationEvent(false, false)]
-    local procedure OnAfterFillLeftHeader(var LeftHeader: Record "Name/Value Buffer"; SalesInvoiceHeader: Record "Sales Invoice Header")
-    begin
-    end;
-
-    [IntegrationEvent(false, false)]
-    local procedure OnAfterFillRightHeader(var RightHeader: Record "Name/Value Buffer"; SalesInvoiceHeader: Record "Sales Invoice Header")
     begin
     end;
 
@@ -1804,11 +1717,11 @@ report 50200 "LDRStandard Sales - Invoice"
         MoreSalesLines: Boolean;
     begin
         //DEFINIMOS CUANTAS LINEAS ENTRAN EN EL CUERPO
-        capacidadLineas := 37;
+        capacidadLineas := 1007;
         //LINEAS FIJAS DE LA ULTIMA PAGINA (tablas inferiores: totales, IVA, vencimientos, etc.)
         lineasFijas := 17;
         //INICIALIZAMOS LA VARIABLE QUE CUENTA LAS LINEAS DE LA FAC.
-        lineasFactura := 1;
+        lineasFactura := 0;
         //BUSCAMOS LAS LINEAS DE LA FAC.
         regLineas.Reset();
         regLineas.SetRange("Document No.", Header."No.");
@@ -1832,13 +1745,11 @@ report 50200 "LDRStandard Sales - Invoice"
         // sabiendo que la ultima pagina reserva lineasLastPage para las tablas inferiores
         aux := lineasFactura + lineasLastPage;
 
-
         contador := aux div capacidadLineas;
         contador2 := aux / capacidadLineas;
 
         if contador2 > contador then
             contador += 1; //esta linea hace que se dupliquen las tablas de abajo XD contador += 1
-
 
         //LINEAS A IMPRIMIR (relleno hasta completar la ultima pagina)
         lineas := (contador * capacidadLineas) - aux;
@@ -1871,15 +1782,6 @@ report 50200 "LDRStandard Sales - Invoice"
         exit(true);
     end;
 
-    local procedure CalcularLineasIVAFactura(): Integer
-    var
-        TempVATAmountLine: Record "VAT Amount Line" temporary;
-    begin
-        TempVATAmountLine.Copy(VATAmountLine, true);
-        TempVATAmountLine.SetFilter("VAT Base", '<>%1', 0);
-        exit(TempVATAmountLine.Count);
-    end;
-
     local procedure CalcularVencimientosFactura(): Integer
     var
         DueDateAmountLineTemp: Record "Cust. Ledger Entry";
@@ -1903,6 +1805,15 @@ report 50200 "LDRStandard Sales - Invoice"
         DueDateAmountLineTemp.SetFilter("Due Date", '<>%1', 0D);
 
         exit(DueDateAmountLineTemp.Count);
+    end;
+
+    local procedure CalcularLineasIVAFactura(): Integer
+    var
+        TempVATAmountLine: Record "VAT Amount Line" temporary;
+    begin
+        TempVATAmountLine.Copy(VATAmountLine, true);
+        TempVATAmountLine.SetFilter("VAT Base", '<>%1', 0);
+        exit(TempVATAmountLine.Count);
     end;
 
     local procedure CalcularLineasExtraComentarios(): Integer
@@ -1932,6 +1843,23 @@ report 50200 "LDRStandard Sales - Invoice"
         exit(LineasExtra);
     end;
 
+    local procedure CalcularLineasComentariosFactura(): Integer
+    var
+        SalesCommentLineTemp: Record "Sales Comment Line";
+        ComentariosProcesados: Integer;
+    begin
+        SalesCommentLineTemp.SetRange("Document Type", SalesCommentLineTemp."Document Type"::"Posted Invoice");
+        SalesCommentLineTemp.SetRange("No.", Header."No.");
+        SalesCommentLineTemp.SetFilter(Comment, '<>%1', '');
+
+        if SalesCommentLineTemp.FindSet() then
+            repeat
+                if DelChr(SalesCommentLineTemp.Comment, '<>', ' ') <> '' then
+                    ComentariosProcesados += 1;
+            until (SalesCommentLineTemp.Next() = 0) or (ComentariosProcesados >= 3);
+
+        exit(ComentariosProcesados);
+    end;
 
     [IntegrationEvent(false, false)]
     local procedure OnBeforeFormatLineValues(SalesInvoiceLine: Record "Sales Invoice Line"; var FormattedQuantity: Text; var FormattedUnitPrice: Text; var FormattedVATPercentage: Text; var FormattedLineAmount: Text; var IsHandled: Boolean)
