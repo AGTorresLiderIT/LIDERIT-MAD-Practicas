@@ -6,15 +6,15 @@
             "request": "launch",
             "type": "al",
             "environmentType": "Sandbox",
-            "environmentName": "Desarollovs",
+            "environmentName": "Desarrollovs",
             "tenant": "09d5a8cc-bcd3-4c18-b6fc-fbc6d9cd8b74",
-            "startupObjectId": 31,
+            "startupObjectId": 50201,
             "startupObjectType": "Page",
             "breakOnError": "All",
             "launchBrowser": true,
             "enableLongRunningSqlStatements": true,
             "enableSqlInformationDebugger": true,
-            //"schemaUpdateMode": "ForceSync"
+            "schemaUpdateMode": "ForceSync"
         }
     ]
 }
