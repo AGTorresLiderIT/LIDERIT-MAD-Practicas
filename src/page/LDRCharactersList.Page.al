@@ -20,10 +20,27 @@ page 50201 "LDRCharacters List"
                 {
                     ToolTip = 'Specifies the value of the Id field.', Comment = '%';
                 }
+                field(Ocupacion; Rec.Ocupacion)
+                {
+                    ToolTip = 'Specifies the value of the Ocupacion field.', Comment = '%';
+                }
+                field(FrasesCelebres; Rec.FrasesCelebres)
+                {
+                    ToolTip = 'Specifies the value of the FrasesCelebres field.', Comment = '%';
+                }
+                field(Localizacion; Rec.Localizacion)
+                {
+                    ToolTip = 'Specifies the value of the Localizacion field.', Comment = '%';
+                }
+            }
+
+
+            // The control add-in can be placed on the page using usercontrol keyword.
+            usercontrol(ControlName; SampleAddIn)
+            {
             }
         }
     }
-
     actions
     {
         area(Processing)
@@ -31,6 +48,7 @@ page 50201 "LDRCharacters List"
             action(ObtenerCharacters)
             {
                 Caption = 'ObtenerCharacters';
+                ToolTip = 'Descarga los personajes desde la API de Los Simpsons.';
                 Image = Refresh;
                 trigger OnAction()
                 var
@@ -47,6 +65,7 @@ page 50201 "LDRCharacters List"
                     resultado: Text;
                     Character: Record LDRCharacters;
                 begin
+                    Character.DeleteAll();
                     JsonText := SimpsonsApi.GetCharactersJson();
                     // Message('1');
                     if not ObjetoParaObtArrt.ReadFrom(JsonText) then
@@ -82,8 +101,32 @@ page 50201 "LDRCharacters List"
 
                         if JsonObject.Get('name', JsonToken) then
                             JsonToken.WriteTo(Character.Nombre);
+
+                        if JsonObject.Get('occupation', JsonToken) then
+                            JsonToken.WriteTo(Character.Ocupacion);
+
+                        if JsonObject.Get('phrases', JsonToken) then
+                            JsonToken.WriteTo(Character.FrasesCelebres);
+
+                        if JsonObject.Get('location', JsonToken) then
+                            JsonToken.WriteTo(Character.Localizacion);
+
                         Character.Insert();
                     end;
+                end;
+            }
+
+            action(leerfrasesCelebres)
+            {
+                ApplicationArea = All;
+                Caption = 'Leer frase célebre';
+
+                trigger OnAction()
+                begin
+                    if Rec.FrasesCelebres <> '' then
+                        CurrPage.ControlName.Speak(Rec.FrasesCelebres)
+                    else
+                        Message('No hay frase célebre seleccionada.');
                 end;
             }
         }
