@@ -3,6 +3,41 @@
   <file datatype="xml" source-language="en-US" target-language="en-US" original="LIDERIT-MAD-Practicas">
     <body>
       <group id="body">
+        <trans-unit id="Table 2910330049 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>CaracterTemp</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table LDRCaracterTemp - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2910330049 - Field 3764102987 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Frases Celebres</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table LDRCaracterTemp - Field Frases Celebres - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2910330049 - Field 415504711 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Id</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table LDRCaracterTemp - Field Id - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2910330049 - Field 3853927675 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Imagen</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table LDRCaracterTemp - Field Imagen - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2910330049 - Field 1544014376 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Localizacion</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table LDRCaracterTemp - Field Localizacion - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2910330049 - Field 814966011 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Nombre</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table LDRCaracterTemp - Field Nombre - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2910330049 - Field 1436286525 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ocupacion</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table LDRCaracterTemp - Field Ocupacion - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 1758605252 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Characters</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -63,6 +98,11 @@
           <note from="Developer" annotates="general" priority="2">%</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page LDRCharacters List - Control Ocupacion - Property ToolTip</note>
         </trans-unit>
+        <trans-unit id="Page 883747414 - Action 1310329149 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Información detallada</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page LDRCharacters List - Action InformacionDetallada - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 883747414 - Action 3335809233 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Leer frase célebre</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -78,18 +118,18 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page LDRCharacters List - Action ObtenerCharacters - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 373204875 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>FichaCharactersTemp</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page LDRFichaCharactersTemp - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 1378804128 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>LocalizacionBurns</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page LocalizacionBurns - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 1378804128 - Action 2614281024 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>GenerarLocalizacion</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page LocalizacionBurns - Action GenerarLocalizacion - Property Caption</note>
-        </trans-unit>
         <trans-unit id="Page 1378804128 - Action 2456042758 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>GenerarLocalizacion</source>
+          <source>GenerarLocalizacion </source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page LocalizacionBurns - Action GenerarLocalizacionOpcion2 - Property Caption</note>
         </trans-unit>

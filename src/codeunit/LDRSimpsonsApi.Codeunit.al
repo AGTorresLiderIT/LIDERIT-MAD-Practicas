@@ -49,4 +49,22 @@ codeunit 50202 "LDR Simpsons API"
         Response.Content().ReadAs(JsonText);
         exit(JsonText);
     end;
+
+    procedure GetCharacterIdJson(CharacterId: Integer): Text
+    var
+        HttpClient: HttpClient;
+        Response: HttpResponseMessage;
+        JsonText: Text;
+        direccion: Text;
+    begin
+        direccion := StrSubstNo('https://thesimpsonsapi.com/api/characters/%1', CharacterId);
+        if not HttpClient.Get(direccion, Response) then
+            Error('Error en la llamada a la API');
+
+        if not Response.IsSuccessStatusCode() then
+            Error('Error HTTP %1: %2', Response.HttpStatusCode(), Response.ReasonPhrase());
+
+        Response.Content().ReadAs(JsonText);
+        exit(JsonText);
+    end;
 }

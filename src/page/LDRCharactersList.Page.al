@@ -62,6 +62,7 @@ page 50201 "LDRCharacters List"
                     JsonTokenIt: JsonToken;
                     resultado: Text;
                     Character: Record LDRCharacters;
+                    arrayFrases: List of [Text];
                 begin
                     Character.DeleteAll();
                     JsonText := SimpsonsApi.GetCharactersJson();
@@ -100,8 +101,12 @@ page 50201 "LDRCharacters List"
                         if JsonObject.Get('occupation', JsonToken) then
                             JsonToken.WriteTo(Character.Ocupacion);
 
-                        if JsonObject.Get('phrases', JsonToken) then
+                        if JsonObject.Get('phrases', JsonToken) then begin
                             JsonToken.WriteTo(Character.FrasesCelebres);
+
+                            ArrayFrases := Character.FrasesCelebres.Split(',');
+                            //Message('%1', ArrayFrases);
+                        end;
 
                         if JsonObject.Get('location', JsonToken) then
                             JsonToken.WriteTo(Character.Localizacion);
@@ -122,6 +127,43 @@ page 50201 "LDRCharacters List"
                         CurrPage.ControlName.Speak(Rec.FrasesCelebres)
                     else
                         Message('No hay frase célebre seleccionada.');
+                end;
+            }
+
+            action(InformacionDetallada)
+            {
+                ApplicationArea = All;
+                Caption = 'Información detallada';
+
+                trigger OnAction()
+                var
+                    TempCharacter: Record "LDRCaracterTemp";
+                    SimpsonsApi: Codeunit "LDR Simpsons API";
+                    TempPage: Page "LDRFichaCharactersTemp";
+                    JsonText: Text;
+                    JsonObject: JsonObject;
+                    JsonToken: JsonToken;
+                begin
+                    JsonText := SimpsonsApi.GetCharacterIdJson(Rec.Id);
+                    if not JsonObject.ReadFrom(JsonText) then
+                        Error('Error al leer JSON');
+
+                    TempCharacter.Id := Rec.Id;
+                    TempCharacter.Nombre := Rec.Nombre;
+                    TempCharacter."Frases Celebres" := Rec.FrasesCelebres;
+                    TempCharacter.Ocupacion := Rec.Ocupacion;
+                    TempCharacter.Localizacion := Rec.Localizacion;
+
+                    if JsonObject.Get('portrait_path', JsonToken) then
+                        JsonToken.WriteTo(TempCharacter.Imagen);
+
+                    TempCharacter.Insert();
+
+                    clear(TempPage);
+                    TempPage.SetTableView(rec);
+                    TempPage.RunModal();
+                    // TempPage.SetTableView(TempCharacter);
+                    //Page.RunModal(50201, TempCharacter);
                 end;
             }
         }

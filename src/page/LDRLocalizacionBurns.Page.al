@@ -20,13 +20,33 @@ page 50202 LocalizacionBurns
                     JsonText: Text;
                     JsonObject: JsonObject;
                     TokenInicial: JsonToken;
+                    Pasointermedio: JsonToken;
                     JsonToken: JsonToken;
                     resultado: Text;
                     ID: Integer;
+                    Rango: Integer;
 
                 begin
+                    JsonText := SimpsonsApi.GetLocationJson();
+
+                    if not TokenInicial.ReadFrom(JsonText) then
+                        Error('Error al analizar el JSON raíz.');
+
+                    if not TokenInicial.IsObject() then
+                        Error('1');
+
+                    JsonObject := TokenInicial.AsObject();
+
+                    if not JsonObject.Get('count', Pasointermedio) then
+                        Error('No se encontró el campo count.');
+
+                    Pasointermedio.WriteTo(resultado);
+
+                    if not Evaluate(Rango, resultado) then
+                        Error('Error al convertir el valor de count a entero.');
+
                     Randomize();
-                    ID := Random(20) + 1;
+                    ID := Random(Rango) + 1;
 
                     JsonText := SimpsonsApi.GetLocationNumeroJson(ID);
 

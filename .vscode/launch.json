@@ -8,7 +8,7 @@
             "environmentType": "Sandbox",
             "environmentName": "Desarrollovs",
             "tenant": "09d5a8cc-bcd3-4c18-b6fc-fbc6d9cd8b74",
-            "startupObjectId": 50202,
+            "startupObjectId": 50201,
             "startupObjectType": "Page",
             "breakOnError": "All",
             "launchBrowser": true,
