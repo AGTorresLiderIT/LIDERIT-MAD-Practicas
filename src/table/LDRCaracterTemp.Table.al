@@ -2,6 +2,7 @@ table 50201 "LDRCaracterTemp"
 {
     Caption = 'CaracterTemp';
     DataClassification = ToBeClassified;
+    TableType = Temporary;
 
     fields
     {

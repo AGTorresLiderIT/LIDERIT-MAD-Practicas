@@ -137,12 +137,13 @@ page 50201 "LDRCharacters List"
 
                 trigger OnAction()
                 var
-                    TempCharacter: Record "LDRCaracterTemp";
+                    TempCharacter: Record "LDRCaracterTemp" temporary;
                     SimpsonsApi: Codeunit "LDR Simpsons API";
                     TempPage: Page "LDRFichaCharactersTemp";
                     JsonText: Text;
                     JsonObject: JsonObject;
                     JsonToken: JsonToken;
+                    ImagenURL: Text;
                 begin
                     JsonText := SimpsonsApi.GetCharacterIdJson(Rec.Id);
                     if not JsonObject.ReadFrom(JsonText) then
@@ -154,16 +155,86 @@ page 50201 "LDRCharacters List"
                     TempCharacter.Ocupacion := Rec.Ocupacion;
                     TempCharacter.Localizacion := Rec.Localizacion;
 
-                    if JsonObject.Get('portrait_path', JsonToken) then
-                        JsonToken.WriteTo(TempCharacter.Imagen);
+                    if JsonObject.Get('portrait_path', JsonToken) then begin
+                        JsonToken.WriteTo(ImagenURL);
+
+                        if ImagenURL <> '' then begin
+                            TempCharacter.Imagen := ImagenURL;
+                            // Imagen := herramientasImage.FromBase64(SimpsonsApi.GetImageJson(ImagenURL));
+                            // TempCharacter.Imagen := Imagen;
+                        end;
+                    end;
 
                     TempCharacter.Insert();
 
                     clear(TempPage);
-                    TempPage.SetTableView(rec);
-                    TempPage.RunModal();
-                    // TempPage.SetTableView(TempCharacter);
-                    //Page.RunModal(50201, TempCharacter);
+
+                    Page.RunModal(50203, TempCharacter);
+
+                end;
+            }
+            action(GenerarLocalizacionOpcion2)
+            {
+                ApplicationArea = All;
+                Caption = 'GenerarLocalizacion ';
+                Image = Print;
+
+                trigger OnAction()
+                var
+                    TempCharacter: Record "LDRCaracterTemp" temporary;
+                    SimpsonsApi: Codeunit "LDR Simpsons API";
+                    TempPage: Page "LDRBurnstemp";
+                    JsonText: Text;
+                    JsonObject: JsonObject;
+                    TokenInicial: JsonToken;
+                    Pasointermedio: JsonToken;
+                    JsonToken: JsonToken;
+                    resultado: Text;
+                    ID: Integer;
+                    Rango: Integer;
+
+                begin
+                    JsonText := SimpsonsApi.GetLocationJson();
+
+                    if not TokenInicial.ReadFrom(JsonText) then
+                        Error('Error al analizar el JSON raíz.');
+
+                    if not TokenInicial.IsObject() then
+                        Error('1');
+
+                    JsonObject := TokenInicial.AsObject();
+
+                    if not JsonObject.Get('count', Pasointermedio) then
+                        Error('No se encontró el campo count.');
+
+                    Pasointermedio.WriteTo(resultado);
+
+                    if not Evaluate(Rango, resultado) then
+                        Error('Error al convertir el valor de count a entero.');
+
+                    Randomize();
+                    ID := Random(Rango) + 1;
+
+                    JsonText := SimpsonsApi.GetLocationNumeroJson(ID);
+
+                    if not TokenInicial.ReadFrom(JsonText) then
+                        Error('Error al analizar el JSON raíz.');
+
+                    if not TokenInicial.IsObject() then
+                        Error('1');
+
+                    JsonObject := TokenInicial.AsObject();
+
+                    if JsonObject.Get('name', JsonToken) then begin
+                        JsonToken.WriteTo(resultado);
+                        //Message('La localización a la que tiene que ir Burns es: %1', resultado);
+                    end;
+
+                    TempCharacter.Localizacion := resultado;
+
+                    TempCharacter.Insert();
+                    clear(TempPage);
+                    Page.RunModal(50204, TempCharacter);
                 end;
             }
         }

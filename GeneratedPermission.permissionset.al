@@ -8,5 +8,5 @@ permissionset 50200 GeneratedPermission
         table LDRCaracterTemp = X,
         codeunit "LDR Simpsons API" = X,
         page LDRFichaCharactersTemp = X,
-        page LocalizacionBurns = X;
+        page LDRBurnstemp = X;
 }

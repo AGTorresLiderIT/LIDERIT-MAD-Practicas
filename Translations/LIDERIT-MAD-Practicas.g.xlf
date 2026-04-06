@@ -68,6 +68,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table LDRCharacters - Field Ocupacion - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 4227460730 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Localización Burns</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page LDRBurnstemp - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4227460730 - Control 814966011 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Nombre field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page LDRBurnstemp - Control Nombre - Property ToolTip</note>
+        </trans-unit>
         <trans-unit id="Page 883747414 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Characters List</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -98,6 +108,11 @@
           <note from="Developer" annotates="general" priority="2">%</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page LDRCharacters List - Control Ocupacion - Property ToolTip</note>
         </trans-unit>
+        <trans-unit id="Page 883747414 - Action 2456042758 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>GenerarLocalizacion </source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page LDRCharacters List - Action GenerarLocalizacionOpcion2 - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 883747414 - Action 1310329149 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Información detallada</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -123,15 +138,35 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page LDRFichaCharactersTemp - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 1378804128 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>LocalizacionBurns</source>
+        <trans-unit id="Page 373204875 - Control 2445482498 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>General</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page LocalizacionBurns - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page LDRFichaCharactersTemp - Control General - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 1378804128 - Action 2456042758 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>GenerarLocalizacion </source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page LocalizacionBurns - Action GenerarLocalizacionOpcion2 - Property Caption</note>
+        <trans-unit id="Page 373204875 - Control 1768104243 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the FrasesCelebres field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page LDRFichaCharactersTemp - Control FrasesCelebres - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 373204875 - Control 415504711 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Id field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page LDRFichaCharactersTemp - Control Id - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 373204875 - Control 3853927675 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Imagen field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page LDRFichaCharactersTemp - Control Imagen - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 373204875 - Control 814966011 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Nombre field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page LDRFichaCharactersTemp - Control Nombre - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 373204875 - Control 1436286525 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Ocupacion field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page LDRFichaCharactersTemp - Control Ocupacion - Property ToolTip</note>
         </trans-unit>
       </group>
     </body>
