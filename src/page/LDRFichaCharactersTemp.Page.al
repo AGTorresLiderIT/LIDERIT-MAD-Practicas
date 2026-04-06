@@ -35,14 +35,7 @@ page 50203 LDRFichaCharactersTemp
                 // }
                 field(Imagen; rec.Imagen)
                 {
-
                     ToolTip = 'Specifies the value of the Imagen field.', Comment = '%';
-                    trigger OnValidate()
-                    var
-                        herramientasImage: Codeunit Image;
-                    begin
-                        herramientasImage.FromBase64(Rec.Imagen);
-                    end;
                 }
             }
         }

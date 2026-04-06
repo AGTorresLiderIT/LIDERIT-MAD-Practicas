@@ -144,6 +144,12 @@ page 50201 "LDRCharacters List"
                     JsonObject: JsonObject;
                     JsonToken: JsonToken;
                     ImagenURL: Text;
+                    // Base64Converter: Codeunit "Base64 Convert";
+                    Outstream: OutStream;
+                    InStream: InStream;
+                    TempBlob: Codeunit "Temp Blob";
+                    Image: text;
+
                 begin
                     JsonText := SimpsonsApi.GetCharacterIdJson(Rec.Id);
                     if not JsonObject.ReadFrom(JsonText) then
@@ -159,11 +165,33 @@ page 50201 "LDRCharacters List"
                         JsonToken.WriteTo(ImagenURL);
 
                         if ImagenURL <> '' then begin
-                            TempCharacter.Imagen := ImagenURL;
+                            // TempCharacter.Imagen := ImagenURL;
                             // Imagen := herramientasImage.FromBase64(SimpsonsApi.GetImageJson(ImagenURL));
                             // TempCharacter.Imagen := Imagen;
+
+
+                            ImagenURL := ImagenURL.TrimEnd('"');
+                            ImagenURL := ImagenURL.TrimStart('"');
+
+
+                            Image := SimpsonsApi.GetImageJson(ImagenURL);
+
+                            if not JsonObject.ReadFrom(JsonText) then
+                                Error('Error al leer JSON');
+
+                            TempBlob.CreateOutStream(Outstream, TextEncoding::UTF8);
+                            TempBlob.CreateInStream(inStream);
+                            JsonObject.WriteTo(Outstream);
+                            // Message('%1', Image);
+                            // Base64Converter.FromBase64(Image, Outstream);
+
+                            Message('llego aqui');
+
+                            TempCharacter.Imagen.ImportStream(InStream, ImagenURL);
+
                         end;
                     end;
+
 
                     TempCharacter.Insert();
 

@@ -26,7 +26,7 @@ table 50201 "LDRCaracterTemp"
         {
             Caption = 'Localizacion';
         }
-        field(6; Imagen; Text[2048])
+        field(6; Imagen; MediaSet)
         {
             Caption = 'Imagen';
         }

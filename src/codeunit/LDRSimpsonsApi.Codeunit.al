@@ -75,12 +75,14 @@ codeunit 50202 "LDR Simpsons API"
         JsonText: Text;
         direccion: Text;
     begin
-        direccion := StrSubstNo('https://thesimpsonsapi.com/api%1', Portaitpath);
+        direccion := 'https://cdn.thesimpsonsapi.com/500' + Portaitpath;
         if not HttpClient.Get(direccion, Response) then
             Error('Error en la llamada a la API');
 
-        if not Response.IsSuccessStatusCode() then
-            Error('Error HTTP %1: %2', Response.HttpStatusCode(), Response.ReasonPhrase());
+        if not Response.IsSuccessStatusCode() then begin
+            Message('%1', direccion);
+            Error('Error image HTTP %1: %2', Response.HttpStatusCode(), Response.ReasonPhrase());
+        end;
 
         Response.Content().ReadAs(JsonText);
         exit(JsonText);
