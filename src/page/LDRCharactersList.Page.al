@@ -19,6 +19,14 @@ page 50000 "Characters List"
                 field("Nombre Personaje"; Rec."Nombre Personaje")
                 {
                     ToolTip = 'Specifies the value of the Nombre Personaje field.', Comment = '%';
+                    ApplicationArea = All;
+                    trigger OnDrillDown()
+                    var
+                        CharacterTemp: Page Habitante_de_Springfield;
+                    begin
+                        CharacterTemp.SeleccionarRegistro(Rec."ID Personaje");
+                        CharacterTemp.Run();
+                    end;
                 }
                 field("Fecha Actualizacion"; Rec."Fecha Actualizacion")
                 {
@@ -39,8 +47,9 @@ page 50000 "Characters List"
                 trigger OnAction()
                 var
                     SimpsonsAPI: Codeunit Simpsons_API;
+                    CharacterTemp: Record TemporalCharacters temporary;
                 begin
-                    SimpsonsAPI.GetCharacters();
+                    SimpsonsAPI.GetCharacters(CharacterTemp, true);
                     CurrPage.Update();
                 end;
             }
