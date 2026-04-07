@@ -33,10 +33,15 @@ page 50000 "Characters List"
         {
             action(MostrarDatos)
             {
-                Caption = 'MostrarDatos2';
-                Image = Refresh;
+                Caption = 'MostrarDatosDeAPI';
+                ApplicationArea = All;
+                Image = Download;
                 trigger OnAction()
+                var
+                    SimpsonsAPI: Codeunit Simpsons_API;
                 begin
+                    SimpsonsAPI.GetCharacters();
+                    CurrPage.Update();
                 end;
             }
         }

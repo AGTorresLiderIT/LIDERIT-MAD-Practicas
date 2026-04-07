@@ -25,4 +25,13 @@ table 50000 Characters
             Clustered = true;
         }
     }
+    trigger OnInsert()
+    begin
+        "Fecha Actualizacion" := CurrentDateTime();
+    end;
+
+    trigger OnModify()
+    begin
+        "Fecha Actualizacion" := CurrentDateTime();
+    end;
 }
