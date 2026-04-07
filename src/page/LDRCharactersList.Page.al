@@ -33,7 +33,10 @@ page 50201 "LDRCharacters List"
                     ToolTip = 'Specifies the value of the Localizacion field.', Comment = '%';
                 }
             }
-
+            usercontrol(ImageViewer; SimpsonsImageViewer)
+            {
+                ApplicationArea = All;
+            }
             usercontrol(ControlName; SampleAddIn)
             {
             }
@@ -138,17 +141,17 @@ page 50201 "LDRCharacters List"
                 trigger OnAction()
                 var
                     TempCharacter: Record "LDRCaracterTemp" temporary;
+                    // TempBlob: Codeunit "Temp Blob";
+                    // Base64Converter: Codeunit "Base64 Convert";
                     SimpsonsApi: Codeunit "LDR Simpsons API";
                     TempPage: Page "LDRFichaCharactersTemp";
                     JsonText: Text;
                     JsonObject: JsonObject;
                     JsonToken: JsonToken;
                     ImagenURL: Text;
-                    // Base64Converter: Codeunit "Base64 Convert";
-                    Outstream: OutStream;
-                    InStream: InStream;
-                    TempBlob: Codeunit "Temp Blob";
-                    Image: text;
+                // Outstream: OutStream;
+                // InStream: InStream;
+                // Image: text;
 
                 begin
                     JsonText := SimpsonsApi.GetCharacterIdJson(Rec.Id);
@@ -172,33 +175,44 @@ page 50201 "LDRCharacters List"
 
                             ImagenURL := ImagenURL.TrimEnd('"');
                             ImagenURL := ImagenURL.TrimStart('"');
+                            ImagenURL := 'https://cdn.thesimpsonsapi.com/500' + ImagenURL
 
 
-                            Image := SimpsonsApi.GetImageJson(ImagenURL);
+                            //opcionfallida
+                            // Image := SimpsonsApi.GetImageJson(ImagenURL);
 
-                            if not JsonObject.ReadFrom(JsonText) then
-                                Error('Error al leer JSON');
+                            // if not JsonObject.ReadFrom(JsonText) then
+                            //     Error('Error al leer JSON');
 
-                            TempBlob.CreateOutStream(Outstream, TextEncoding::UTF8);
-                            TempBlob.CreateInStream(inStream);
-                            JsonObject.WriteTo(Outstream);
+                            // TempBlob.CreateOutStream(Outstream, TextEncoding::UTF8);
+
+                            // Image := Base64Converter.ToBase64(Image, TextEncoding::UTF8);
+
                             // Message('%1', Image);
+                            // //Outstream.WriteText(Image);
+
+                            // TempBlob.CreateInStream(inStream);
+
+
+                            // // Message('%1', Image);
                             // Base64Converter.FromBase64(Image, Outstream);
 
-                            Message('llego aqui');
+                            // // Message('llego aqui');
 
-                            TempCharacter.Imagen.ImportStream(InStream, ImagenURL);
+                            // TempCharacter.Imagen.ImportStream(InStream, ImagenURL);
+                            //finopcionfallida
+
 
                         end;
                     end;
-
+                    // TempCharacter.Imagen := ImagenURL;
 
                     TempCharacter.Insert();
 
                     clear(TempPage);
 
                     Page.RunModal(50203, TempCharacter);
-
+                    CurrPage.ImageViewer.SetImageUrl(ImagenURL);
                 end;
             }
             action(GenerarLocalizacionOpcion2)
@@ -253,10 +267,9 @@ page 50201 "LDRCharacters List"
 
                     JsonObject := TokenInicial.AsObject();
 
-                    if JsonObject.Get('name', JsonToken) then begin
+                    if JsonObject.Get('name', JsonToken) then
                         JsonToken.WriteTo(resultado);
-                        //Message('La localización a la que tiene que ir Burns es: %1', resultado);
-                    end;
+                    //Message('La localización a la que tiene que ir Burns es: %1', resultado);
 
                     TempCharacter.Localizacion := resultado;
 

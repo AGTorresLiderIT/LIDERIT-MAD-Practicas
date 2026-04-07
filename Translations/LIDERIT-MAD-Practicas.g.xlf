@@ -153,11 +153,6 @@
           <note from="Developer" annotates="general" priority="2">%</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page LDRFichaCharactersTemp - Control Id - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 373204875 - Control 3853927675 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the Imagen field.</source>
-          <note from="Developer" annotates="general" priority="2">%</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page LDRFichaCharactersTemp - Control Imagen - Property ToolTip</note>
-        </trans-unit>
         <trans-unit id="Page 373204875 - Control 814966011 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the Nombre field.</source>
           <note from="Developer" annotates="general" priority="2">%</note>

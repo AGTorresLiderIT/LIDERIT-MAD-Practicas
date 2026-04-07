@@ -33,11 +33,26 @@ page 50203 LDRFichaCharactersTemp
                 // {
                 //     ToolTip = 'Specifies the value of the Localizacion field.', Comment = '%';
                 // }
-                field(Imagen; rec.Imagen)
-                {
-                    ToolTip = 'Specifies the value of the Imagen field.', Comment = '%';
-                }
+                // field(Imagen; rec.Imagen)
+                // {
+                //     ToolTip = 'Specifies the value of the Imagen field.', Comment = '%';
+                // }
+
             }
+            // usercontrol(ImageViewer; SimpsonsImageViewer)
+            // {
+            //     ApplicationArea = All;
+            // }
         }
     }
+
+
+
+    // trigger OnOpenPage()
+    // begin
+    //     // aqui no funciona por ser temporal, fuera si que funciona
+    //     CurrPage.ImageViewer.SetImageUrl(rec.Imagen);
+    // end;
+
+
 }
