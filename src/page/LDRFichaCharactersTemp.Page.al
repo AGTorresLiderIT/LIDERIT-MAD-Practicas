@@ -29,38 +29,16 @@ page 50203 LDRFichaCharactersTemp
                 {
                     ToolTip = 'Specifies the value of the FrasesCelebres field.', Comment = '%';
                 }
-                // field(Localizacion; Rec.Localizacion)
-                // {
-                //     ToolTip = 'Specifies the value of the Localizacion field.', Comment = '%';
-                // }
-                // field(Imagen; rec.Imagen)
-                // {
-                //     ToolTip = 'Specifies the value of the Imagen field.', Comment = '%';
-                // }
-
             }
             usercontrol(ImageViewer; SimpsonsImageViewer)
             {
                 ApplicationArea = All;
                 trigger Control()
                 begin
+                    if Rec.Imagen <> '' then
+                        CurrPage.ImageViewer.SetImageUrl(Rec.Imagen);
                 end;
             }
         }
     }
-
-
-
-    // trigger OnOpenPage()
-    // begin
-    //     // aqui no funciona por ser temporal, fuera si que funciona
-    //     CurrPage.ImageViewer.SetImageUrl(rec.Imagen);
-    // end;
-    trigger OnOpenPage()
-    begin
-        Message('%1', rec.Imagen);
-        if Rec.Imagen <> '' then
-            CurrPage.ImageViewer.SetImageUrl(Rec.Imagen);
-    end;
-
 }
