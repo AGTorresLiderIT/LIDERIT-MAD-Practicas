@@ -17,6 +17,18 @@ table 50000 Characters
         {
             Caption = 'Fecha Actualizacion';
         }
+        field(4; "Frases"; Text[1000])
+        {
+            Caption = 'Frases';
+        }
+        field(5; "Localizacion"; Text[200])
+        {
+            Caption = 'Localización';
+        }
+        field(6; "Poblacion"; Text[200])
+        {
+            Caption = 'Población';
+        }
     }
     keys
     {

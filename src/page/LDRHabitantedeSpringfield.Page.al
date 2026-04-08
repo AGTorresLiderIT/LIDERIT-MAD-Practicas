@@ -69,6 +69,8 @@ page 50001 Habitante_de_Springfield
     end;
 
     trigger OnAfterGetCurrRecord()
+    var
+
     begin
         if Rec.Foto <> '' then
             CurrPage.Fotos.InsertarFoto(Rec.Foto);

@@ -32,6 +32,29 @@ page 50000 "Characters List"
                 {
                     ToolTip = 'Specifies the value of the Fecha Actualizacion field.', Comment = '%';
                 }
+                field("Frases"; Rec."Frases")
+                {
+                    ToolTip = 'Specifies the value of the Frases field.', Comment = '%';
+                    Visible = false;
+                }
+                field("Localizacion"; Rec."Localizacion")
+                {
+                    ToolTip = 'Specifies the value of the Localizacion field.', Comment = '%';
+                    Visible = false;
+                }
+                field("Población"; Rec."Poblacion")
+                {
+                    ToolTip = 'Specifies the value of the Población field.', Comment = '%';
+                    Visible = false;
+                }
+
+            }
+            usercontrol(Sonido; Fotos)
+            {
+                ApplicationArea = All;
+                trigger ControlListo()
+                begin
+                end;
             }
         }
     }
@@ -53,6 +76,35 @@ page 50000 "Characters List"
                     CurrPage.Update();
                 end;
             }
+            action(LeerFrase)
+            {
+                Caption = 'LeerFrase';
+                ApplicationArea = All;
+                Image = VoidCheck;
+                trigger OnAction()
+                begin
+                    if Rec.Frases <> '' then
+                        CurrPage.Sonido.Speak(Rec.Frases)
+                    else
+                        Message('Este character no tiene una frase para leer');
+                end;
+            }
+            action("Localizacion Aleatoria")
+            {
+                Caption = 'Localizacion Aleatoria';
+                ApplicationArea = All;
+                Image = Map;
+                trigger OnAction()
+                var
+                    PaginaPaseo: Page Paseo_de_perros;
+                begin
+                    PaginaPaseo.RunModal();
+                end;
+            }
         }
     }
+    trigger OnAfterGetRecord()
+
+    begin
+    end;
 }

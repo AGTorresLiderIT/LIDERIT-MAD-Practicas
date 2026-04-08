@@ -11,4 +11,5 @@ controladdin "Fotos"
     event ControlListo();
 
     procedure InsertarFoto(url: Text);
+    procedure Speak(text: Text);
 }
