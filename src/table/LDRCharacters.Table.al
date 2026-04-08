@@ -25,6 +25,10 @@ table 50200 "LDRCharacters"
         {
             Caption = 'Localización';
         }
+        field(6; "Fecha Actualizacion"; DateTime)
+        {
+            Caption = 'Fecha Actualizacion';
+        }
     }
     keys
     {
@@ -33,4 +37,15 @@ table 50200 "LDRCharacters"
             Clustered = true;
         }
     }
+
+    trigger OnModify()
+    begin
+        "Fecha Actualizacion" := CurrentDateTime();
+    end;
+
+    trigger OnInsert()
+    begin
+        "Fecha Actualizacion" := CurrentDateTime();
+    end;
+
 }

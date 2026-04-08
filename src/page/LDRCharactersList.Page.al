@@ -20,18 +20,22 @@ page 50201 "LDRCharacters List"
                 {
                     ToolTip = 'Specifies the value of the Id field.', Comment = '%';
                 }
-                field(Ocupacion; Rec.Ocupacion)
+                field("Fecha Actualizacion"; Rec."Fecha Actualizacion")
                 {
-                    ToolTip = 'Specifies the value of the Ocupacion field.', Comment = '%';
+                    ToolTip = 'Specifies the value of the Fecha Actualizacion field.', Comment = '%';
                 }
-                field(FrasesCelebres; Rec.FrasesCelebres)
-                {
-                    ToolTip = 'Specifies the value of the FrasesCelebres field.', Comment = '%';
-                }
-                field(Localizacion; Rec.Localizacion)
-                {
-                    ToolTip = 'Specifies the value of the Localizacion field.', Comment = '%';
-                }
+                // field(Ocupacion; Rec.Ocupacion)
+                // {
+                //     ToolTip = 'Specifies the value of the Ocupacion field.', Comment = '%';
+                // }
+                // field(FrasesCelebres; Rec.FrasesCelebres)
+                // {
+                //     ToolTip = 'Specifies the value of the FrasesCelebres field.', Comment = '%';
+                // }
+                // field(Localizacion; Rec.Localizacion)
+                // {
+                //     ToolTip = 'Specifies the value of the Localizacion field.', Comment = '%';
+                // }
             }
             usercontrol(ImageViewer; SimpsonsImageViewer)
             {
@@ -114,6 +118,7 @@ page 50201 "LDRCharacters List"
                         if JsonObject.Get('location', JsonToken) then
                             JsonToken.WriteTo(Character.Localizacion);
 
+                        Character."Fecha Actualizacion" := CurrentDateTime();
                         Character.Insert();
                     end;
                 end;
@@ -205,14 +210,14 @@ page 50201 "LDRCharacters List"
 
                         end;
                     end;
-                    // TempCharacter.Imagen := ImagenURL;
+                    TempCharacter.Imagen := ImagenURL;
 
                     TempCharacter.Insert();
 
                     clear(TempPage);
 
                     Page.RunModal(50203, TempCharacter);
-                    CurrPage.ImageViewer.SetImageUrl(ImagenURL);
+                    // CurrPage.ImageViewer.SetImageUrl(ImagenURL);
                 end;
             }
             action(GenerarLocalizacionOpcion2)

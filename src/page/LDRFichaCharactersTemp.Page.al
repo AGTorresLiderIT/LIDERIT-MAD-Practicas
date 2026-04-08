@@ -39,10 +39,13 @@ page 50203 LDRFichaCharactersTemp
                 // }
 
             }
-            // usercontrol(ImageViewer; SimpsonsImageViewer)
-            // {
-            //     ApplicationArea = All;
-            // }
+            usercontrol(ImageViewer; SimpsonsImageViewer)
+            {
+                ApplicationArea = All;
+                trigger Control()
+                begin
+                end;
+            }
         }
     }
 
@@ -53,6 +56,11 @@ page 50203 LDRFichaCharactersTemp
     //     // aqui no funciona por ser temporal, fuera si que funciona
     //     CurrPage.ImageViewer.SetImageUrl(rec.Imagen);
     // end;
-
+    trigger OnOpenPage()
+    begin
+        Message('%1', rec.Imagen);
+        if Rec.Imagen <> '' then
+            CurrPage.ImageViewer.SetImageUrl(Rec.Imagen);
+    end;
 
 }
