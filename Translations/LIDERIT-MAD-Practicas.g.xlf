@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="en-US" original="LIDERIT-MAD-Practicas">
+    <body>
+      <group id="body">
+        <trans-unit id="Table 2978967640 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Pokemons</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table LDRPokemons - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2978967640 - Field 814966011 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Nombre</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table LDRPokemons - Field Nombre - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2978967640 - Field 4002899860 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tamano</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table LDRPokemons - Field Tamano - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2978967640 - Field 2883740582 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tipo</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table LDRPokemons - Field Tipo - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1649991299 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tamaños</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table LDRTamanos - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1649991299 - Field 4092165491 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Codigo</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table LDRTamanos - Field Codigo - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1649991299 - Field 3827982217 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tamaño</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table LDRTamanos - Field Tamaño - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2449464666 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Pokemons</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Pokemons - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2449464666 - Control 814966011 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Nombre field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Pokemons - Control Nombre - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2449464666 - Control 4002899860 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Tamano field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Pokemons - Control Tamano - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2449464666 - Control 2883740582 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Tipo field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Pokemons - Control Tipo - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2449464666 - Action 2855800662 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Importar Pokemons desde un archivo XML</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Pokemons - Action LDRImportarPokemons - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2449464666 - Action 2855800662 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Importar Pokemons</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Pokemons - Action LDRImportarPokemons - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4150868309 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tamanos</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Tamanos - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4150868309 - Control 4092165491 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Codigo field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Tamanos - Control Codigo - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4150868309 - Control 3827982217 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Tamaño field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Tamanos - Control Tamaño - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="XmlPort 821453787 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Importar Pokemons</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">XmlPort ImportacionPokemons - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3012987241 - EnumValue 3389216430 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tipo Acero</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Tipo Pokemon - EnumValue Acero - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3012987241 - EnumValue 3087810166 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tipo Agua</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Tipo Pokemon - EnumValue Agua - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3012987241 - EnumValue 2156296721 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tipo Bicho</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Tipo Pokemon - EnumValue Bicho - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3012987241 - EnumValue 2577373659 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tipo Dragon</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Tipo Pokemon - EnumValue Dragon - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3012987241 - EnumValue 18475904 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tipo Electrico</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Tipo Pokemon - EnumValue Electrico - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3012987241 - EnumValue 2911248573 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tipo Fantasma</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Tipo Pokemon - EnumValue Fantasma - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3012987241 - EnumValue 4060796146 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tipo Fuego</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Tipo Pokemon - EnumValue Fuego - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3012987241 - EnumValue 3348665400 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tipo Hada</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Tipo Pokemon - EnumValue Hada - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3012987241 - EnumValue 3051873289 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tipo Hielo</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Tipo Pokemon - EnumValue Hielo - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3012987241 - EnumValue 3615197341 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tipo Lucha</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Tipo Pokemon - EnumValue Lucha - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3012987241 - EnumValue 221910773 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tipo Normal</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Tipo Pokemon - EnumValue Normal - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3012987241 - EnumValue 1515812442 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tipo Planta</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Tipo Pokemon - EnumValue Planta - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3012987241 - EnumValue 1863270445 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tipo Psiquico</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Tipo Pokemon - EnumValue Psiquico - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3012987241 - EnumValue 119776521 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tipo Roca</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Tipo Pokemon - EnumValue Roca - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3012987241 - EnumValue 1352933302 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tipo Siniestro</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Tipo Pokemon - EnumValue Siniestro - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3012987241 - EnumValue 103021339 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tipo Tierra</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Tipo Pokemon - EnumValue Tierra - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3012987241 - EnumValue 1209665955 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tipo Veneno</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Tipo Pokemon - EnumValue Veneno - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3012987241 - EnumValue 940114415 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tipo Volador</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Tipo Pokemon - EnumValue Volador - Property Caption</note>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>
