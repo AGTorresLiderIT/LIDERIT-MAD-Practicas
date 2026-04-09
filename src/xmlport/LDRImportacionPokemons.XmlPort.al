@@ -7,21 +7,31 @@ xmlport 50200 ImportacionPokemons
     FieldSeparator = ';';
     UseRequestPage = false;
     Permissions = tabledata LDRPokemons = rmdi;
+
+    //LA VERSION 1 DEL CÓDIGO ES LA QUE ESTA COMENTADA SI SE QUIERE ACTIVAR
+    //NECESARIO DESCOMENTARLA, ES PEOR QUE LA VERSION SIN COMENTAR.
     schema
     {
         textelement(RootNodeName)
         {
-            tableelement(Integer; Integer)
+            //tableelement(Integer; Integer)
+            tableelement(LDRPokemons; LDRPokemons)
             {
                 AutoReplace = false;
                 AutoSave = false;
                 AutoUpdate = false;
-                XmlName = 'Integer';
+                // XmlName = 'Integer';
 
-                textelement(Nombre)
+                // textelement(Nombre)
+                // {
+                // }
+                // textelement(Tipo)
+                // {
+                // }
+                fieldattribute(Nombre; LDRPokemons.Nombre)
                 {
                 }
-                textelement(Tipo)
+                fieldattribute(Tipo; LDRPokemons.Tipo)
                 {
                 }
                 textelement(tamanoletra)
@@ -31,54 +41,54 @@ xmlport 50200 ImportacionPokemons
                 trigger OnBeforeInsertRecord()
                 var
                     TablaTamano: Record LDRTamanos;
-                    LDRPokemons: Record LDRPokemons;
-                    LDRTipoPokemon: Enum "Tipo Pokemon";
+                //LDRPokemons: Record LDRPokemons;
+                //LDRTipoPokemon: Enum "Tipo Pokemon";
                 begin
 
-                    case (tipo.ToLower()) of
-                        'acero':
-                            LDRTipoPokemon := LDRTipoPokemon::Acero;
-                        'agua':
-                            LDRTipoPokemon := LDRTipoPokemon::Agua;
-                        'bicho':
-                            LDRTipoPokemon := LDRTipoPokemon::Bicho;
-                        'dragon':
-                            LDRTipoPokemon := LDRTipoPokemon::Dragon;
-                        'electrico':
-                            LDRTipoPokemon := LDRTipoPokemon::Electrico;
-                        'fantasma':
-                            LDRTipoPokemon := LDRTipoPokemon::Fantasma;
-                        'fuego':
-                            LDRTipoPokemon := LDRTipoPokemon::Fuego;
-                        'hada':
-                            LDRTipoPokemon := LDRTipoPokemon::Hada;
-                        'hielo':
-                            LDRTipoPokemon := LDRTipoPokemon::Hielo;
-                        'lucha':
-                            LDRTipoPokemon := LDRTipoPokemon::Lucha;
-                        'normal':
-                            LDRTipoPokemon := LDRTipoPokemon::Normal;
-                        'planta':
-                            LDRTipoPokemon := LDRTipoPokemon::Planta;
-                        'psiquico':
-                            LDRTipoPokemon := LDRTipoPokemon::Psiquico;
-                        'roca':
-                            LDRTipoPokemon := LDRTipoPokemon::Roca;
-                        'siniestro':
-                            LDRTipoPokemon := LDRTipoPokemon::Siniestro;
-                        'tierra':
-                            LDRTipoPokemon := LDRTipoPokemon::Tierra;
-                        'veneno':
-                            LDRTipoPokemon := LDRTipoPokemon::Veneno;
-                        'volador':
-                            LDRTipoPokemon := LDRTipoPokemon::Volador;
-                        else
-                            Error('El tipo %1 no existe, revisa que no tenga tíldes', Tipo);
-                    end;
-                    LDRPokemons.Init();
-                    LDRPokemons.Validate(tipo, LDRTipoPokemon);
+                    // case (tipo.ToLower()) of
+                    //     'acero':
+                    //         LDRTipoPokemon := LDRTipoPokemon::Acero;
+                    //     'agua':
+                    //         LDRTipoPokemon := LDRTipoPokemon::Agua;
+                    //     'bicho':
+                    //         LDRTipoPokemon := LDRTipoPokemon::Bicho;
+                    //     'dragon':
+                    //         LDRTipoPokemon := LDRTipoPokemon::Dragon;
+                    //     'electrico':
+                    //         LDRTipoPokemon := LDRTipoPokemon::Electrico;
+                    //     'fantasma':
+                    //         LDRTipoPokemon := LDRTipoPokemon::Fantasma;
+                    //     'fuego':
+                    //         LDRTipoPokemon := LDRTipoPokemon::Fuego;
+                    //     'hada':
+                    //         LDRTipoPokemon := LDRTipoPokemon::Hada;
+                    //     'hielo':
+                    //         LDRTipoPokemon := LDRTipoPokemon::Hielo;
+                    //     'lucha':
+                    //         LDRTipoPokemon := LDRTipoPokemon::Lucha;
+                    //     'normal':
+                    //         LDRTipoPokemon := LDRTipoPokemon::Normal;
+                    //     'planta':
+                    //         LDRTipoPokemon := LDRTipoPokemon::Planta;
+                    //     'psiquico':
+                    //         LDRTipoPokemon := LDRTipoPokemon::Psiquico;
+                    //     'roca':
+                    //         LDRTipoPokemon := LDRTipoPokemon::Roca;
+                    //     'siniestro':
+                    //         LDRTipoPokemon := LDRTipoPokemon::Siniestro;
+                    //     'tierra':
+                    //         LDRTipoPokemon := LDRTipoPokemon::Tierra;
+                    //     'veneno':
+                    //         LDRTipoPokemon := LDRTipoPokemon::Veneno;
+                    //     'volador':
+                    //         LDRTipoPokemon := LDRTipoPokemon::Volador;
+                    //     else
+                    //         Error('El tipo %1 no existe, revisa que no tenga tíldes', Tipo);
+                    // end;
+                    // LDRPokemons.Init();
+                    // LDRPokemons.Validate(tipo, LDRTipoPokemon);
 
-                    LDRPokemons.Validate(Nombre, Nombre);
+                    // LDRPokemons.Validate(Nombre, Nombre);
 
                     // Tamano por letra
                     TablaTamano.SetRange(Codigo, tamanoletra);
@@ -123,4 +133,9 @@ xmlport 50200 ImportacionPokemons
     }
     var
         NoLinea: Integer;
+
+    trigger OnPostXmlPort()
+    begin
+        Message('Pokemons insertados');
+    end;
 }
