@@ -44,7 +44,10 @@ xmlport 50200 ImportacionPokemons
                 //LDRPokemons: Record LDRPokemons;
                 //LDRTipoPokemon: Enum "Tipo Pokemon";
                 begin
-
+                    //si se quiere quitar espacios y las tildes (para esto hay que hacer el tolower antes del case para que reconozca las tildes):
+                    //tipo.ToLower();
+                    //tipo := ConvertStr(tipo, ' ', '')); // quita espacios
+                    //tipo := ConvertStr(tipo, 'áéíóúüñ', 'aeiouun'); // quita tildes
                     // case (tipo.ToLower()) of
                     //     'acero':
                     //         LDRTipoPokemon := LDRTipoPokemon::Acero;
