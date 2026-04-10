@@ -42,6 +42,17 @@ page 50000 Pokemon
                     xmlport.Run(50000, false, true);
                 end;
             }
+            action(ImportarCase)
+            {
+                ApplicationArea = All;
+                Caption = 'ImportarCase';
+                Image = Import;
+
+                trigger OnAction()
+                begin
+                    xmlport.Run(50001, false, true);
+                end;
+            }
         }
     }
 }

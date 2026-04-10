@@ -30,17 +30,19 @@ xmlport 50000 ImportarPokemon
                 trigger OnBeforeInsertRecord()
                 var
                     TamañosPokemon: Record "Tamaños Pokemon";
-                    Pokemon: Record Pokemon;
+                    PokemonActual: Record Pokemon;
                 begin
                     contador += 1;
-                    Pokemon.Init();
-                    Pokemon.Validate(Nombre, columna1);
-                    Evaluate(Pokemon.Tipo, columna2);
+                    PokemonActual.Init();
+                    PokemonActual.Validate(Nombre, columna1);
+                    if not Evaluate(PokemonActual.Tipo, columna2) then
+                        Error('El tipo %1 no existe en la tabla de tamaños. (¡No hagas que Oak se enfade, busca el error en la línea %2!)', columna2, contador);
                     if TamañosPokemon.Get(columna3) then
-                        Pokemon.Validate(Tamañocm, TamañosPokemon."Tamañocm")
+                        PokemonActual.Validate(Tamañocm, TamañosPokemon."Tamañocm")
                     else
                         Error('El tamaño %1 no existe en la tabla de tamaños. (¡No hagas que Oak se enfade, busca el error en la línea %2!)', columna3, contador);
-                    Pokemon.Insert();
+                    if not PokemonActual.Insert() then
+                        PokemonActual.Modify();
                 end;
             }
         }
@@ -65,6 +67,7 @@ xmlport 50000 ImportarPokemon
     }
     var
         contador: Integer;
+
     trigger OnPostXmlPort()
     begin
         Message('¡Enhorabuena :)! Pokemon insertados: %1.', contador);

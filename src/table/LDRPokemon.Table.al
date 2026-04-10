@@ -27,6 +27,17 @@ table 50000 Pokemon
                     Rec.Tamañocm := TamañosPokemon.Tamañocm;
                 end;
             end;
+
+            trigger OnValidate()
+            var
+                TamañosPokemon: Record "Tamaños Pokemon";
+            begin
+                if Rec."Tamañocm" = 0 then exit;
+                "TamañosPokemon".SetRange(Tamañocm, Rec.Tamañocm);
+                if "TamañosPokemon".IsEmpty() then
+                    Error('El tamaño %1 no existe en la tabla de tamaños Pokémon.', Rec.Tamañocm);
+
+            end;
         }
     }
     keys
