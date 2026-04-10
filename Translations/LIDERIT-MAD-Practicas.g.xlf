@@ -2,7 +2,18 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
   <file datatype="xml" source-language="en-US" target-language="en-US" original="LIDERIT-MAD-Practicas">
     <body>
-      <group id="body" />
+      <group id="body">
+        <trans-unit id="PageExtension 3922645780 - Action 217931361 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2183420390">
+          <source>Activa en el entorno los usuarios seleccionados</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension LDRUsers - Action Activar Usuarios - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 3922645780 - Action 3474855503 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2183420390">
+          <source>Desactiva en el entorno los usuarios seleccionados</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension LDRUsers - Action Desactivar Usuarios - Property ToolTip</note>
+        </trans-unit>
+      </group>
     </body>
   </file>
 </xliff>
