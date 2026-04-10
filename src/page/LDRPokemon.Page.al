@@ -20,30 +20,28 @@ page 50000 Pokemon
                 {
                     ToolTip = 'Specifies the value of the Tipo field.', Comment = '%';
                 }
-                field("Tamaño (cm)"; Rec."Tamaño (cm)")
+                field("Tamañocm"; Rec."Tamañocm")
                 {
                     ToolTip = 'Specifies the value of the Tamaño (cm) field.', Comment = '%';
                 }
             }
         }
     }
-    /*actions
+    actions
     {
         area(Processing)
         {
-            action(Action1)
+            action(Importar)
             {
-                Caption = 'Action1';
-                Image = Process;
+                ApplicationArea = All;
+                Caption = 'Importar';
+                Image = Import;
+
                 trigger OnAction()
-                var
-                    GenJnlLineBuffer: Record "Gen. Journal Line";
-                    decAmount: Decimal;
                 begin
-                    if GenJnlLineBuffer.FindSet() then begin
-                    end;
+                    xmlport.Run(50000, false, true);
                 end;
             }
         }
-    }*/
+    }
 }

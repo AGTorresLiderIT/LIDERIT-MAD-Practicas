@@ -9,14 +9,14 @@ table 50001 "Tamaños Pokemon"
         {
             Caption = 'Tamaño';
         }
-        field(2; "Tamaño (cm)"; decimal)
+        field(2; Tamañocm; decimal)
         {
             Caption = 'Tamaño (cm)';
         }
     }
     keys
     {
-        key(PK; "Tamaño (cm)")
+        key(PK; Tamaño)
         {
             Clustered = true;
         }

@@ -13,10 +13,20 @@ table 50000 Pokemon
         {
             Caption = 'Tipo';
         }
-        field(3; "Tamaño (cm)"; Decimal)
+        field(3; Tamañocm; Decimal)
         {
-            Caption = 'Tamaño (cm)';
-            TableRelation = "Tamaños Pokemon"."Tamaño (cm)";
+            Caption = 'Tamañocm';
+            trigger OnLookup()
+            var
+                TamañosPokemon: Record "Tamaños Pokemon";
+                PaginaTamaños: Page "tamañospo";
+            begin
+                "PaginaTamaños".LookupMode(true);
+                if "PaginaTamaños".RunModal() = Action::LookupOK then begin
+                    "PaginaTamaños".GetRecord(TamañosPokemon);
+                    Rec.Tamañocm := TamañosPokemon.Tamañocm;
+                end;
+            end;
         }
     }
     keys
