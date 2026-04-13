@@ -3,6 +3,19 @@ permissionset 50000 GeneratedPermission
     Assignable = true;
     Permissions = tabledata MantenerEmpresas=RIMD,
         table MantenerEmpresas=X,
-        codeunit MantenerEmpresas=X,
-        page MantenerEmpresas=X;
+        codeunit UtilidadesLider=X,
+        page MantenerEmpresas=X,
+        tabledata "ConfiguracionUtilidades"=RIMD,
+        table "ConfiguracionUtilidades"=X,
+        tabledata "App Deployment Staging"=RIMD,
+        table "App Deployment Staging"=X,
+        codeunit "App Deployment Management"=X,
+        page "App Deploy Error FactBox"=X,
+        page "App Deployment Card"=X,
+        page "App Deployment Staging"=X,
+        page ConfiguracionUtilidades=X,
+        page "Deployment Group Apps"=X,
+        page "Deployment Group Detail"=X,
+        page "Deployment Group Wizard"=X,
+        page "Deployment Groups"=X;
 }

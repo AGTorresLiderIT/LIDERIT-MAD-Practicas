@@ -23,6 +23,25 @@ page 50149 MantenerEmpresas
             }
         }
     }
+    actions
+    {
+        area(Processing)
+        {
+            action(Encender)
+            {
+                trigger OnAction()
+                    var
+                    Encendido: Boolean;
+                begin
+                    if Encendido = false then begin
+                        Encendido:= true;
+                        Message('La opción de seleccionar empresas al copiar está activada.')
+                    end else
+                        Message('La opción de seleccionar empresas al copiar está desactivada.')
+                end;
+            }
+        }
+    }
     trigger OnOpenPage()
     var
         Empresas: Record Company;
