@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="en-US" original="LIDERIT-MAD-Practicas">
+    <body>
+      <group id="body">
+        <trans-unit id="Table 4035355198 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Eliminaralcopiar</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Eliminaralcopiar - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4035355198 - Field 3997336476 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Company Name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Eliminaralcopiar - Field Company Name - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4035355198 - Field 2891538263 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Enabled</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Eliminaralcopiar - Field Enabled - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 339591043 - Control 284655429 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 339591043">
+          <source>Specifies that the company will be eliminated in setting up the new enviroment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Companies - Control EnableEliminarAlCopiar - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 339591043 - Control 284655429 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 339591043">
+          <source>Enable Eliminar Al Copiar</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Companies - Control EnableEliminarAlCopiar - Property Caption</note>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>
