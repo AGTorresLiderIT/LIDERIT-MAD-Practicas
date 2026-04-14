@@ -13,5 +13,8 @@ permissionset 50200 GeneratedPermission
         page "Deployment Group Apps" = X,
         page "Deployment Group Detail" = X,
         page "Deployment Group Wizard" = X,
-        page "Deployment Groups" = X;
+        page "Deployment Groups" = X,
+        tabledata Configuracion = RIMD,
+        table Configuracion = X,
+        codeunit DesactivarUsuariosAlCopiarEnto = X;
 }

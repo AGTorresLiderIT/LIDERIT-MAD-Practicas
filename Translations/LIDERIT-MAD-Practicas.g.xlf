@@ -168,6 +168,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field Wait for Completion - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 2955971345 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Configuracion de Empresa</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Configuracion - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2955971345 - Field 948074193 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Activar Deshabilitar Usuarios</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Configuracion - Field Deshabilitar Usuarios - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 4035355198 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Eliminaralcopiar</source>
           <note from="Developer" annotates="general" priority="2"></note>
