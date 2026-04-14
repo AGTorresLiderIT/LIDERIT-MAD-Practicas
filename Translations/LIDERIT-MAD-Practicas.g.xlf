@@ -3,6 +3,171 @@
   <file datatype="xml" source-language="en-US" target-language="en-US" original="LIDERIT-MAD-Practicas">
     <body>
       <group id="body">
+        <trans-unit id="Table 2196014931 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>App Deployment Staging</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 3673089793 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>App File</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field App File - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 1584867668 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>App File Name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field App File Name - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 1256520770 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>App Name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field App Name - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 1606374689 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>App Publisher</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field App Publisher - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 2709452997 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>App Version</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field App Version - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 2369664869 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Created By</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field Created By - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 1887216571 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Created Date Time</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field Created Date Time - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 792743089 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Entry number of the app that must be deployed before this one</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field Depends On Entry No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 792743089 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Depends On Entry No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field Depends On Entry No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 721678429 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Deployed Date Time</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field Deployed Date Time - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 3932406010 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Group multiple apps together for sequential deployment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field Deployment Group - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 3932406010 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Deployment Group</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field Deployment Group - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 3905086987 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Deployment Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field Deployment Type - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 358006848 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Semicolon-separated email addresses</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field Email Recipients - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 358006848 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Email Recipients</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field Email Recipients - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 883711285 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Entry No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field Entry No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 2852966117 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Error Message</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field Error Message - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 1522056360 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Indicates if the app file was deleted for security after upload</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field File Deleted After Upload - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 1522056360 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>File Deleted After Upload</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field File Deleted After Upload - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 904953648 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>SHA256 hash of the uploaded file for verification</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field File Hash - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 904953648 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>File Hash</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field File Hash - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 885973409 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Group Deployment Started</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field Group Deployment Started - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 3884745596 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Last Status Check</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field Last Status Check - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 1848808116 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Operation ID</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field Operation ID - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 8752847 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Scheduled Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field Scheduled Date - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 4154264992 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Scheduled Time</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field Scheduled Time - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 1771712983 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Send Email on Completion</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field Send Email on Completion - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 3014885516 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Defines the order of deployment within a group (1, 2, 3...)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field Sequence No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 3014885516 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sequence No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field Sequence No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 513339096 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Status</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 3730965528 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>If true, next app in sequence will wait for this app to complete deployment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field Wait for Completion - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2196014931 - Field 3730965528 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Wait for Completion</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field Wait for Completion - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 4035355198 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Eliminaralcopiar</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -18,6 +183,551 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Eliminaralcopiar - Field Enabled - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3348071037 - NamedType 3237099675" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Found %1 app(s) scheduled for deployment.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = Number of apps</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit App Deployment Management - NamedType DeploymentScheduledMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3348071037 - NamedType 1886235043" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Deployment of %1 has started.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = App File Name</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit App Deployment Management - NamedType DeploymentStartedMsg</note>
+        </trans-unit>
+        <trans-unit id="Page 835821617 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Error Details</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deploy Error FactBox - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 835821617 - Control 2852966117 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies any error message.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deploy Error FactBox - Control Error Message - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3697056944 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>App Deployment Details</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Card - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3697056944 - Control 318613646 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Deployment Details</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Card - Control Details - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3697056944 - Control 2369664869 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies who created the entry.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Card - Control Created By - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3697056944 - Control 1887216571 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies when the entry was created.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Card - Control Created Date Time - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3697056944 - Control 721678429 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies when the app was deployed or failed.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Card - Control Deployed Date Time - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3697056944 - Control 3884745596 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies when the status was last checked.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Card - Control Last Status Check - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3697056944 - Control 1848808116 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the operation ID from NAV App Tenant Operation.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Card - Control Operation ID - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3697056944 - Control 2231333747 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Email Notification</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Card - Control EmailNotification - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3697056944 - Control 358006848 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Semicolon-separated email addresses (e.g., user1@company.com;user2@company.com)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Card - Control Email Recipients - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3697056944 - Control 1771712983 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether to send email notification when deployment completes.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Card - Control Send Email on Completion - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3697056944 - Control 1901783274 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Error Information</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Card - Control ErrorInfo - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3697056944 - Control 2852966117 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies any error message.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Card - Control Error Message - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3697056944 - Control 2445482498 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>General</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Card - Control General - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3697056944 - Control 1584867668 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the app file name.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Card - Control App File Name - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3697056944 - Control 1256520770 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the app name.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Card - Control App Name - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3697056944 - Control 3905086987 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the deployment type.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Card - Control Deployment Type - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3697056944 - Control 883711285 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the entry number.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Card - Control Entry No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3697056944 - Control 513339096 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the deployment status.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Card - Control Status - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3697056944 - Control 2019212495 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Schedule</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Card - Control Schedule - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3697056944 - Control 8752847 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the scheduled deployment date.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Card - Control Scheduled Date - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3697056944 - Control 4154264992 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the scheduled deployment time.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Card - Control Scheduled Time - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3697056944 - Action 3153868191 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Deploy the app immediately.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Card - Action DeployNow - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3697056944 - Action 3153868191 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Deploy Now</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Card - Action DeployNow - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3697056944 - Action 2144283875 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Manually refresh the deployment status.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Card - Action RefreshStatus - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3697056944 - Action 2144283875 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Refresh Status</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Card - Action RefreshStatus - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>App Deployment Scheduling</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Control 1584867668 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the app file name.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Control App File Name - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Control 1256520770 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the app name from the operation.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Control App Name - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Control 2369664869 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies who created the entry.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Control Created By - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Control 1887216571 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies when the entry was created.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Control Created Date Time - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Control 721678429 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies when the app was deployed.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Control Deployed Date Time - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Control 3905086987 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the deployment type.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Control Deployment Type - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Control 883711285 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the entry number.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Control Entry No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Control 1522056360 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>File was deleted for security after upload</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Control File Deleted After Upload - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Control 904953648 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>SHA256 hash for file verification</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Control File Hash - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Control 8752847 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the scheduled deployment date.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Control Scheduled Date - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Control 4154264992 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the scheduled deployment time.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Control Scheduled Time - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Control 1771712983 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether to send email notification.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Control Send Email on Completion - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Control 513339096 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the deployment status.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Control Status - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Action 3684565758 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Create a new deployment group for sequential app deployment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Action CreateDeploymentGroup - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Action 3684565758 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Create Deployment Group</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Action CreateDeploymentGroup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Action 3153868191 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Deploy the selected app immediately.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Action DeployNow - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Action 3153868191 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Deploy Now</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Action DeployNow - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Action 2144283875 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Manually refresh the status of the selected deployment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Action RefreshStatus - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Action 2144283875 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Refresh Status</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Action RefreshStatus - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Action 1844161189 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Re-upload the app file (if it was deleted for security)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Action ReuploadAppFile - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Action 1844161189 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Re-upload App File</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Action ReuploadAppFile - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Action 4271163235 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Setup the job queue for automatic deployment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Action SetupJobQueue - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Action 4271163235 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Setup Job Queue</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Action SetupJobQueue - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Action 3422517552 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Upload an app file for scheduled deployment.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Action UploadAppFile - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Action 3422517552 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Upload App File</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Action UploadAppFile - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Action 1754179892 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View and manage deployment groups</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Action ViewDeploymentGroups - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Action 1754179892 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Deployment Groups</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Action ViewDeploymentGroups - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Action 2369542833 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open Extension Management page to view all extensions and their status.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Action ViewExtensionManagement - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Action 2369542833 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Extension Management</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Action ViewExtensionManagement - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Action 4192954518 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open Extension Management to view deployment details.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Action ViewOperationDetails - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2196014931 - Action 4192954518 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View in Extension Management</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Action ViewOperationDetails - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3469650296 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Apps in Group</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Apps - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3469650296 - Control 1584867668 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>App file name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Apps - Control App File Name - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3469650296 - Control 1256520770 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>App name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Apps - Control App Name - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3469650296 - Control 792743089 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Depends on entry</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Apps - Control Depends On Entry No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3469650296 - Control 721678429 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Deployment time</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Apps - Control Deployed Date Time - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3469650296 - Control 3014885516 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Deployment sequence</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Apps - Control Sequence No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3469650296 - Control 513339096 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Current status</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Apps - Control Status - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3469650296 - Control 3730965528 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Wait for completion</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Apps - Control Wait for Completion - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3875267601 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Deployment Group Details</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Detail - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3875267601 - Control 2454596835 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Group Information</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Detail - Control GroupInfo - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3875267601 - Control 3928540937 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Completed</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Detail - Control CompletedApps - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3875267601 - Control 3932406010 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Group Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Detail - Control Deployment Group - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3875267601 - Control 2215777539 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Failed</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Detail - Control FailedApps - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3875267601 - Control 699475367 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Pending</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Detail - Control PendingApps - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3875267601 - Control 2370736596 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total Apps</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Detail - Control TotalApps - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3875267601 - Action 3850030512 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Deploy Group Now</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Detail - Action DeployGroup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3875267601 - Action 2144283875 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Refresh Status</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Detail - Action RefreshStatus - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1266357023 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Deployment Group Wizard</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Wizard - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1266357023 - Control 2916936581 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step 1: Group Information</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Wizard - Control Step1 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1266357023 - Control 1458756392 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Semicolon-separated email addresses</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Wizard - Control EmailRecipients - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1266357023 - Control 1458756392 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Email Recipients</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Wizard - Control EmailRecipients - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1266357023 - Control 3286576318 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Enter a unique code for this deployment group</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Wizard - Control GroupCode - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1266357023 - Control 3286576318 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Group Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Wizard - Control GroupCode - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1266357023 - Control 577731474 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Date when the group should be deployed</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Wizard - Control GroupScheduleDate - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1266357023 - Control 577731474 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Scheduled Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Wizard - Control GroupScheduleDate - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1266357023 - Control 125107153 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Time when the group should be deployed</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Wizard - Control GroupScheduleTime - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1266357023 - Control 125107153 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Scheduled Time</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Wizard - Control GroupScheduleTime - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1266357023 - Control 2279239964 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step 2: Upload Apps</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Wizard - Control Step2 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1266357023 - Control 3150995916 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Instructions</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Wizard - Control UploadInstructions - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1266357023 - Control 1641543347 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Step 3: Review</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Wizard - Control Step3 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1266357023 - Action 2667510389 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Finish &amp; Create Dependencies</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Wizard - Action Finish - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1266357023 - Action 2805992183 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Next</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Wizard - Action NextStep - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1266357023 - Action 1691721957 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Previous</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Wizard - Action PrevStep - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1266357023 - Action 3262523080 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Remove Last</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Wizard - Action RemoveLast - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1266357023 - Action 929065190 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Upload App</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Group Wizard - Action UploadApp - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1572521927 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Deployment Groups</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Groups - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1572521927 - Control 1584867668 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>App file name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Groups - Control App File Name - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1572521927 - Control 792743089 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Entry number of dependent app</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Groups - Control Depends On Entry No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1572521927 - Control 3932406010 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Deployment group identifier</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Groups - Control Deployment Group - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1572521927 - Control 3014885516 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Deployment sequence within the group</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Groups - Control Sequence No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1572521927 - Control 513339096 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Current deployment status</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Groups - Control Status - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1572521927 - Control 3730965528 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Wait for this app to complete before deploying next</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Groups - Control Wait for Completion - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1572521927 - Action 662581977 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Create a new deployment group</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Groups - Action CreateNewGroup - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1572521927 - Action 662581977 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Create New Group</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Groups - Action CreateNewGroup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1572521927 - Action 3850030512 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Deploy all apps in the selected group immediately</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Groups - Action DeployGroup - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1572521927 - Action 3850030512 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Deploy Group Now</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Groups - Action DeployGroup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1572521927 - Action 1939528732 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View detailed information about the group</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Groups - Action ViewGroupDetails - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1572521927 - Action 1939528732 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View Group Details</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Deployment Groups - Action ViewGroupDetails - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 339591043 - Control 284655429 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 339591043">
           <source>Specifies that the company will be eliminated in setting up the new enviroment.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -27,6 +737,46 @@
           <source>Enable Eliminar Al Copiar</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension Companies - Control EnableEliminarAlCopiar - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1136601824 - EnumValue 2678607854 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Deployed</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum App Deployment Status - EnumValue Deployed - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1136601824 - EnumValue 3826689261 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Failed</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum App Deployment Status - EnumValue Failed - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1136601824 - EnumValue 1429510690 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Installation In Progress</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum App Deployment Status - EnumValue Installation In Progress - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1136601824 - EnumValue 3481143665 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Pending</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum App Deployment Status - EnumValue Pending - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1136601824 - EnumValue 222992066 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Upload Completed</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum App Deployment Status - EnumValue Upload Completed - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1136601824 - EnumValue 2587787342 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Upload Started</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum App Deployment Status - EnumValue Upload Started - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1136601824 - EnumValue 4269186555 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Waiting for Dependencies</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum App Deployment Status - EnumValue Waiting for Dependencies - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1897727124 - EnumValue 367086139 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Publish</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum App Deployment Type - EnumValue Publish - Property Caption</note>
         </trans-unit>
       </group>
     </body>
