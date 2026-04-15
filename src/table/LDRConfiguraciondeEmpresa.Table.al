@@ -13,6 +13,10 @@ table 50001 "ConfiguracionUtilidades"
         {
             Caption = 'Activar Deshabilitar Usuarios';
         }
+        field(3; "Contraseña"; Text[100])
+        {
+            Caption = 'Contraseña';
+        }
     }
     keys
     {

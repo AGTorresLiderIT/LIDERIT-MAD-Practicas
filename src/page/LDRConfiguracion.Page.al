@@ -24,6 +24,10 @@ page 50001 "ConfiguracionUtilidades"
                 {
                     ToolTip = 'Specifies the value of the Activar Deshabilitar Usuarios field.', Comment = '%';
                 }
+                field("Contraseña"; Rec."Contraseña")
+                {
+                    ToolTip = 'Specifies the value of the Contraseña field.', Comment = '%';
+                }
             }
         }
     }

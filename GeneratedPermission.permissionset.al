@@ -17,5 +17,19 @@ permissionset 50000 GeneratedPermission
         page "Deployment Group Apps"=X,
         page "Deployment Group Detail"=X,
         page "Deployment Group Wizard"=X,
-        page "Deployment Groups"=X;
+        page "Deployment Groups"=X,
+        tabledata DataBufferBinario=RIMD,
+        tabledata DataEditorBuffer=RIMD,
+        tabledata DataEditorConfiguracion=RIMD,
+        tabledata DataEditorField=RIMD,
+        tabledata DataEditorLogs=RIMD,
+        tabledata FiltrosGuardados=RIMD,
+        tabledata "LDRBuscarYReemplazar.Table"=RIMD,
+        table DataBufferBinario=X,
+        table DataEditorBuffer=X,
+        table DataEditorConfiguracion=X,
+        table DataEditorField=X,
+        table DataEditorLogs=X,
+        table FiltrosGuardados=X,
+        table "LDRBuscarYReemplazar.Table"=X;
 }
