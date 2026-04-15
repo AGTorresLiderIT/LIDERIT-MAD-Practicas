@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: MIT
 //
 // Original author — Volodymyr Dvernytskyi (Data Editor Tool)
-table 50006 "LDRBuscarYReemplazar.Table"
+table 50006 "DET Find and Replace"
 {
-    Caption = 'LDRBuscarYReemplazar.Table';
+    Caption = 'LDRBuscarYReemplazar';
     DataClassification = CustomerContent;
     TableType = Temporary;
 

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MIT
 //
 // Original author — Volodymyr Dvernytskyi (Data Editor Tool)
-table 50003 "DataEditorBuffer"
+table 50003 "DET Data Editor Buffer"
 {
     Caption = 'Data Editor Buffer';
     DataClassification = CustomerContent;

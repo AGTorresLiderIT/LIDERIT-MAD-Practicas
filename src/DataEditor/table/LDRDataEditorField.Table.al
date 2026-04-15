@@ -1,8 +1,4 @@
-// SPDX-FileCopyrightText: 2021-2025 Volodymyr Dvernytskyi
-// SPDX-License-Identifier: MIT
-//
-// Original author — Volodymyr Dvernytskyi (Data Editor Tool)
-table 50005 "DataEditorField"
+table 50005 "DET Field"
 {
     Caption = 'DataEditorField';
     DataClassification = CustomerContent;

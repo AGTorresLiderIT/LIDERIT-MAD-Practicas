@@ -1,4 +1,4 @@
-table 50008 "DataEditorLogs"
+table 50008 "DET Data Editor Log"
 {
     Caption = 'DataEditorLogs';
     DataClassification = CustomerContent;

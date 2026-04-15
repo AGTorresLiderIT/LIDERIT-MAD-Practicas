@@ -27,6 +27,7 @@ page 50001 "ConfiguracionUtilidades"
                 field("Contraseña"; Rec."Contraseña")
                 {
                     ToolTip = 'Specifies the value of the Contraseña field.', Comment = '%';
+                    ExtendedDatatype = Masked;
                 }
             }
         }

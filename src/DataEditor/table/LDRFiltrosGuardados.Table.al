@@ -1,4 +1,4 @@
-table 50007 "FiltrosGuardados"
+table 50007 "DET Query Preset"
 {
     Caption = 'Filtros Guardados';
     DataClassification = CustomerContent;

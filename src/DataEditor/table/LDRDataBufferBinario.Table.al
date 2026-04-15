@@ -1,4 +1,4 @@
-table 50009 "DataBufferBinario"
+table 50009 "DET Binary Data Buffer"
 {
     Caption = 'Data Buffer Binario';
     DataClassification = CustomerContent;
