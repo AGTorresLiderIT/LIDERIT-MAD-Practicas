@@ -18,6 +18,7 @@ page 50019 "DET Data Editor Log"
             {
                 field("Entry No."; Rec."Entry No.")
                 {
+                    Caption = 'Nº Mov.';
                     ToolTip = 'Specifies the value of the Entry No. field.', Comment = '%';
                 }
                 field("Record Id"; Format(Rec."Record Id"))
@@ -27,44 +28,52 @@ page 50019 "DET Data Editor Log"
                 }
                 field("Table No."; Rec."Table No.")
                 {
+                    Caption = 'Nº Tabla';
                     ToolTip = 'Specifies the value of the Table No. field.', Comment = '%';
                 }
                 field("Table Name"; Rec."Table Name")
                 {
+                    Caption = 'Nombre Tabla';
                     ToolTip = 'Specifies the value of the Table Name field.', Comment = '%';
                 }
                 field("Field No."; Rec."Field No.")
                 {
+                    Caption = 'Nº Campo';
                     ToolTip = 'Specifies the value of the Field No. field.', Comment = '%';
                 }
                 field("Field Name"; Rec."Field Name")
                 {
+                    Caption = 'Nombre del campo';
                     ToolTip = 'Specifies the value of the Field Name field.', Comment = '%';
                 }
                 field("Action Type"; Rec."Action Type")
                 {
+                    Caption = 'Tipo de acción';
                     ToolTip = 'Specifies the value of the Action Type field.', Comment = '%';
                 }
                 field("Old Value"; Rec."Old Value")
                 {
+                    Caption = 'Valor antiguo';
                     ToolTip = 'Specifies the value of the Old Value field.', Comment = '%';
                 }
                 field("New Value"; Rec."New Value")
                 {
+                    Caption = 'Valor nuevo';
                     ToolTip = 'Specifies the value of the New Value field.', Comment = '%';
                 }
                 field("With Validation"; Rec."With Validation")
                 {
+                    Caption = 'Con validación';
                     ToolTip = 'Specifies the value of the With Validation field.', Comment = '%';
                 }
                 field(SystemCreatedAt; Rec.SystemCreatedAt)
                 {
-                    Caption = 'Created At';
+                    Caption = 'Fecha Creación';
                     ToolTip = 'Specifies the value of the SystemCreatedAt field.', Comment = '%';
                 }
                 field(SystemCreatedBy; Rec.GetUserName())
                 {
-                    Caption = 'Created By';
+                    Caption = 'Creado por:';
                     ToolTip = 'Specifies the value of the SystemCreatedBy field.', Comment = '%';
                 }
             }
@@ -88,7 +97,7 @@ page 50019 "DET Data Editor Log"
             action(ShowOldValue)
             {
                 ApplicationArea = All;
-                Caption = 'Show Old Value';
+                Caption = 'Ver Valor Antiguo';
                 ToolTip = 'Show Old Value';
                 Image = ShowList;
                 trigger OnAction()
@@ -99,7 +108,7 @@ page 50019 "DET Data Editor Log"
             action(ShowNewValue)
             {
                 ApplicationArea = All;
-                Caption = 'Show New Value';
+                Caption = 'Ver Valor Nuevo';
                 ToolTip = 'Show New Value';
                 Image = ShowList;
                 trigger OnAction()

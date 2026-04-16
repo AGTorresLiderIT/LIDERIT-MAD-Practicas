@@ -18,15 +18,17 @@ page 50017 "DET Query Preset"
                 }
                 field(Name; Rec.Name)
                 {
+                    Caption = 'Nombre';
                     ToolTip = 'Specifies the value of the Name field.';
                 }
                 field(Description; Rec.Description)
                 {
+                    Caption = 'Descripción';
                     ToolTip = 'Specifies the value of the Description field.';
                 }
                 field(EmptyField; Rec.IsEmptyJson())
                 {
-                    Caption = 'Is Empty';
+                    Caption = 'Vacío:';
                     Editable = false;
                     ToolTip = 'Specifies wether the json data of this record is empty.';
                 }
@@ -57,7 +59,7 @@ page 50017 "DET Query Preset"
             action(ShowJSONString)
             {
                 ApplicationArea = All;
-                Caption = 'Show Json';
+                Caption = 'Mostrar Json';
                 ToolTip = 'Show Json';
                 Image = ShowList;
                 trigger OnAction()
@@ -71,7 +73,7 @@ page 50017 "DET Query Preset"
             action(ImportJSON)
             {
                 ApplicationArea = All;
-                Caption = 'Import Json';
+                Caption = 'Importar Json';
                 ToolTip = 'Import Json';
                 Image = Import;
 

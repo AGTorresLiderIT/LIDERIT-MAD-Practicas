@@ -16,14 +16,17 @@ page 50018 "DET Data Editor Setup"
 
                 field("Enable Data Editor Log"; Rec."Enable Data Editor Log")
                 {
+                    Caption = 'Activar Data Editor Log';
                     ToolTip = 'May adversely affect performance.', Comment = '%';
                 }
                 field("Number of Threads"; Rec."Number of Threads")
                 {
+                    Caption = 'Número de hilos';
                     ToolTip = 'Specify the number of parallel threads to load the data. From 2 to 8.', Comment = '%';
                 }
                 field("Show Run After"; Rec."Show Run After")
                 {
+                    Caption = 'Activar: Ejecutar después de';
                     ToolTip = 'Specifies the value of the Show Run After field.', Comment = '%';
                 }
             }
@@ -43,7 +46,7 @@ page 50018 "DET Data Editor Setup"
             action(DataEditorLog)
             {
                 ApplicationArea = All;
-                Caption = 'Data Editor Log';
+                Caption = 'Data Editor Logs';
                 ToolTip = 'Data Editor Log';
                 Image = ShowList;
                 RunObject = page "DET Data Editor Log";

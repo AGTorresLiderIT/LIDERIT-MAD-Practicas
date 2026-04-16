@@ -16,7 +16,7 @@ page 50016 "DET Find and Replace"
             {
                 ApplicationArea = All;
                 ToolTip = 'Set Table Filter';
-                Caption = 'Table Filter';
+                Caption = 'Filtros Tabla';
                 Editable = false;
                 trigger OnDrillDown()
                 begin
@@ -26,27 +26,27 @@ page 50016 "DET Find and Replace"
             field(FindWhat; FindWhat)
             {
                 ToolTip = 'Find What';
-                Caption = 'Find What';
+                Caption = 'Buscar';
             }
             field(ReplaceWith; ReplaceWith)
             {
                 ToolTip = 'Replace With';
-                Caption = 'Replace With';
+                Caption = 'Reemplazar';
             }
             field(ReplaceEntireValue; ReplaceEntireValue)
             {
                 ToolTip = 'Replace Entire Field Value';
-                Caption = 'Replace Entire Field Value';
+                Caption = 'Reemplazar todo el valor del campo';
             }
             field(MatchCase; MatchCase)
             {
                 ToolTip = 'Match Case';
-                Caption = 'Match Case';
+                Caption = 'Key Sensitive';
             }
             field(MatchEntireFieldValue; MatchEntireFieldValue)
             {
                 ToolTip = 'Match Entire Field Value';
-                Caption = 'Match Entire Field Value';
+                Caption = 'Coincidir con todo el contenido del campo';
             }
             repeater(General)
             {
@@ -90,7 +90,7 @@ page 50016 "DET Find and Replace"
             {
                 ApplicationArea = All;
                 Image = Find;
-                Caption = 'Find All';
+                Caption = 'Buscar todos';
                 ToolTip = 'Find All';
                 ShortcutKey = F9;
                 trigger OnAction()
@@ -102,7 +102,7 @@ page 50016 "DET Find and Replace"
             {
                 ApplicationArea = All;
                 Image = EditLines;
-                Caption = 'Find & Replace All';
+                Caption = 'Buscar y reemplazar todo';
                 ToolTip = 'Find & Replace All';
                 trigger OnAction()
                 begin

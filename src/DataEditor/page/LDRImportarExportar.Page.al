@@ -21,7 +21,7 @@ page 50020 "DET Import/Export Dialog"
                 field(FileFormat; FileFormat)
                 {
                     ApplicationArea = All;
-                    Caption = 'File Format';
+                    Caption = 'Formato Archivo';
                     ToolTip = 'File Format';
                     trigger OnValidate()
                     begin

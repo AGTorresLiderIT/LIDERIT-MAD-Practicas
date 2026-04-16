@@ -15,7 +15,6 @@ page 50013 "DET Insert New Record"
             {
                 field("Text Value 2"; Rec."Text Value 2")
                 {
-                    ToolTip = 'Specifies the value of the Value 2 field';
                     ApplicationArea = All;
                     Visible = FieldVisible1;
                     CaptionClass = FieldCaption1;

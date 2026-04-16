@@ -18,7 +18,7 @@ page 50010 "DET Data Editor"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Source Table No.';
-                    Caption = 'Source Table No.';
+                    Caption = 'Tabla Origen No.';
                     ShowMandatory = true;
                     trigger OnValidate()
                     var
@@ -61,14 +61,14 @@ page 50010 "DET Data Editor"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Source Table Name';
-                    Caption = 'Source Table Name';
+                    Caption = 'Nombre Origen Tabla';
                     Editable = false;
                 }
                 field(CustomTableViewField; CustomTableView)
                 {
                     ApplicationArea = All;
                     ToolTip = 'Set Initial Table Filter';
-                    Caption = 'Table Filter';
+                    Caption = 'Filtro de Tabla';
                     Editable = false;
                     trigger OnDrillDown()
                     begin
@@ -80,14 +80,14 @@ page 50010 "DET Data Editor"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Number Of Filtered Records';
-                    Caption = 'Number Of Records';
+                    Caption = 'Nº de registros';
                     Editable = false;
                 }
                 field(FieldFilter; FieldFilter)
                 {
                     ApplicationArea = All;
                     ToolTip = 'Set Initial Field Filter';
-                    Caption = 'Field Filter';
+                    Caption = 'Filtro de campo';
                     Editable = false;
                     trigger OnDrillDown()
                     begin
@@ -99,7 +99,7 @@ page 50010 "DET Data Editor"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Without Validation';
-                    Caption = 'Without Validation (Warning!)';
+                    Caption = 'Sin validación (¡Advertencia!)';
                     trigger OnValidate()
                     begin
                         SetDirty();
@@ -109,7 +109,7 @@ page 50010 "DET Data Editor"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Exclude FlowField''s from loading. For best performance, always exclude FlowField''s.';
-                    Caption = 'Exclude FlowField''s';
+                    Caption = 'Excluir FlowFields';
 
                     trigger OnValidate()
                     begin
@@ -120,7 +120,7 @@ page 50010 "DET Data Editor"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Reading data in multiple parallel threads can speed up loading';
-                    Caption = 'Read in Parallel';
+                    Caption = 'Leer en Paralelo';
 
                     trigger OnValidate()
                     begin
@@ -131,14 +131,14 @@ page 50010 "DET Data Editor"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Run After';
-                    Caption = 'Run After';
+                    Caption = 'Ejecutar después de: ';
                     Visible = ShowRunAfter;
                 }
                 field(PresetCodeField; PresetCode)
                 {
                     ApplicationArea = All;
                     ToolTip = 'Preset';
-                    Caption = 'Preset';
+                    Caption = 'Filtro guardado';
 
                     trigger OnLookup(var Text: Text): Boolean
                     var
@@ -162,7 +162,7 @@ page 50010 "DET Data Editor"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Preset Name';
-                    Caption = 'Preset Name';
+                    Caption = 'Nombre del filtro';
                     Editable = false;
                 }
                 field(SavePresetField; SavePreset)
@@ -170,7 +170,7 @@ page 50010 "DET Data Editor"
                     ApplicationArea = All;
                     Enabled = IsDirty and (PresetCode <> '');
                     ToolTip = 'Save Preset';
-                    Caption = 'Save Preset';
+                    Caption = 'Guardar filtro';
                 }
             }
         }

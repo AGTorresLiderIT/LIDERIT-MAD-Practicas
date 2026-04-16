@@ -56,7 +56,7 @@ page 50014 "DET Select Fields"
         {
             action("Set Included")
             {
-                Caption = 'Set Included';
+                Caption = 'Marcar Incluido';
                 ToolTip = 'Set Included';
                 Image = Completed;
                 Visible = not OneFieldMode;
@@ -70,7 +70,7 @@ page 50014 "DET Select Fields"
             }
             action("Clear Included")
             {
-                Caption = 'Clear Included';
+                Caption = 'Desmarcar Incluido';
                 ToolTip = 'Clear Included';
                 Image = ResetStatus;
                 Visible = not OneFieldMode;
