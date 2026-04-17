@@ -6,6 +6,9 @@ codeunit 50202 DesactivarUsuariosAlCopiarEnto
         UserTable: Record User;
         Configuracion: Record "Configuracion";
     begin
+        if CompanyName = '' then
+            exit;
+
         if Configuracion.Get() then
             if Configuracion."Deshabilitar Usuarios" then begin
                 UserTable.SetFilter("Contact Email", '<>*@liderit.es');

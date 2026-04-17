@@ -9,5 +9,9 @@ table 50202 "Configuracion"
         {
             Caption = 'Activar Deshabilitar Usuarios';
         }
+        field(2; "Fecha Inicio"; Date)
+        {
+            Caption = 'Fecha desde la que empezar a borrar';
+        }
     }
 }
