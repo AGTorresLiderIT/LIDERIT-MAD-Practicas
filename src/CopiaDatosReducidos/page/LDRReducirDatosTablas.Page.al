@@ -28,6 +28,11 @@ page 50022 ReducirDatosTablas
                     Caption = 'ID Campo Fecha';
                     ApplicationArea = All;
                 }
+                field("Copiar Reducido"; Rec."CopiarReducido")
+                {
+                    Caption = 'Copiar Reducido';
+                    ApplicationArea = All;
+                }
 
             }
         }
