@@ -3,7 +3,7 @@ permissionset 50000 GeneratedPermission
     Assignable = true;
     Permissions = tabledata MantenerEmpresas=RIMD,
         table MantenerEmpresas=X,
-        //codeunit UtilidadesLider=X,
+    //codeunit UtilidadesLider=X,
         page MantenerEmpresas=X,
         tabledata "ConfiguracionUtilidades"=RIMD,
         table "ConfiguracionUtilidades"=X,
@@ -57,5 +57,22 @@ permissionset 50000 GeneratedPermission
         page ConfigurarFecha=X,
         page ReducirDatosTablas=X,
         tabledata Prueba=RIMD,
-        table Prueba=X;
+        table Prueba=X,
+        tabledata COBCORWizDepartment=RIMD,
+        tabledata COBCORWizRoleExtraSetup=RIMD,
+        tabledata COBCORWizRolesCOBRAList=RIMD,
+        tabledata COBCORWizSetup=RIMD,
+        tabledata COBCORWizUserConfigDataHist=RIMD,
+        tabledata COBCORWizUserConfigurationData=RIMD,
+        tabledata COBCORWizUserConfigurationList=RIMD,
+        tabledata COBCORWizUsersBuffer=RIMD,
+        table COBCORWizDepartment=X,
+        table COBCORWizRoleExtraSetup=X,
+        table COBCORWizRolesCOBRAList=X,
+        table COBCORWizSetup=X,
+        table COBCORWizUserConfigDataHist=X,
+        table COBCORWizUserConfigurationData=X,
+        table COBCORWizUserConfigurationList=X,
+        table COBCORWizUsersBuffer=X,
+        page Prueba=X;
 }
