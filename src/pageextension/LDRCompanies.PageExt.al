@@ -18,10 +18,6 @@ pageextension 50200 Companies extends Companies
                     Eliminaralcopiar.SetEnabled(Rec.Name, EnableEliminarAlCopiar, false);
                 end;
             }
-            field(fechaborrado; fechaborrado)
-            {
-                ApplicationArea = All;
-            }
         }
     }
     actions
@@ -45,17 +41,6 @@ pageextension 50200 Companies extends Companies
                     end;
                 end;
             }
-            action(ElegirFechaBorrado)
-            {
-                Image = Percentage;
-                ApplicationArea = all;
-                trigger OnAction()
-                var
-                    configuracion: Record Configuracion;
-                begin
-                    configuracion."Fecha Inicio" := fechaborrado;
-                end;
-            }
         }
     }
 
@@ -74,5 +59,4 @@ pageextension 50200 Companies extends Companies
 
     var
         EnableEliminarAlCopiar: Boolean;
-        fechaborrado: Date;
 }

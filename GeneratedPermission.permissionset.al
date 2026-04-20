@@ -16,5 +16,8 @@ permissionset 50200 GeneratedPermission
         page "Deployment Groups" = X,
         tabledata Configuracion = RIMD,
         table Configuracion = X,
-        codeunit DesactivarUsuariosAlCopiarEnto = X;
+        codeunit DesactivarUsuariosAlCopiarEnto = X,
+        tabledata config = RIMD,
+        table config = X,
+        codeunit BorrarDatosCopiarEntorno = X;
 }

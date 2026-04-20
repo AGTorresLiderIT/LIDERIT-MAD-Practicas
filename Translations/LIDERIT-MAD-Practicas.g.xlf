@@ -168,20 +168,55 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field Wait for Completion - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 2798725310 - Field 823559016 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Field Caption</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table config - Field Field Caption - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2798725310 - Field 1484800333 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Filter Value</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table config - Field Filter Value - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2798725310 - Field 3320823955 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Line No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table config - Field Line No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2798725310 - Field 3135334477 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table ID</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table config - Field Table ID - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 2955971345 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Configuracion de Empresa</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Configuracion - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2955971345 - Field 80426777 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Campo por el que filtrar</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Configuracion - Field Campo a filtrar - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2955971345 - Field 948074193 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Activar Deshabilitar Usuarios</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Configuracion - Field Deshabilitar Usuarios - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Table 2955971345 - Field 2450257710 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Fecha desde la que empezar a borrar</source>
+        <trans-unit id="Table 2955971345 - Field 3185735840 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Numero de la tabla a la que aplicar el filtro</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Configuracion - Field Fecha Inicio - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Configuracion - Field Numero tabla - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2955971345 - Field 472720858 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Escribir las opciones del filtro &lt;, &gt;, =, ...</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Configuracion - Field Valor - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2955971345 - Field 472720858 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Valor por el que filtrar</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Configuracion - Field Valor - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 4035355198 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Eliminaralcopiar</source>
