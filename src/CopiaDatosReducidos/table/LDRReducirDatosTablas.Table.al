@@ -23,13 +23,13 @@ table 50011 ReducirDatosTablas
         {
             Caption = 'Nombre Tabla';
         }
-        field(3; "ID Campo Fecha"; Integer)
+        field(3; "ID Campo"; Integer)
         {
-            Caption = 'ID Campo Fecha';
+            Caption = 'ID Campo';
         }
-        field(4; "CopiarReducido"; Boolean)
+        field(4; "Filtro"; Text[250])
         {
-            Caption = 'Copiar Reducido';
+            Caption = 'Filtro';
         }
     }
     keys
