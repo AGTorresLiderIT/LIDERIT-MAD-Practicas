@@ -232,24 +232,24 @@ page 50027 COBCORWizUserConfigurationList
                 var
                     UserConfigData: Record COBCORWizUserConfigurationData;
                     TempUserConfigData: Record COBCORWizUserConfigurationData temporary;
-                    Setup: Record COBCORWizSetup;
                 begin
                     if gCOBCORWizUsersMgt.IsSupportDepartment(Rec.COBCORDepartment) then
                         gCOBCORWizUsersMgt.InsertSupportCompanies(Rec.COBCORUserID);
 
-                    if not Setup.Get() then
-                        Error('No se ha configurado la tabla de replicado de empresas.');
-
                     UserConfigData.Reset();
                     UserConfigData.SetRange(COBCORUserID, Rec.COBCORUserID);
                     UserConfigData.SetRange(COBCORCompanyRole, gCOBCORWizUsersMgt.GetNubeAllPermission());
+
                     if UserConfigData.FindSet() then
                         repeat
+                            TempUserConfigData := UserConfigData;
+                            if TempUserConfigData.Insert() then;
                         until UserConfigData.Next() = 0;
 
-                    if TempUserConfigData.FindFirst() then begin
-                    end else
-                        Error('No hay registros para mostrar');
+                    // if not TempUserConfigData.IsEmpty() then
+                    //     Page.RunModal(Page::COBCORWizUserConfiguration, TempUserConfigData)
+                    // else
+                    // Message('No specific configuration found for this user.', Comment = 'ESP="No se encontró configuración específica para este usuario."');
                 end;
             }
             action(UserRegistration)
