@@ -6,8 +6,6 @@ codeunit 50204 MensajeEntorno
         EnvInfo: Codeunit "Environment Information";
     begin
         if EnvInfo.IsSandbox() then
-            Message('Estás en SANDBOX')
-        else
-            Message('Estás en PRODUCCIÓN');
+            Message('Estás en SANDBOX');
     end;
 }
