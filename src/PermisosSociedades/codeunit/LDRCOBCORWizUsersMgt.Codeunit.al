@@ -766,35 +766,6 @@ codeunit 50007 COBCORWizUsersMgt
         exit(CopyStr(CopyStr(pBaseRoleID, 1, lAllowedBaseLength) + pSuffix, 1, MaxStrLen(pBaseRoleID)));
     end;
 
-    local procedure GetPermissionSetDisplayName(pRoleID: Code[20]): Text[150]
-    var
-        lAggregatePermissionSet: Record "Aggregate Permission Set";
-    begin
-        lAggregatePermissionSet.Reset();
-        lAggregatePermissionSet.SetRange("Role ID", pRoleID);
-        if lAggregatePermissionSet.FindFirst() then
-            if lAggregatePermissionSet.Name <> '' then
-                exit(lAggregatePermissionSet.Name);
-
-        exit(Format(pRoleID));
-    end;
-
-    local procedure GetUserFullNameForDerivedRole(pUserID: Text[140]): Text[150]
-    var
-        lWizardUserConfigurationList: Record COBCORWizUserConfigurationList;
-        lUser: Record User;
-    begin
-        if lWizardUserConfigurationList.Get(pUserID) then
-            if lWizardUserConfigurationList.COBCORFullName <> '' then
-                exit(lWizardUserConfigurationList.COBCORFullName);
-
-        lUser.Reset();
-        lUser.SetRange("User Name", pUserID);
-        if lUser.FindFirst() then
-            exit(lUser."Full Name");
-
-        exit(pUserID);
-    end;
 
     local procedure HandleDelegationRemovalOnDelete(pRoleID: Code[20]; pDelegationToRemove: Text[250]; var pRemainingDelegations: Text[250]): Boolean
     var
@@ -1155,30 +1126,6 @@ codeunit 50007 COBCORWizUsersMgt
         end;
 
         exit(false);
-    end;
-
-    local procedure NormalizeRoleIdentifierText(pSourceText: Text[150]): Text[150]
-    var
-        lResult: Text[150];
-    begin
-        lResult := UpperCase(pSourceText);
-        lResult := ConvertStr(lResult, 'ÁÀÄÂÉÈËÊÍÌÏÎÓÒÖÔÚÙÜÛÑ', 'AAAAEEEEIIIIOOOOUUUUN');
-        lResult := ConvertStr(lResult, '-_/.,;:()[]{}', '             ');
-        exit(lResult);
-    end;
-
-    local procedure TrimRoleIdentifierText(pSourceText: Text[150]): Text[150]
-    var
-        lResult: Text[150];
-    begin
-        lResult := pSourceText;
-        while (lResult <> '') and (CopyStr(lResult, 1, 1) = ' ') do
-            lResult := CopyStr(lResult, 2);
-
-        while (lResult <> '') and (CopyStr(lResult, StrLen(lResult), 1) = ' ') do
-            lResult := CopyStr(lResult, 1, StrLen(lResult) - 1);
-
-        exit(lResult);
     end;
 
     local procedure SetDefaultBusinessCentralGroup(var pBusinessGroup: Code[20])
