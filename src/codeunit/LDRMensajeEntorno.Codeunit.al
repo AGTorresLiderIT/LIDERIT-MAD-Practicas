@@ -5,7 +5,10 @@ codeunit 50204 MensajeEntorno
     var
         EnvInfo: Codeunit "Environment Information";
     begin
-        if EnvInfo.IsSandbox() then
-            Message('Estás en SANDBOX');
+        if not UserId().StartsWith('user_') then begin
+            if EnvInfo.IsSandbox() then
+                Message('Estás en SANDBOX');
+        end;
     end;
+
 }
