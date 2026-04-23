@@ -34,12 +34,11 @@ codeunit 50007 COBCORWizUsersMgt
         lUserConfigData.SetRange(COBCORDelete, true);
         if lUserConfigData.FindSet(true) then
             repeat
-                if lUserConfigData.COBCORDelegation <> '' then begin
+                if lUserConfigData.COBCORDelegation <> '' then
                     HandleDelegationRemovalOnDelete(
                         lUserConfigData.COBCORCompanyRole,
                         lUserConfigData.COBCORDelegation,
                         lRemainingDelegation);
-                end;
 
                 lDeletedRoleID := lUserConfigData.COBCORCompanyRole;
                 lDeletedIsExtraRole := lUserConfigData.COBCORIsExtraRole;
@@ -1212,10 +1211,11 @@ codeunit 50007 COBCORWizUsersMgt
             exit;
         lUserSetup.ChangeCompany(pCompanyName);
 
-        if not lUserSetup.Get(pUserID) then
+        if not lUserSetup.Get(pUserID) then begin
             lUserSetup.Init();
-        lUserSetup."User ID" := pUserID;
-        lUserSetup.Insert(true);
+            lUserSetup."User ID" := pUserID;
+            if lUserSetup.Insert(false) then;
+        end;
     end;
 
     local procedure GetConfiguredReplicationCompanies(): List of [Text[30]]
