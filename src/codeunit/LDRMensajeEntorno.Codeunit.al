@@ -4,8 +4,10 @@ codeunit 50204 MensajeEntorno
     local procedure OnCompanyOpen()
     var
         EnvInfo: Codeunit "Environment Information";
+        user: Record user;
     begin
-        if not UserId().StartsWith('user_') then begin
+        user.SetRange("User Name", UserId);
+        if not (user.State = user.State::Enabled) or UserId.StartsWith('user_') then begin
             if EnvInfo.IsSandbox() then
                 Message('Estás en SANDBOX');
         end;
