@@ -12,5 +12,4 @@ codeunit 50204 MensajeEntorno
                 Message('Estás en SANDBOX');
         end;
     end;
-
 }

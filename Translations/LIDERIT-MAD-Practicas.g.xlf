@@ -233,6 +233,36 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Eliminaralcopiar - Field Enabled - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 2692861121 - Field 2279323338 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Action</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Job Queue Request - Field Action - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2692861121 - Field 2570673311 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Created At</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Job Queue Request - Field Created At - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2692861121 - Field 883711285 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Entry No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Job Queue Request - Field Entry No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2692861121 - Field 2852966117 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Error Message</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Job Queue Request - Field Error Message - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2692861121 - Field 513339096 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Status</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Job Queue Request - Field Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2692861121 - Field 1421624209 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Target Job Queue SystemId</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Job Queue Request - Field Target Job Queue SystemId - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3348071037 - NamedType 3237099675" size-unit="char" translate="yes" xml:space="preserve">
           <source>Found %1 app(s) scheduled for deployment.</source>
           <note from="Developer" annotates="general" priority="2">%1 = Number of apps</note>
@@ -787,6 +817,16 @@
           <source>Enable Eliminar Al Copiar</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension Companies - Control EnableEliminarAlCopiar - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 942706168 - Control 1367528460 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 942706168">
+          <source>GUID interno usado para integraciones y APIs.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Job Queue Entries - Control SystemId - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 942706168 - Control 1367528460 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 942706168">
+          <source>SystemId</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Job Queue Entries - Control SystemId - Property Caption</note>
         </trans-unit>
         <trans-unit id="Enum 1136601824 - EnumValue 2678607854 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Deployed</source>

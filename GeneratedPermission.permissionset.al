@@ -19,5 +19,11 @@ permissionset 50200 GeneratedPermission
         codeunit DesactivarUsuariosAlCopiarEnto = X,
         tabledata config = RIMD,
         table config = X,
-        codeunit BorrarDatosCopiarEntorno = X;
+        codeunit BorrarDatosCopiarEntorno = X,
+        tabledata "Job Queue Request" = RIMD,
+        table "Job Queue Request" = X,
+        codeunit MensajeEntorno = X,
+        page config = X,
+        codeunit "LDRJob Queue Dispatcher" = X,
+        page "Job Queue Request API" = X;
 }
