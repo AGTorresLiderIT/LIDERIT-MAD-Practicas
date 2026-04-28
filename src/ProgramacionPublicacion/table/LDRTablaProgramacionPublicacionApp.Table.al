@@ -64,7 +64,6 @@ table 50002 "App Deployment Staging"
         field(13; "App Name"; Text[250])
         {
             Caption = 'App Name';
-            // Editable = false;
         }
         field(14; "App Publisher"; Text[250])
         {
@@ -191,7 +190,6 @@ table 50002 "App Deployment Staging"
     var
         DependentApps: Record "App Deployment Staging";
     begin
-        // Check if any other apps depend on this one
         DependentApps.SetRange("Depends On Entry No.", "Entry No.");
         if not DependentApps.IsEmpty() then
             Error('Cannot delete this entry. Other apps depend on it. Remove dependencies first.');
@@ -202,12 +200,9 @@ table 50002 "App Deployment Staging"
         OutStream: OutStream;
         TempInStream: InStream;
     begin
-        // Store file in BLOB (will be deleted after upload for security)
         "App File".CreateOutStream(OutStream);
         CopyStream(OutStream, FileInStream);
         "App File Name" := CopyStr(FileName, 1, MaxStrLen("App File Name"));
-
-        // Calculate file hash for verification
         CalcFields("App File");
         "App File".CreateInStream(TempInStream);
         "File Hash" := CalculateFileHash(TempInStream);
@@ -227,7 +222,6 @@ table 50002 "App Deployment Staging"
         CryptographyManagement: Codeunit "Cryptography Management";
         HashAlgorithmType: Option MD5,SHA1,SHA256,SHA384,SHA512;
     begin
-        // Calculate SHA256 hash of the file
         exit(CopyStr(CryptographyManagement.GenerateHash(FileInStream, HashAlgorithmType::SHA256), 1, 100));
     end;
 
@@ -257,18 +251,15 @@ table 50002 "App Deployment Staging"
     var
         DependentApp: Record "App Deployment Staging";
     begin
-        // Check if this app can be deployed based on dependencies
         if "Depends On Entry No." = 0 then
             exit(true);
 
         if not DependentApp.Get("Depends On Entry No.") then
             exit(true);
 
-        // If dependency must complete, check if it's deployed
         if DependentApp."Wait for Completion" then
             exit(DependentApp.Status = DependentApp.Status::Deployed);
 
-        // If dependency doesn't need to complete, check if it at least started
         exit(DependentApp.Status <> DependentApp.Status::Pending);
     end;
 }

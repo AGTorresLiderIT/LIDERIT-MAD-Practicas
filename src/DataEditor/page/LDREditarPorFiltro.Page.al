@@ -1,8 +1,5 @@
 page 50012 "DET Run Editor From Filter"
 {
-    //Used for call Data Editor directly without Dialog window
-    //Example of usage call page via link: 
-    //&page=81003&filter='Table Number' is '18' and 'Exclude FlowFields' is '1' and 'Without Validate' is '0'
     Caption = 'Cierrame';
     PageType = ConfirmationDialog;
     SourceTable = "DET Data Editor Buffer";

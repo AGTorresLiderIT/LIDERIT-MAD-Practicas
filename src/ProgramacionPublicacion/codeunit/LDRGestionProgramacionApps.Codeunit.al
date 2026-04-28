@@ -17,19 +17,16 @@ codeunit 50001 "App Deployment Management"
         AppDeploymentStaging: Record "App Deployment Staging";
         ProcessedCount: Integer;
     begin
-        // Process pending deployments that can be deployed (dependencies met)
         AppDeploymentStaging.SetRange(Status, AppDeploymentStaging.Status::Pending);
         AppDeploymentStaging.SetFilter("Scheduled Date", '<=%1', Today);
         AppDeploymentStaging.SetFilter("Scheduled Time", '<=%1', Time);
 
         if AppDeploymentStaging.FindSet() then begin
             repeat
-                // Check if dependencies are met
                 if AppDeploymentStaging.CanBeDeployed() then begin
                     DeployApp(AppDeploymentStaging);
                     ProcessedCount += 1;
                 end else
-                    // Mark as waiting for dependencies
                     if AppDeploymentStaging.Status = AppDeploymentStaging.Status::Pending then begin
                         AppDeploymentStaging.Status := AppDeploymentStaging.Status::"Waiting for Dependencies";
                         AppDeploymentStaging.Modify(true);
@@ -40,7 +37,6 @@ codeunit 50001 "App Deployment Management"
                 Message(DeploymentScheduledMsg, ProcessedCount);
         end;
 
-        // Also check apps waiting for dependencies
         ProcessWaitingApps();
     end;
 
@@ -61,7 +57,6 @@ codeunit 50001 "App Deployment Management"
     var
         AppDeploymentStaging: Record "App Deployment Staging";
     begin
-        // Check if uploaded apps are now installed
         AppDeploymentStaging.SetFilter(Status, '%1|%2|%3',
             AppDeploymentStaging.Status::"Upload Started",
             AppDeploymentStaging.Status::"Upload Completed",
@@ -81,15 +76,12 @@ codeunit 50001 "App Deployment Management"
     begin
         MinutesElapsed := Round((CurrentDateTime - AppDeploymentStaging."Last Status Check") / 60000, 1);
 
-        // Extract app name from filename (remove .app extension)
         AppNameToFind := AppDeploymentStaging."App Name";
         if AppNameToFind.EndsWith('.app') then
             AppNameToFind := CopyStr(AppNameToFind, 1, StrLen(AppNameToFind) - 4);
 
-        // Try to find the installed app by name
         NavAppInstalledApp.SetFilter(Name, '@*' + AppNameToFind + '*');
         if NavAppInstalledApp.FindFirst() then begin
-            // App is installed! Mark as deployed
             AppDeploymentStaging.Status := AppDeploymentStaging.Status::Deployed;
             AppDeploymentStaging."Deployed Date Time" := CurrentDateTime;
             AppDeploymentStaging."App Name" := CopyStr(NavAppInstalledApp.Name, 1, MaxStrLen(AppDeploymentStaging."App Name"));
@@ -105,7 +97,6 @@ codeunit 50001 "App Deployment Management"
             exit;
         end;
 
-        // Update status based on time
         if MinutesElapsed >= 1 then begin
             if AppDeploymentStaging.Status = AppDeploymentStaging.Status::"Upload Started" then begin
                 AppDeploymentStaging.Status := AppDeploymentStaging.Status::"Upload Completed";
@@ -120,7 +111,6 @@ codeunit 50001 "App Deployment Management"
             end;
         end;
 
-        // If more than 10 minutes and still not found, might have failed
         if MinutesElapsed >= 10 then begin
             AppDeploymentStaging.Status := AppDeploymentStaging.Status::Failed;
             AppDeploymentStaging."Error Message" := 'App not found in installed apps after 10 minutes. Check Extension Management for details.';
@@ -168,18 +158,14 @@ codeunit 50001 "App Deployment Management"
         ExtensionManagement: Codeunit "Extension Management";
         FileInStream: InStream;
     begin
-        // Get file from BLOB
         AppDeploymentStaging.CalcFields("App File");
         if not AppDeploymentStaging."App File".HasValue then
             Error('App file is missing or has been deleted for security.');
 
         AppDeploymentStaging.GetAppFile(FileInStream);
 
-        // Upload and Publish the extension
         ExtensionManagement.UploadExtension(FileInStream, GlobalLanguage());
 
-        // SECURITY: Delete the app file immediately after upload
-        // This prevents the file from being downloaded later
         Clear(AppDeploymentStaging."App File");
         AppDeploymentStaging."File Deleted After Upload" := true;
         AppDeploymentStaging.Modify(true);
@@ -201,14 +187,12 @@ codeunit 50001 "App Deployment Management"
         if AppDeploymentStaging."Email Recipients" = '' then
             exit;
 
-        // Parse recipients
         RecipientText := AppDeploymentStaging."Email Recipients";
         ParseEmailRecipients(RecipientText, Recipients);
 
         if Recipients.Count = 0 then
             exit;
 
-        // Build email content
         if AppDeploymentStaging.Status = AppDeploymentStaging.Status::Deployed then begin
             Subject := StrSubstNo('✓ App Deployment Successful - %1', AppDeploymentStaging."App File Name");
             Body := BuildSuccessEmailBody(AppDeploymentStaging);
@@ -217,9 +201,7 @@ codeunit 50001 "App Deployment Management"
             Body := BuildFailureEmailBody(AppDeploymentStaging);
         end;
 
-        // Send email
         if TrySendEmail(Recipients, Subject, Body) then
-            // Log success
             Session.LogMessage('0000APP', 'Email notification sent successfully', Verbosity::Normal, DataClassification::SystemMetadata, TelemetryScope::ExtensionPublisher, 'Category', 'AppDeployment');
     end;
 
@@ -319,23 +301,18 @@ codeunit 50001 "App Deployment Management"
         JobQueueEntry: Record "Job Queue Entry";
         JobQueueCategory: Record "Job Queue Category";
     begin
-        // Create Job Queue Category if it doesn't exist
         if not JobQueueCategory.Get('APPDEPLOY') then begin
             JobQueueCategory.Init();
             JobQueueCategory.Code := 'APPDEPLOY';
             JobQueueCategory.Description := 'App Deployment';
             JobQueueCategory.Insert(true);
         end;
-
-        // Check if job queue entry already exists
         JobQueueEntry.SetRange("Object Type to Run", JobQueueEntry."Object Type to Run"::Codeunit);
         JobQueueEntry.SetRange("Object ID to Run", Codeunit::"App Deployment Management");
         if not JobQueueEntry.IsEmpty then begin
             Message('Job Queue Entry already exists. You can modify it from the Job Queue Entries page.');
             exit;
         end;
-
-        // Create new Job Queue Entry
         JobQueueEntry.Init();
         JobQueueEntry."Object Type to Run" := JobQueueEntry."Object Type to Run"::Codeunit;
         JobQueueEntry."Object ID to Run" := Codeunit::"App Deployment Management";
@@ -350,7 +327,7 @@ codeunit 50001 "App Deployment Management"
         JobQueueEntry."Run on Sundays" := true;
         JobQueueEntry."Starting Time" := 000000T;
         JobQueueEntry."Ending Time" := 235959T;
-        JobQueueEntry."No. of Minutes between Runs" := 5; // Check every 5 minutes
+        JobQueueEntry."No. of Minutes between Runs" := 5;
         JobQueueEntry."Maximum No. of Attempts to Run" := 3;
         JobQueueEntry."Rerun Delay (sec.)" := 30;
         JobQueueEntry.Status := JobQueueEntry.Status::Ready;
@@ -374,7 +351,6 @@ codeunit 50001 "App Deployment Management"
         if GroupCode = '' then
             Error('Group code cannot be empty.');
 
-        // Get all apps in the group
         AppDeploymentStaging.SetRange("Deployment Group", GroupCode);
         AppDeploymentStaging.SetFilter(Status, '%1|%2',
             AppDeploymentStaging.Status::Pending,
@@ -386,18 +362,15 @@ codeunit 50001 "App Deployment Management"
             exit;
         end;
 
-        // Mark group deployment as started
         MarkGroupAsStarted(GroupCode);
 
-        // Process apps in sequence
         repeat
             if AppDeploymentStaging.CanBeDeployed() then begin
                 DeployApp(AppDeploymentStaging);
                 ProcessedCount += 1;
 
-                // If this app requires completion, wait before continuing
                 if AppDeploymentStaging."Wait for Completion" then
-                    Sleep(5000); // Wait 5 seconds between deployments
+                    Sleep(5000);
             end else begin
                 AppDeploymentStaging.Status := AppDeploymentStaging.Status::"Waiting for Dependencies";
                 AppDeploymentStaging.Modify(true);

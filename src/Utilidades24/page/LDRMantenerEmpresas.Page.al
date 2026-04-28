@@ -30,11 +30,11 @@ page 50149 MantenerEmpresas
             action(Encender)
             {
                 trigger OnAction()
-                    var
+                var
                     Encendido: Boolean;
                 begin
                     if Encendido = false then begin
-                        Encendido:= true;
+                        Encendido := true;
                         Message('La opción de seleccionar empresas al copiar está activada.')
                     end else
                         Message('La opción de seleccionar empresas al copiar está desactivada.')
