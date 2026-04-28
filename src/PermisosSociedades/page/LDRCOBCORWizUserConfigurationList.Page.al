@@ -246,10 +246,10 @@ page 50027 COBCORWizUserConfigurationList
                             if TempUserConfigData.Insert() then;
                         until UserConfigData.Next() = 0;
 
-                    // if not TempUserConfigData.IsEmpty() then
-                    //     Page.RunModal(Page::COBCORWizUserConfiguration, TempUserConfigData)
-                    // else
-                    // Message('No specific configuration found for this user.', Comment = 'ESP="No se encontró configuración específica para este usuario."');
+                    if not TempUserConfigData.IsEmpty() then
+                        Page.RunModal(Page::COBCORPermisosCore, TempUserConfigData)
+                    else
+                        Message('No specific configuration found for this user.');
                 end;
             }
             action(UserRegistration)
@@ -281,7 +281,10 @@ page 50027 COBCORWizUserConfigurationList
     }
 
     trigger OnOpenPage()
+    var
+        Permisos: Codeunit LDRCOBCORPermisosMgt;
     begin
+        Permisos.CheckIsCoreAdmin();
         ShowActions := true;
         g_recUserSetup.get(UserId);
         FilterUsersByCountry();
