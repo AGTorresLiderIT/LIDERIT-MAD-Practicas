@@ -7,7 +7,7 @@ codeunit 50204 MensajeEntorno
         user: Record user;
     begin
         user.SetRange("User Name", UserId);
-        if not (user.State = user.State::Enabled) or UserId.StartsWith('user_') then begin
+        if not ((user.State = user.State::Enabled) or UserId.StartsWith('user_')) then begin
             if EnvInfo.IsSandbox() then
                 Message('Estás en SANDBOX');
         end;
