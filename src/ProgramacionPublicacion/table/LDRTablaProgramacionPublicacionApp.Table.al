@@ -70,7 +70,7 @@ table 50002 "App Deployment Staging"
             Caption = 'App Publisher';
             Editable = false;
         }
-        field(15; "App Version"; Text[50])
+        field(15; "App Version"; Text[1000])
         {
             Caption = 'App Version';
             Editable = false;

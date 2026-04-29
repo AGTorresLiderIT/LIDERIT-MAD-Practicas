@@ -3,7 +3,12 @@ codeunit 50001 "App Deployment Management"
     TableNo = "Job Queue Entry";
 
     trigger OnRun()
+    var
+        Utilidades: Record ConfiguracionUtilidades;
     begin
+        if Utilidades.Get() then
+            if not Utilidades."Activar Programar Publicacion" then
+                exit;
         ProcessScheduledDeployments();
         CheckPendingOperations();
     end;
@@ -97,19 +102,18 @@ codeunit 50001 "App Deployment Management"
             exit;
         end;
 
-        if MinutesElapsed >= 1 then begin
+        if MinutesElapsed >= 1 then
             if AppDeploymentStaging.Status = AppDeploymentStaging.Status::"Upload Started" then begin
                 AppDeploymentStaging.Status := AppDeploymentStaging.Status::"Upload Completed";
                 AppDeploymentStaging."Last Status Check" := CurrentDateTime;
                 AppDeploymentStaging.Modify(true);
-            end else if MinutesElapsed >= 2 then begin
-                if AppDeploymentStaging.Status = AppDeploymentStaging.Status::"Upload Completed" then begin
-                    AppDeploymentStaging.Status := AppDeploymentStaging.Status::"Installation In Progress";
-                    AppDeploymentStaging."Last Status Check" := CurrentDateTime;
-                    AppDeploymentStaging.Modify(true);
-                end;
-            end;
-        end;
+            end else
+                if MinutesElapsed >= 2 then
+                    if AppDeploymentStaging.Status = AppDeploymentStaging.Status::"Upload Completed" then begin
+                        AppDeploymentStaging.Status := AppDeploymentStaging.Status::"Installation In Progress";
+                        AppDeploymentStaging."Last Status Check" := CurrentDateTime;
+                        AppDeploymentStaging.Modify(true);
+                    end;
 
         if MinutesElapsed >= 10 then begin
             AppDeploymentStaging.Status := AppDeploymentStaging.Status::Failed;
@@ -121,7 +125,7 @@ codeunit 50001 "App Deployment Management"
         end;
     end;
 
-    local procedure GetVersionString(VersionMajor: Integer; VersionMinor: Integer; VersionBuild: Integer; VersionRevision: Integer): Text
+    local procedure GetVersionString(VersionMajor: Integer; VersionMinor: Integer; VersionBuild: Integer; VersionRevision: Integer): Text[1000]
     begin
         exit(StrSubstNo('%1.%2.%3.%4', VersionMajor, VersionMinor, VersionBuild, VersionRevision));
     end;
@@ -194,10 +198,10 @@ codeunit 50001 "App Deployment Management"
             exit;
 
         if AppDeploymentStaging.Status = AppDeploymentStaging.Status::Deployed then begin
-            Subject := StrSubstNo('✓ App Deployment Successful - %1', AppDeploymentStaging."App File Name");
+            Subject := StrSubstNo(SuccessfulLbl, AppDeploymentStaging."App File Name");
             Body := BuildSuccessEmailBody(AppDeploymentStaging);
         end else begin
-            Subject := StrSubstNo('✗ App Deployment Failed - %1', AppDeploymentStaging."App File Name");
+            Subject := StrSubstNo(FailedLbl, AppDeploymentStaging."App File Name");
             Body := BuildFailureEmailBody(AppDeploymentStaging);
         end;
 
@@ -394,4 +398,8 @@ codeunit 50001 "App Deployment Management"
                 end;
             until AppDeploymentStaging.Next() = 0;
     end;
+
+    var
+        FailedLbl: Label '✗ App Deployment Failed - %1', Comment = '%1 = App File Name';
+        SuccessfulLbl: Label '✓ App Deployment Successful - %1', Comment = '%1 = App File Name';
 }

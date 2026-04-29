@@ -29,6 +29,10 @@ page 50001 "ConfiguracionUtilidades"
                     ToolTip = 'Specifies the value of the Contraseña field.', Comment = '%';
                     ExtendedDatatype = Masked;
                 }
+                field("Activar Programar Publicacion"; Rec."Activar Programar Publicacion")
+                {
+                    ToolTip = 'Specifies the value of the Activar Programar Publicacion field.', Comment = '%';
+                }
             }
         }
     }

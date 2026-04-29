@@ -2,6 +2,7 @@ table 50149 MantenerEmpresas
 {
     Caption = 'MantenerEmpresa';
     DataClassification = ToBeClassified;
+    DataPerCompany = false;
 
     fields
     {

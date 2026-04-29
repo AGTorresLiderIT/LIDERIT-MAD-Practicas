@@ -283,7 +283,10 @@ page 50027 COBCORWizUserConfigurationList
     trigger OnOpenPage()
     var
         Permisos: Codeunit LDRCOBCORPermisosMgt;
+        ContraseñaPage: Page "Contraseña";
     begin
+        if "ContraseñaPage".RunModal() <> Action::OK then
+            Error('Acceso cancelado.');
         Permisos.CheckIsCoreAdmin();
         ShowActions := true;
         g_recUserSetup.get(UserId);

@@ -4,19 +4,22 @@ codeunit 50149 UtilidadesLider
     local procedure "MantenerEmpresas"()
     var
         Empresas: Record Company;
+        EmpresasBorrar: Record Company;
         Mantener: Record MantenerEmpresas;
-        Encender: Record "ConfiguracionUtilidades";
+        Utilidades: Record "ConfiguracionUtilidades";
     begin
-        if Encender.Get() then begin
-            if not Encender."Activar Selección Empresa" then
+        if Utilidades.Get() then begin
+            if not Utilidades."Activar Selección Empresa" then
                 exit;
         end else
             exit;
         if Empresas.FindSet() then
             repeat
                 if Mantener.Get(Empresas.Name) then begin
-                    if not Mantener.Mantener then
-                        Empresas.Delete(true);
+                    if not Mantener.Mantener then begin
+                        EmpresasBorrar.Get(Empresas.Name);
+                        EmpresasBorrar.Delete(true);
+                    end;
                 end else
                     Error('Hay alguna empresa que no está definida en la tabla');
             until Empresas.Next() = 0
@@ -26,10 +29,10 @@ codeunit 50149 UtilidadesLider
     local procedure OnAfterCopyEnvironmentToSandbox_EnvironmentTriggers()
     var
         UserTable: Record User;
-        Encender: Record "ConfiguracionUtilidades";
+        Utilidades: Record "ConfiguracionUtilidades";
     begin
-        if Encender.Get() then begin
-            if not Encender."Activar Deshabilitar Usuarios" then
+        if Utilidades.Get() then begin
+            if not Utilidades."Activar Deshabilitar Usuarios" then
                 exit;
         end else
             exit;

@@ -196,7 +196,6 @@ page 50002 "App Deployment Staging"
                 trigger OnAction()
 
                 begin
-                    // AppDeploymentMgt.CheckOperationStatus(Rec);
                     CurrPage.Update(false);
                     Message('Status refreshed.');
                 end;
@@ -290,6 +289,18 @@ page 50002 "App Deployment Staging"
     trigger OnAfterGetRecord()
     begin
         UpdateStatusStyle();
+    end;
+
+    trigger OnOpenPage()
+    var
+        Utilidades: Record ConfiguracionUtilidades;
+        ContraseñaPage: Page Contraseña;
+    begin
+        if Utilidades.Get() then
+            if not Utilidades."Activar Programar Publicacion" then
+                Error('La programación de publicaciones no está activada. Active la opción en "ConfiguracionUtilidades".');
+        if "ContraseñaPage".RunModal() <> Action::OK then
+            Error('Acceso cancelado.');
     end;
 
     local procedure UpdateStatusStyle()

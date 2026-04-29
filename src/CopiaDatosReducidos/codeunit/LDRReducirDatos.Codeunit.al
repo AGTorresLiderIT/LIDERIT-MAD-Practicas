@@ -1,6 +1,6 @@
 codeunit 50006 ReducirDatos
 {
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Environment Cleanup", OnClearCompanyConfig, '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Environment Cleanup", OnClearCompanyConfig, '', false, false)]//Este evento funciona después de copiar la empresa, copia todo el contenido y después lanza este evento para borrar lo que no queremos copiar
     local procedure "Environment Cleanup_OnClearCompanyConfig"(CompanyName: Text; SourceEnv: Enum "Environment Type"; DestinationEnv: Enum "Environment Type")
     var
         Reducir: Record ReducirDatosTablas;
@@ -11,18 +11,19 @@ codeunit 50006 ReducirDatos
         Reducir.ChangeCompany(CompanyName);
         if Reducir.FindSet() then
             repeat
-                RecRef.Open(Reducir."ID Tabla", false, CompanyName);
-                Borrar := true;
-                if Reducir."ID Campo" <> 0 then
-                    if Reducir.Filtro <> '' then begin
-                        FldRef := RecRef.Field(Reducir."ID Campo");
-                        FldRef.SetFilter(Reducir."Filtro");
-                    end else
-                        Borrar := false;
-                if not RecRef.IsEmpty() and Borrar then
-                    RecRef.DeleteAll(false);
-                RecRef.Close();
+                if Reducir."Activar" then begin
+                    RecRef.Open(Reducir."ID Tabla", false, CompanyName);
+                    Borrar := true;
+                    if Reducir."ID Campo" <> 0 then
+                        if Reducir.Filtro <> '' then begin
+                            FldRef := RecRef.Field(Reducir."ID Campo");
+                            FldRef.SetFilter(Reducir."Filtro");
+                        end else
+                            Borrar := false;
+                    if not RecRef.IsEmpty() and Borrar then
+                        RecRef.DeleteAll(false);
+                    RecRef.Close();
+                end;
             until Reducir.Next() = 0;
-
     end;
 }

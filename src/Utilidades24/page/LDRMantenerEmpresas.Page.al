@@ -23,38 +23,24 @@ page 50149 MantenerEmpresas
             }
         }
     }
-    actions
-    {
-        area(Processing)
-        {
-            action(Encender)
-            {
-                trigger OnAction()
-                var
-                    Encendido: Boolean;
-                begin
-                    if Encendido = false then begin
-                        Encendido := true;
-                        Message('La opción de seleccionar empresas al copiar está activada.')
-                    end else
-                        Message('La opción de seleccionar empresas al copiar está desactivada.')
-                end;
-            }
-        }
-    }
     trigger OnOpenPage()
     var
         Empresas: Record Company;
         Mantener: Record MantenerEmpresas;
+        Utilidades: Record ConfiguracionUtilidades;
     begin
-        if Empresas.FindSet() then
-            repeat
-                if not Mantener.Get(Empresas.Name) then begin
-                    Mantener.Init();
-                    Mantener.Nombre := Empresas.Name;
-                    Mantener.Mantener := false;
-                    Mantener.Insert();
-                end;
-            until Empresas.Next() = 0
+        if Utilidades.Get() then
+            if not Utilidades."Activar Selección Empresa" then
+                Error('La selección de empresas no está activada. Active la opción en "ConfiguracionUtilidades".')
+            else
+                if Empresas.FindSet() then
+                    repeat
+                        if not Mantener.Get(Empresas.Name) then begin
+                            Mantener.Init();
+                            Mantener.Nombre := Empresas.Name;
+                            Mantener.Mantener := false;
+                            Mantener.Insert();
+                        end;
+                    until Empresas.Next() = 0
     end;
 }

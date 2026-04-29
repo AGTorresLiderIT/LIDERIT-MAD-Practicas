@@ -33,6 +33,11 @@ page 50022 ReducirDatosTablas
                     Caption = 'Filtro';
                     ApplicationArea = All;
                 }
+                field("Activar"; Rec."Activar")
+                {
+                    Caption = 'Activar';
+                    ApplicationArea = All;
+                }
             }
         }
     }
@@ -63,4 +68,11 @@ page 50022 ReducirDatosTablas
             }
         }
     }
+    trigger OnOpenPage()
+    var
+        ContraseñaPage: Page Contraseña;
+    begin
+        if "ContraseñaPage".RunModal() <> Action::OK then
+            Error('Acceso cancelado.');
+    end;
 }

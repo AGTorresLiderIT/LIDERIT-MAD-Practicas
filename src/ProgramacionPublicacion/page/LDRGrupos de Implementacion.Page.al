@@ -12,7 +12,7 @@ page 50004 "Deployment Groups"
     {
         area(Content)
         {
-            repeater(Group)//Todos los captions en español
+            repeater(Group)
             {
                 field("Deployment Group"; Rec."Deployment Group")
                 {
@@ -134,6 +134,15 @@ page 50004 "Deployment Groups"
     trigger OnAfterGetRecord()
     begin
         UpdateStatusStyle();
+    end;
+
+    trigger OnOpenPage()
+    var
+        Utilidades: Record ConfiguracionUtilidades;
+    begin
+        if Utilidades.Get() then
+            if not Utilidades."Activar Programar Publicacion" then
+                Error('La programación de publicaciones no está activada. Active la opción en "ConfiguracionUtilidades".');
     end;
 
     local procedure UpdateStatusStyle()

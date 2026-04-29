@@ -17,6 +17,8 @@ table 50011 ReducirDatosTablas
                     Rec."Nombre Tabla" := tablas."Object Caption"
                 else
                     Rec."Nombre Tabla" := '';
+                if Rec."ID Tabla" <> xRec."ID Tabla" then
+                    Rec."ID Campo" := 0;
             end;
         }
         field(2; "Nombre Tabla"; Text[100])
@@ -26,10 +28,15 @@ table 50011 ReducirDatosTablas
         field(3; "ID Campo"; Integer)
         {
             Caption = 'ID Campo';
+            TableRelation = Field."No." where("TableNo" = field("ID Tabla"));
         }
         field(4; "Filtro"; Text[250])
         {
             Caption = 'Filtro';
+        }
+        field(5; "Activar"; Boolean)
+        {
+            Caption = 'Activar';
         }
     }
     keys

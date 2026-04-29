@@ -2,6 +2,7 @@ table 50001 "ConfiguracionUtilidades"
 {
     Caption = 'Configuracion de Empresa';
     DataClassification = ToBeClassified;
+    DataPerCompany = false;
 
     fields
     {
@@ -16,6 +17,10 @@ table 50001 "ConfiguracionUtilidades"
         field(3; "Contraseña"; Text[100])
         {
             Caption = 'Contraseña';
+        }
+        field(4; "Activar Programar Publicacion"; Boolean)
+        {
+            Caption = 'Activar Programar Publicación';
         }
     }
     keys

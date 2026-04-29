@@ -184,7 +184,7 @@ page 50010 "DET Data Editor"
     begin
         if "ContraseñaPage".RunModal() <> Action::OK then
             Error('Acceso cancelado.');
-        ExcludeFlowFields := true; //much better for performance
+        ExcludeFlowFields := true;
 
         if DataEditorSetup.Get() then
             ShowRunAfter := DataEditorSetup."Show Run After";
