@@ -12,20 +12,4 @@ pageextension 50201 "Job Queue Entries" extends "Job Queue Entries"
             }
         }
     }
-    actions
-    {
-        addlast(Processing)
-        {
-            action(TestAPI)
-            {
-                ApplicationArea = All;
-                trigger OnAction()
-                var
-                    Test: Codeunit "API Test Runner";
-                begin
-                    Test.Run();
-                end;
-            }
-        }
-    }
 }
