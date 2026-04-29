@@ -1,6 +1,6 @@
 codeunit 50006 ReducirDatos
 {
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Environment Cleanup", OnClearCompanyConfig, '', false, false)]//Este evento funciona después de copiar la empresa, copia todo el contenido y después lanza este evento para borrar lo que no queremos copiar
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Environment Cleanup", OnClearCompanyConfig, '', false, false)]
     local procedure "Environment Cleanup_OnClearCompanyConfig"(CompanyName: Text; SourceEnv: Enum "Environment Type"; DestinationEnv: Enum "Environment Type")
     var
         Reducir: Record ReducirDatosTablas;

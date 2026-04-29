@@ -27,6 +27,14 @@ page 50022 ReducirDatosTablas
                 {
                     Caption = 'ID Campo Fecha';
                     ApplicationArea = All;
+                    trigger onLookup(var Text: Text): Boolean
+                    var
+                        Field: Record Field;
+                    begin
+                        Field.SetRange(TableNo, Rec."ID Tabla");
+                        if Page.RunModal(Page::"Fields Lookup", Field) = Action::LookupOK then
+                            Rec."ID Campo" := Field."No.";
+                    end;
                 }
                 field("Filtro"; Rec."Filtro")
                 {
