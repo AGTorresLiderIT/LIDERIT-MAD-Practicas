@@ -24,6 +24,6 @@ permissionset 50200 GeneratedPermission
         table "Job Queue Request" = X,
         codeunit MensajeEntorno = X,
         page config = X,
-        codeunit "LDRJob Queue Dispatcher" = X,
-        page "Job Queue Request API" = X;
+        page "Job Queue Request API" = X,
+        codeunit pruebaapifinal = X;
 }
