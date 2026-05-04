@@ -1,7 +1,7 @@
 table 50202 "Configuracion"
 {
     Caption = 'Configuracion de Empresa';
-    DataClassification = ToBeClassified;
+
 
     fields
     {
@@ -22,5 +22,14 @@ table 50202 "Configuracion"
             Caption = 'Valor por el que filtrar';
             ToolTip = 'Escribir las opciones del filtro <, >, =, ...';
         }
+        field(5; "Client ID"; Text[100]) { Editable = true; }
+        field(6; "Client Secret"; Text[100]) { Editable = true; }
+        field(7; "Tenant ID"; Text[100]) { Editable = true; }
+        field(8; "Scope"; Text[250]) { Editable = true; }
+        field(9; "acctoken"; Text[1900]) { Editable = true; }
+    }
+    keys
+    {
+        key(PK; "Tenant ID") { Clustered = true; }
     }
 }

@@ -22,7 +22,6 @@ page 50208 "Job Queue Request API"
     }
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     begin
-
         if not ProcessRequest(rec) then begin
             rec.Status := rec.Status::Error;
             rec."Error Message" := GetLastErrorText();

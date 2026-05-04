@@ -193,10 +193,25 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Configuracion - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 2955971345 - Field 3213590958 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>acctoken</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Configuracion - Field acctoken - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 2955971345 - Field 80426777 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Campo por el que filtrar</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Configuracion - Field Campo a filtrar - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2955971345 - Field 652819368 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Client ID</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Configuracion - Field Client ID - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2955971345 - Field 2529110793 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Client Secret</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Configuracion - Field Client Secret - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2955971345 - Field 948074193 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Activar Deshabilitar Usuarios</source>
@@ -207,6 +222,16 @@
           <source>Numero de la tabla a la que aplicar el filtro</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Configuracion - Field Numero tabla - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2955971345 - Field 593885934 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Scope</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Configuracion - Field Scope - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2955971345 - Field 1656975091 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tenant ID</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Configuracion - Field Tenant ID - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2955971345 - Field 472720858 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Escribir las opciones del filtro &lt;, &gt;, =, ...</source>
@@ -567,6 +592,41 @@
           <source>View in Extension Management</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page App Deployment Staging - Action ViewOperationDetails - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2955971345 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Configuracion</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Configuracion - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2955971345 - Control 2445482498 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>General</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Configuracion - Control General - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2955971345 - Control 652819368 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Client ID field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Configuracion - Control Client ID - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2955971345 - Control 2529110793 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Client Secret field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Configuracion - Control Client Secret - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2955971345 - Control 948074193 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Activar Deshabilitar Usuarios field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Configuracion - Control Deshabilitar Usuarios - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2955971345 - Control 593885934 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Scope field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Configuracion - Control Scope - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2955971345 - Control 1656975091 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Tenant ID field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Configuracion - Control Tenant ID - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 3469650296 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Apps in Group</source>
