@@ -45,7 +45,7 @@ page 50208 "Job Queue Request API"
 
             Request.Action::Stop:
                 begin
-                    JobQueue.CancelTask();
+                    JobQueue.Cancel();
                 end;
 
             Request.Action::Restart:

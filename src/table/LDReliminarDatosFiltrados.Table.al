@@ -1,4 +1,4 @@
-table 50217 "config"
+table 50217 "eliminarDatosFiltrados"
 {
     fields
     {

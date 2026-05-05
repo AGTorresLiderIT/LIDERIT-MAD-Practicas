@@ -1,4 +1,4 @@
-table 50300 "Eliminaralcopiar"
+table 50250 "Eliminaralcopiar"
 {
     Caption = 'Eliminaralcopiar';
     DataPerCompany = false;
@@ -33,12 +33,7 @@ table 50300 "Eliminaralcopiar"
         }
     }
 
-    fieldgroups
-    {
-    }
-
-
-    procedure SetEnabled(CompanyName: Text[30]; Enable: Boolean; ResetState: Boolean)
+    procedure SetEnabled(CompanyName: Text[30]; Enable: Boolean)
     var
         AssistedCompanySetupStatus: Record Eliminaralcopiar;
     begin

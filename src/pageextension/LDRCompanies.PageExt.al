@@ -15,30 +15,7 @@ pageextension 50200 Companies extends Companies
                 var
                     Eliminaralcopiar: Record "Eliminaralcopiar";
                 begin
-                    Eliminaralcopiar.SetEnabled(Rec.Name, EnableEliminarAlCopiar, false);
-                end;
-            }
-        }
-    }
-    actions
-    {
-        addafter("Create New Company")
-        {
-            action(Encender)
-            {
-                Image = Percentage;
-                ApplicationArea = all;
-                trigger OnAction()
-                var
-                    configuracion: Record Configuracion;
-                begin
-                    if configuracion."Deshabilitar Usuarios" = false then begin
-                        configuracion."Deshabilitar Usuarios" := true;
-                        Message('La opción de seleccionar empresas al copiar está activada.')
-                    end else begin
-                        configuracion."Deshabilitar Usuarios" := false;
-                        Message('La opción de seleccionar empresas al copiar está desactivada.')
-                    end;
+                    Eliminaralcopiar.SetEnabled(Rec.Name, EnableEliminarAlCopiar);
                 end;
             }
         }

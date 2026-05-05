@@ -1,7 +1,7 @@
-page 50207 config
+page 50207 eliminarDatosFiltrados
 {
     PageType = List;
-    SourceTable = "config";
+    SourceTable = "eliminarDatosFiltrados";
     ApplicationArea = All;
     UsageCategory = Administration;
 
