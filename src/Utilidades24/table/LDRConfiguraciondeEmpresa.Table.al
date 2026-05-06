@@ -6,6 +6,10 @@ table 50001 "ConfiguracionUtilidades"
 
     fields
     {
+        field(5; PK; Code[10])
+        {
+            Caption = 'PK';
+        }
         field(1; "Activar Selección Empresa"; Boolean)
         {
             Caption = 'Activar Selección Empresa';
@@ -25,7 +29,7 @@ table 50001 "ConfiguracionUtilidades"
     }
     keys
     {
-        key(PK; "Activar Selección Empresa")
+        key(PK; PK)
         {
             Clustered = true;
         }

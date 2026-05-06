@@ -27,12 +27,20 @@ page 50149 MantenerEmpresas
     var
         Empresas: Record Company;
         Mantener: Record MantenerEmpresas;
+        MantenerBorrar: Record MantenerEmpresas;
         Utilidades: Record ConfiguracionUtilidades;
     begin
         if Utilidades.Get() then
             if not Utilidades."Activar Selección Empresa" then
                 Error('La selección de empresas no está activada. Active la opción en "ConfiguracionUtilidades".')
-            else
+            else begin
+                if Mantener.FindSet() then
+                    repeat
+                        if not Empresas.Get(Mantener.Nombre) then begin
+                            MantenerBorrar.Get(Mantener.Nombre);
+                            MantenerBorrar.Delete();
+                        end;
+                    until Mantener.Next() = 0;
                 if Empresas.FindSet() then
                     repeat
                         if not Mantener.Get(Empresas.Name) then begin
@@ -42,5 +50,6 @@ page 50149 MantenerEmpresas
                             Mantener.Insert();
                         end;
                     until Empresas.Next() = 0
+            end;
     end;
 }

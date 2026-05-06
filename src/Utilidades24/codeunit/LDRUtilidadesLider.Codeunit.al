@@ -15,13 +15,12 @@ codeunit 50149 UtilidadesLider
             exit;
         if Empresas.FindSet() then
             repeat
-                if Mantener.Get(Empresas.Name) then begin
-                    if not Mantener.Mantener then begin
-                        EmpresasBorrar.Get(Empresas.Name);
-                        EmpresasBorrar.Delete(true);
-                    end;
-                end else
-                    Error('Hay alguna empresa que no está definida en la tabla');
+                if Mantener.Get(Empresas.Name) then
+                    if not Mantener.Mantener then
+                        if Empresas.Name <> CompanyName() then begin
+                            EmpresasBorrar.Get(Empresas.Name);
+                            EmpresasBorrar.Delete(true);
+                        end;
             until Empresas.Next() = 0
     end;
 

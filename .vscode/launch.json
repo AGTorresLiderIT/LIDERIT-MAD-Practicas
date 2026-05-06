@@ -19,7 +19,7 @@
         //     "usePublicURLFromServer": true
         // },
         {
-            "name": "Desarrollo-CDX",
+            "name": "Desarrollo",
             "request": "launch",
             "type": "al",
             "environmentType": "Sandbox",

@@ -25,7 +25,7 @@ page 50022 ReducirDatosTablas
                 }
                 field("ID Campo"; Rec."ID Campo")
                 {
-                    Caption = 'ID Campo Fecha';
+                    Caption = 'ID Campo';
                     ApplicationArea = All;
                     trigger onLookup(var Text: Text): Boolean
                     var
@@ -46,33 +46,6 @@ page 50022 ReducirDatosTablas
                     Caption = 'Activar';
                     ApplicationArea = All;
                 }
-            }
-        }
-    }
-    actions
-    {
-        area(Processing)
-        {
-            action("Asignar Fecha")
-            {
-                ApplicationArea = All;
-                Caption = 'Asignar Fecha';
-                Image = Calendar;
-
-                trigger OnAction()
-                var
-                    Conf: Record ConfigurarFecha;
-                    ConfPage: Page ConfigurarFecha;
-                begin
-                    if not Conf.Get() then begin
-                        Conf.Init();
-                        Conf.FKey := '';
-                        Conf.Insert();
-                        Commit();
-                    end;
-                    ConfPage.SetRecord(Conf);
-                    ConfPage.RunModal();
-                end;
             }
         }
     }
