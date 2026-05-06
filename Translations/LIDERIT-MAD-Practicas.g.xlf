@@ -6009,7 +6009,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page utilidadesLider - Control Client Secret - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 4008393688 - Control 1732512966 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Mensaje que sale al sabir una empresa en sandbox a quien no sea desarrollador</source>
+          <source>Contraseña para entrar al Data Editor Tool</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page utilidadesLider - Control Contraseña Data editor - Property Caption</note>
         </trans-unit>
@@ -6067,6 +6067,16 @@
           <source>SystemId</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension Job Queue Entries - Control SystemId - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 3922645780 - Action 217931361 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2183420390">
+          <source>Activa en el entorno los usuarios seleccionados</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension LDRUsers - Action Activar Usuarios - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 3922645780 - Action 3474855503 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2183420390">
+          <source>Desactiva en el entorno los usuarios seleccionados</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension LDRUsers - Action Desactivar Usuarios - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Enum 1136601824 - EnumValue 2678607854 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Deployed</source>

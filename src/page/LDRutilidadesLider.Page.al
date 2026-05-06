@@ -66,7 +66,7 @@ page 50209 utilidadesLider
                 field("Contraseña Data editor"; rec."contrasenaDet")
                 {
                     ApplicationArea = All;
-                    Caption = 'Mensaje que sale al sabir una empresa en sandbox a quien no sea desarrollador';
+                    Caption = 'Contraseña para entrar al Data Editor Tool';
                     ExtendedDatatype = Masked;
                 }
             }

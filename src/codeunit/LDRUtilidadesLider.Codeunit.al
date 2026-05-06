@@ -1,8 +1,8 @@
 codeunit 50203 utilidadesLider
 {
-    //Borrar datos al copiar entorno
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Environment Cleanup", OnClearCompanyConfig, '', false, false)]
-    local procedure "Environment Cleanup_OnClearCompanyConfig"(CompanyName: Text; SourceEnv: Enum "Environment Type"; DestinationEnv: Enum "Environment Type")
+    // //Borrar datos al copiar entorno
+    // [EventSubscriber(ObjectType::Codeunit, Codeunit::"Environment Cleanup", OnClearCompanyConfig, '', false, false)]
+    // local procedure "Environment Cleanup_OnClearCompanyConfig"(CompanyName: Text; SourceEnv: Enum "Environment Type"; DestinationEnv: Enum "Environment Type")
     // var
     //     setup: Record eliminarDatosFiltrados;
     //     config: record "utilidadesLider";
@@ -46,25 +46,25 @@ codeunit 50203 utilidadesLider
     //             RecRef.Close();
     //         until Setup.Next() = 0;
     // end;
-    var
-        Empresas: Record Company;
-        EmpresasBorrar: Record Company;
-        Mantener: Record Eliminaralcopiar;
-        Utilidades: Record utilidadesLider;
-    begin
-        if Utilidades.Get() then begin
-            if not Utilidades."Eliminar empresa al clonar" then
-                exit;
-        end else
-            exit;
-        if Empresas.FindSet() then
-            repeat
-                if Mantener.Get(Empresas.Name) then begin
-                    EmpresasBorrar.Get(Empresas.Name);
-                    EmpresasBorrar.Delete(true);
-                end;
-            until Empresas.Next() = 0
-    end;
+    // // var
+    // //     Empresas: Record Company;
+    // //     EmpresasBorrar: Record Company;
+    // //     Mantener: Record Eliminaralcopiar;
+    // //     Utilidades: Record utilidadesLider;
+    // // begin
+    // //     if Utilidades.Get() then begin
+    // //         if not Utilidades."Eliminar empresa al clonar" then
+    // //             exit;
+    // //     end else
+    // //         exit;
+    // //     if Empresas.FindSet() then
+    // //         repeat
+    // //             if Mantener.Get(Empresas.Name) then begin
+    // //                 EmpresasBorrar.Get(Empresas.Name);
+    // //                 EmpresasBorrar.Delete(true);
+    // //             end;
+    // //         until Empresas.Next() = 0
+    // // end;
 
     // Desactivar ususarios al copiar
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Environment Triggers", OnAfterCopyEnvironmentToSandbox, '', false, false)]
@@ -118,7 +118,8 @@ codeunit 50203 utilidadesLider
         user: Record user;
         setup: Record utilidadesLider;
     begin
-        setup.FindFirst();
+        if not setup.FindFirst() then
+            exit;
         user.SetRange("User Name", UserId);
         if not (UserId.StartsWith('user_') or user."Authentication Email".Contains('ider')) then
             if EnvInfo.IsSandbox() then
@@ -126,10 +127,15 @@ codeunit 50203 utilidadesLider
                     Message('%1', setup."mensaje Sandbox");
     end;
 
-    local procedure CompanyExists(CompanyName: Text): Boolean
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Environment Triggers", OnAfterCopyEnvironmentToSandboxPerCompany, '', false, false)]
+    local procedure OnAfterCopyEnvironmentToSandboxPerCompany_EnvirtonmentTriggers()
     var
-        Empresas: Record Company;
+        CompanyInformation: Record "Company Information";
     begin
-        exit(Empresas.Get(CompanyName));
+        CompanyInformation.Get();
+        CompanyInformation."System Indicator" := CompanyInformation."System Indicator"::Custom;
+        CompanyInformation."Custom System Indicator Text" := 'TEST';
+        CompanyInformation."System Indicator Style" := CompanyInformation."System Indicator Style"::Accent6;
+        CompanyInformation.Modify();
     end;
 }
