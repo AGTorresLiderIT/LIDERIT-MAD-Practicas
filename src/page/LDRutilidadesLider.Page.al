@@ -60,13 +60,13 @@ page 50209 utilidadesLider
                 field("Mensaje Sandbox"; rec."Mensaje Sandbox")
                 {
                     ApplicationArea = All;
-                    Caption = 'Mensaje que sale al sabir una empresa en sandbox a quien no sea desarrollador';
+                    Caption = 'Mensaje que sale al abrir una empresa en sandbox a quien no sea desarrollador';
                 }
 
-                field("Contraseña Data editor"; rec."contrasenaDet")
+                field("Contraseña"; rec."contrasenaDet")
                 {
                     ApplicationArea = All;
-                    Caption = 'Contraseña para entrar al Data Editor Tool';
+                    Caption = 'Contraseña para entrar a distintas utilidades';
                     ExtendedDatatype = Masked;
                 }
             }
@@ -99,7 +99,7 @@ page 50209 utilidadesLider
 
                 trigger OnAction()
                 begin
-                    Page.RunModal(Page::"eliminarDatosFiltrados");
+                    Page.RunModal(Page::ReducirDatosTablas);
                 end;
             }
         }

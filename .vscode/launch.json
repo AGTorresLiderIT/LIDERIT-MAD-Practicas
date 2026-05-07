@@ -2,11 +2,11 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "desarollo-CDX",
+            "name": "desarollo",
             "request": "launch",
             "type": "al",
             "environmentType": "Sandbox",
-            "environmentName": "desarollo",
+            "environmentName": "Desarollo2",
             "tenant": "09d5a8cc-bcd3-4c18-b6fc-fbc6d9cd8b74",
             "startupObjectId": 50200,
             "startupObjectType": "Page",

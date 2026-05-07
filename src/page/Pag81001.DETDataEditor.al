@@ -192,7 +192,6 @@ page 50301 "DET Data Editor"
 
         Pwd := PwdPage.GetPassword();
 
-        //Contraseña hardcodeada, cambiar a la deseada
         if Pwd <> setup.contrasenaDet then
             Error('Acceso denegado');
     end;

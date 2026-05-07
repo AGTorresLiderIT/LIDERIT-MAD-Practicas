@@ -1,70 +1,29 @@
 codeunit 50203 utilidadesLider
 {
-    // //Borrar datos al copiar entorno
-    // [EventSubscriber(ObjectType::Codeunit, Codeunit::"Environment Cleanup", OnClearCompanyConfig, '', false, false)]
-    // local procedure "Environment Cleanup_OnClearCompanyConfig"(CompanyName: Text; SourceEnv: Enum "Environment Type"; DestinationEnv: Enum "Environment Type")
-    // var
-    //     setup: Record eliminarDatosFiltrados;
-    //     config: record "utilidadesLider";
-    //     FieldRec: Record Field;
-    //     RecRef: RecordRef;
-    //     FieldRef: FieldRef;
-    // begin
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Environment Triggers", OnAfterCopyEnvironmentToSandbox, '', false, false)]
+    local procedure "MantenerEmpresas"()
+    var
+        Empresas: Record Company;
+        EmpresasBorrar: Record Company;
+        Mantener: Record MantenerEmpresas;
+        Utilidades: Record "utilidadeslider";
+    begin
+        if Utilidades.FindFirst() then begin
+            if not Utilidades."Eliminar empresa al clonar" then
+                exit;
+        end else
+            exit;
+        if Empresas.FindSet() then
+            repeat
+                if Mantener.Get(Empresas.Name) then
+                    if not Mantener.Mantener then
+                        if Empresas.Name <> CompanyName() then begin
+                            EmpresasBorrar.Get(Empresas.Name);
+                            EmpresasBorrar.Delete(true);
+                        end;
+            until Empresas.Next() = 0
+    end;
 
-    //     if not CompanyExists(CompanyName) then
-    //         exit;
-    //     Setup.ChangeCompany(CompanyName);
-    //     Config.ChangeCompany(CompanyName);
-
-    //     // Asegurar que hay configuración activa
-    //     if not Config.FindFirst() then
-    //         exit;
-
-    //     if not Config."Eliminar empresa al clonar" then
-    //         exit;
-
-    //     if Setup.FindSet() then
-    //         repeat
-    //             RecRef.Open(Setup."Table ID");
-
-    //             // Buscar el campo por caption
-    //             FieldRec.Reset();
-    //             FieldRec.SetRange(TableNo, Setup."Table ID");
-    //             FieldRec.SetRange("Field Caption", Setup."Field caption");
-
-    //             if FieldRec.FindFirst() then begin
-    //                 FieldRef := RecRef.Field(FieldRec."No.");
-
-    //                 // Aplicar filtro SOLO si hay valor
-    //                 if Setup."Filter Value" <> '' then
-    //                     FieldRef.SetFilter(Setup."Filter Value");
-
-    //                 // Borrar con filtros aplicados
-    //                 RecRef.DeleteAll();
-    //             end;
-
-    //             RecRef.Close();
-    //         until Setup.Next() = 0;
-    // end;
-    // // var
-    // //     Empresas: Record Company;
-    // //     EmpresasBorrar: Record Company;
-    // //     Mantener: Record Eliminaralcopiar;
-    // //     Utilidades: Record utilidadesLider;
-    // // begin
-    // //     if Utilidades.Get() then begin
-    // //         if not Utilidades."Eliminar empresa al clonar" then
-    // //             exit;
-    // //     end else
-    // //         exit;
-    // //     if Empresas.FindSet() then
-    // //         repeat
-    // //             if Mantener.Get(Empresas.Name) then begin
-    // //                 EmpresasBorrar.Get(Empresas.Name);
-    // //                 EmpresasBorrar.Delete(true);
-    // //             end;
-    // //         until Empresas.Next() = 0
-    // // end;
 
     // Desactivar ususarios al copiar
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Environment Triggers", OnAfterCopyEnvironmentToSandbox, '', false, false)]
@@ -84,30 +43,30 @@ codeunit 50203 utilidadesLider
             end;
     end;
 
-    //Eliminar datos de empresas al clonar el enviroment
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Environment Cleanup", OnClearCompanyConfig, '', false, false)]
-    local procedure "MantenerEmpresas"()
-    var
-        Empresas: Record Company;
-        eliminaralcopiar: Record Eliminaralcopiar;
-        setup: record "utilidadesLider";
+    // //Eliminar datos de empresas al clonar el enviroment
+    // [EventSubscriber(ObjectType::Codeunit, Codeunit::"Environment Cleanup", OnClearCompanyConfig, '', false, false)]
+    // local procedure "MantenerEmpresas"()
+    // var
+    //     Empresas: Record Company;
+    //     eliminaralcopiar: Record Eliminaralcopiar;
+    //     setup: record "utilidadesLider";
 
-    begin
-        if not setup.FindFirst() then
-            exit;
+    // begin
+    //     if not setup.FindFirst() then
+    //         exit;
 
-        if not setup."Borrado de datos" then
-            exit;
+    //     if not setup."Borrado de datos" then
+    //         exit;
 
-        eliminaralcopiar.SetRange(Enabled, true);
+    //     eliminaralcopiar.SetRange(Enabled, true);
 
-        if eliminaralcopiar.FindSet() then
-            repeat
-                if Empresas.Get(eliminaralcopiar."Company Name") then
-                    Empresas.Delete(true)
+    //     if eliminaralcopiar.FindSet() then
+    //         repeat
+    //             if Empresas.Get(eliminaralcopiar."Company Name") then
+    //                 Empresas.Delete(true)
 
-            until eliminaralcopiar.Next() = 0;
-    end;
+    //         until eliminaralcopiar.Next() = 0;
+    // end;
 
 
     //Mensaje de entorno estas en sandbox
