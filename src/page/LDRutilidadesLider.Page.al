@@ -86,7 +86,7 @@ page 50209 utilidadesLider
 
                 trigger OnAction()
                 begin
-                    Page.RunModal(Page::"companies");
+                    Page.RunModal(Page::MantenerEmpresas);
                 end;
             }
             action("Ir a filtrado de datos al clonar")

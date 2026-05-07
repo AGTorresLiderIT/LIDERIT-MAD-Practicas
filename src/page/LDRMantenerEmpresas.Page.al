@@ -32,7 +32,7 @@ page 50329 MantenerEmpresas
     begin
         if Utilidades.FindFirst() then
             if not Utilidades."Eliminar empresa al clonar" then
-                Error('La selección de empresas no está activada. Active la opción en "ConfiguracionUtilidades".')
+                Error('La selección de empresas no está activada. Active la opción en "Utilidades lider".')
             else begin
                 if Mantener.FindSet() then
                     repeat
