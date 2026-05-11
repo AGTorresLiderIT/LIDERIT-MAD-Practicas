@@ -5,12 +5,14 @@ page 50209 utilidadesLider
     PageType = Card;
     SourceTable = utilidadesLider;
     UsageCategory = Administration;
+    InsertAllowed = false;
+    DeleteAllowed = false;
 
     layout
     {
         area(Content)
         {
-            repeater(Group)
+            group(General)
             {
                 Caption = 'General';
 
@@ -104,4 +106,11 @@ page 50209 utilidadesLider
             }
         }
     }
+    trigger OnOpenPage()
+    begin
+        if not Rec.Get() then begin
+            Rec.Init();
+            Rec.Insert();
+        end;
+    end;
 }
