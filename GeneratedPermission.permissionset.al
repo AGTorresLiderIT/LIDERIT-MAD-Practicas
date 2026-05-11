@@ -88,5 +88,8 @@ permissionset 50200 GeneratedPermission
         page COBCORWizSetup = X,
         page COBCORWizUserConfigurationList = X,
         page COBCORWizUserRegistration = X,
-        page COBCORWizUsersBuffer = X;
+        page COBCORWizUsersBuffer = X,
+        page "COBCOR Permisos Listados" = X,
+        tabledata "COBCOR Permsisos dinamicos" = RIMD,
+        table "COBCOR Permsisos dinamicos" = X;
 }
