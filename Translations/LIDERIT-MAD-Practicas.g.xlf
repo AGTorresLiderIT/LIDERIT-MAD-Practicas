@@ -7963,10 +7963,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page utilidadesLider - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 4008393688 - Control 739346273 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 4008393688 - Control 2445482498 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>General</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page utilidadesLider - Control Group - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page utilidadesLider - Control General - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 4008393688 - Control 118796277 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Activar borrado de datos</source>
@@ -7983,38 +7983,68 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page utilidadesLider - Control Client Secret - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 4008393688 - Control 2297866965 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 4008393688 - Control 2297866965 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Contraseña para entrar a distintas utilidades</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page utilidadesLider - Control Contraseña - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4008393688 - Control 2297866965 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Contraseña</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page utilidadesLider - Control Contraseña - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 4008393688 - Control 948074193 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 4008393688 - Control 948074193 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Activar Deshabilitar Usuarios</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page utilidadesLider - Control Deshabilitar Usuarios - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4008393688 - Control 948074193 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Deshabilitar Usuarios</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page utilidadesLider - Control Deshabilitar Usuarios - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 4008393688 - Control 3042419832 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Activar mantener empresas al clonar</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page utilidadesLider - Control Eliminar empresa al clonar - Property ToolTip</note>
+        </trans-unit>
         <trans-unit id="Page 4008393688 - Control 3042419832 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Activar eliminar empresas seleccionadas al clonar</source>
+          <source>Mantener empresas al clonar</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page utilidadesLider - Control Eliminar empresa al clonar - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 4008393688 - Control 3251093002 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 4008393688 - Control 3251093002 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Mensaje que sale al abrir una empresa en sandbox a quien no sea desarrollador</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page utilidadesLider - Control Mensaje Sandbox - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4008393688 - Control 3251093002 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Mensaje del sandbox</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page utilidadesLider - Control Mensaje Sandbox - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 4008393688 - Control 593885934 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 4008393688 - Control 593885934 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Scope para el token normalmente: https://api.businesscentral.dynamics.com/.default</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page utilidadesLider - Control Scope - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4008393688 - Control 593885934 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Scope para el token</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page utilidadesLider - Control Scope - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 4008393688 - Control 1656975091 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>En la url desde el .com/ hasta /</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page utilidadesLider - Control Tenant ID - Property ToolTip</note>
+        </trans-unit>
         <trans-unit id="Page 4008393688 - Control 1656975091 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Id del tenant (en la url desde el .com/ hasta /)</source>
+          <source>Id del tenant</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page utilidadesLider - Control Tenant ID - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 4008393688 - Action 4018448791 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Ir a configuracion borrar empresas</source>
+          <source>Ir a configuracion mantener empresas</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page utilidadesLider - Action Ir a configuracion borrar empresas - Property Caption</note>
         </trans-unit>

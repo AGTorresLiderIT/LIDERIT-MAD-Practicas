@@ -19,13 +19,15 @@ page 50209 utilidadesLider
                 field("Deshabilitar Usuarios"; Rec."Deshabilitar Usuarios")
                 {
                     ApplicationArea = All;
-                    Caption = 'Activar Deshabilitar Usuarios';
+                    Caption = 'Deshabilitar Usuarios';
+                    ToolTip = 'Activar Deshabilitar Usuarios';
                 }
 
                 field("Eliminar empresa al clonar"; Rec."Eliminar empresa al clonar")
                 {
                     ApplicationArea = All;
-                    Caption = 'Activar eliminar empresas seleccionadas al clonar';
+                    Caption = 'Mantener empresas al clonar';
+                    ToolTip = 'Activar mantener empresas al clonar';
                 }
 
                 field("Borrado de datos"; rec."Borrado de datos")
@@ -50,25 +52,29 @@ page 50209 utilidadesLider
                 field("Tenant ID"; Rec."Tenant ID")
                 {
                     ApplicationArea = All;
-                    Caption = 'Id del tenant (en la url desde el .com/ hasta /)';
+                    Caption = 'Id del tenant';
+                    ToolTip = 'En la url desde el .com/ hasta /';
                 }
 
                 field("Scope"; Rec."Scope")
                 {
                     ApplicationArea = All;
-                    Caption = 'Scope para el token normalmente: https://api.businesscentral.dynamics.com/.default';
+                    Caption = 'Scope para el token';
+                    ToolTip = 'Scope para el token normalmente: https://api.businesscentral.dynamics.com/.default';
                 }
 
                 field("Mensaje Sandbox"; rec."Mensaje Sandbox")
                 {
                     ApplicationArea = All;
-                    Caption = 'Mensaje que sale al abrir una empresa en sandbox a quien no sea desarrollador';
+                    Caption = 'Mensaje del sandbox';
+                    ToolTip = 'Mensaje que sale al abrir una empresa en sandbox a quien no sea desarrollador';
                 }
 
                 field("Contraseña"; rec."contrasenaDet")
                 {
                     ApplicationArea = All;
-                    Caption = 'Contraseña para entrar a distintas utilidades';
+                    Caption = 'Contraseña';
+                    ToolTip = 'Contraseña para entrar a distintas utilidades';
                     ExtendedDatatype = Masked;
                 }
             }
@@ -80,7 +86,7 @@ page 50209 utilidadesLider
         {
             action("Ir a configuracion borrar empresas")
             {
-                Caption = 'Ir a configuracion borrar empresas';
+                Caption = 'Ir a configuracion mantener empresas';
                 Image = View;
                 ApplicationArea = All;
                 Promoted = true;
