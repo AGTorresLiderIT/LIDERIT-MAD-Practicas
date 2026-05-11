@@ -9,6 +9,7 @@ codeunit 50326 ReducirDatos
         FldRef: FieldRef;
         Borrar: Boolean;
     begin
+        setup.FindFirst();
         if setup."Borrado de datos" then begin
             Reducir.ChangeCompany(CompanyName);
             if Reducir.FindSet() then

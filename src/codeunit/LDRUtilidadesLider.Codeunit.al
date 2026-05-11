@@ -35,39 +35,12 @@ codeunit 50203 utilidadesLider
         if CompanyName = '' then
             exit;
 
-
         if Setup.FindFirst() then
             if setup."Deshabilitar Usuarios" then begin
                 UserTable.SetFilter("Contact Email", '<>*@liderit.es');
                 UserTable.ModifyAll(State, UserTable.State::Disabled);
             end;
     end;
-
-    // //Eliminar datos de empresas al clonar el enviroment
-    // [EventSubscriber(ObjectType::Codeunit, Codeunit::"Environment Cleanup", OnClearCompanyConfig, '', false, false)]
-    // local procedure "MantenerEmpresas"()
-    // var
-    //     Empresas: Record Company;
-    //     eliminaralcopiar: Record Eliminaralcopiar;
-    //     setup: record "utilidadesLider";
-
-    // begin
-    //     if not setup.FindFirst() then
-    //         exit;
-
-    //     if not setup."Borrado de datos" then
-    //         exit;
-
-    //     eliminaralcopiar.SetRange(Enabled, true);
-
-    //     if eliminaralcopiar.FindSet() then
-    //         repeat
-    //             if Empresas.Get(eliminaralcopiar."Company Name") then
-    //                 Empresas.Delete(true)
-
-    //         until eliminaralcopiar.Next() = 0;
-    // end;
-
 
     //Mensaje de entorno estas en sandbox
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Company Triggers", 'OnCompanyOpen', '', false, false)]

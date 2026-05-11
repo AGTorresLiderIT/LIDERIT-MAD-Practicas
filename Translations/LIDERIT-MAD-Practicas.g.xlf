@@ -2948,21 +2948,6 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table MantenerEmpresas - Field Nombre - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Table 1713600163 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Prueba</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Prueba - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 1713600163 - Field 1991915875 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Fecha</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Prueba - Field Fecha - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 1713600163 - Field 842726990 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Hola</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Prueba - Field Hola - Property Caption</note>
-        </trans-unit>
         <trans-unit id="Table 3709675678 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>ReducirDatosTablas</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -7937,31 +7922,6 @@
           <source>Specifies the value of the Nombre field.</source>
           <note from="Developer" annotates="general" priority="2">%</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page MantenerEmpresas - Control Nombre - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 1713600163 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Prueba</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Prueba - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 1713600163 - Control 1991915875 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>h</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Prueba - Control Fecha - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 1713600163 - Control 1991915875 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Fecha</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Prueba - Control Fecha - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 1713600163 - Control 842726990 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>h</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Prueba - Control Hola - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 1713600163 - Control 842726990 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Hola</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Prueba - Control Hola - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3709675678 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Reducir Datos</source>
