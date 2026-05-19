@@ -1,4 +1,4 @@
-permissionset 50200 GeneratedPermission
+permissionset 50200 LDRUtil_Permission
 {
     Assignable = true;
     Permissions = tabledata "App Deployment Staging" = RIMD,

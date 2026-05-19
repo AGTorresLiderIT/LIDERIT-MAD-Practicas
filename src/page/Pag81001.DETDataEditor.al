@@ -187,6 +187,7 @@ page 50301 "DET Data Editor"
         PwdPage: Page "DET Password Dialog";
         Pwd: Text;
     begin
+        setup.FindFirst();
         if PwdPage.RunModal() <> Action::OK then
             Error('Cancelado');
 

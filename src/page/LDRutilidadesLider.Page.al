@@ -97,6 +97,7 @@ page 50209 utilidadesLider
                     Page.RunModal(Page::MantenerEmpresas);
                 end;
             }
+
             action("Ir a filtrado de datos al clonar")
             {
                 Caption = 'Ir a filtrado de datos al clonar';
@@ -110,8 +111,10 @@ page 50209 utilidadesLider
                     Page.RunModal(Page::ReducirDatosTablas);
                 end;
             }
+
         }
     }
+
     trigger OnOpenPage()
     begin
         if not Rec.Get() then begin
@@ -119,4 +122,5 @@ page 50209 utilidadesLider
             Rec.Insert();
         end;
     end;
+
 }

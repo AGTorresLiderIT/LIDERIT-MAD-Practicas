@@ -168,6 +168,31 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table App Deployment Staging - Field Wait for Completion - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 1988391298 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Permisos Dinámicos</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Permisos Dinámicos"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table COBCOR Permsisos dinamicos - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1988391298 - Field 1559139290 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Activo</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table COBCOR Permsisos dinamicos - Field Activo - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1988391298 - Field 3531868071 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Field No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table COBCOR Permsisos dinamicos - Field Field No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1988391298 - Field 815566802 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Nombre Permiso</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table COBCOR Permsisos dinamicos - Field Nombre Permiso - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1988391298 - Field 2708250016 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>User ID</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table COBCOR Permsisos dinamicos - Field User ID - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 1799570124 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Wizard Departments</source>
           <note from="Developer" annotates="general" priority="2">ESP="Departamentos Wizard"</note>
@@ -3513,140 +3538,10 @@
           <note from="Developer" annotates="general" priority="2">ESP="ID Usuario"</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control gUserID - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 3933861969 - Control 4037252596 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Company parameters</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Permisos gestionados por usuarios"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control Permisos gestionados por usuarios - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3933861969 - Control 1748582326 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Approvals</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Aprobaciones"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control Aprobaciones - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3933861969 - Control 1375603903 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Compliance</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Compliance"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control Compliance - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3933861969 - Control 2887933732 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Accounting</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Contabilidad"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control Contabilidad - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3933861969 - Control 1156833456 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Purchases/Credit Memo</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Facturas/Abonos"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control Facturas/Abonos - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3933861969 - Control 3503253305 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Post Cred Mem Without Appl To</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Nota de abono sin Liquidación"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control COBCORPostCredMemWithoutApplTo - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3933861969 - Control 2887801870 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Financing</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Financiación"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control Financiación - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3933861969 - Control 2574825653 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Liquidity</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Liquidez"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control Liquidez - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3933861969 - Control 3088904899 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Project master</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Maestro Proyectos"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control Maestro Proyectos - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3933861969 - Control 3955753512 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Cloud</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Nube"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control Nube - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3933861969 - Control 540485834 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Core Admin</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Administrador Core"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control COBCORIsAdminCore - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3933861969 - Control 239761664 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Cloud Administrator</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Administrador Nube"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control COBCORIsCloudAdmin - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3933861969 - Control 1063975819 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Cloud Local</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Administrador Local Nube"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control COBCORIsLocalCloudAdmin - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3933861969 - Control 216141961 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Other setup values</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Otros valores de configuración"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control Otros valores de configuración - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3933861969 - Control 2926120339 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Allow Purch Inv Whithout Ord</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Permitir Factura Compra sin Pedido"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control COBCORAllowPurchInvWhithoutOrd - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3933861969 - Control 646805395 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Disable Internal Doc Warning</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Desactivar mensaje Comprobante"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control COBCORDisableInternalDocWarning - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3933861969 - Control 264002388 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Disable Reporting Warning</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Desactivar aviso fecha reporting"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control COBCORDisableReportingWarning - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3933861969 - Control 2240634801 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Validation Log Active</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Activar Log de Validación"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control COBCORValidationLog - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3933861969 - Control 2748443412 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Orders</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Pedidos"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control Pedidos - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3933861969 - Control 2525958026 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Allow Reopen Purchase Order</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Permitir Reabrir Pedido de Compra"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control COBCORReopenPurchaseOrder - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3933861969 - Control 1961717314 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Accounting periods</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Periodos contables"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control Periodos contables - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3933861969 - Control 2059691337 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Allow Posting From</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Permitir registro desde:"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control COBCORAllowPostingFrom - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3933861969 - Control 708857670 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Allow Posting To</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Permitir registro hasta:"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control COBCORAllowPostingTo - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3933861969 - Control 3556983910 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>budgets</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Presupuestos"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control Presupuestos - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3933861969 - Control 2979908568 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Treasury</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Tesorería"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control Tesorería - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3933861969 - Control 2217868885 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Post Payments Without Appl To</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Permitir Pagos sin Liquidación"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control COBCORPostPaymentsWithoutApplTo - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3933861969 - Control 1335980679 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Post Receivables Without Appl To</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Permitir Cobros sin Liquidación"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control COBCORPostReceivablesWithoutApplTo - Property Caption</note>
+        <trans-unit id="Page 3933861969 - Control 369418799 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Permisos del Usuario</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Permisos del Usuario"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control PermisosDinamicos - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 25329358 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Wizard Assign Roles</source>
