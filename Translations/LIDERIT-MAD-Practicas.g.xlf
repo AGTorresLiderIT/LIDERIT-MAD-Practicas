@@ -7818,6 +7818,11 @@
           <note from="Developer" annotates="general" priority="2">%</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page MantenerEmpresas - Control Nombre - Property ToolTip</note>
         </trans-unit>
+        <trans-unit id="Page 1846049712 - Action 2201114829 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Poner todas las empresas en la tabla</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page MantenerEmpresas - Action Poner todas las empresas - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3709675678 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Reducir Datos</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -7854,7 +7859,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page ReducirDatosTablas - Control Nombre Tabla - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 4008393688 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Utilidades lider</source>
+          <source>Utilidades LIDER</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page utilidadesLider - Property Caption</note>
         </trans-unit>

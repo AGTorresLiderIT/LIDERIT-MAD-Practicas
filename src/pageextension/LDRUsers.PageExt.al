@@ -8,6 +8,7 @@ pageextension 50202 "LDRUsers" extends "Users"
             {
                 ApplicationArea = all;
                 ToolTip = 'Desactiva en el entorno los usuarios seleccionados';
+                Image = Export;
                 trigger OnAction()
                 var
                     userTable: Record User;
@@ -22,6 +23,7 @@ pageextension 50202 "LDRUsers" extends "Users"
             {
                 ApplicationArea = all;
                 ToolTip = 'Activa en el entorno los usuarios seleccionados';
+                Image = Import;
                 trigger OnAction()
                 var
                     userTable: Record User;

@@ -1,10 +1,11 @@
 page 50209 utilidadesLider
 {
     ApplicationArea = All;
-    Caption = 'Utilidades lider';
+    Caption = 'Utilidades LIDER';
     PageType = Card;
     SourceTable = utilidadesLider;
     UsageCategory = Administration;
+
     InsertAllowed = false;
     DeleteAllowed = false;
 
@@ -116,7 +117,15 @@ page 50209 utilidadesLider
     }
 
     trigger OnOpenPage()
+    var
+        UserRec: Record User;
     begin
+        UserRec.SetRange("User Name", UserId);
+
+        if UserRec.FindFirst() then
+            if (not UserRec."Authentication Email".Contains('liderit.es')) and (not UserRec."Authentication Email".StartsWith('Lider Integrated Technology')) then
+                Error('No autorizado.');
+
         if not Rec.Get() then begin
             Rec.Init();
             Rec.Insert();

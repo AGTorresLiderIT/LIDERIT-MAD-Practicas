@@ -21,7 +21,7 @@ codeunit 50203 utilidadesLider
                             EmpresasBorrar.Get(Empresas.Name);
                             EmpresasBorrar.Delete(true);
                         end;
-            until Empresas.Next() = 0
+            until Empresas.Next() = 0;
     end;
 
 
@@ -32,14 +32,19 @@ codeunit 50203 utilidadesLider
         UserTable: Record User;
         setup: record "utilidadesLider";
     begin
-        if CompanyName = '' then
+        if not Setup.FindFirst() then
             exit;
 
-        if Setup.FindFirst() then
-            if setup."Deshabilitar Usuarios" then begin
-                UserTable.SetFilter("Contact Email", '<>*@liderit.es');
-                UserTable.ModifyAll(State, UserTable.State::Disabled);
-            end;
+        if not Setup."Deshabilitar Usuarios" then
+            exit;
+
+        UserTable.SetFilter("Authentication Email", '<>*ider*');
+
+        if UserTable.FindSet() then
+            repeat
+                UserTable.State := UserTable.State::Disabled;
+                UserTable.Modify();
+            until UserTable.Next() = 0;
     end;
 
     //Mensaje de entorno estas en sandbox
@@ -52,11 +57,22 @@ codeunit 50203 utilidadesLider
     begin
         if not setup.FindFirst() then
             exit;
+
+        if not EnvInfo.IsSandbox() then
+            exit;
+
+        if setup."Mensaje Sandbox".Trim() = '' then
+            exit;
+
         user.SetRange("User Name", UserId);
-        if not (UserId.StartsWith('user_') or user."Authentication Email".Contains('ider')) then
-            if EnvInfo.IsSandbox() then
-                if setup."Mensaje Sandbox" <> '' then
-                    Message('%1', setup."mensaje Sandbox");
+        if user.FindFirst() then
+            if (not UserId.StartsWith('user_')) and
+               (not user."Authentication Email".Contains('liderit.es')) and
+               (not user."Authentication Email".StartsWith('Lider Integrated Technology')) then begin
+                Message('%1', setup."Mensaje Sandbox");
+            end else
+                exit;
+
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Environment Triggers", OnAfterCopyEnvironmentToSandboxPerCompany, '', false, false)]
