@@ -3513,10 +3513,10 @@
           <note from="Developer" annotates="general" priority="2">ESP="Conf. Permisos Core"</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 3933861969 - Control 67383084 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the Company Name field.</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Nombre Empresa"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control COBCORCompanyName - Property ToolTip</note>
+        <trans-unit id="Page 3933861969 - Control 133130612 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>User Companies</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Empresas del Usuario"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control EmpresasUsuario - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3933861969 - Control 4060388513 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Country</source>
@@ -7803,6 +7803,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page DET Select Fields - Action Set Included - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 133130612 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Empresas del Usuario</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EmpresasUsuario - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 1846049712 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>MantenerEmpresas</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -7818,10 +7823,45 @@
           <note from="Developer" annotates="general" priority="2">%</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page MantenerEmpresas - Control Nombre - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 1846049712 - Action 2201114829 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Poner todas las empresas en la tabla</source>
+        <trans-unit id="Page 1846049712 - Action 3602429048 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Pulsar para mantener las empresas seleccionadas.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page MantenerEmpresas - Action Mantener empresas - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1846049712 - Action 3602429048 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Mantener empresas</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page MantenerEmpresas - Action Poner todas las empresas - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page MantenerEmpresas - Action Mantener empresas - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1846049712 - Action 332373873 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Pulsar para que aparezcan todas las empresas del entorno con el check de mantener activo.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page MantenerEmpresas - Action Mantener todas las empresas - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1846049712 - Action 332373873 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Mantener todas las empresas</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page MantenerEmpresas - Action Mantener todas las empresas - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1846049712 - Action 3473324391 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Pulsar para no mantener las empresas seleccionadas.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page MantenerEmpresas - Action No Mantener empresas - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1846049712 - Action 3473324391 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No Mantener empresas</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page MantenerEmpresas - Action No Mantener empresas - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1846049712 - Action 1967058738 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Desactivar todos los checks de mantener.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page MantenerEmpresas - Action No Mantener todas las empresas - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1846049712 - Action 1967058738 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No Mantener todas las empresas</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page MantenerEmpresas - Action No Mantener todas las empresas - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3709675678 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Reducir Datos</source>

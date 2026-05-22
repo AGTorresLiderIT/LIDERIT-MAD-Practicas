@@ -66,12 +66,12 @@ codeunit 50203 utilidadesLider
 
         user.SetRange("User Name", UserId);
         if user.FindFirst() then
-            if (not UserId.StartsWith('user_')) and
-               (not user."Authentication Email".Contains('liderit.es')) and
-               (not user."Authentication Email".StartsWith('Lider Integrated Technology')) then begin
+            // if (not UserId.StartsWith('user_')) and
+            //    (not user."Authentication Email".Contains('liderit.es')) and
+            //    (not user."Authentication Email".StartsWith('Lider Integrated Technology')) then begin
                 Message('%1', setup."Mensaje Sandbox");
-            end else
-                exit;
+        // end else
+        //     exit;
 
     end;
 

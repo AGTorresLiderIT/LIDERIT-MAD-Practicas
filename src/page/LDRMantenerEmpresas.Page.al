@@ -27,9 +27,10 @@ page 50329 MantenerEmpresas
     {
         area(Processing)
         {
-            action("Poner todas las empresas")
+            action("Mantener todas las empresas")
             {
-                Caption = 'Poner todas las empresas en la tabla';
+                Caption = 'Mantener todas las empresas';
+                ToolTip = 'Pulsar para que aparezcan todas las empresas del entorno con el check de mantener activo.', Comment = '%';
                 Image = View;
                 ApplicationArea = All;
 
@@ -54,6 +55,76 @@ page 50329 MantenerEmpresas
                     CurrPage.Update(false);
 
                     Message('Todas las empresas han sido añadidas y marcadas para mantener.');
+                end;
+            }
+            action("No Mantener todas las empresas")
+            {
+                Caption = 'No Mantener todas las empresas';
+                ToolTip = 'Desactivar todos los checks de mantener.', Comment = '%';
+                Image = View;
+                ApplicationArea = All;
+
+                trigger OnAction()
+                var
+                    Mantener: Record MantenerEmpresas;
+                begin
+                    if Mantener.FindSet() then begin
+                        Mantener.Reset();
+                        Mantener.ModifyAll(Mantener, false);
+                    end;
+                    CurrPage.Update(false);
+
+                    Message('Todas las empresas han sido marcadas para no mantenerse.');
+                end;
+            }
+            action("Mantener empresas")
+            {
+                Caption = 'Mantener empresas';
+                ToolTip = 'Pulsar para mantener las empresas seleccionadas.', Comment = '%';
+                Image = View;
+                ApplicationArea = All;
+
+                trigger OnAction()
+                var
+                    RecSeleccionado: Record MantenerEmpresas;
+                begin
+                    CurrPage.SetSelectionFilter(RecSeleccionado);
+                    if RecSeleccionado.FindSet() then
+                        repeat
+                            if not RecSeleccionado.Mantener then begin
+                                RecSeleccionado.Mantener := true;
+                                RecSeleccionado.Modify();
+                            end;
+                        until RecSeleccionado.Next() = 0;
+
+                    CurrPage.Update(false);
+
+                    Message('Las empresas seleccionadas han sido marcadas para mantenerse.');
+                end;
+            }
+            action("No Mantener empresas")
+            {
+                Caption = 'No Mantener empresas';
+                ToolTip = 'Pulsar para no mantener las empresas seleccionadas.', Comment = '%';
+                Image = View;
+                ApplicationArea = All;
+
+                trigger OnAction()
+                var
+                    RecSeleccionado: Record MantenerEmpresas;
+                begin
+                    CurrPage.SetSelectionFilter(RecSeleccionado);
+                    if RecSeleccionado.FindSet() then
+                        repeat
+                            if RecSeleccionado.Mantener then begin
+                                RecSeleccionado.Mantener := false;
+                                RecSeleccionado.Modify();
+                            end;
+                        until RecSeleccionado.Next() = 0;
+
+                    CurrPage.Update(false);
+
+                    Message('Las empresas seleccionadas han sido marcadas para no mantenerse.');
                 end;
             }
         }
