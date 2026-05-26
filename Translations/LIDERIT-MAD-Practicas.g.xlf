@@ -3513,10 +3513,10 @@
           <note from="Developer" annotates="general" priority="2">ESP="Conf. Permisos Core"</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 3933861969 - Control 133130612 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>User Companies</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Empresas del Usuario"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control EmpresasUsuario - Property Caption</note>
+        <trans-unit id="Page 3933861969 - Control 67383084 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Company Name field.</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Nombre Empresa"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORPermisosCore - Control COBCORCompanyName - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 3933861969 - Control 4060388513 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Country</source>
@@ -3608,14 +3608,9 @@
           <note from="Developer" annotates="general" priority="2">ESP="Registro de Roles"</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page COBCORWizAssignRoles - Control COBCORRoleRegistration - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 25329358 - Control 858672770 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the target company for role registration.</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Especifica la empresa destino para registrar el rol"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORWizAssignRoles - Control COBCORTargetCompany - Property ToolTip</note>
-        </trans-unit>
         <trans-unit id="Page 25329358 - Control 858672770 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Company</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Empresa"</note>
+          <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page COBCORWizAssignRoles - Control COBCORTargetCompany - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 25329358 - Control 2141736533 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -7802,11 +7797,6 @@
           <source>Set Included</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page DET Select Fields - Action Set Included - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 133130612 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Empresas del Usuario</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page EmpresasUsuario - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1846049712 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>MantenerEmpresas</source>

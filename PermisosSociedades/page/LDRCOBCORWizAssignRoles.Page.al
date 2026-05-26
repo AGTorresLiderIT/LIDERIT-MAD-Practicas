@@ -127,9 +127,9 @@ page 50350 COBCORWizAssignRoles
                 field(COBCORTargetCompany; COBCORTargetCompany)
                 {
                     ApplicationArea = All;
-                    Caption = 'Company', Comment = 'ESP="Empresa"';
-                    ToolTip = 'Specifies the target company for role registration.', Comment = 'ESP="Especifica la empresa destino para registrar el rol"';
+                    Caption = 'Company';
 
+                    TableRelation = Company.Name;
 
                     trigger OnValidate()
                     begin
@@ -390,7 +390,7 @@ page 50350 COBCORWizAssignRoles
     var
         //g_recUserSetup: Record "User Setup";
         gCOBCORWizUsersMgt: Codeunit COBCORWizUsersMgt;
-        COBCORTargetCompany: Text[30];
+        COBCORTargetCompany: Text[100];
         COBCORTargetRole: Code[20];
         COBCORTargetDelegation: Text[250];
         ShowOptions: Boolean;
