@@ -139,26 +139,8 @@ page 50350 COBCORWizAssignRoles
                 field(COBCORTargetRole; COBCORTargetRole)
                 {
                     ApplicationArea = All;
-                    Caption = 'Company Permission', Comment = 'ESP="Permiso Empresa"';
-                    TableRelation = COBCORWizRolesCOBRAList."Role ID";
-                    LookupPageId = COBCORWizRolesCobraList;
-                    ToolTip = 'Specifies the role to register in the selected company.', Comment = 'ESP="Especifica el rol a registrar en la empresa seleccionada"';
-                }
-                field(COBCORTargetDelegation; COBCORTargetDelegation)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Delegation Filter', Comment = 'ESP="Filtro Delegación"';
-                    ToolTip = 'Specifies the delegation filter for the role registration.', Comment = 'ESP="Especifica el filtro de delegación para el registro del rol"';
-
-                    trigger OnLookup(var Text: Text): Boolean
-                    begin
-                        if gCOBCORWizUsersMgt.LookupDelegationValue(COBCORTargetCompany, COBCORTargetDelegation) then begin
-                            Text := COBCORTargetDelegation;
-                            exit(true);
-                        end;
-
-                        exit(false);
-                    end;
+                    Caption = 'Selected Roles', Comment = 'ESP="Roles Seleccionados"';
+                    Editable = false;
                 }
             }
 
@@ -244,15 +226,47 @@ page 50350 COBCORWizAssignRoles
                     CurrPage.Update(false);
                 end;
             }
+            action(COBCORSelectRoles)
+            {
+                ApplicationArea = All;
+                Caption = '1. Select Roles', Comment = 'ESP="1. Seleccionar Roles"';
+                Image = SelectEntries;
+                ToolTip = 'Opens the list to select multiple roles.', Comment = 'ESP="Abre la lista para seleccionar múltiples roles a la vez."';
+                trigger OnAction()
+                var
+                    AggPermSet: Record "Aggregate Permission Set";
+                    PermSetsPage: Page "Permission Sets";
+                    Selection: Text;
+                begin
+                    AggPermSet.Reset();
+                    PermSetsPage.SetTableView(AggPermSet);
+                    PermSetsPage.LookupMode(true);
 
+                    if PermSetsPage.RunModal() = Action::LookupOK then begin
+                        PermSetsPage.SetSelectionFilter(AggPermSet);
+                        if AggPermSet.FindSet() then
+                            repeat
+                                if Selection <> '' then
+                                    Selection += '|';
+                                Selection += AggPermSet."Role ID";
+                            until AggPermSet.Next() = 0;
+                    end;
+
+                    COBCORTargetRole := Selection;
+                    CurrPage.Update(false);
+                end;
+            }
             action(COBCORRegisterRole)
             {
                 ApplicationArea = All;
-                Caption = 'Register Roles', Comment = 'ESP="Registrar Roles"';
+                Caption = '2. Register Roles', Comment = 'ESP="2. Registrar Roles"';
                 Image = Create;
-                ToolTip = 'Registers the selected role in the selected company for the current user.', Comment = 'ESP="Registra el rol seleccionado en la empresa seleccionada para el usuario actual"';
+                ToolTip = 'Registers the selected role(s) in the selected company.', Comment = 'ESP="Registra los roles seleccionados en la empresa seleccionada."';
 
                 trigger OnAction()
+                var
+                    RoleArray: List of [Text];
+                    SingleRole: Text;
                 begin
                     if Rec.COBCORDeactivated then
                         Error(UserIsDeactivatedErrLbl);
@@ -260,9 +274,13 @@ page 50350 COBCORWizAssignRoles
                     if (COBCORTargetCompany = '') or (COBCORTargetRole = '') then
                         Error(CompanyRoleRequiredErrLbl);
 
-                    gCOBCORWizUsersMgt.RegisterRoleForUser(Rec.COBCORUserID, COBCORTargetCompany, COBCORTargetRole, COBCORTargetDelegation);
+                    RoleArray := COBCORTargetRole.Split('|');
 
+                    foreach SingleRole in RoleArray do
+                        gCOBCORWizUsersMgt.RegisterRoleForUser(Rec.COBCORUserID, COBCORTargetCompany, CopyStr(SingleRole, 1, 20), '');
                     Message(ProcessFinishedMsgLbl);
+
+                    COBCORTargetRole := '';
                     CurrPage.Update(false);
                 end;
             }
@@ -391,7 +409,7 @@ page 50350 COBCORWizAssignRoles
         //g_recUserSetup: Record "User Setup";
         gCOBCORWizUsersMgt: Codeunit COBCORWizUsersMgt;
         COBCORTargetCompany: Text[100];
-        COBCORTargetRole: Code[20];
+        COBCORTargetRole: Text[200];
         COBCORTargetDelegation: Text[250];
         ShowOptions: Boolean;
         BoolEditable: Boolean;

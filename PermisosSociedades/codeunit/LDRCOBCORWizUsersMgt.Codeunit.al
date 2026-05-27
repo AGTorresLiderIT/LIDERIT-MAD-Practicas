@@ -70,10 +70,6 @@ codeunit 50357 COBCORWizUsersMgt
     end;
 
     procedure RegisterRoleForUser(pUserID: Text[140]; pCompanyName: Text[30]; pRoleID: Code[20]; pDelegation: Text[250])
-    var
-        lDerivedRoleID: Code[20];
-        lDerivedRoleID1: Code[20];
-        lDerivedRoleIDSin: Code[20];
     begin
         if (pCompanyName = '') or (pRoleID = '') then
             Error(gCompanyRoleRequiredErrLbl);
@@ -81,19 +77,8 @@ codeunit 50357 COBCORWizUsersMgt
         if IsParentCompany(pCompanyName) then
             Error(gParentCompanyNotAllowedErrLbl, pCompanyName);
 
-        AssignRoleAndAccess(pUserID, pCompanyName, pRoleID, '', false, false);
-
-        if pDelegation <> '' then begin
-            GenerateDerivedPermissionRoleIds(pUserID, pRoleID, lDerivedRoleID, lDerivedRoleID1, lDerivedRoleIDSin);
-            CreateDelegationPermissionSets(pDelegation, pRoleID, lDerivedRoleID, lDerivedRoleID1);
-            RegisterDerivedWizardRoles(pUserID, pCompanyName, pDelegation, lDerivedRoleID, lDerivedRoleID1);
-        end else begin
-            GenerateDerivedPermissionRoleIds(pUserID, pRoleID, lDerivedRoleID, lDerivedRoleID1, lDerivedRoleIDSin);
-            CreatePermissionSetWithoutSecurityFilter(pRoleID, lDerivedRoleIDSin);
-            AssignRoleAndAccess(pUserID, pCompanyName, lDerivedRoleIDSin, '', true, true);
-        end;
-
-        ApplyExtraRoleSetup(pUserID, pRoleID, pCompanyName, pDelegation);
+        AssignRoleAndAccess(pUserID, pCompanyName, pRoleID, false, false);
+        ApplyExtraRoleSetup(pUserID, pRoleID, pCompanyName);
     end;
 
     #endregion
@@ -234,7 +219,7 @@ codeunit 50357 COBCORWizUsersMgt
         lRoleHistory.SetRange(COBCORReactivatedAt, 0DT);
         if lRoleHistory.FindSet(true) then
             repeat
-                AssignRoleAndAccess(pUserID, lRoleHistory.COBCORCompanyName, lRoleHistory.COBCORCompanyRole, lRoleHistory.COBCORDelegation, false, lRoleHistory.COBCORIsDerivedRole);
+                AssignRoleAndAccess(pUserID, lRoleHistory.COBCORCompanyName, lRoleHistory.COBCORCompanyRole, false, lRoleHistory.COBCORIsDerivedRole);
                 lRoleHistory.COBCORReactivatedAt := CurrentDateTime;
                 lRoleHistory.COBCORReactivatedBy := UserId();
                 lRoleHistory.Modify();
@@ -591,8 +576,9 @@ codeunit 50357 COBCORWizUsersMgt
         if not TryGetUserSecurityId(pUserID, lUserSecurityID) then
             exit;
 
-        GetPermissionSetMetadata(pRoleID, lPermissionSetScope, lAppID);
-
+        // GetPermissionSetMetadata(pRoleID, lPermissionSetScope, lAppID);
+        lPermissionSetScope := lPermissionSetScope::Tenant;
+        Clear(lAppID);
         lAccessControl.Reset();
         lAccessControl.SetRange(Scope, lPermissionSetScope);
         lAccessControl.SetRange("App ID", lAppID);
@@ -684,7 +670,7 @@ codeunit 50357 COBCORWizUsersMgt
 
     #region ROLES ADICIONALES (EXTRA SETUP)
 
-    local procedure ApplyExtraRoleSetup(pUserID: Text[140]; pBaseRoleID: Code[20]; pCompanyName: Text[30]; pDelegation: Text[250])
+    local procedure ApplyExtraRoleSetup(pUserID: Text[140]; pBaseRoleID: Code[20]; pCompanyName: Text[30])
     var
         lRoleExtraSetup: Record COBCORWizRoleExtraSetup;
     begin
@@ -694,26 +680,26 @@ codeunit 50357 COBCORWizUsersMgt
 
         repeat
             if lRoleExtraSetup.COBCORApplyInParent then
-                ApplyExtraRoleSetupByScope(pUserID, lRoleExtraSetup.COBCORExtraRoleID, pCompanyName, pDelegation, true);
+                ApplyExtraRoleSetupByScope(pUserID, lRoleExtraSetup.COBCORExtraRoleID, pCompanyName, true);
             if lRoleExtraSetup.COBCORApplyInChild then
-                ApplyExtraRoleSetupByScope(pUserID, lRoleExtraSetup.COBCORExtraRoleID, pCompanyName, pDelegation, false);
+                ApplyExtraRoleSetupByScope(pUserID, lRoleExtraSetup.COBCORExtraRoleID, pCompanyName, false);
         until lRoleExtraSetup.Next() = 0;
     end;
 
-    local procedure ApplyExtraRoleSetupByScope(pUserID: Text[140]; pRoleID: Code[20]; pCompanyName: Text[30]; pDelegation: Text[250]; pParent: Boolean)
+    local procedure ApplyExtraRoleSetupByScope(pUserID: Text[140]; pRoleID: Code[20]; pCompanyName: Text[30]; pParent: Boolean)
     var
         lSetup: Record COBCORWizSetup;
     begin
         if not lSetup.Get() then begin
-            AssignRoleAndAccess(pUserID, pCompanyName, pRoleID, pDelegation, true, false);
+            AssignRoleAndAccess(pUserID, pCompanyName, pRoleID, true, false);
             exit;
             pParent := true; //MioQuitar a fúturo
         end;
     end;
 
-    local procedure AssignRoleAndAccess(pUserID: Text[140]; pCompanyName: Text[30]; pRoleID: Code[20]; pDelegation: Text[250]; pIsExtraRole: Boolean; pIsDerivedRole: Boolean)
+    local procedure AssignRoleAndAccess(pUserID: Text[140]; pCompanyName: Text[30]; pRoleID: Code[20]; pIsExtraRole: Boolean; pIsDerivedRole: Boolean)
     begin
-        UpsertRoleLine(pUserID, pCompanyName, pRoleID, pDelegation, UserId(), Today, Time, pIsExtraRole, pIsDerivedRole);
+        UpsertRoleLine(pUserID, pCompanyName, pRoleID, '', UserId(), Today, Time, pIsExtraRole, pIsDerivedRole);
         GrantAccessControlByRole(pUserID, pRoleID, pCompanyName);
     end;
 
@@ -730,13 +716,13 @@ codeunit 50357 COBCORWizUsersMgt
         exit(false);
     end;
 
-    local procedure RegisterDerivedWizardRoles(pUserID: Text[140]; pCompanyName: Text[30]; pDelegation: Text[250]; pDerivedRoleID: Code[20]; pDerivedRoleID1: Code[20])
+    local procedure RegisterDerivedWizardRoles(pUserID: Text[140]; pCompanyName: Text[30]; pDerivedRoleID: Code[20]; pDerivedRoleID1: Code[20])
     begin
         if pDerivedRoleID <> '' then
-            AssignRoleAndAccess(pUserID, pCompanyName, pDerivedRoleID, pDelegation, false, true);
+            AssignRoleAndAccess(pUserID, pCompanyName, pDerivedRoleID, false, true);
 
         if pDerivedRoleID1 <> '' then
-            AssignRoleAndAccess(pUserID, pCompanyName, pDerivedRoleID1, pDelegation, false, true);
+            AssignRoleAndAccess(pUserID, pCompanyName, pDerivedRoleID1, false, true);
     end;
 
     local procedure GenerateDerivedPermissionRoleIds(pUserID: Text[140]; pTemplateRoleID: Code[20]; var pDerivedRoleID: Code[20]; var pDerivedRoleID1: Code[20]; var pDerivedRoleIDSin: Code[20])

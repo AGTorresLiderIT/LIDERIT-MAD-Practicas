@@ -3613,24 +3613,9 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page COBCORWizAssignRoles - Control COBCORTargetCompany - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 25329358 - Control 2141736533 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the delegation filter for the role registration.</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Especifica el filtro de delegación para el registro del rol"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORWizAssignRoles - Control COBCORTargetDelegation - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 25329358 - Control 2141736533 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Delegation Filter</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Filtro Delegación"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORWizAssignRoles - Control COBCORTargetDelegation - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 25329358 - Control 726211919 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the role to register in the selected company.</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Especifica el rol a registrar en la empresa seleccionada"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORWizAssignRoles - Control COBCORTargetRole - Property ToolTip</note>
-        </trans-unit>
         <trans-unit id="Page 25329358 - Control 726211919 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Company Permission</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Permiso Empresa"</note>
+          <source>Selected Roles</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Roles Seleccionados"</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page COBCORWizAssignRoles - Control COBCORTargetRole - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 25329358 - Control 2465145564 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -3784,14 +3769,24 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page COBCORWizAssignRoles - Action COBCORRoleHistory - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 25329358 - Action 596326871 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Registers the selected role in the selected company for the current user.</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Registra el rol seleccionado en la empresa seleccionada para el usuario actual"</note>
+          <source>Registers the selected role(s) in the selected company.</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Registra los roles seleccionados en la empresa seleccionada."</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page COBCORWizAssignRoles - Action COBCORRegisterRole - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 25329358 - Action 596326871 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Register Roles</source>
-          <note from="Developer" annotates="general" priority="2">ESP="Registrar Roles"</note>
+          <source>2. Register Roles</source>
+          <note from="Developer" annotates="general" priority="2">ESP="2. Registrar Roles"</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page COBCORWizAssignRoles - Action COBCORRegisterRole - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 25329358 - Action 1037826089 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Opens the list to select multiple roles.</source>
+          <note from="Developer" annotates="general" priority="2">ESP="Abre la lista para seleccionar múltiples roles a la vez."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORWizAssignRoles - Action COBCORSelectRoles - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 25329358 - Action 1037826089 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>1. Select Roles</source>
+          <note from="Developer" annotates="general" priority="2">ESP="1. Seleccionar Roles"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page COBCORWizAssignRoles - Action COBCORSelectRoles - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 25329358 - Action 3119940151 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Sends a welcome email in the user language with the configured manual attached.</source>
