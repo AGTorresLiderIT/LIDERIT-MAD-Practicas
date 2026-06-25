@@ -10,15 +10,14 @@
     "CRS.FileNamePattern": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
     "CRS.FileNamePatternExtensions": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
     "CRS.FileNamePatternPageCustomizations": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
-    //"CRS.OnSaveAlFileAction": "Rename",
+    "CRS.OnSaveAlFileAction": "Rename",
     "CRS.RenameWithGit": true,
     //"CRS.RemovePrefixFromFilename": true,
     "editor.formatOnSave": true,
-    "CRS.ObjectNamePrefix": "LDR_",    
+    "CRS.ObjectNamePrefix": "LDR_",
     "alOutline.codeActionsOnSave": [
         "SortProperties",
         "SortVariables",
         "FormatDocument"
     ]
- 
 }
