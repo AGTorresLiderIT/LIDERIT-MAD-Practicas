@@ -1,0 +1,10 @@
+{"codigo":"PRUEBA-SDD-01","codigo_erpit":"","nombre":"Campo Observaciones internas en clientes (prueba)","cliente":"CLIENTE DEMO","fecha":"15/10/2026","proyecto":"Prueba de la skill sdd-tarea","destinatario":"Responsable de ventas","consultor":"Alejandro González",
+"ficha":{"origen":"Tarea de prueba inventada (sin datos de clientes)","riesgo":"VERDE (campo de texto y visualización)","estado":"Borrador"},
+"funcional":{"contexto":"Tarea de prueba para validar el paso a GitHub de la skill. El área comercial quiere anotar observaciones internas en la ficha del cliente.","situacion_actual":"La ficha estándar de cliente no tiene un campo de observaciones internas.",
+"bloques":[{"id":"1","titulo":"Observaciones internas","requisitos":[{"id":"RF-1.1","texto":"Nuevo campo de texto «Observaciones internas» en la ficha de cliente."},{"id":"RF-1.2","texto":"El campo se ve también en la lista de clientes."}]}],
+"puntos":[{"id":"P-1","tipo":"Pregunta","ambito":"Cliente","texto":"¿Longitud máxima del texto?","bloquea":false,"responsable":"Ventas","estado":"Pendiente"}]},
+"desarrollo":{"intro":"Se extiende la tabla y las páginas estándar de cliente.","secciones":[{"id":"1","titulo":"Observaciones internas","ubicacion":"Tabla Customer (18), páginas Customer Card (21) y Customer List (22).","parrafos":["Se añade el campo en la pestaña General de la ficha y como columna en la lista."]}],
+"alcance_tecnico":["TableExtension 50100 «Customer Ext_LDR»: campo Internal Notes_LDR (Text 250).","PageExtension 50101 y 50102 sobre ficha y lista de clientes."],"eventos":[],"consideraciones":["Sin impacto en procesos estándar."],
+"tareas":[{"id":"T-01","descripcion":"Campo y páginas","depende_de":"—","hecho_cuando":"Compila y se ve en ficha y lista"}]},
+"pruebas":{"intro":"Prueba del consultor en sandbox.","parametrizacion":[],"escenarios":[{"id":"A-1","rf":"RF-1.1","escenario":"Escribir una observación en la ficha de un cliente","resultado":"El texto se guarda"},{"id":"A-2","rf":"RF-1.2","escenario":"Abrir la lista de clientes","resultado":"La columna muestra la observación"}]},
+"fuentes":[]}
