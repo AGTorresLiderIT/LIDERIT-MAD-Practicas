@@ -3,10 +3,195 @@
   <file datatype="xml" source-language="en-US" target-language="en-US" original="LIDERIT-MAD-Practicas">
     <body>
       <group id="body">
-        <trans-unit id="Report 1989166309 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Factura</source>
+        <trans-unit id="Table 3932910577 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Characters</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Report Factura_LDR - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Characters_LDR - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3932910577 - Field 1137010794 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Fecha Actualizacion</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Characters_LDR - Field Fecha Actualizacion - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3932910577 - Field 456233642 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>ID Personaje</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Characters_LDR - Field ID Personaje - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3932910577 - Field 1945024670 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Nombre Personaje</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Characters_LDR - Field Nombre Personaje - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3606214493 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Locations</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Locations_LDR - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3606214493 - Field 2686962215 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>id</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Locations_LDR - Field id - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3606214493 - Field 2756773423 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>image_path</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Locations_LDR - Field image_path - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3606214493 - Field 3558812865 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Locations_LDR - Field name - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3606214493 - Field 1339902830 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>town</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Locations_LDR - Field town - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3606214493 - Field 1892443725 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>use</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Locations_LDR - Field use - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1176168751 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>URLs</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table URLs_LDR - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1176168751 - Field 883711285 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Entry No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table URLs_LDR - Field Entry No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1176168751 - Field 2897666313 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Enviar</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table URLs_LDR - Field Enviar - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1176168751 - Field 419371172 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Frases</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table URLs_LDR - Field Frases - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1176168751 - Field 423212896 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Recibir</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table URLs_LDR - Field Recibir - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1722648482 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>CharacterList</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CharacterList_LDR - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1722648482 - Control 1137010794 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Fecha Actualizacion field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CharacterList_LDR - Control Fecha Actualizacion - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1722648482 - Control 456233642 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the ID Personaje field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CharacterList_LDR - Control ID Personaje - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1722648482 - Control 1945024670 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Nombre Personaje field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CharacterList_LDR - Control Nombre Personaje - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1722648482 - Action 2836554343 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Borrar Personaje</source>
+          <note from="Developer" annotates="general" priority="2">NLB="YourLanguageCaption"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CharacterList_LDR - Action BorrarPersonaje - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1722648482 - Action 3357721824 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Cargar Personajes</source>
+          <note from="Developer" annotates="general" priority="2">NLB="YourLanguageCaption"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CharacterList_LDR - Action CargarPersonajes - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1722648482 - Action 767796921 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Enviar TODAS las Frase</source>
+          <note from="Developer" annotates="general" priority="2">NLB="YourLanguageCaption"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CharacterList_LDR - Action EnviarFrases - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1722648482 - Action 2181216680 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Enviar personajes</source>
+          <note from="Developer" annotates="general" priority="2">NLB="YourLanguageCaption"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CharacterList_LDR - Action EnviarPersonajeApi - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1722648482 - Action 2040079872 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Enviar TODOS los personajes</source>
+          <note from="Developer" annotates="general" priority="2">NLB="YourLanguageCaption"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CharacterList_LDR - Action EnviarTodos - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2691990384 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Habitante de Springfield</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Habitantes de Springfield_LDR - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2691990384 - Action 1692444235 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Buscar por nombre</source>
+          <note from="Developer" annotates="general" priority="2">NLB="YourLanguageCaption"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Habitantes de Springfield_LDR - Action ActionName - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2691990384 - Action 569346677 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Reproducir frase</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Habitantes de Springfield_LDR - Action Reproducir - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3446137687 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Paseo de Perros</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Paseo de Perros_LDR - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3446137687 - Control 2686962215 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the id field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Paseo de Perros_LDR - Control id - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3446137687 - Control 2756773423 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the image_path field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Paseo de Perros_LDR - Control image_path - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3446137687 - Control 3558812865 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the name field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Paseo de Perros_LDR - Control name - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3446137687 - Control 1339902830 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the town field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Paseo de Perros_LDR - Control town - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3446137687 - Control 1892443725 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the use field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Paseo de Perros_LDR - Control use - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3446137687 - Action 1692444235 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Localización al azar</source>
+          <note from="Developer" annotates="general" priority="2">NLB="YourLanguageCaption"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Paseo de Perros_LDR - Action ActionName - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1176168751 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>URLs</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page URLs_LDR - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1176168751 - Control 2897666313 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Enviar field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page URLs_LDR - Control Enviar - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1176168751 - Control 419371172 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Recibir field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page URLs_LDR - Control Frases - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1176168751 - Control 423212896 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Recibir field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page URLs_LDR - Control Recibir - Property ToolTip</note>
         </trans-unit>
       </group>
     </body>
