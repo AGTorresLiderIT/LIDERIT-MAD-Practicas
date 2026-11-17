@@ -11,7 +11,8 @@
   "ficha": {
     "origen": "Tarea de formación TF0021 – Liquidación de comisiones (Bloque 5, 19/10/2026). Depende de TF0020.",
     "riesgo": "ROJO (genera facturas de compra, modifica movimientos de comisión en lote y permite deshacer la liquidación)",
-    "estado": "Borrador"
+    "estado": "En GitHub",
+    "issue_rama": "https://github.com/AGTorresLiderIT/LIDERIT-MAD-Practicas/issues/49 · rama Feature/TF0021-liquidacion-de-comisiones"
   },
   "funcional": {
     "contexto": "Continuación de TF0020. Cada mes el responsable comercial liquida las comisiones pendientes de los vendedores hasta una fecha. Los vendedores son autónomos y facturan su comisión, por lo que la liquidación puede generar una factura de compra en borrador a su proveedor.",
