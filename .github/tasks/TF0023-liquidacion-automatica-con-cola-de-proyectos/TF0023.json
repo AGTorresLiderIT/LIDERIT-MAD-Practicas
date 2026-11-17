@@ -11,7 +11,8 @@
   "ficha": {
     "origen": "Tarea de formación TF0023 – Liquidación automática con cola de proyectos (19/10/2026), Bloque 5. Depende de TF0021.",
     "riesgo": "ROJO (proceso desatendido en la cola de proyectos, Commit por vendedor, Codeunit.Run con gestión de errores y generación de liquidaciones sin intervención)",
-    "estado": "Borrador"
+    "estado": "En GitHub",
+    "issue_rama": "https://github.com/AGTorresLiderIT/LIDERIT-MAD-Practicas/issues/51 · rama Feature/TF0023-liquidacion-automatica-con-cola-de-proyectos"
   },
   "funcional": {
     "contexto": "Cierre del Bloque 5. Dirección quiere que la liquidación de comisiones de TF0021 se haga sola el día 1 de cada mes de madrugada, liquidando hasta el último día del mes anterior, sin que nadie lance el proceso.",
