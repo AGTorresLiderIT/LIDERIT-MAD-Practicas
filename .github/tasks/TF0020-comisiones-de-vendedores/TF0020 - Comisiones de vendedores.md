@@ -2,7 +2,7 @@
 
 Código ERPIT: pendiente · Código en el origen: TF0020
 Cliente: LiderIT · Fecha: 17/11/2026 · Proyecto: Formación – Bloque 5 (Eventos, registro y procesos) · Consultor: Alejandro González Torres
-Origen: Tarea de formación TF0020 – Comisiones de vendedores (19/10/2026), Bloque 5 · Riesgo: ROJO (suscripción a eventos de registro de ventas de Sales-Post; los movimientos se crean dentro de la transacción de registro) · Estado: Borrador · Puntos a validar pendientes: 7 (2 bloqueantes)
+Origen: Tarea de formación TF0020 – Comisiones de vendedores (19/10/2026), Bloque 5 · Riesgo: ROJO (suscripción a eventos de registro de ventas de Sales-Post; los movimientos se crean dentro de la transacción de registro) · Estado: En GitHub · Puntos a validar pendientes: 7 (2 bloqueantes)
 
 ## 1. Descripción funcional
 
