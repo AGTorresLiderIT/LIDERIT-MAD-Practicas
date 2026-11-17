@@ -2,7 +2,7 @@
 
 Código ERPIT: pendiente · Código en el origen: TF0021
 Cliente: LiderIT · Fecha: 17/11/2026 · Proyecto: Formación – Bloque 5 (Eventos, registro y procesos) · Consultor: Alejandro González Torres
-Origen: Tarea de formación TF0021 – Liquidación de comisiones (Bloque 5, 19/10/2026). Depende de TF0020. · Riesgo: ROJO (genera facturas de compra, modifica movimientos de comisión en lote y permite deshacer la liquidación) · Estado: Borrador · Puntos a validar pendientes: 10 (1 bloqueantes)
+Origen: Tarea de formación TF0021 – Liquidación de comisiones (Bloque 5, 19/10/2026). Depende de TF0020. · Riesgo: ROJO (genera facturas de compra, modifica movimientos de comisión en lote y permite deshacer la liquidación) · Estado: En GitHub · Puntos a validar pendientes: 10 (1 bloqueantes)
 
 ## 1. Descripción funcional
 
