@@ -2,7 +2,7 @@
 
 Código ERPIT: pendiente · Código en el origen: TF0022
 Cliente: LiderIT · Fecha: 17/11/2026 · Proyecto: Formación – Bloque 5 (Eventos, registro y procesos) · Consultor: Alejandro González Torres
-Origen: Tarea de formación TF0022 (apartado del Bloque 5), continuación de TF0020 y TF0021 · Riesgo: AMARILLO (tabla y lógica nuevas acotadas; cambia el cálculo del % de comisión de TF0020; no toca contabilidad, IVA ni almacén) · Estado: Borrador · Puntos a validar pendientes: 10 (0 bloqueantes)
+Origen: Tarea de formación TF0022 (apartado del Bloque 5), continuación de TF0020 y TF0021 · Riesgo: AMARILLO (tabla y lógica nuevas acotadas; cambia el cálculo del % de comisión de TF0020; no toca contabilidad, IVA ni almacén) · Estado: En GitHub · Puntos a validar pendientes: 10 (0 bloqueantes)
 
 ## 1. Descripción funcional
 
