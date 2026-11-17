@@ -11,7 +11,8 @@
   "ficha": {
     "origen": "Tarea de formación TF0020 – Comisiones de vendedores (19/10/2026), Bloque 5",
     "riesgo": "ROJO (suscripción a eventos de registro de ventas de Sales-Post; los movimientos se crean dentro de la transacción de registro)",
-    "estado": "Borrador"
+    "estado": "En GitHub",
+    "issue_rama": "https://github.com/AGTorresLiderIT/LIDERIT-MAD-Practicas/issues/48 · rama Feature/TF0020-comisiones-de-vendedores"
   },
   "funcional": {
     "contexto": "La empresa paga a sus vendedores una comisión por cada factura de venta registrada y se la descuenta al registrar un abono. Hoy se calcula a mano en una hoja de cálculo a partir del listado de facturas. Se requiere que Business Central genere automáticamente un movimiento de comisión al registrar.",
