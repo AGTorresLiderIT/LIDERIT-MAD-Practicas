@@ -2,7 +2,7 @@
 
 Código ERPIT: pendiente · Código en el origen: TF0023
 Cliente: LiderIT · Fecha: 17/11/2026 · Proyecto: Formación – Bloque 5 (Eventos, registro y procesos) · Consultor: Alejandro González Torres
-Origen: Tarea de formación TF0023 – Liquidación automática con cola de proyectos (19/10/2026), Bloque 5. Depende de TF0021. · Riesgo: ROJO (proceso desatendido en la cola de proyectos, Commit por vendedor, Codeunit.Run con gestión de errores y generación de liquidaciones sin intervención) · Estado: Borrador · Puntos a validar pendientes: 10 (5 bloqueantes)
+Origen: Tarea de formación TF0023 – Liquidación automática con cola de proyectos (19/10/2026), Bloque 5. Depende de TF0021. · Riesgo: ROJO (proceso desatendido en la cola de proyectos, Commit por vendedor, Codeunit.Run con gestión de errores y generación de liquidaciones sin intervención) · Estado: En GitHub · Puntos a validar pendientes: 10 (5 bloqueantes)
 
 ## 1. Descripción funcional
 
