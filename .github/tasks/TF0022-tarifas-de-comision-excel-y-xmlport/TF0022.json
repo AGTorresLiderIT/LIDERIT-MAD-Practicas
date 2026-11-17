@@ -11,7 +11,8 @@
   "ficha": {
     "origen": "Tarea de formación TF0022 (apartado del Bloque 5), continuación de TF0020 y TF0021",
     "riesgo": "AMARILLO (tabla y lógica nuevas acotadas; cambia el cálculo del % de comisión de TF0020; no toca contabilidad, IVA ni almacén)",
-    "estado": "Borrador"
+    "estado": "En GitHub",
+    "issue_rama": "https://github.com/AGTorresLiderIT/LIDERIT-MAD-Practicas/issues/50 · rama Feature/TF0022-tarifas-de-comision-excel-y-xmlport"
   },
   "funcional": {
     "contexto": "Continuación de TF0020 y TF0021. Dirección comercial negocia porcentajes distintos por vendedor y categoría de producto (por ejemplo, 8 % en mobiliario y 3 % en accesorios), los prepara en Excel y quiere cargarlos en BC en lugar de teclearlos. Nóminas necesita los movimientos de comisión de un periodo en Excel, para cuadrarlos a mano, y en un CSV de formato fijo para su programa de nóminas.",
