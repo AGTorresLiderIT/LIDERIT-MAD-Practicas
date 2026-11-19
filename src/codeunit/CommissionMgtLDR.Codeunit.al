@@ -109,6 +109,35 @@ codeunit 50000 "Commission Mgt._LDR"
                 GeneralLedgerSetup."Amount Rounding Precision"));
     end;
 
+    // RF-4.1 / P-6: the line is only added if the user can read the commission entries.
+    procedure FindNavigateEntries(var DocumentEntry: Record "Document Entry"; DocNoFilter: Text; PostingDateFilter: Text)
+    var
+        CommissionEntry: Record "Commission Entry_LDR";
+    begin
+        if not CommissionEntry.ReadPermission() then
+            exit;
+        SetNavigateFilters(CommissionEntry, DocNoFilter, PostingDateFilter);
+        DocumentEntry.InsertIntoDocEntry(Database::"Commission Entry_LDR", CommissionEntry.TableCaption(), CommissionEntry.Count());
+    end;
+
+    procedure ShowNavigateEntries(var TempDocumentEntry: Record "Document Entry" temporary; DocNoFilter: Text; PostingDateFilter: Text; var IsHandled: Boolean)
+    var
+        CommissionEntry: Record "Commission Entry_LDR";
+    begin
+        if IsHandled or (TempDocumentEntry."Table ID" <> Database::"Commission Entry_LDR") then
+            exit;
+        SetNavigateFilters(CommissionEntry, DocNoFilter, PostingDateFilter);
+        Page.Run(Page::"Commission Entries_LDR", CommissionEntry);
+        IsHandled := true;
+    end;
+
+    local procedure SetNavigateFilters(var CommissionEntry: Record "Commission Entry_LDR"; DocNoFilter: Text; PostingDateFilter: Text)
+    begin
+        CommissionEntry.SetCurrentKey("Document No.", "Posting Date");
+        CommissionEntry.SetFilter("Document No.", DocNoFilter);
+        CommissionEntry.SetFilter("Posting Date", PostingDateFilter);
+    end;
+
     local procedure CalcCommissionAmount(BaseAmountLCY: Decimal; CommissionPct: Decimal): Decimal
     var
         GeneralLedgerSetup: Record "General Ledger Setup";

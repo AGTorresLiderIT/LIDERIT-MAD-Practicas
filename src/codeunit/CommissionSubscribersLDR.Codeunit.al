@@ -19,4 +19,20 @@ codeunit 50001 "Commission Subscribers_LDR"
     begin
         CommissionMgt.CreateFromSalesCrMemoLine(SalesCrMemoLine, SalesCrMemoHeader);
     end;
+
+    [EventSubscriber(ObjectType::Page, Page::Navigate, 'OnAfterNavigateFindRecords', '', false, false)]
+    local procedure Navigate_OnAfterNavigateFindRecords(var DocumentEntry: Record "Document Entry"; DocNoFilter: Text; PostingDateFilter: Text)
+    var
+        CommissionMgt: Codeunit "Commission Mgt._LDR";
+    begin
+        CommissionMgt.FindNavigateEntries(DocumentEntry, DocNoFilter, PostingDateFilter);
+    end;
+
+    [EventSubscriber(ObjectType::Page, Page::Navigate, 'OnBeforeShowRecords', '', false, false)]
+    local procedure Navigate_OnBeforeShowRecords(var TempDocumentEntry: Record "Document Entry" temporary; DocNoFilter: Text; PostingDateFilter: Text; var IsHandled: Boolean)
+    var
+        CommissionMgt: Codeunit "Commission Mgt._LDR";
+    begin
+        CommissionMgt.ShowNavigateEntries(TempDocumentEntry, DocNoFilter, PostingDateFilter, IsHandled);
+    end;
 }
