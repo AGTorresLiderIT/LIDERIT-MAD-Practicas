@@ -575,9 +575,143 @@
     "Revisado con bc-code-intel (especialistas: sam-coder; find_bc_knowledge seth-security «Permission Set Design Patterns»). Respuestas genéricas, sin normas ni lecciones LiderIT sobre permisos indirectos en registro; P-1, P-4 y P-6 las decide el revisor."
   ],
   "implementacion": {
-    "cambios": [],
+    "cambios": [
+      {
+        "id": "C-01",
+        "rf": "RF-2.1",
+        "ficheros": [
+          "src/table/CommissionEntryLDR.Table.al",
+          "src/enum/CommissionDocumentTypeLDR.Enum.al"
+        ],
+        "commit": "f572a32",
+        "resumen": "Tabla Commission Entry_LDR (AutoIncrement, claves con SIFT y de Navegar) y enum de tipo de documento"
+      },
+      {
+        "id": "C-02",
+        "rf": "RF-2.2",
+        "ficheros": [
+          "src/page/CommissionEntriesLDR.Page.al"
+        ],
+        "commit": "f572a32",
+        "resumen": "Lista no editable de movimientos con acción Navegar (SetDoc + Run)"
+      },
+      {
+        "id": "C-03",
+        "rf": "RF-1.1",
+        "ficheros": [
+          "src/pageextension/SalespersonPurchaserLDR.PageExt.al"
+        ],
+        "commit": "4e823ca",
+        "resumen": "S-02: «Commission %» estándar oculto y mostrado de nuevo con ApplicationArea All"
+      },
+      {
+        "id": "C-04",
+        "rf": "RF-1.2",
+        "ficheros": [
+          "src/tableextension/ItemLDR.TableExt.al",
+          "src/pageextension/ItemCardLDR.PageExt.al"
+        ],
+        "commit": "4e823ca",
+        "resumen": "Campo Exclude from Commission_LDR en el producto, visible en la ficha"
+      },
+      {
+        "id": "C-05",
+        "rf": "RF-2.3",
+        "ficheros": [
+          "src/tableextension/SalespersonPurchaserLDR.TableExt.al",
+          "src/pageextension/SalespersonPurchaserLDR.PageExt.al"
+        ],
+        "commit": "4e823ca",
+        "resumen": "FlowField Pending Commission (LCY)_LDR con DrillDown a la lista"
+      },
+      {
+        "id": "C-06",
+        "rf": "RF-3.1",
+        "ficheros": [
+          "src/codeunit/CommissionMgtLDR.Codeunit.al",
+          "src/codeunit/CommissionSubscribersLDR.Codeunit.al"
+        ],
+        "commit": "374448f",
+        "resumen": "Suscriptor OnAfterSalesInvLineInsert; filtro tipo Producto, cantidad > 0 (S-01), producto no excluido, sin vista previa"
+      },
+      {
+        "id": "C-07",
+        "rf": "RF-3.2",
+        "ficheros": [
+          "src/codeunit/CommissionMgtLDR.Codeunit.al",
+          "src/codeunit/CommissionSubscribersLDR.Codeunit.al"
+        ],
+        "commit": "374448f",
+        "resumen": "Suscriptor OnAfterSalesCrMemoLineInsert; base y comisión con signo negativo"
+      },
+      {
+        "id": "C-08",
+        "rf": "RF-3.3",
+        "ficheros": [
+          "src/codeunit/CommissionMgtLDR.Codeunit.al"
+        ],
+        "commit": "374448f",
+        "resumen": "Sin vendedor o % 0: sale sin movimiento ni error"
+      },
+      {
+        "id": "C-09",
+        "rf": "RF-3.4",
+        "ficheros": [
+          "src/codeunit/CommissionMgtLDR.Codeunit.al"
+        ],
+        "commit": "374448f",
+        "resumen": "Base en DL con ExchangeAmtFCYToLCY y redondeo con Amount Rounding Precision; comisión redondeada"
+      },
+      {
+        "id": "C-10",
+        "rf": "RF-4.1",
+        "ficheros": [
+          "src/codeunit/CommissionMgtLDR.Codeunit.al",
+          "src/codeunit/CommissionSubscribersLDR.Codeunit.al"
+        ],
+        "commit": "269d784",
+        "resumen": "OnAfterNavigateFindRecords (con ReadPermission) y OnBeforeShowRecords"
+      },
+      {
+        "id": "C-11",
+        "rf": "RF-3.1",
+        "ficheros": [
+          "src/permissionset/CommissionsLDR.PermissionSet.al",
+          "src/permissionsetextension/D365SalesDocPostLDR.PermissionSetExt.al"
+        ],
+        "commit": "c2ea5c0",
+        "resumen": "P-6: PermissionSet Commissions_LDR y permiso indirecto ri en D365 SALES DOC, POST"
+      },
+      {
+        "id": "C-12",
+        "rf": "RF-2.1",
+        "ficheros": [
+          "Translations/LIDERIT-MAD-Practicas.g.xlf",
+          "Translations/LIDERIT-MAD-Practicas.es-ES.xlf"
+        ],
+        "commit": "f3c26ed",
+        "resumen": "XLIFF generado y traducción es-ES (40/40) desde los Comment ESP"
+      }
+    ],
     "extras": [],
-    "evidencias": [],
+    "evidencias": [
+      {
+        "id": "E-01",
+        "rf": "RF-2.1",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "alc 18.1.43.24897 con CodeCop, UICop, PerTenantExtensionCop y lider.ruleset contra símbolos BC 28.5 (.alpackages): 0 errores, 0 avisos; info AA0247 (namespaces) y AA0232. App declara application 26: sin símbolos 26 no verificado contra 26."
+      },
+      {
+        "id": "E-02",
+        "rf": "RF-1.1",
+        "escenario": "",
+        "tipo": "bc-code-intel",
+        "resultado": "OK",
+        "referencia": "ask_bc_expert (modify ApplicationArea en pageextension) y find_bc_knowledge (FlowField sin permiso de lectura): respuestas genéricas, sin normas aplicables; decisiones basadas en el estándar BC 29 ES"
+      }
+    ],
     "desviaciones": [],
     "firmas": {
       "P1": {
@@ -703,6 +837,104 @@
         "ts": "2026-11-19T10:15:06",
         "accion": "decidir-solicitud",
         "por": "AGTorresLiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:28:57",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:28:59",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:29:00",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:29:02",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:29:03",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:29:04",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:29:05",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:29:06",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:29:07",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:29:08",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:29:09",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:29:11",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:29:12",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:29:13",
+        "accion": "evidencia",
+        "por": "",
         "usuario_gh": "AlejandroGallego-LiderIT",
         "plugin": "0.4.0"
       }
