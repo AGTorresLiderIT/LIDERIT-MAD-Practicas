@@ -11,7 +11,7 @@
   "ficha": {
     "origen": "Tarea de formación TF0020 – Comisiones de vendedores (19/10/2026), Bloque 5",
     "riesgo": "ROJO (suscripción a eventos de registro de ventas de Sales-Post; los movimientos se crean dentro de la transacción de registro)",
-    "estado": "En GitHub",
+    "estado": "En desarrollo",
     "issue_rama": "https://github.com/AGTorresLiderIT/LIDERIT-MAD-Practicas/issues/48 · rama Feature/TF0020-comisiones-de-vendedores"
   },
   "funcional": {
@@ -25,7 +25,7 @@
         "requisitos": [
           {
             "id": "RF-1.1",
-            "texto": "El porcentaje de comisión de cada vendedor es el campo estándar «% Comisión» de la ficha del vendedor; no se crea un campo nuevo."
+            "texto": "El porcentaje de comisión de cada vendedor es el campo estándar «% Comisión» de la ficha del vendedor; no se crea un campo nuevo, pero se muestra en la ficha porque por defecto no sale (S-02)."
           },
           {
             "id": "RF-1.2",
@@ -57,7 +57,7 @@
         "requisitos": [
           {
             "id": "RF-3.1",
-            "texto": "Al registrar una factura de venta se crea un movimiento por cada línea de tipo Producto con cantidad distinta de 0 y producto no excluido."
+            "texto": "Al registrar una factura de venta se crea un movimiento por cada línea de tipo Producto con cantidad mayor que 0 y producto no excluido (S-01)."
           },
           {
             "id": "RF-3.2",
@@ -91,8 +91,9 @@
         "texto": "Nº de movimiento con AutoIncrement y no con FindLast + 1 de los movimientos estándar. Motivo: no es un movimiento contable ni fiscal, no se exige numeración sin huecos y FindLast + 1 obliga a LockTable sobre la tabla, lo que serializa los registros de ventas concurrentes. Consecuencia aceptada: el contador de SQL no se devuelve en un rollback, así que quedan huecos cuando un registro falla. Se inserta con «Entry No.» = 0 y el valor asignado se lee del registro tras el Insert. Alternativa a comentar en P1: el estándar numera hoy sus movimientos con la codeunit Sequence No. Mgt. (Sales-Post llama a SetPreviewMode al empezar). Revisado por el revisor técnico: se mantiene.",
         "bloquea": true,
         "responsable": "Consultor / formador LiderIT",
-        "estado": "Pendiente",
-        "ambito": "Interno"
+        "estado": "Resuelto",
+        "ambito": "Interno",
+        "respuesta": "Validado en P1: se mantiene AutoIncrement (AGTorresLiderIT, 19/11/2026)."
       },
       {
         "id": "P-2",
@@ -100,8 +101,9 @@
         "texto": "Eventos por línea (OnAfterSalesInvLineInsert / OnAfterSalesCrMemoLineInsert) y no OnAfterPostSalesDoc (TF0010). Motivo: OnAfterPostSalesDoc se lanza después del Commit del registro; un error ahí deja la factura registrada sin comisión. Los eventos por línea van dentro de la misma transacción y ya traen la línea registrada. Con envío y facturación parcial solo se genera comisión de lo facturado (el envío sin factura no crea líneas de factura). Se debe cuestionar en P1. Revisado: correcto. El evento de línea se lanza también para líneas de comentario y de cuenta; por eso el filtro Type = Item va en la codeunit.",
         "bloquea": true,
         "responsable": "Consultor / formador LiderIT",
-        "estado": "Pendiente",
-        "ambito": "Interno"
+        "estado": "Resuelto",
+        "ambito": "Interno",
+        "respuesta": "Validado en P1: eventos por línea de Sales-Post (AGTorresLiderIT, 19/11/2026)."
       },
       {
         "id": "P-3",
@@ -118,8 +120,9 @@
         "texto": "Vista previa de registro: Commission Mgt._LDR sale sin hacer nada si la codeunit Gen. Jnl.-Post Preview (19) devuelve IsActive() = true. Se usa esta comprobación y no el parámetro PreviewMode porque solo lo trae OnAfterSalesInvLineInsert; OnAfterSalesCrMemoLineInsert no lo tiene (BC 28 y 29), y así facturas y abonos se tratan igual en un único sitio. Motivo frente a dejar que el rollback lo deshaga: no se hace trabajo inútil y no se consumen números del AutoIncrement (P-1). Los movimientos no se ven en la ventana de vista previa (no se suscribe a Posting Preview Event Handler); mostrarlos queda fuera de alcance.",
         "bloquea": false,
         "responsable": "Revisor técnico LiderIT",
-        "estado": "Pendiente",
-        "ambito": "Interno"
+        "estado": "Resuelto",
+        "ambito": "Interno",
+        "respuesta": "Validado en P1: se usa Gen. Jnl.-Post Preview.IsActive() (AGTorresLiderIT, 19/11/2026)."
       },
       {
         "id": "P-5",
@@ -570,5 +573,169 @@
     "bc-code-intel find_bc_knowledge (redactor): «AL Event Subscriber Architecture» (suscriptores finos, lógica en codeunit); sin normas ni lecciones de la capa LiderIT sobre movimientos propios o comisiones.",
     "BC 28 frente a 29 (bc-observatory bc_diff_object): Sales-Post (80) y Navigate (344); firmas de los eventos de la codeunit 80 (PreviewMode solo en OnAfterSalesInvLineInsert); Gen. Jnl.-Post Preview (19), IsActive; DocumentEntry.Table.al:107 (InsertIntoDocEntry); Navigate.Page.al:58 (SourceTableTemporary).",
     "Revisado con bc-code-intel (especialistas: sam-coder; find_bc_knowledge seth-security «Permission Set Design Patterns»). Respuestas genéricas, sin normas ni lecciones LiderIT sobre permisos indirectos en registro; P-1, P-4 y P-6 las decide el revisor."
-  ]
+  ],
+  "implementacion": {
+    "cambios": [],
+    "extras": [],
+    "evidencias": [],
+    "desviaciones": [],
+    "firmas": {
+      "P1": {
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-19",
+        "reformulacion": "Se deberá: mostrar en la page de Vendedor/Comprador el campo \"Commission %\" el cual existe pero no está sacado; en la tabla productos añadir con un tableextension el campo \"Excluir comisión\", visible en la ficha del producto (boolean). Se creará la tabla \"Commission Entry\" con todos los campos que se nombran en el Word, siendo la PK \"Entry No.\", la SK \"Salesperson Code, Liquidated, Posting Date\", con SumIndexFields = \"Commission Amount (LCY)\". Una page list de la tabla llamada \"Commission Entries\", no editable, con una action \"Navegar\" que abra la página estándar de Navigate con fecha y nº documento del movimiento. En la ficha del vendedor FF de \"Comisión Pendiente (DL)\" = suma de \"Commission Amount (LCY)\" de sus movs no liquidados con drilldown a la lista de movimientos. Hay que usar los eventos de la CDU 80 \"Sales-Post\" OnAfterSalesInvLineInsert, OnAfterSalesCrMemoLineInsert.\nNo entra: facturas y abonos de anticipo, documentos de servicio, liquidación de comisiones.\nEjemplo: Pepe, 5 %, Relecloud, cualquiera sin excluir, 1, 10 -> Base Amount (LCY) 10,00 €, Commission Amount (LCY) 0,50 €, Liquidated No.\nP-1: AutoIncrement, para que no se repitan si varios usuarios registran a la vez. P-2: opción B, eventos por línea, porque si la comisión se crea después de confirmar la factura y da error podría quedar sin comisión. P-4: IsActive() para no generar movimientos en la vista previa.\nValidado con el consultor: RF-3.1 solo cantidad > 0; abonos con el % del vendedor en la fecha del abono; servicio y fuera de inventario generan comisión salvo «Excluir de comisión»; «Commission %» se muestra en la ficha del vendedor (por defecto no sale).",
+        "validada_por": "AGTorresLiderIT"
+      }
+    },
+    "subissues": {
+      "RF-1.1": 52,
+      "RF-1.2": 53,
+      "RF-2.1": 54,
+      "RF-2.2": 55,
+      "RF-2.3": 56,
+      "RF-3.1": 57,
+      "RF-3.2": 58,
+      "RF-3.3": 59,
+      "RF-3.4": 60,
+      "RF-4.1": 61
+    },
+    "traza": [
+      {
+        "ts": "2026-11-18T16:02:57",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-18T16:02:58",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-18T16:02:59",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-18T16:03:00",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-18T16:03:01",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-18T16:03:02",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-18T16:03:04",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-18T16:03:05",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-18T16:03:06",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-18T16:03:07",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:14:40",
+        "accion": "firma",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "P1"
+      },
+      {
+        "ts": "2026-11-19T10:15:02",
+        "accion": "solicitud",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:15:04",
+        "accion": "solicitud",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:15:05",
+        "accion": "decidir-solicitud",
+        "por": "AGTorresLiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:15:06",
+        "accion": "decidir-solicitud",
+        "por": "AGTorresLiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      }
+    ],
+    "solicitudes": [
+      {
+        "id": "S-01",
+        "descripcion": "Generar movimiento solo si la cantidad de la línea es mayor que 0 (antes: distinta de 0)",
+        "tipo": "modifica-rf",
+        "rf": [
+          "RF-3.1"
+        ],
+        "origen": "P1, propuesta del programador",
+        "horas_delta": 0.0,
+        "estado": "Aprobada",
+        "decidido_por": "AGTorresLiderIT",
+        "fecha": "2026-11-19",
+        "referencia": "Validación P1 del consultor (19/11/2026)"
+      },
+      {
+        "id": "S-02",
+        "descripcion": "Mostrar el campo estándar «Commission %» en la ficha del vendedor, que por defecto no sale (ApplicationArea RelationshipMgmt)",
+        "tipo": "modifica-rf",
+        "rf": [
+          "RF-1.1"
+        ],
+        "origen": "P1, consultor",
+        "horas_delta": 0.0,
+        "estado": "Aprobada",
+        "decidido_por": "AGTorresLiderIT",
+        "fecha": "2026-11-19",
+        "referencia": "Validación P1 del consultor (19/11/2026)"
+      }
+    ]
+  }
 }
