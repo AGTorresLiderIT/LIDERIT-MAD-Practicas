@@ -12,5 +12,6 @@ permissionset 50000 "Commissions_LDR"
         codeunit "Commission Mgt._LDR" = X,
         codeunit "Commission Subscribers_LDR" = X,
         codeunit "Settle Salesp. Commission_LDR" = X,
-        report "Settle Commissions_LDR" = X;
+        report "Settle Commissions_LDR" = X,
+        report "Commission Settlement_LDR" = X;
 }

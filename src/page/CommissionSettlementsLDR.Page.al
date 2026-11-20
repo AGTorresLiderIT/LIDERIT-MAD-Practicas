@@ -57,6 +57,26 @@ page 50003 "Commission Settlements_LDR"
                 end;
             }
         }
+        area(Reporting)
+        {
+            action(Print)
+            {
+                Caption = 'Print', Comment = 'ESP="Imprimir"';
+                Ellipsis = true;
+                Image = Print;
+                ToolTip = 'Print the selected commission settlement.', Comment = 'ESP="Imprime la liquidación de comisiones seleccionada."';
+
+                trigger OnAction()
+                var
+                    CommissionSettlement: Record "Commission Settlement_LDR";
+                begin
+                    // RF-5.3: only the selected settlement, on a copy so that the filters of the page do not change.
+                    CommissionSettlement := Rec;
+                    CommissionSettlement.SetRecFilter();
+                    Report.Run(Report::"Commission Settlement_LDR", true, false, CommissionSettlement);
+                end;
+            }
+        }
         area(Navigation)
         {
             action(Entries)
@@ -75,6 +95,10 @@ page 50003 "Commission Settlements_LDR"
                 actionref(SettleCommissions_Promoted; SettleCommissions) { }
                 actionref(UndoSettlement_Promoted; UndoSettlement) { }
                 actionref(Entries_Promoted; Entries) { }
+            }
+            group(Category_Report)
+            {
+                actionref(Print_Promoted; Print) { }
             }
         }
     }
