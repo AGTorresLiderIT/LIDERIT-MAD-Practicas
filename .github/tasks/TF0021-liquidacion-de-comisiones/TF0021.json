@@ -785,6 +785,17 @@
         ],
         "commit": "ec4b868",
         "resumen": "T-07: traducción es-ES de los 58 textos nuevos de TF0021 a partir de los comentarios ESP; se conservan las 40 de TF0020"
+      },
+      {
+        "id": "C-17",
+        "rf": "RF-3.6",
+        "ficheros": [
+          "src/codeunit/SalespCommSettlementLDR.Codeunit.al",
+          "src/report/SettleCommissionsLDR.Report.al",
+          "src/permissionset/CommissionsLDR.PermissionSet.al"
+        ],
+        "commit": "37af16c",
+        "resumen": "Codeunit 50002 renombrada a 'Salesp. Comm. Settlement_LDR': el nombre anterior ya existía en el sandbox (versión manual de la tarea). TF0023 debe usar este nombre"
       }
     ],
     "extras": [],
@@ -836,6 +847,14 @@
         "tipo": "al_compile",
         "resultado": "OK",
         "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos; RDLC bien formado (no renderizado: falta probarlo en BC). Commit 1fced99"
+      },
+      {
+        "id": "E-07",
+        "rf": "RF-3.6",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "Tras renombrar la codeunit: alc 18.1, 0 errores, 0 avisos. Commit 37af16c"
       }
     ],
     "desviaciones": [],
@@ -1128,6 +1147,20 @@
       {
         "ts": "2026-11-20T12:47:09",
         "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:54:09",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:54:11",
+        "accion": "evidencia",
         "por": "",
         "usuario_gh": "AlejandroGallego-LiderIT",
         "plugin": "0.4.0"
