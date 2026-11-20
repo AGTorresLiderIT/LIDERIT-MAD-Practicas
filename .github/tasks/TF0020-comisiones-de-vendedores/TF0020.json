@@ -1236,6 +1236,13 @@
         "usuario_gh": "AlejandroGallego-LiderIT",
         "plugin": "0.4.0",
         "puerta": "P2"
+      },
+      {
+        "ts": "2026-11-20T11:01:30",
+        "accion": "pr",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
       }
     ],
     "solicitudes": [
@@ -1267,7 +1274,12 @@
         "fecha": "2026-11-19",
         "referencia": "Validación P1 del consultor (19/11/2026)"
       }
-    ]
+    ],
+    "pr": {
+      "url": "https://github.com/AGTorresLiderIT/LIDERIT-MAD-Practicas/pull/101",
+      "numero": 101,
+      "fecha": "2026-11-20"
+    }
   },
   "documentacion": {
     "enlaces": {
