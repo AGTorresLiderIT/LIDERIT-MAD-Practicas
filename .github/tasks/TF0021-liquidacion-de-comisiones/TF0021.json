@@ -627,7 +627,48 @@
     "Revisado con bc-code-intel (especialistas: alex-architect; sin contenido específico aplicable: decisiones del revisor contrastadas con el código estándar BC 29 ES)."
   ],
   "implementacion": {
-    "cambios": [],
+    "cambios": [
+      {
+        "id": "C-01",
+        "rf": "RF-1.1",
+        "ficheros": [
+          "src/tableextension/SalesReceivablesSetupLDR.TableExt.al",
+          "src/pageextension/SalesReceivablesSetupLDR.PageExt.al"
+        ],
+        "commit": "b4929c0",
+        "resumen": "Campos Commission Settlement Nos. y Commission Account en Sales & Receivables Setup (ext. 50002) y grupo Commissions en su página (ext. 50004)"
+      },
+      {
+        "id": "C-02",
+        "rf": "RF-1.2",
+        "ficheros": [
+          "src/tableextension/SalespersonPurchaserLDR.TableExt.al",
+          "src/pageextension/SalespersonPurchaserLDR.PageExt.al"
+        ],
+        "commit": "b4929c0",
+        "resumen": "Campo Vendor No. en Salesperson/Purchaser (ext. 50000) y en su ficha (ext. 50002)"
+      },
+      {
+        "id": "C-03",
+        "rf": "RF-2.1",
+        "ficheros": [
+          "src/table/CommissionSettlementLDR.Table.al",
+          "src/table/CommissionEntryLDR.Table.al",
+          "src/permissionset/CommissionsLDR.PermissionSet.al"
+        ],
+        "commit": "f8cb3ec",
+        "resumen": "Tabla 50002 Commission Settlement_LDR con nº de serie (No. Series.GetNextNo) y FlowFields de total y nº de movimientos; clave Liquidation No. con SumIndexFields en Commission Entry_LDR (P-9); permisos de los objetos nuevos"
+      },
+      {
+        "id": "C-04",
+        "rf": "RF-2.2",
+        "ficheros": [
+          "src/page/CommissionSettlementsLDR.Page.al"
+        ],
+        "commit": "f8cb3ec",
+        "resumen": "Lista 50003 Commission Settlements_LDR no editable con acción Movimientos (Imprimir, Deshacer y Liquidar se añaden con RF-5.3, RF-4.x y RF-3.6)"
+      }
+    ],
     "extras": [],
     "evidencias": [
       {
@@ -637,6 +678,22 @@
         "tipo": "bc-code-intel",
         "resultado": "OK",
         "referencia": "P1: find_bc_knowledge (BC26) sobre ModifyAll filtrado/LockTable y sobre RDLC; sin contenido específico aplicable. Contraste hecho con el estándar es-29: PurchPost 7101 (Pre-Assigned No.), PurchInvHeader Key3, PurchaseLine 4795 (Direct Posting), NoSeries.GetNextNo(Code,Date)."
+      },
+      {
+        "id": "E-02",
+        "rf": "RF-1.1",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "alc 18.1 contra símbolos 28.5 con CodeCop y UICop y lider.ruleset: 0 errores, 0 avisos (solo info AA0247 y AA0232 previos de TF0020). Commit b4929c0"
+      },
+      {
+        "id": "E-03",
+        "rf": "RF-2.1",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos; info AA0232 en el FlowField (igual que el previo de TF0020, la clave con SumIndexFields existe). Commit f8cb3ec"
       }
     ],
     "desviaciones": [],
@@ -785,6 +842,48 @@
         "usuario_gh": "AlejandroGallego-LiderIT",
         "plugin": "0.4.0",
         "puerta": "P1"
+      },
+      {
+        "ts": "2026-11-20T12:33:13",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:33:15",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:33:16",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:35:19",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:35:21",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:35:22",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
       }
     ]
   }
