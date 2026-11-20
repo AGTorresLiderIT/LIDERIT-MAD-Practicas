@@ -725,6 +725,56 @@
         ],
         "commit": "e7f8628",
         "resumen": "Lógica en la codeunit 50002 sin interfaz ni Commit (SetParameters, GetSettlementNo, GetWarningText); el report la ejecuta con Codeunit.Run sin if (todo o nada, P-4); acción Liquidar comisiones en la lista, report en el buscador (UsageCategory Tasks) y permisos. Nombre acortado a 'Settle Salesp. Commission_LDR' (el de la tarea supera los 30 caracteres de AL)"
+      },
+      {
+        "id": "C-11",
+        "rf": "RF-4.1",
+        "ficheros": [
+          "src/codeunit/CommissionMgtLDR.Codeunit.al"
+        ],
+        "commit": "d98e7bc",
+        "resumen": "UndoSettlement en Commission Mgt._LDR: LockTable + Get de la liquidación; si la factura no está en Purchase Header y existe en Purch. Inv. Header por Pre-Assigned No. (P-5), error y sin cambios"
+      },
+      {
+        "id": "C-12",
+        "rf": "RF-4.2",
+        "ficheros": [
+          "src/codeunit/CommissionMgtLDR.Codeunit.al",
+          "src/page/CommissionSettlementsLDR.Page.al"
+        ],
+        "commit": "d98e7bc",
+        "resumen": "Acción Deshacer liquidación con Confirm (texto distinto si no hay factura); borra la factura borrador con Delete(true), ModifyAll Liquidated = false y después Liquidation No. vacío (P-1), y borra la liquidación"
+      },
+      {
+        "id": "C-13",
+        "rf": "RF-5.1",
+        "ficheros": [
+          "src/report/CommissionSettlementLDR.Report.al",
+          "src/report/layout/CommissionSettlement.rdlc"
+        ],
+        "commit": "1fced99",
+        "resumen": "Report 50001 Commission Settlement_LDR con layout RDLC (P-7 respondido por el consultor: RDLC en vez de Word). Cabecera de página con logo y nombre de la empresa, título y nº de página; nº de liquidación, vendedor y nombre y fecha hasta en la cabecera del grupo, repetida en cada página"
+      },
+      {
+        "id": "C-14",
+        "rf": "RF-5.2",
+        "ficheros": [
+          "src/report/CommissionSettlementLDR.Report.al",
+          "src/report/layout/CommissionSettlement.rdlc"
+        ],
+        "commit": "1fced99",
+        "resumen": "Líneas con fecha, tipo y nº de documento, cliente, producto, base, % y comisión; total por liquidación (Sum) y salto de página entre liquidaciones"
+      },
+      {
+        "id": "C-15",
+        "rf": "RF-5.3",
+        "ficheros": [
+          "src/report/CommissionSettlementLDR.Report.al",
+          "src/page/CommissionSettlementsLDR.Page.al",
+          "src/permissionset/CommissionsLDR.PermissionSet.al"
+        ],
+        "commit": "1fced99",
+        "resumen": "RequestFilterFields nº y vendedor, UsageCategory ReportsAndAnalysis; acción Imprimir en la lista con SetRecFilter sobre una copia; permisos"
       }
     ],
     "extras": [],
@@ -760,6 +810,22 @@
         "tipo": "al_compile",
         "resultado": "OK",
         "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos (info AA0232 previos). Commit e7f8628"
+      },
+      {
+        "id": "E-05",
+        "rf": "RF-4.2",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos. Commit d98e7bc"
+      },
+      {
+        "id": "E-06",
+        "rf": "RF-5.1",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos; RDLC bien formado (no renderizado: falta probarlo en BC). Commit 1fced99"
       }
     ],
     "desviaciones": [],
@@ -995,6 +1061,55 @@
       },
       {
         "ts": "2026-11-20T12:38:38",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:42:35",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:42:37",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:42:39",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:44:52",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:44:54",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:44:55",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:44:57",
         "accion": "evidencia",
         "por": "",
         "usuario_gh": "AlejandroGallego-LiderIT",
