@@ -19,6 +19,10 @@ pageextension 50002 "Salesperson/Purchaser_LDR" extends "Salesperson/Purchaser C
             {
                 ApplicationArea = All;
             }
+            field("Vendor No._LDR"; Rec."Vendor No._LDR")
+            {
+                ApplicationArea = All;
+            }
         }
     }
 }
