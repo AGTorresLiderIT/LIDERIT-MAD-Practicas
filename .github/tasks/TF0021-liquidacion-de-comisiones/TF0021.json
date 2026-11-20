@@ -796,6 +796,23 @@
         ],
         "commit": "706752a",
         "resumen": "Codeunit 50002 renombrada a 'Salesp. Comm. Settlement_LDR': el nombre anterior ya existía en el sandbox (versión manual de la tarea). TF0023 debe usar este nombre. El fichero se renombró en 2596a9a."
+      },
+      {
+        "id": "C-18",
+        "rf": "RF-2.1",
+        "ficheros": [
+          "src/table/CommSettlementLDR.Table.al",
+          "src/report/CommSettlementLDR.Report.al",
+          "src/report/SettleSalespCommissionsLDR.Report.al",
+          "src/page/CommissionSettlementsLDR.Page.al",
+          "src/codeunit/CommissionMgtLDR.Codeunit.al",
+          "src/codeunit/SalespCommSettlementLDR.Codeunit.al",
+          "src/permissionset/CommissionsLDR.PermissionSet.al",
+          "Translations/LIDERIT-MAD-Practicas.g.xlf",
+          "Translations/LIDERIT-MAD-Practicas.es-ES.xlf"
+        ],
+        "commit": "b115cc5",
+        "resumen": "Renombrados por choque con la app de la versión manual del sandbox: tabla 50002 y report 50001 'Commission Settlement_LDR' -> 'Comm. Settlement_LDR'; report 50000 'Settle Commissions_LDR' -> 'Settle Salesp. Commissions_LDR'. TF0023 debe usar estos nombres"
       }
     ],
     "extras": [],
@@ -855,6 +872,14 @@
         "tipo": "al_compile",
         "resultado": "OK",
         "referencia": "Tras renombrar la codeunit: alc 18.1, 0 errores, 0 avisos. Commit 706752a"
+      },
+      {
+        "id": "E-08",
+        "rf": "RF-2.1",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "Tras renombrar tabla y reports: alc 18.1, 0 errores, 0 avisos. Commit b115cc5"
       }
     ],
     "desviaciones": [],
@@ -1160,6 +1185,20 @@
       },
       {
         "ts": "2026-11-20T12:54:11",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T13:00:43",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T13:00:44",
         "accion": "evidencia",
         "por": "",
         "usuario_gh": "AlejandroGallego-LiderIT",
