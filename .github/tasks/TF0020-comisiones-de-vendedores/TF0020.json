@@ -790,9 +790,62 @@
         "tipo": "manual",
         "resultado": "OK",
         "referencia": "Prueba manual repetida en sandbox por AlejandroGallego-LiderIT (19/11/2026): factura en USD 1 x 1.000,00 de 1896-S con factor 1,10: base 909,09 EUR y comisión 45,45 EUR"
+      },
+      {
+        "id": "E-13",
+        "rf": "RF-1.1",
+        "escenario": "A-1",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba manual en sandbox por AlejandroGallego-LiderIT (20/11/2026): ficha del vendedor muestra «% Comisión» (S-02) y «Comisión pendiente (DL)»"
+      },
+      {
+        "id": "E-14",
+        "rf": "RF-1.2",
+        "escenario": "A-2",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba manual en sandbox por AlejandroGallego-LiderIT (20/11/2026): producto de portes con «Excluir de comisión» marcado y 1896-S sin marcar"
+      },
+      {
+        "id": "E-15",
+        "rf": "RF-3.1",
+        "escenario": "A-11",
+        "tipo": "manual",
+        "resultado": "No ejecutada",
+        "referencia": "No se dispone de un segundo usuario en el sandbox sin SUPER (crearlo requiere al administrador de Microsoft 365). Queda para la aceptación del consultor, junto con la comprobación de la ficha del vendedor sin Commissions_LDR."
       }
     ],
-    "desviaciones": [],
+    "desviaciones": [
+      {
+        "puerta": "trazabilidad",
+        "codigo": "RF-3.1:evidencia-ko",
+        "motivo": "No hay un segundo usuario en el sandbox sin SUPER. Los permisos (P-6) se prueban en la aceptación del consultor.",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-20"
+      },
+      {
+        "puerta": "trazabilidad",
+        "codigo": "RF-3.4:evidencia-ko",
+        "motivo": "Primer intento con un precio mal tecleado (1.000.000 USD). Repetido con los datos del escenario: OK en E-12.",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-20"
+      },
+      {
+        "puerta": "trazabilidad",
+        "codigo": "T-06:traducciones",
+        "motivo": "El XLIFF es-ES está completo (40 de 40) e incluido en el paquete, pero el sandbox muestra los textos en inglés. Queda pendiente de investigar.",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-20"
+      },
+      {
+        "puerta": "herramientas",
+        "codigo": "uso:bcquality",
+        "motivo": "BCQuality no está instalado en el equipo; revisión con CodeCop, UICop y PerTenantExtensionCop sin avisos.",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-20"
+      }
+    ],
     "firmas": {
       "P1": {
         "por": "AlejandroGallego-LiderIT",
@@ -1087,6 +1140,59 @@
         "por": "",
         "usuario_gh": "AlejandroGallego-LiderIT",
         "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T10:06:54",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T10:06:55",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T10:08:58",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T10:13:28",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "trazabilidad"
+      },
+      {
+        "ts": "2026-11-20T10:13:30",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "trazabilidad"
+      },
+      {
+        "ts": "2026-11-20T10:13:31",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "trazabilidad"
+      },
+      {
+        "ts": "2026-11-20T10:13:32",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "herramientas"
       }
     ],
     "solicitudes": [
