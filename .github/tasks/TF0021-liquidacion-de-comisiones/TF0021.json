@@ -775,6 +775,16 @@
         ],
         "commit": "1fced99",
         "resumen": "RequestFilterFields nº y vendedor, UsageCategory ReportsAndAnalysis; acción Imprimir en la lista con SetRecFilter sobre una copia; permisos"
+      },
+      {
+        "id": "C-16",
+        "rf": "RF-1.1",
+        "ficheros": [
+          "Translations/LIDERIT-MAD-Practicas.es-ES.xlf",
+          "Translations/LIDERIT-MAD-Practicas.g.xlf"
+        ],
+        "commit": "ec4b868",
+        "resumen": "T-07: traducción es-ES de los 58 textos nuevos de TF0021 a partir de los comentarios ESP; se conservan las 40 de TF0020"
       }
     ],
     "extras": [],
@@ -1111,6 +1121,13 @@
       {
         "ts": "2026-11-20T12:44:57",
         "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:47:09",
+        "accion": "cambio",
         "por": "",
         "usuario_gh": "AlejandroGallego-LiderIT",
         "plugin": "0.4.0"
