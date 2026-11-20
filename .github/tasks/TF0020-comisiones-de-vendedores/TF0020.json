@@ -1225,5 +1225,251 @@
         "referencia": "Validación P1 del consultor (19/11/2026)"
       }
     ]
+  },
+  "documentacion": {
+    "enlaces": {
+      "rama": "https://github.com/AGTorresLiderIT/LIDERIT-MAD-Practicas/tree/Feature/TF0020-comisiones-de-vendedores"
+    },
+    "resumen": "Al registrar facturas y abonos de venta, Business Central crea automáticamente un movimiento de comisión por cada línea de producto, con el % del vendedor de la cabecera. Los movimientos se consultan en una lista de solo lectura, desde la ficha del vendedor («Comisión pendiente (DL)») y desde «Navegar» del documento registrado. Los productos con «Excluir de comisión» no generan comisión.",
+    "objetos": [
+      {
+        "tipo": "Table",
+        "id": "50001",
+        "nombre": "Commission Entry_LDR",
+        "cambio": "Nueva tabla de movimientos de comisión."
+      },
+      {
+        "tipo": "Enum",
+        "id": "50000",
+        "nombre": "Commission Document Type_LDR",
+        "cambio": "Tipo de documento del movimiento: Factura o Abono."
+      },
+      {
+        "tipo": "Page",
+        "id": "50000",
+        "nombre": "Commission Entries_LDR",
+        "cambio": "Lista de movimientos de solo consulta con la acción «Navegar»."
+      },
+      {
+        "tipo": "TableExtension",
+        "id": "50001",
+        "nombre": "Item_LDR",
+        "cambio": "Nuevo campo «Excluir de comisión» en el producto."
+      },
+      {
+        "tipo": "PageExtension",
+        "id": "50003",
+        "nombre": "Item Card_LDR",
+        "cambio": "Muestra «Excluir de comisión» en la ficha del producto (pestaña General)."
+      },
+      {
+        "tipo": "TableExtension",
+        "id": "50000",
+        "nombre": "Salesperson/Purchaser_LDR",
+        "cambio": "Nuevo campo calculado «Comisión pendiente (DL)» en el vendedor."
+      },
+      {
+        "tipo": "PageExtension",
+        "id": "50002",
+        "nombre": "Salesperson/Purchaser_LDR",
+        "cambio": "Muestra «% Comisión» en cualquier experiencia y «Comisión pendiente (DL)» en la ficha del vendedor."
+      },
+      {
+        "tipo": "Codeunit",
+        "id": "50000",
+        "nombre": "Commission Mgt._LDR",
+        "cambio": "Lógica: crear el movimiento desde la línea registrada, conversión a divisa local y Navegar."
+      },
+      {
+        "tipo": "Codeunit",
+        "id": "50001",
+        "nombre": "Commission Subscribers_LDR",
+        "cambio": "Suscriptores de Sales-Post y Navigate; solo llaman a Commission Mgt._LDR."
+      },
+      {
+        "tipo": "PermissionSet",
+        "id": "50000",
+        "nombre": "Commissions_LDR",
+        "cambio": "Permisos para consultar los movimientos de comisión."
+      },
+      {
+        "tipo": "PermissionSetExtension",
+        "id": "50000",
+        "nombre": "D365 Sales Doc Post_LDR",
+        "cambio": "Permite registrar ventas sin tener Commissions_LDR (permiso indirecto)."
+      }
+    ],
+    "detalles": [
+      {
+        "rf": "RF-1.1, RF-1.2",
+        "titulo": "Configuración",
+        "parrafos": [
+          "El porcentaje es el campo estándar «% Comisión» del vendedor (tabla 13); no se crea campo nuevo. El estándar solo lo muestra en la experiencia Esencial; por decisión del consultor (S-02), la extensión 50002 de la ficha (página 5116) oculta el control estándar y lo muestra de nuevo para todas las experiencias, así aparece una sola vez.",
+          "El producto (tabla 27) tiene el nuevo campo «Excluir de comisión», visible en la pestaña General de su ficha. Sus líneas no generan movimiento."
+        ],
+        "tabla": {
+          "columnas": [
+            "Campo",
+            "Id",
+            "Tipo",
+            "Comentario"
+          ],
+          "filas": [
+            [
+              "Exclude from Commission_LDR («Excluir de comisión»)",
+              "50000",
+              "Boolean",
+              "Tabla Item (27)"
+            ]
+          ]
+        }
+      },
+      {
+        "rf": "RF-2.1, RF-2.2, RF-2.3",
+        "titulo": "Movimientos de comisión",
+        "parrafos": [
+          "Tabla 50001 con los datos del documento, vendedor, cliente (venta a), producto, base, % aplicado, comisión, liquidación (para TF0021) y usuario. El nº de movimiento es AutoIncrement (P-1): no bloquea a varios usuarios registrando a la vez; si un registro falla puede quedar un hueco en la numeración.",
+          "La lista 50000 no permite crear, modificar ni borrar. Su acción «Navegar» abre la página estándar Navegar con la fecha y el nº del documento.",
+          "En el vendedor, «Comisión pendiente (DL)» suma la comisión de sus movimientos no liquidados; al pulsarla abre esos movimientos. Una clave con SumIndexFields evita recorrer la tabla para calcularla."
+        ],
+        "tabla": {
+          "columnas": [
+            "Campo",
+            "Id",
+            "Tipo",
+            "Comentario"
+          ],
+          "filas": [
+            [
+              "Entry No.",
+              "1",
+              "Integer",
+              "Clave primaria, AutoIncrement"
+            ],
+            [
+              "Posting Date, Document Type, Document No., Document Line No.",
+              "2-5",
+              "Date, Enum, Code[20], Integer",
+              "Documento registrado de origen"
+            ],
+            [
+              "Salesperson Code, Customer No., Item No.",
+              "6-8",
+              "Code[20]",
+              "Vendedor de la cabecera, cliente venta a, producto"
+            ],
+            [
+              "Base Amount (LCY), Commission %, Commission Amount (LCY)",
+              "9-11",
+              "Decimal",
+              "Negativos en abonos; el % se guarda en el momento del registro"
+            ],
+            [
+              "Liquidated, Liquidation No.",
+              "12-13",
+              "Boolean, Code[20]",
+              "Los usará TF0021"
+            ],
+            [
+              "User ID",
+              "14",
+              "Code[50]",
+              "Usuario que registra"
+            ],
+            [
+              "Pending Commission (LCY)_LDR",
+              "50000",
+              "Decimal (FlowField)",
+              "Tabla Salesperson/Purchaser (13)"
+            ]
+          ]
+        }
+      },
+      {
+        "rf": "RF-3.1, RF-3.2, RF-3.3, RF-3.4",
+        "titulo": "Generación de movimientos al registrar",
+        "parrafos": [
+          "Se usan los eventos OnAfterSalesInvLineInsert y OnAfterSalesCrMemoLineInsert de Sales-Post (80). Van dentro de la transacción del registro (P-2): factura y comisión se guardan o se deshacen juntas. Por eso el envío sin factura no genera comisión y en la facturación parcial cada factura genera solo lo que factura.",
+          "Se crea movimiento solo si la línea es de tipo Producto, con cantidad mayor que 0 (S-01), producto no excluido y vendedor con % distinto de 0. En otro caso no se crea nada y el documento se registra sin error. En la vista previa de registro no se crea nada (P-4).",
+          "Base = importe de la línea sin IVA; si hay divisa se convierte a divisa local con el factor de la cabecera y se redondea con la precisión de importes de la configuración de contabilidad. Comisión = base × % / 100, redondeada. En abonos, base y comisión van en negativo.",
+          "Impacto: el código se ejecuta dentro del registro de ventas (riesgo ROJO). No genera asientos contables ni cambia la contabilización estándar."
+        ]
+      },
+      {
+        "rf": "RF-4.1",
+        "titulo": "Integración con Navegar",
+        "parrafos": [
+          "Con los eventos OnAfterNavigateFindRecords y OnBeforeShowRecords de la página Navegar (344), «Navegar» desde la factura o el abono registrados muestra la línea de movimientos de comisión con su número de registros y, al pulsarla, abre la lista filtrada. Si el usuario no tiene permiso de lectura sobre la tabla, la línea no aparece."
+        ]
+      },
+      {
+        "bloque": "5",
+        "titulo": "Permisos y traducciones",
+        "parrafos": [
+          "Solo Commission Mgt._LDR inserta movimientos (permiso ri en la codeunit). El conjunto Commissions_LDR da la consulta. La extensión de «D365 SALES DOC, POST» da permiso indirecto para que quien registra ventas sin Commissions_LDR pueda registrar (P-6).",
+          "Textos en inglés con traducción es-ES completa en Translations. En el sandbox de pruebas los textos se ven en inglés; queda pendiente de investigar (desviación declarada)."
+        ]
+      }
+    ],
+    "pruebas": [
+      {
+        "titulo": "Configuración (A-1, A-2)",
+        "pasos": [
+          "Ficha del vendedor: se ven «% Comisión» y «Comisión pendiente (DL)» a 0,00.",
+          "Producto de portes con «Excluir de comisión» marcado; 1896-S sin marcar."
+        ],
+        "capturas": [
+          "Ficha del vendedor con «% Comisión» y «Comisión pendiente (DL)»",
+          "Ficha del producto de portes con «Excluir de comisión» marcado"
+        ]
+      },
+      {
+        "titulo": "Factura, Navegar y lista (A-3, A-10, A-9)",
+        "pasos": [
+          "Factura con 1896-S, 1900-S, una línea de cuenta y el producto de portes: 2 movimientos, 500/25 y 1.000/50.",
+          "«Navegar» desde la factura registrada muestra la línea de comisiones con 2 registros.",
+          "La lista no deja crear, modificar ni borrar; su «Navegar» abre el documento."
+        ],
+        "capturas": [
+          "Factura antes de registrar con las 4 líneas",
+          "Lista de movimientos con los 2 movimientos de la factura",
+          "Navegar con la línea de movimientos de comisión"
+        ]
+      },
+      {
+        "titulo": "Abono, sin vendedor y divisa (A-4, A-5, A-6)",
+        "pasos": [
+          "Abono de 10 × 100: movimiento −1.000/−50; la comisión pendiente pasa de 75,00 a 25,00.",
+          "Facturas sin vendedor y con vendedor al 0 %: se registran sin movimiento.",
+          "Factura de 1.000 USD con factor 1,10: base 909,09 € y comisión 45,45 €."
+        ],
+        "capturas": [
+          "Movimiento del abono en negativo",
+          "Ficha del vendedor con 25,00 pendientes",
+          "Movimiento de la factura en USD"
+        ]
+      },
+      {
+        "titulo": "Pedido parcial y vista previa (A-7, A-8)",
+        "pasos": [
+          "Pedido de 10: el envío no crea movimiento; facturar 4 da 400/20 y facturar 6 da 600/30.",
+          "La vista previa de registro no crea movimientos."
+        ],
+        "capturas": [
+          "Movimientos de las dos facturas parciales"
+        ]
+      },
+      {
+        "titulo": "No ejecutada (A-11)",
+        "pasos": [
+          "Permisos con un usuario sin Commissions_LDR: no se pudo probar por no haber un segundo usuario en el sandbox. Queda para la aceptación."
+        ]
+      }
+    ],
+    "para_probar": [
+      "Dónde está: búsqueda «Movimientos de comisión»; ficha del vendedor («% Comisión», «Comisión pendiente (DL)»); ficha del producto («Excluir de comisión»); «Navegar» desde facturas y abonos de venta registrados.",
+      "Configuración previa: vendedores con «% Comisión» (uno con 5 y otro con 0), clientes con y sin vendedor, un producto con «Excluir de comisión», divisa USD con tipo de cambio en la fecha de registro.",
+      "Usuario sin Commissions_LDR con los permisos estándar de ventas para probar A-11 y abrir la ficha del vendedor con él."
+    ]
   }
 }
