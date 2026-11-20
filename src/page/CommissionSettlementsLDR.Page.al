@@ -28,6 +28,16 @@ page 50003 "Commission Settlements_LDR"
     }
     actions
     {
+        area(Processing)
+        {
+            action(SettleCommissions)
+            {
+                Caption = 'Settle Commissions', Comment = 'ESP="Liquidar comisiones"';
+                Image = CalculateCost;
+                RunObject = report "Settle Commissions_LDR";
+                ToolTip = 'Settle the pending commission entries of the salespeople up to a date.', Comment = 'ESP="Liquida los movimientos de comisión pendientes de los vendedores hasta una fecha."';
+            }
+        }
         area(Navigation)
         {
             action(Entries)
@@ -43,6 +53,7 @@ page 50003 "Commission Settlements_LDR"
         {
             group(Category_Process)
             {
+                actionref(SettleCommissions_Promoted; SettleCommissions) { }
                 actionref(Entries_Promoted; Entries) { }
             }
         }
