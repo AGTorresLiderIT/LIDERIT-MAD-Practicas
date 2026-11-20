@@ -37,6 +37,25 @@ page 50003 "Commission Settlements_LDR"
                 RunObject = report "Settle Commissions_LDR";
                 ToolTip = 'Settle the pending commission entries of the salespeople up to a date.', Comment = 'ESP="Liquida los movimientos de comisión pendientes de los vendedores hasta una fecha."';
             }
+            action(UndoSettlement)
+            {
+                Caption = 'Undo Settlement', Comment = 'ESP="Deshacer liquidación"';
+                Image = Undo;
+                ToolTip = 'Undo the selected settlement: its draft purchase invoice is deleted and its commission entries become pending again.', Comment = 'ESP="Deshace la liquidación seleccionada: se elimina su factura de compra borrador y sus movimientos de comisión vuelven a quedar pendientes."';
+
+                trigger OnAction()
+                var
+                    CommissionMgt: Codeunit "Commission Mgt._LDR";
+                begin
+                    if Rec."Purchase Invoice No." <> '' then begin
+                        if not Confirm(UndoSettlementQst, false, Rec."No.", Rec."Purchase Invoice No.") then
+                            exit;
+                    end else
+                        if not Confirm(UndoSettlementNoInvoiceQst, false, Rec."No.") then
+                            exit;
+                    CommissionMgt.UndoSettlement(Rec."No.");
+                end;
+            }
         }
         area(Navigation)
         {
@@ -54,8 +73,13 @@ page 50003 "Commission Settlements_LDR"
             group(Category_Process)
             {
                 actionref(SettleCommissions_Promoted; SettleCommissions) { }
+                actionref(UndoSettlement_Promoted; UndoSettlement) { }
                 actionref(Entries_Promoted; Entries) { }
             }
         }
     }
+
+    var
+        UndoSettlementQst: Label 'Do you want to undo settlement %1? Draft purchase invoice %2 will be deleted and the commission entries will be pending again.', Comment = 'ESP="¿Desea deshacer la liquidación %1? Se eliminará la factura de compra borrador %2 y los movimientos volverán a quedar pendientes." %1 = settlement no., %2 = purchase invoice no.';
+        UndoSettlementNoInvoiceQst: Label 'Do you want to undo settlement %1? The commission entries will be pending again.', Comment = 'ESP="¿Desea deshacer la liquidación %1? Los movimientos volverán a quedar pendientes." %1 = settlement no.';
 }
