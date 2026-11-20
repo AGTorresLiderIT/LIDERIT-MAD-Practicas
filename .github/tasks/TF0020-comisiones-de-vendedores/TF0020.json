@@ -1,0 +1,1530 @@
+{
+  "_version": 2,
+  "codigo": "TF0020",
+  "codigo_erpit": "",
+  "nombre": "Comisiones de vendedores",
+  "cliente": "LiderIT",
+  "fecha": "17/11/2026",
+  "proyecto": "Formación – Bloque 5 (Eventos, registro y procesos)",
+  "destinatario": "Alejandro Gallego",
+  "consultor": "Alejandro González Torres",
+  "ficha": {
+    "origen": "Tarea de formación TF0020 – Comisiones de vendedores (19/10/2026), Bloque 5",
+    "riesgo": "ROJO (suscripción a eventos de registro de ventas de Sales-Post; los movimientos se crean dentro de la transacción de registro)",
+    "estado": "En desarrollo",
+    "issue_rama": "https://github.com/AGTorresLiderIT/LIDERIT-MAD-Practicas/issues/48 · rama Feature/TF0020-comisiones-de-vendedores"
+  },
+  "funcional": {
+    "contexto": "La empresa paga a sus vendedores una comisión por cada factura de venta registrada y se la descuenta al registrar un abono. Hoy se calcula a mano en una hoja de cálculo a partir del listado de facturas. Se requiere que Business Central genere automáticamente un movimiento de comisión al registrar.",
+    "situacion_actual": "El estándar ya tiene vendedores (tabla Salesperson/Purchaser) con el campo «% Comisión», visible en la ficha, pero no lo usa para calcular nada. No hay ningún desarrollo previo en el repositorio de prácticas.",
+    "intro_alcance": "La tarea incluye:",
+    "bloques": [
+      {
+        "id": "1",
+        "titulo": "Configuración",
+        "requisitos": [
+          {
+            "id": "RF-1.1",
+            "texto": "El porcentaje de comisión de cada vendedor es el campo estándar «% Comisión» de la ficha del vendedor; no se crea un campo nuevo, pero se muestra en la ficha porque por defecto no sale (S-02)."
+          },
+          {
+            "id": "RF-1.2",
+            "texto": "Nuevo campo «Excluir de comisión» en la ficha del producto para productos que no generan comisión (portes, embalajes)."
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "titulo": "Movimientos de comisión",
+        "requisitos": [
+          {
+            "id": "RF-2.1",
+            "texto": "Nueva tabla de movimientos de comisión con los datos del documento, vendedor, cliente, producto, base, porcentaje aplicado, importe, liquidación y usuario."
+          },
+          {
+            "id": "RF-2.2",
+            "texto": "Lista de movimientos de comisión de solo consulta: no se pueden crear, modificar ni borrar a mano; con acción «Navegar»."
+          },
+          {
+            "id": "RF-2.3",
+            "texto": "En la ficha del vendedor, «Comisión pendiente (DL)»: suma de las comisiones no liquidadas, con acceso a sus movimientos."
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "titulo": "Generación de movimientos al registrar",
+        "requisitos": [
+          {
+            "id": "RF-3.1",
+            "texto": "Al registrar una factura de venta se crea un movimiento por cada línea de tipo Producto con cantidad mayor que 0 y producto no excluido (S-01)."
+          },
+          {
+            "id": "RF-3.2",
+            "texto": "Al registrar un abono de venta se crea el movimiento con base e importe en negativo."
+          },
+          {
+            "id": "RF-3.3",
+            "texto": "El vendedor es el de la cabecera del documento registrado; si no tiene vendedor o su porcentaje es 0, se registra sin error y sin movimiento."
+          },
+          {
+            "id": "RF-3.4",
+            "texto": "Base sin IVA en divisa local y comisión = base × % / 100, redondeadas a la precisión de importes de la configuración de contabilidad."
+          }
+        ]
+      },
+      {
+        "id": "4",
+        "titulo": "Integración con Navegar",
+        "requisitos": [
+          {
+            "id": "RF-4.1",
+            "texto": "Desde la factura o el abono registrados, «Navegar» muestra la línea de movimientos de comisión con su número de registros y, al pulsarla, abre esos movimientos."
+          }
+        ]
+      }
+    ],
+    "puntos": [
+      {
+        "id": "P-1",
+        "tipo": "Supuesto",
+        "texto": "Nº de movimiento con AutoIncrement y no con FindLast + 1 de los movimientos estándar. Motivo: no es un movimiento contable ni fiscal, no se exige numeración sin huecos y FindLast + 1 obliga a LockTable sobre la tabla, lo que serializa los registros de ventas concurrentes. Consecuencia aceptada: el contador de SQL no se devuelve en un rollback, así que quedan huecos cuando un registro falla. Se inserta con «Entry No.» = 0 y el valor asignado se lee del registro tras el Insert. Alternativa a comentar en P1: el estándar numera hoy sus movimientos con la codeunit Sequence No. Mgt. (Sales-Post llama a SetPreviewMode al empezar). Revisado por el revisor técnico: se mantiene.",
+        "bloquea": true,
+        "responsable": "Consultor / formador LiderIT",
+        "estado": "Resuelto",
+        "ambito": "Interno",
+        "respuesta": "Validado en P1: se mantiene AutoIncrement (AGTorresLiderIT, 19/11/2026)."
+      },
+      {
+        "id": "P-2",
+        "tipo": "Supuesto",
+        "texto": "Eventos por línea (OnAfterSalesInvLineInsert / OnAfterSalesCrMemoLineInsert) y no OnAfterPostSalesDoc (TF0010). Motivo: OnAfterPostSalesDoc se lanza después del Commit del registro; un error ahí deja la factura registrada sin comisión. Los eventos por línea van dentro de la misma transacción y ya traen la línea registrada. Con envío y facturación parcial solo se genera comisión de lo facturado (el envío sin factura no crea líneas de factura). Se debe cuestionar en P1. Revisado: correcto. El evento de línea se lanza también para líneas de comentario y de cuenta; por eso el filtro Type = Item va en la codeunit.",
+        "bloquea": true,
+        "responsable": "Consultor / formador LiderIT",
+        "estado": "Resuelto",
+        "ambito": "Interno",
+        "respuesta": "Validado en P1: eventos por línea de Sales-Post (AGTorresLiderIT, 19/11/2026)."
+      },
+      {
+        "id": "P-3",
+        "tipo": "Supuesto",
+        "texto": "Conversión a DL como el estándar: si el documento tiene divisa, ExchangeAmtFCYToLCY de Currency Exchange Rate con la fecha de registro, la divisa y el «Currency Factor» de la cabecera; redondeo con «Amount Rounding Precision» de la configuración de contabilidad. La comisión se calcula sobre la base ya redondeada y se redondea otra vez. Se acepta una diferencia de céntimos frente a lo contabilizado, que el estándar redondea por agrupación. Se debe cuestionar en P1.",
+        "bloquea": false,
+        "responsable": "Consultor / formador LiderIT",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      },
+      {
+        "id": "P-4",
+        "tipo": "Supuesto",
+        "texto": "Vista previa de registro: Commission Mgt._LDR sale sin hacer nada si la codeunit Gen. Jnl.-Post Preview (19) devuelve IsActive() = true. Se usa esta comprobación y no el parámetro PreviewMode porque solo lo trae OnAfterSalesInvLineInsert; OnAfterSalesCrMemoLineInsert no lo tiene (BC 28 y 29), y así facturas y abonos se tratan igual en un único sitio. Motivo frente a dejar que el rollback lo deshaga: no se hace trabajo inútil y no se consumen números del AutoIncrement (P-1). Los movimientos no se ven en la ventana de vista previa (no se suscribe a Posting Preview Event Handler); mostrarlos queda fuera de alcance.",
+        "bloquea": false,
+        "responsable": "Revisor técnico LiderIT",
+        "estado": "Resuelto",
+        "ambito": "Interno",
+        "respuesta": "Validado en P1: se usa Gen. Jnl.-Post Preview.IsActive() (AGTorresLiderIT, 19/11/2026)."
+      },
+      {
+        "id": "P-5",
+        "tipo": "Supuesto",
+        "texto": "Base = campo «Amount» de la línea registrada (neto sin IVA, después del descuento de línea y del descuento de factura). Cliente del movimiento = «Sell-to Customer No.» de la cabecera. «Amount» es sin IVA también cuando la cabecera tiene «Precios IVA incluido». Revisado: correcto.",
+        "bloquea": false,
+        "responsable": "Consultor / formador LiderIT",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      },
+      {
+        "id": "P-6",
+        "tipo": "Supuesto",
+        "texto": "Permisos (decisión del revisor): 1) Commission Mgt._LDR, única que inserta, con Permissions = tabledata \"Commission Entry_LDR\" = ri. 2) PermissionSet «Commissions_LDR» (Assignable) con lectura directa de la tabla y ejecución de los objetos de comisiones, para quien consulta. 3) PermissionSetExtension del conjunto estándar «D365 SALES DOC, POST» con tabledata \"Commission Entry_LDR\" = ri (indirecto): sin ella, un usuario que registra ventas y no tiene Commissions_LDR recibiría un error de permisos y no podría registrar. No se usa InherentPermissions en la tabla: daría lectura e inserción a cualquier usuario. En Navegar, si el usuario no tiene ReadPermission sobre la tabla, el suscriptor no añade la línea. Se debe cuestionar en P1.",
+        "bloquea": false,
+        "responsable": "Revisor técnico LiderIT",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      },
+      {
+        "id": "P-7",
+        "tipo": "Supuesto",
+        "texto": "La app declara application 28 y el estándar local es BC 29 ES. Comprobado con bc-observatory (bc_diff_object 28 → 29): Sales-Post (80) solo añade OnBeforeUpdateSalesOrderLineIfExist y Navigate (344) solo añade FindSpendRequests; las firmas de OnAfterSalesInvLineInsert, OnAfterSalesCrMemoLineInsert, OnAfterNavigateFindRecords y OnBeforeShowRecords son iguales en 28 y 29. Se puede publicar en 28.",
+        "bloquea": false,
+        "responsable": "Revisor técnico LiderIT",
+        "estado": "Resuelto",
+        "ambito": "Interno",
+        "respuesta": "Firmas de los cuatro eventos idénticas en BC 28 y 29 (bc_diff_object)."
+      },
+      {
+        "id": "P-8",
+        "tipo": "Fuera de alcance",
+        "texto": "Facturas y abonos de anticipo (Sales-Post Prepayments), documentos de servicio, recálculo de movimientos ya creados si cambia el % del vendedor, comisiones por producto o cliente (TF0022), liquidación (TF0021) y proceso automático (TF0023).",
+        "bloquea": false,
+        "responsable": "Consultor / formador LiderIT",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      }
+    ]
+  },
+  "desarrollo": {
+    "intro": "Toda la lógica se centraliza en la codeunit «Commission Mgt._LDR»; los suscriptores solo llaman a sus funciones, igual que en las tareas del Bloque 4. Se realizarán las siguientes modificaciones:",
+    "secciones": [
+      {
+        "id": "1",
+        "titulo": "Configuración",
+        "ubicacion": "Tabla Salesperson/Purchaser (13), página Salesperson/Purchaser Card (5116); tabla Item (27), página Item Card (30).",
+        "parrafos": [
+          "El porcentaje es el campo estándar «Commission %» (campo 3) de Salesperson/Purchaser, que ya se ve en la ficha del vendedor y en la lista. No se crea campo nuevo.",
+          "Se añade al producto un campo booleano, visible en la ficha en la pestaña General."
+        ],
+        "tabla": {
+          "columnas": [
+            "Campo",
+            "Tipo",
+            "Tabla",
+            "Comentario"
+          ],
+          "filas": [
+            [
+              "Exclude from Commission (ESP «Excluir de comisión»)",
+              "Boolean",
+              "Item (27)",
+              "Si está activo, las líneas de ese producto no generan comisión"
+            ]
+          ]
+        }
+      },
+      {
+        "id": "2",
+        "titulo": "Movimientos de comisión",
+        "ubicacion": "Tabla nueva Commission Entry_LDR; página nueva Commission Entries_LDR; ficha Salesperson/Purchaser Card (5116).",
+        "parrafos": [
+          "Tabla de movimientos con estos campos. «Entry No.» es AutoIncrement (P-1): se inserta con 0 y lo asigna la base de datos. LookupPageId y DrillDownPageId apuntan a la lista. DataClassification CustomerContent.",
+          "La lista no es editable (Editable, InsertAllowed, ModifyAllowed y DeleteAllowed = false). Su acción «Navegar» abre la página estándar Navigate (344) con SetDoc(«Posting Date», «Document No.») y Run."
+        ],
+        "tabla": {
+          "columnas": [
+            "Campo",
+            "Tipo",
+            "Relación",
+            "Comentario"
+          ],
+          "filas": [
+            [
+              "Entry No.",
+              "Integer",
+              "—",
+              "PK, AutoIncrement"
+            ],
+            [
+              "Posting Date",
+              "Date",
+              "—",
+              "Fecha de registro del documento"
+            ],
+            [
+              "Document Type",
+              "Enum Commission Document Type_LDR",
+              "—",
+              "Invoice / Credit Memo"
+            ],
+            [
+              "Document No.",
+              "Code[20]",
+              "—",
+              "Nº de la factura o abono registrado"
+            ],
+            [
+              "Document Line No.",
+              "Integer",
+              "—",
+              "Nº de línea del histórico"
+            ],
+            [
+              "Salesperson Code",
+              "Code[20]",
+              "Salesperson/Purchaser",
+              "Vendedor de la cabecera"
+            ],
+            [
+              "Customer No.",
+              "Code[20]",
+              "Customer",
+              "Sell-to Customer No. (P-5)"
+            ],
+            [
+              "Item No.",
+              "Code[20]",
+              "Item",
+              ""
+            ],
+            [
+              "Base Amount (LCY)",
+              "Decimal",
+              "—",
+              "Neto sin IVA en DL; negativo en abonos"
+            ],
+            [
+              "Commission %",
+              "Decimal",
+              "—",
+              "% del vendedor en el momento del registro; se guarda, no se recalcula"
+            ],
+            [
+              "Commission Amount (LCY)",
+              "Decimal",
+              "—",
+              "Base × % / 100, redondeado; negativo en abonos"
+            ],
+            [
+              "Liquidated",
+              "Boolean",
+              "—",
+              "Lo usará TF0021"
+            ],
+            [
+              "Liquidation No.",
+              "Code[20]",
+              "—",
+              "Lo usará TF0021"
+            ],
+            [
+              "User ID",
+              "Code[50]",
+              "—",
+              "UserId() del usuario que registra"
+            ]
+          ]
+        },
+        "puntos": [
+          "Claves: PK «Entry No.»; secundaria «Salesperson Code, Liquidated, Posting Date» con SumIndexFields = «Commission Amount (LCY)» (cubre el FlowField); secundaria «Document No., Posting Date» para el filtro de Navegar.",
+          "Ficha del vendedor: FlowField «Pending Commission (LCY)» (ESP «Comisión pendiente (DL)») = Sum de «Commission Amount (LCY)» con Salesperson Code = field(Code) y Liquidated = const(false); no editable; DrillDown a la lista filtrada.",
+          "DataClassification: «User ID» EndUserIdentifiableInformation; el resto CustomerContent."
+        ]
+      },
+      {
+        "id": "3",
+        "titulo": "Generación de movimientos al registrar",
+        "ubicacion": "Codeunit Sales-Post (80); tablas Sales Invoice Line (113), Sales Cr.Memo Line (115) y sus cabeceras (112, 114); Currency Exchange Rate (330); General Ledger Setup (98).",
+        "parrafos": [
+          "La codeunit de suscriptores se suscribe a OnAfterSalesInvLineInsert y OnAfterSalesCrMemoLineInsert de Sales-Post y llama a «Commission Mgt._LDR» con la línea y la cabecera registradas. Signo +1 en facturas y −1 en abonos.",
+          "Se descarta OnAfterPostSalesDoc (P-2): se lanza después del Commit, fuera de la transacción del registro. Los eventos por línea se lanzan dentro, con la línea ya insertada, así que factura y comisión se guardan o se deshacen juntas. En facturación parcial, cada factura genera comisión solo de lo que factura.",
+          "Importe en DL (P-3): sin divisa, «Amount» tal cual; con divisa, ExchangeAmtFCYToLCY(«Posting Date», «Currency Code», «Amount», «Currency Factor») y Round con «Amount Rounding Precision». Comisión = Round(base × % / 100)."
+        ],
+        "puntos": [
+          "Se crea movimiento solo si: no es vista previa (P-4), Type = Item, Quantity <> 0, el producto no tiene «Exclude from Commission», la cabecera tiene «Salesperson Code» y el % de ese vendedor es distinto de 0.",
+          "En cualquier otro caso sale sin hacer nada y sin error: nunca se impide registrar por la comisión. Sin Commit, Message ni Confirm en la codeunit (va dentro de la transacción del registro).",
+          "Signo: en abonos la línea registrada trae «Amount» y «Quantity» en positivo; la base y la comisión se multiplican por −1 después de convertir y redondear. «Commission %» se guarda siempre en positivo.",
+          "Lecturas con SetLoadFields (Item: Exclude from Commission; Salesperson: Commission %). GLSetup.Get por línea es aceptable porque el servidor cachea la configuración; no hace falta SingleInstance.",
+          "Permisos de inserción según P-6."
+        ]
+      },
+      {
+        "id": "4",
+        "titulo": "Integración con Navegar",
+        "ubicacion": "Página Navigate (344), tabla Document Entry (265).",
+        "parrafos": [
+          "OnAfterNavigateFindRecords: si el usuario tiene ReadPermission sobre la tabla, se filtran los movimientos con SetFilter por DocNoFilter (Document No.) y PostingDateFilter (Posting Date) y, si hay, se añade la línea con DocumentEntry.InsertIntoDocEntry(Database::\"Commission Entry_LDR\", TableCaption, Count). DocumentEntry es el registro temporal de la propia página (SourceTableTemporary).",
+          "OnBeforeShowRecords: si TempDocumentEntry.\"Table ID\" es la tabla de comisiones, se abre «Commission Entries_LDR» con los mismos filtros y se pone IsHandled := true. Para cualquier otra tabla no se toca IsHandled."
+        ]
+      }
+    ],
+    "objetos": [
+      {
+        "tipo": "Table",
+        "id": 50001,
+        "nombre": "Commission Entry_LDR",
+        "extiende": "",
+        "uso": "movimientos de comisión (objeto compartido con TF0021 y TF0022)"
+      },
+      {
+        "tipo": "Page",
+        "id": 50000,
+        "nombre": "Commission Entries_LDR",
+        "extiende": "",
+        "uso": "lista no editable con acción Navegar (TF0022 añade acciones de exportación)"
+      },
+      {
+        "tipo": "Enum",
+        "id": 50000,
+        "nombre": "Commission Document Type_LDR",
+        "extiende": "",
+        "uso": "Invoice / Credit Memo"
+      },
+      {
+        "tipo": "Codeunit",
+        "id": 50000,
+        "nombre": "Commission Mgt._LDR",
+        "extiende": "",
+        "uso": "lógica central: crear movimiento desde línea de factura o abono, conversión a DL, Navegar (la amplían TF0021, TF0022 y TF0023)"
+      },
+      {
+        "tipo": "Codeunit",
+        "id": 50001,
+        "nombre": "Commission Subscribers_LDR",
+        "extiende": "",
+        "uso": "suscriptores de Sales-Post y Navigate; solo llaman a Commission Mgt._LDR"
+      },
+      {
+        "tipo": "TableExtension",
+        "id": 50000,
+        "nombre": "Salesperson/Purchaser_LDR",
+        "extiende": "tabla Salesperson/Purchaser (13)",
+        "uso": "FlowField Pending Commission (LCY) (TF0021 añade Vendor No.)"
+      },
+      {
+        "tipo": "PageExtension",
+        "id": 50002,
+        "nombre": "Salesperson/Purchaser_LDR",
+        "extiende": "página Salesperson/Purchaser Card (5116)",
+        "uso": "muestra Pending Commission (LCY) con DrillDown (TF0022 añade la acción Commission Rates)"
+      },
+      {
+        "tipo": "TableExtension",
+        "id": 50001,
+        "nombre": "Item_LDR",
+        "extiende": "tabla Item (27)",
+        "uso": "campo Exclude from Commission"
+      },
+      {
+        "tipo": "PageExtension",
+        "id": 50003,
+        "nombre": "Item Card_LDR",
+        "extiende": "página Item Card (30)",
+        "uso": "muestra Exclude from Commission"
+      },
+      {
+        "tipo": "PermissionSet",
+        "id": 50000,
+        "nombre": "Commissions_LDR",
+        "extiende": "",
+        "uso": "permisos de los objetos de comisiones (cada tarea añade los suyos)"
+      },
+      {
+        "tipo": "PermissionSetExtension",
+        "id": 50000,
+        "nombre": "D365 Sales Doc Post_LDR",
+        "extiende": "permission set D365 SALES DOC, POST",
+        "uso": "permiso indirecto de lectura e inserción en Commission Entry_LDR para quien registra ventas (P-6)"
+      }
+    ],
+    "alcance_tecnico": [
+      "Suscripciones a eventos de Sales-Post (registro) y de Navigate, verificadas en BC 29 ES y sin cambios en BC 28; los suscriptores no contienen lógica.",
+      "Captions en inglés con Comment = 'ESP=\"...\"' y traducción es-ES.",
+      "Sin cambios en la contabilización estándar: los movimientos de comisión no generan asientos."
+    ],
+    "eventos": [
+      {
+        "publicador": "Codeunit Sales-Post (80)",
+        "evento": "OnAfterSalesInvLineInsert",
+        "uso": "crear el movimiento de comisión de cada línea de factura registrada",
+        "verificado_en": "BaseApp/Source/Base Application/Sales/Posting/SalesPost.Codeunit.al:9703 (BC 29 ES); firma igual en BC 28 (bc-observatory bc_diff_object 28→29)"
+      },
+      {
+        "publicador": "Codeunit Sales-Post (80)",
+        "evento": "OnAfterSalesCrMemoLineInsert",
+        "uso": "crear el movimiento en negativo de cada línea de abono registrado",
+        "verificado_en": "BaseApp/Source/Base Application/Sales/Posting/SalesPost.Codeunit.al:9736 (BC 29 ES); firma igual en BC 28 (bc-observatory bc_diff_object 28→29)"
+      },
+      {
+        "publicador": "Page Navigate (344)",
+        "evento": "OnAfterNavigateFindRecords",
+        "uso": "añadir la línea de movimientos de comisión en Navegar",
+        "verificado_en": "BaseApp/Source/Base Application/Foundation/Navigate/Navigate.Page.al:2289 (BC 29 ES); firma igual en BC 28 (bc-observatory bc_diff_object 28→29)"
+      },
+      {
+        "publicador": "Page Navigate (344)",
+        "evento": "OnBeforeShowRecords",
+        "uso": "abrir la lista de movimientos de comisión filtrada",
+        "verificado_en": "BaseApp/Source/Base Application/Foundation/Navigate/Navigate.Page.al:2331 (BC 29 ES); firma igual en BC 28 (bc-observatory bc_diff_object 28→29)"
+      }
+    ],
+    "consideraciones": [
+      "Decisión del consultor: las preguntas de ejercicio del origen (AutoIncrement frente a FindLast + 1, conversión a DL y redondeo, eventos por línea frente a OnAfterPostSalesDoc, facturación parcial y vista previa) quedan resueltas en P-1 a P-4. En sdd-implementar el programador debe cuestionarlas en P1 antes de construir y anotar si las mantiene o propone otra cosa.",
+      "Los eventos homónimos de Sales-Post Prepayments (442) no se suscriben: los anticipos no generan comisión (P-8).",
+      "La comisión se genera también en abonos que vienen de devoluciones o de «Corregir/Cancelar» una factura registrada, porque pasan por Sales-Post.",
+      "Objetos compartidos según el reparto del Bloque 5: TF0020 crea la tabla, la página, el enum, las dos codeunits, la extensión del vendedor y el PermissionSet; TF0021 a TF0023 los amplían con el mismo nombre.",
+      "Sin impacto sobre lo instalado: main no tiene objetos ni suscripciones.",
+      "Referencia: kassandra tiene un informe de comisiones de vendedores (ComisionesVendedores.Report.al) que calcula sobre documentos registrados y ajusta el signo de los abonos; sirve de contraste funcional, no se reutiliza código.",
+      "La app declara application 28 y el estándar consultado es BC 29 ES; firmas comprobadas también en 28 (P-7).",
+      "Nuevo objeto respecto al reparto del Bloque 5: PermissionSetExtension «D365 Sales Doc Post_LDR» (P-6). Lo crea TF0020; TF0021 a TF0023 solo lo amplían si insertan o modifican movimientos en procesos que lancen usuarios sin Commissions_LDR.",
+      "Riesgo ROJO confirmado: el código se ejecuta dentro de la transacción de registro de ventas; un error en la codeunit (incluido uno de permisos) impide registrar facturas y abonos."
+    ],
+    "tareas": [
+      {
+        "id": "T-01",
+        "descripcion": "P1: revisar y cuestionar las decisiones P-1 a P-6 con el consultor",
+        "depende_de": "—",
+        "hecho_cuando": "Decisiones confirmadas o cambiadas por escrito"
+      },
+      {
+        "id": "T-02",
+        "descripcion": "Enum, tabla Commission Entry_LDR con claves y lista no editable con Navegar",
+        "depende_de": "T-01",
+        "hecho_cuando": "Compila; la lista no permite crear, modificar ni borrar"
+      },
+      {
+        "id": "T-03",
+        "descripcion": "Extensiones de producto y vendedor (campo, FlowField y DrillDown)",
+        "depende_de": "T-02",
+        "hecho_cuando": "Pasan A-1 y A-2"
+      },
+      {
+        "id": "T-04",
+        "descripcion": "Commission Mgt._LDR y suscriptores de Sales-Post",
+        "depende_de": "T-03",
+        "hecho_cuando": "Pasan A-3 a A-9"
+      },
+      {
+        "id": "T-05",
+        "descripcion": "Suscriptores de Navigate",
+        "depende_de": "T-04",
+        "hecho_cuando": "Pasa A-10"
+      },
+      {
+        "id": "T-06",
+        "descripcion": "PermissionSet, PermissionSetExtension de D365 SALES DOC, POST, traducciones y documentación técnica (solución, eventos y por qué, funciones, capturas, dudas)",
+        "depende_de": "T-05",
+        "hecho_cuando": "Pasa A-11; XLIFF completo y documento de entrega con capturas"
+      }
+    ]
+  },
+  "pruebas": {
+    "intro": "Pruebas que valida el consultor en un entorno sandbox con CRONUS ES (divisa local EUR, precisión de importes 0,01).",
+    "parametrizacion": [
+      "Vendedor «PS» con «% Comisión» 5; vendedor «JR» con «% Comisión» 0.",
+      "Cliente 10000 con vendedor PS; cliente 20000 sin vendedor; cliente 30000 con vendedor JR; cliente 40000 en USD con vendedor PS.",
+      "Producto 1896-S sin exclusión; producto 1900-S sin exclusión; producto «PORTES» con «Excluir de comisión» activo.",
+      "Divisa USD con factor de divisa 1,10 en la fecha de prueba.",
+      "Usuario de prueba sin SUPER, con los conjuntos estándar de ventas (incluido D365 SALES DOC, POST) y sin Commissions_LDR."
+    ],
+    "escenarios": [
+      {
+        "id": "A-1",
+        "rf": "RF-1.1",
+        "escenario": "Abrir la ficha del vendedor PS",
+        "resultado": "Se ve «% Comisión» = 5 y «Comisión pendiente (DL)» = 0,00"
+      },
+      {
+        "id": "A-2",
+        "rf": "RF-1.2",
+        "escenario": "Abrir la ficha del producto PORTES y la del 1896-S",
+        "resultado": "PORTES tiene «Excluir de comisión» marcado; 1896-S, no"
+      },
+      {
+        "id": "A-3",
+        "rf": "RF-3.1, RF-2.1",
+        "escenario": "Factura al cliente 10000: 10 × 100 € de 1896-S, 2 × 250 € de 1900-S, 1 línea de cuenta de 200 € y 1 × 50 € de PORTES; registrar",
+        "resultado": "2 movimientos: base 1.000,00 / comisión 50,00 y base 500,00 / comisión 25,00, con % 5, tipo Factura, nº y línea de la factura, cliente, producto y usuario"
+      },
+      {
+        "id": "A-4",
+        "rf": "RF-3.2, RF-2.3",
+        "escenario": "Abono al cliente 10000 de 10 × 100 € de 1896-S; registrar y abrir la ficha de PS",
+        "resultado": "1 movimiento: base −1.000,00, comisión −50,00, tipo Abono. «Comisión pendiente (DL)» pasa de 75,00 a 25,00 y al pulsarla se ven los 3 movimientos"
+      },
+      {
+        "id": "A-5",
+        "rf": "RF-3.3",
+        "escenario": "Registrar una factura de 1 × 100 € de 1896-S al cliente 20000 (sin vendedor) y otra al 30000 (vendedor JR, 0 %)",
+        "resultado": "Ambas se registran sin error y no se crea ningún movimiento"
+      },
+      {
+        "id": "A-6",
+        "rf": "RF-3.4",
+        "escenario": "Factura al cliente 40000 en USD: 1 × 1.000,00 USD de 1896-S, factor 1,10; registrar",
+        "resultado": "Movimiento con base 909,09 € y comisión 45,45 €"
+      },
+      {
+        "id": "A-7",
+        "rf": "RF-3.1",
+        "escenario": "Pedido al cliente 10000 de 10 × 100 € de 1896-S; registrar envío de 10 y facturar 4; después facturar las 6 restantes",
+        "resultado": "El envío no crea movimiento; primera factura: base 400,00 / comisión 20,00; segunda: base 600,00 / comisión 30,00"
+      },
+      {
+        "id": "A-8",
+        "rf": "RF-3.1",
+        "escenario": "Vista previa de registro de una factura de 1 × 100 € de 1896-S al cliente 10000",
+        "resultado": "La vista previa se muestra sin movimientos de comisión y, al cerrarla, no hay ningún movimiento nuevo en la lista"
+      },
+      {
+        "id": "A-9",
+        "rf": "RF-2.2",
+        "escenario": "En la lista de movimientos, intentar crear, modificar o borrar un movimiento",
+        "resultado": "No está permitido; la acción «Navegar» abre Navegar con la fecha y el nº del documento"
+      },
+      {
+        "id": "A-10",
+        "rf": "RF-4.1",
+        "escenario": "Desde la factura registrada de A-3, pulsar «Navegar»",
+        "resultado": "Aparece la línea de movimientos de comisión con 2 registros; al pulsarla se abren esos 2 movimientos"
+      },
+      {
+        "id": "A-11",
+        "rf": "RF-3.1",
+        "escenario": "Con el usuario sin Commissions_LDR, registrar una factura de 1 × 100 € de 1896-S al cliente 10000 y pulsar «Navegar» desde ella",
+        "resultado": "La factura se registra sin error de permisos y el movimiento existe (se comprueba con un usuario con Commissions_LDR); en Navegar ese usuario no ve la línea de comisiones"
+      }
+    ]
+  },
+  "fuentes": [
+    "Tarea de formación TF0020 – Comisiones de vendedores (Bloque 5); reparto del Bloque 5 (TF0020-TF0023).",
+    "BC 29 ES: Sales/Posting/SalesPost.Codeunit.al (eventos de línea, Commit previo a OnAfterPostSalesDoc en la línea 407); Foundation/Navigate/Navigate.Page.al (SetDoc, eventos); Foundation/Navigate/DocumentEntry.Table.al (InsertIntoDocEntry); Finance/Currency/CurrencyExchangeRate.Table.al (ExchangeAmtFCYToLCY); CRM/Team/SalespersonPurchaser.Table.al y SalespersonPurchaserCard.Page.al; Finance/GeneralLedger/Preview/PostingPreviewEventHandler.Codeunit.al.",
+    "https://learn.microsoft.com/dynamics365/business-central/dev-itpro/developer/devenv-events-in-al",
+    "https://learn.microsoft.com/dynamics365/business-central/dev-itpro/developer/properties/devenv-autoincrement-property",
+    "Referencias LiderIT: kassandra (informe de comisiones de vendedores), como contraste funcional.",
+    "bc-code-intel find_bc_knowledge (redactor): «AL Event Subscriber Architecture» (suscriptores finos, lógica en codeunit); sin normas ni lecciones de la capa LiderIT sobre movimientos propios o comisiones.",
+    "BC 28 frente a 29 (bc-observatory bc_diff_object): Sales-Post (80) y Navigate (344); firmas de los eventos de la codeunit 80 (PreviewMode solo en OnAfterSalesInvLineInsert); Gen. Jnl.-Post Preview (19), IsActive; DocumentEntry.Table.al:107 (InsertIntoDocEntry); Navigate.Page.al:58 (SourceTableTemporary).",
+    "Revisado con bc-code-intel (especialistas: sam-coder; find_bc_knowledge seth-security «Permission Set Design Patterns»). Respuestas genéricas, sin normas ni lecciones LiderIT sobre permisos indirectos en registro; P-1, P-4 y P-6 las decide el revisor."
+  ],
+  "implementacion": {
+    "cambios": [
+      {
+        "id": "C-01",
+        "rf": "RF-2.1",
+        "ficheros": [
+          "src/table/CommissionEntryLDR.Table.al",
+          "src/enum/CommissionDocumentTypeLDR.Enum.al"
+        ],
+        "commit": "f572a32",
+        "resumen": "Tabla Commission Entry_LDR (AutoIncrement, claves con SIFT y de Navegar) y enum de tipo de documento"
+      },
+      {
+        "id": "C-02",
+        "rf": "RF-2.2",
+        "ficheros": [
+          "src/page/CommissionEntriesLDR.Page.al"
+        ],
+        "commit": "f572a32",
+        "resumen": "Lista no editable de movimientos con acción Navegar (SetDoc + Run)"
+      },
+      {
+        "id": "C-03",
+        "rf": "RF-1.1",
+        "ficheros": [
+          "src/pageextension/SalespersonPurchaserLDR.PageExt.al"
+        ],
+        "commit": "4e823ca",
+        "resumen": "S-02: «Commission %» estándar oculto y mostrado de nuevo con ApplicationArea All"
+      },
+      {
+        "id": "C-04",
+        "rf": "RF-1.2",
+        "ficheros": [
+          "src/tableextension/ItemLDR.TableExt.al",
+          "src/pageextension/ItemCardLDR.PageExt.al"
+        ],
+        "commit": "4e823ca",
+        "resumen": "Campo Exclude from Commission_LDR en el producto, visible en la ficha"
+      },
+      {
+        "id": "C-05",
+        "rf": "RF-2.3",
+        "ficheros": [
+          "src/tableextension/SalespersonPurchaserLDR.TableExt.al",
+          "src/pageextension/SalespersonPurchaserLDR.PageExt.al"
+        ],
+        "commit": "4e823ca",
+        "resumen": "FlowField Pending Commission (LCY)_LDR con DrillDown a la lista"
+      },
+      {
+        "id": "C-06",
+        "rf": "RF-3.1",
+        "ficheros": [
+          "src/codeunit/CommissionMgtLDR.Codeunit.al",
+          "src/codeunit/CommissionSubscribersLDR.Codeunit.al"
+        ],
+        "commit": "374448f",
+        "resumen": "Suscriptor OnAfterSalesInvLineInsert; filtro tipo Producto, cantidad > 0 (S-01), producto no excluido, sin vista previa"
+      },
+      {
+        "id": "C-07",
+        "rf": "RF-3.2",
+        "ficheros": [
+          "src/codeunit/CommissionMgtLDR.Codeunit.al",
+          "src/codeunit/CommissionSubscribersLDR.Codeunit.al"
+        ],
+        "commit": "374448f",
+        "resumen": "Suscriptor OnAfterSalesCrMemoLineInsert; base y comisión con signo negativo"
+      },
+      {
+        "id": "C-08",
+        "rf": "RF-3.3",
+        "ficheros": [
+          "src/codeunit/CommissionMgtLDR.Codeunit.al"
+        ],
+        "commit": "374448f",
+        "resumen": "Sin vendedor o % 0: sale sin movimiento ni error"
+      },
+      {
+        "id": "C-09",
+        "rf": "RF-3.4",
+        "ficheros": [
+          "src/codeunit/CommissionMgtLDR.Codeunit.al"
+        ],
+        "commit": "374448f",
+        "resumen": "Base en DL con ExchangeAmtFCYToLCY y redondeo con Amount Rounding Precision; comisión redondeada"
+      },
+      {
+        "id": "C-10",
+        "rf": "RF-4.1",
+        "ficheros": [
+          "src/codeunit/CommissionMgtLDR.Codeunit.al",
+          "src/codeunit/CommissionSubscribersLDR.Codeunit.al"
+        ],
+        "commit": "269d784",
+        "resumen": "OnAfterNavigateFindRecords (con ReadPermission) y OnBeforeShowRecords"
+      },
+      {
+        "id": "C-11",
+        "rf": "RF-3.1",
+        "ficheros": [
+          "src/permissionset/CommissionsLDR.PermissionSet.al",
+          "src/permissionsetextension/D365SalesDocPostLDR.PermissionSetExt.al"
+        ],
+        "commit": "c2ea5c0",
+        "resumen": "P-6: PermissionSet Commissions_LDR y permiso indirecto ri en D365 SALES DOC, POST"
+      },
+      {
+        "id": "C-12",
+        "rf": "RF-2.1",
+        "ficheros": [
+          "Translations/LIDERIT-MAD-Practicas.g.xlf",
+          "Translations/LIDERIT-MAD-Practicas.es-ES.xlf"
+        ],
+        "commit": "f3c26ed",
+        "resumen": "XLIFF generado y traducción es-ES (40/40) desde los Comment ESP"
+      }
+    ],
+    "extras": [],
+    "evidencias": [
+      {
+        "id": "E-01",
+        "rf": "RF-2.1",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "alc 18.1.43.24897 con CodeCop, UICop, PerTenantExtensionCop y lider.ruleset contra símbolos BC 28.5 (.alpackages): 0 errores, 0 avisos; info AA0247 (namespaces) y AA0232. App declara application 26: sin símbolos 26 no verificado contra 26."
+      },
+      {
+        "id": "E-02",
+        "rf": "RF-1.1",
+        "escenario": "",
+        "tipo": "bc-code-intel",
+        "resultado": "OK",
+        "referencia": "ask_bc_expert (modify ApplicationArea en pageextension) y find_bc_knowledge (FlowField sin permiso de lectura): respuestas genéricas, sin normas aplicables; decisiones basadas en el estándar BC 29 ES"
+      },
+      {
+        "id": "E-03",
+        "rf": "RF-3.1",
+        "escenario": "A-3",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba manual en sandbox por AlejandroGallego-LiderIT (19/11/2026): factura cliente 10000, 2 movimientos 500/25 y 1.000/50; sin movimiento del producto excluido 1006 ni de la línea de cuenta"
+      },
+      {
+        "id": "E-04",
+        "rf": "RF-4.1",
+        "escenario": "A-10",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba manual en sandbox por AlejandroGallego-LiderIT (19/11/2026): Navegar desde la factura registrada de A-3 muestra la línea de movimientos de comisión con 2 registros y abre esos 2"
+      },
+      {
+        "id": "E-05",
+        "rf": "RF-2.2",
+        "escenario": "A-9",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba manual en sandbox por AlejandroGallego-LiderIT (19/11/2026): la lista no permite crear, modificar ni borrar; Navegar abre con fecha y nº de documento"
+      },
+      {
+        "id": "E-06",
+        "rf": "RF-3.2",
+        "escenario": "A-4",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba manual en sandbox por AlejandroGallego-LiderIT (19/11/2026), con el vendedor JR al 5 % en lugar de PS: abono 10 x 100 de 1896-S crea movimiento tipo Abono con base -1.000 y comisión -50; comisión pendiente 75 -> 25 y drilldown con 3 movimientos"
+      },
+      {
+        "id": "E-07",
+        "rf": "RF-2.3",
+        "escenario": "A-4",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba manual en sandbox por AlejandroGallego-LiderIT (19/11/2026), con el vendedor JR al 5 % en lugar de PS: abono 10 x 100 de 1896-S crea movimiento tipo Abono con base -1.000 y comisión -50; comisión pendiente 75 -> 25 y drilldown con 3 movimientos"
+      },
+      {
+        "id": "E-08",
+        "rf": "RF-3.3",
+        "escenario": "A-5",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba manual en sandbox por AlejandroGallego-LiderIT (19/11/2026): facturas de 1 x 100 de 1896-S sin vendedor y con vendedor al 0 %: registradas sin error y sin movimiento"
+      },
+      {
+        "id": "E-09",
+        "rf": "RF-3.4",
+        "escenario": "A-6",
+        "tipo": "manual",
+        "resultado": "No ejecutada",
+        "referencia": "Prueba manual 19/11/2026 (AlejandroGallego-LiderIT) con datos distintos del escenario: factura 103340 de 1 x 1.000.000,00 USD (error al teclear el precio), factor 1,10 -> base 909.090,91 EUR, coherente con la fórmula. Hay que repetir A-6 con 1 x 1.000,00 USD."
+      },
+      {
+        "id": "E-10",
+        "rf": "RF-3.1",
+        "escenario": "A-7",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba manual en sandbox por AlejandroGallego-LiderIT (19/11/2026): pedido 10 x 100 de 1896-S; el envío no crea movimiento; facturar 4: 400/20; facturar 6: 600/30"
+      },
+      {
+        "id": "E-11",
+        "rf": "RF-3.1",
+        "escenario": "A-8",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba manual en sandbox por AlejandroGallego-LiderIT (19/11/2026): vista previa de registro de factura 1 x 100 de 1896-S: sin movimientos de comisión y ninguno nuevo en la lista al cerrarla"
+      },
+      {
+        "id": "E-12",
+        "rf": "RF-3.4",
+        "escenario": "A-6",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba manual repetida en sandbox por AlejandroGallego-LiderIT (19/11/2026): factura en USD 1 x 1.000,00 de 1896-S con factor 1,10: base 909,09 EUR y comisión 45,45 EUR"
+      },
+      {
+        "id": "E-13",
+        "rf": "RF-1.1",
+        "escenario": "A-1",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba manual en sandbox por AlejandroGallego-LiderIT (20/11/2026): ficha del vendedor muestra «% Comisión» (S-02) y «Comisión pendiente (DL)»"
+      },
+      {
+        "id": "E-14",
+        "rf": "RF-1.2",
+        "escenario": "A-2",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba manual en sandbox por AlejandroGallego-LiderIT (20/11/2026): producto de portes con «Excluir de comisión» marcado y 1896-S sin marcar"
+      },
+      {
+        "id": "E-15",
+        "rf": "RF-3.1",
+        "escenario": "A-11",
+        "tipo": "manual",
+        "resultado": "No ejecutada",
+        "referencia": "No se dispone de un segundo usuario en el sandbox sin SUPER (crearlo requiere al administrador de Microsoft 365). Queda para la aceptación del consultor, junto con la comprobación de la ficha del vendedor sin Commissions_LDR."
+      }
+    ],
+    "desviaciones": [
+      {
+        "puerta": "trazabilidad",
+        "codigo": "RF-3.1:evidencia-ko",
+        "motivo": "No hay un segundo usuario en el sandbox sin SUPER. Los permisos (P-6) se prueban en la aceptación del consultor.",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-20"
+      },
+      {
+        "puerta": "trazabilidad",
+        "codigo": "RF-3.4:evidencia-ko",
+        "motivo": "Primer intento con un precio mal tecleado (1.000.000 USD). Repetido con los datos del escenario: OK en E-12.",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-20"
+      },
+      {
+        "puerta": "trazabilidad",
+        "codigo": "T-06:traducciones",
+        "motivo": "El XLIFF es-ES está completo (40 de 40) e incluido en el paquete, pero el sandbox muestra los textos en inglés. Queda pendiente de investigar.",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-20"
+      },
+      {
+        "puerta": "herramientas",
+        "codigo": "uso:bcquality",
+        "motivo": "BCQuality no está instalado en el equipo; revisión con CodeCop, UICop y PerTenantExtensionCop sin avisos.",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-20"
+      },
+      {
+        "puerta": "escenarios",
+        "codigo": "A-11:no-ejecutada",
+        "motivo": "No hay un segundo usuario en el sandbox; A-11 lo prueba el consultor en la aceptación.",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-20"
+      },
+      {
+        "puerta": "documentacion",
+        "codigo": "doc:capturas",
+        "motivo": "Tarea de práctica: los datos de prueba ya no existen; las capturas se harán en las siguientes tareas.",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-20"
+      }
+    ],
+    "firmas": {
+      "P1": {
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-19",
+        "reformulacion": "Se deberá: mostrar en la page de Vendedor/Comprador el campo \"Commission %\" el cual existe pero no está sacado; en la tabla productos añadir con un tableextension el campo \"Excluir comisión\", visible en la ficha del producto (boolean). Se creará la tabla \"Commission Entry\" con todos los campos que se nombran en el Word, siendo la PK \"Entry No.\", la SK \"Salesperson Code, Liquidated, Posting Date\", con SumIndexFields = \"Commission Amount (LCY)\". Una page list de la tabla llamada \"Commission Entries\", no editable, con una action \"Navegar\" que abra la página estándar de Navigate con fecha y nº documento del movimiento. En la ficha del vendedor FF de \"Comisión Pendiente (DL)\" = suma de \"Commission Amount (LCY)\" de sus movs no liquidados con drilldown a la lista de movimientos. Hay que usar los eventos de la CDU 80 \"Sales-Post\" OnAfterSalesInvLineInsert, OnAfterSalesCrMemoLineInsert.\nNo entra: facturas y abonos de anticipo, documentos de servicio, liquidación de comisiones.\nEjemplo: Pepe, 5 %, Relecloud, cualquiera sin excluir, 1, 10 -> Base Amount (LCY) 10,00 €, Commission Amount (LCY) 0,50 €, Liquidated No.\nP-1: AutoIncrement, para que no se repitan si varios usuarios registran a la vez. P-2: opción B, eventos por línea, porque si la comisión se crea después de confirmar la factura y da error podría quedar sin comisión. P-4: IsActive() para no generar movimientos en la vista previa.\nValidado con el consultor: RF-3.1 solo cantidad > 0; abonos con el % del vendedor en la fecha del abono; servicio y fuera de inventario generan comisión salvo «Excluir de comisión»; «Commission %» se muestra en la ficha del vendedor (por defecto no sale).",
+        "validada_por": "AGTorresLiderIT"
+      },
+      "P2": {
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-20",
+        "reformulacion": "Para esta tarea se ha creado una tabla y una página para registrar y consultar las comisiones de facturas y abonos de venta.\nSe han utilizado eventos de Sales-Post para generar las comisiones dentro de la misma transacción y evitar que se registre una factura sin su comisión.\nTambién se ha añadido el campo «Excluir de comisión» en los productos y el cálculo de la comisión pendiente en la ficha del vendedor.\nAdemás, se ha integrado con «Navegar» para consultar los movimientos de cada documento y los abonos generan comisiones negativas."
+      }
+    },
+    "subissues": {
+      "RF-1.1": 52,
+      "RF-1.2": 53,
+      "RF-2.1": 54,
+      "RF-2.2": 55,
+      "RF-2.3": 56,
+      "RF-3.1": 57,
+      "RF-3.2": 58,
+      "RF-3.3": 59,
+      "RF-3.4": 60,
+      "RF-4.1": 61
+    },
+    "traza": [
+      {
+        "ts": "2026-11-18T16:02:57",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-18T16:02:58",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-18T16:02:59",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-18T16:03:00",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-18T16:03:01",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-18T16:03:02",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-18T16:03:04",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-18T16:03:05",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-18T16:03:06",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-18T16:03:07",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:14:40",
+        "accion": "firma",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "P1"
+      },
+      {
+        "ts": "2026-11-19T10:15:02",
+        "accion": "solicitud",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:15:04",
+        "accion": "solicitud",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:15:05",
+        "accion": "decidir-solicitud",
+        "por": "AGTorresLiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:15:06",
+        "accion": "decidir-solicitud",
+        "por": "AGTorresLiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:28:57",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:28:59",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:29:00",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:29:02",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:29:03",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:29:04",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:29:05",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:29:06",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:29:07",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:29:08",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:29:09",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:29:11",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:29:12",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T10:29:13",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T11:12:10",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T11:18:49",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T11:21:23",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T11:30:58",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T11:31:00",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T11:35:07",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T11:44:01",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T11:50:04",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T11:52:46",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T13:10:05",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T10:06:54",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T10:06:55",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T10:08:58",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T10:13:28",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "trazabilidad"
+      },
+      {
+        "ts": "2026-11-20T10:13:30",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "trazabilidad"
+      },
+      {
+        "ts": "2026-11-20T10:13:31",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "trazabilidad"
+      },
+      {
+        "ts": "2026-11-20T10:13:32",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "herramientas"
+      },
+      {
+        "ts": "2026-11-20T10:52:39",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "escenarios"
+      },
+      {
+        "ts": "2026-11-20T10:52:40",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "documentacion"
+      },
+      {
+        "ts": "2026-11-20T11:00:36",
+        "accion": "firma",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "P2"
+      },
+      {
+        "ts": "2026-11-20T11:01:30",
+        "accion": "pr",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      }
+    ],
+    "solicitudes": [
+      {
+        "id": "S-01",
+        "descripcion": "Generar movimiento solo si la cantidad de la línea es mayor que 0 (antes: distinta de 0)",
+        "tipo": "modifica-rf",
+        "rf": [
+          "RF-3.1"
+        ],
+        "origen": "P1, propuesta del programador",
+        "horas_delta": 0.0,
+        "estado": "Aprobada",
+        "decidido_por": "AGTorresLiderIT",
+        "fecha": "2026-11-19",
+        "referencia": "Validación P1 del consultor (19/11/2026)"
+      },
+      {
+        "id": "S-02",
+        "descripcion": "Mostrar el campo estándar «Commission %» en la ficha del vendedor, que por defecto no sale (ApplicationArea RelationshipMgmt)",
+        "tipo": "modifica-rf",
+        "rf": [
+          "RF-1.1"
+        ],
+        "origen": "P1, consultor",
+        "horas_delta": 0.0,
+        "estado": "Aprobada",
+        "decidido_por": "AGTorresLiderIT",
+        "fecha": "2026-11-19",
+        "referencia": "Validación P1 del consultor (19/11/2026)"
+      }
+    ],
+    "pr": {
+      "url": "https://github.com/AGTorresLiderIT/LIDERIT-MAD-Practicas/pull/101",
+      "numero": 101,
+      "fecha": "2026-11-20"
+    }
+  },
+  "documentacion": {
+    "enlaces": {
+      "rama": "https://github.com/AGTorresLiderIT/LIDERIT-MAD-Practicas/tree/Feature/TF0020-comisiones-de-vendedores"
+    },
+    "resumen": "Al registrar facturas y abonos de venta, Business Central crea automáticamente un movimiento de comisión por cada línea de producto, con el % del vendedor de la cabecera. Los movimientos se consultan en una lista de solo lectura, desde la ficha del vendedor («Comisión pendiente (DL)») y desde «Navegar» del documento registrado. Los productos con «Excluir de comisión» no generan comisión.",
+    "objetos": [
+      {
+        "tipo": "Table",
+        "id": "50001",
+        "nombre": "Commission Entry_LDR",
+        "cambio": "Nueva tabla de movimientos de comisión."
+      },
+      {
+        "tipo": "Enum",
+        "id": "50000",
+        "nombre": "Commission Document Type_LDR",
+        "cambio": "Tipo de documento del movimiento: Factura o Abono."
+      },
+      {
+        "tipo": "Page",
+        "id": "50000",
+        "nombre": "Commission Entries_LDR",
+        "cambio": "Lista de movimientos de solo consulta con la acción «Navegar»."
+      },
+      {
+        "tipo": "TableExtension",
+        "id": "50001",
+        "nombre": "Item_LDR",
+        "cambio": "Nuevo campo «Excluir de comisión» en el producto."
+      },
+      {
+        "tipo": "PageExtension",
+        "id": "50003",
+        "nombre": "Item Card_LDR",
+        "cambio": "Muestra «Excluir de comisión» en la ficha del producto (pestaña General)."
+      },
+      {
+        "tipo": "TableExtension",
+        "id": "50000",
+        "nombre": "Salesperson/Purchaser_LDR",
+        "cambio": "Nuevo campo calculado «Comisión pendiente (DL)» en el vendedor."
+      },
+      {
+        "tipo": "PageExtension",
+        "id": "50002",
+        "nombre": "Salesperson/Purchaser_LDR",
+        "cambio": "Muestra «% Comisión» en cualquier experiencia y «Comisión pendiente (DL)» en la ficha del vendedor."
+      },
+      {
+        "tipo": "Codeunit",
+        "id": "50000",
+        "nombre": "Commission Mgt._LDR",
+        "cambio": "Lógica: crear el movimiento desde la línea registrada, conversión a divisa local y Navegar."
+      },
+      {
+        "tipo": "Codeunit",
+        "id": "50001",
+        "nombre": "Commission Subscribers_LDR",
+        "cambio": "Suscriptores de Sales-Post y Navigate; solo llaman a Commission Mgt._LDR."
+      },
+      {
+        "tipo": "PermissionSet",
+        "id": "50000",
+        "nombre": "Commissions_LDR",
+        "cambio": "Permisos para consultar los movimientos de comisión."
+      },
+      {
+        "tipo": "PermissionSetExtension",
+        "id": "50000",
+        "nombre": "D365 Sales Doc Post_LDR",
+        "cambio": "Permite registrar ventas sin tener Commissions_LDR (permiso indirecto)."
+      }
+    ],
+    "detalles": [
+      {
+        "rf": "RF-1.1, RF-1.2",
+        "titulo": "Configuración",
+        "parrafos": [
+          "El porcentaje es el campo estándar «% Comisión» del vendedor (tabla 13); no se crea campo nuevo. El estándar solo lo muestra en la experiencia Esencial; por decisión del consultor (S-02), la extensión 50002 de la ficha (página 5116) oculta el control estándar y lo muestra de nuevo para todas las experiencias, así aparece una sola vez.",
+          "El producto (tabla 27) tiene el nuevo campo «Excluir de comisión», visible en la pestaña General de su ficha. Sus líneas no generan movimiento."
+        ],
+        "tabla": {
+          "columnas": [
+            "Campo",
+            "Id",
+            "Tipo",
+            "Comentario"
+          ],
+          "filas": [
+            [
+              "Exclude from Commission_LDR («Excluir de comisión»)",
+              "50000",
+              "Boolean",
+              "Tabla Item (27)"
+            ]
+          ]
+        }
+      },
+      {
+        "rf": "RF-2.1, RF-2.2, RF-2.3",
+        "titulo": "Movimientos de comisión",
+        "parrafos": [
+          "Tabla 50001 con los datos del documento, vendedor, cliente (venta a), producto, base, % aplicado, comisión, liquidación (para TF0021) y usuario. El nº de movimiento es AutoIncrement (P-1): no bloquea a varios usuarios registrando a la vez; si un registro falla puede quedar un hueco en la numeración.",
+          "La lista 50000 no permite crear, modificar ni borrar. Su acción «Navegar» abre la página estándar Navegar con la fecha y el nº del documento.",
+          "En el vendedor, «Comisión pendiente (DL)» suma la comisión de sus movimientos no liquidados; al pulsarla abre esos movimientos. Una clave con SumIndexFields evita recorrer la tabla para calcularla."
+        ],
+        "tabla": {
+          "columnas": [
+            "Campo",
+            "Id",
+            "Tipo",
+            "Comentario"
+          ],
+          "filas": [
+            [
+              "Entry No.",
+              "1",
+              "Integer",
+              "Clave primaria, AutoIncrement"
+            ],
+            [
+              "Posting Date, Document Type, Document No., Document Line No.",
+              "2-5",
+              "Date, Enum, Code[20], Integer",
+              "Documento registrado de origen"
+            ],
+            [
+              "Salesperson Code, Customer No., Item No.",
+              "6-8",
+              "Code[20]",
+              "Vendedor de la cabecera, cliente venta a, producto"
+            ],
+            [
+              "Base Amount (LCY), Commission %, Commission Amount (LCY)",
+              "9-11",
+              "Decimal",
+              "Negativos en abonos; el % se guarda en el momento del registro"
+            ],
+            [
+              "Liquidated, Liquidation No.",
+              "12-13",
+              "Boolean, Code[20]",
+              "Los usará TF0021"
+            ],
+            [
+              "User ID",
+              "14",
+              "Code[50]",
+              "Usuario que registra"
+            ],
+            [
+              "Pending Commission (LCY)_LDR",
+              "50000",
+              "Decimal (FlowField)",
+              "Tabla Salesperson/Purchaser (13)"
+            ]
+          ]
+        }
+      },
+      {
+        "rf": "RF-3.1, RF-3.2, RF-3.3, RF-3.4",
+        "titulo": "Generación de movimientos al registrar",
+        "parrafos": [
+          "Se usan los eventos OnAfterSalesInvLineInsert y OnAfterSalesCrMemoLineInsert de Sales-Post (80). Van dentro de la transacción del registro (P-2): factura y comisión se guardan o se deshacen juntas. Por eso el envío sin factura no genera comisión y en la facturación parcial cada factura genera solo lo que factura.",
+          "Se crea movimiento solo si la línea es de tipo Producto, con cantidad mayor que 0 (S-01), producto no excluido y vendedor con % distinto de 0. En otro caso no se crea nada y el documento se registra sin error. En la vista previa de registro no se crea nada (P-4).",
+          "Base = importe de la línea sin IVA; si hay divisa se convierte a divisa local con el factor de la cabecera y se redondea con la precisión de importes de la configuración de contabilidad. Comisión = base × % / 100, redondeada. En abonos, base y comisión van en negativo.",
+          "Impacto: el código se ejecuta dentro del registro de ventas (riesgo ROJO). No genera asientos contables ni cambia la contabilización estándar."
+        ]
+      },
+      {
+        "rf": "RF-4.1",
+        "titulo": "Integración con Navegar",
+        "parrafos": [
+          "Con los eventos OnAfterNavigateFindRecords y OnBeforeShowRecords de la página Navegar (344), «Navegar» desde la factura o el abono registrados muestra la línea de movimientos de comisión con su número de registros y, al pulsarla, abre la lista filtrada. Si el usuario no tiene permiso de lectura sobre la tabla, la línea no aparece."
+        ]
+      },
+      {
+        "bloque": "5",
+        "titulo": "Permisos y traducciones",
+        "parrafos": [
+          "Solo Commission Mgt._LDR inserta movimientos (permiso ri en la codeunit). El conjunto Commissions_LDR da la consulta. La extensión de «D365 SALES DOC, POST» da permiso indirecto para que quien registra ventas sin Commissions_LDR pueda registrar (P-6).",
+          "Textos en inglés con traducción es-ES completa en Translations. En el sandbox de pruebas los textos se ven en inglés; queda pendiente de investigar (desviación declarada)."
+        ]
+      }
+    ],
+    "pruebas": [
+      {
+        "titulo": "Configuración (A-1, A-2)",
+        "pasos": [
+          "Ficha del vendedor: se ven «% Comisión» y «Comisión pendiente (DL)» a 0,00.",
+          "Producto de portes con «Excluir de comisión» marcado; 1896-S sin marcar."
+        ],
+        "capturas": [
+          "Ficha del vendedor con «% Comisión» y «Comisión pendiente (DL)»",
+          "Ficha del producto de portes con «Excluir de comisión» marcado"
+        ]
+      },
+      {
+        "titulo": "Factura, Navegar y lista (A-3, A-10, A-9)",
+        "pasos": [
+          "Factura con 1896-S, 1900-S, una línea de cuenta y el producto de portes: 2 movimientos, 500/25 y 1.000/50.",
+          "«Navegar» desde la factura registrada muestra la línea de comisiones con 2 registros.",
+          "La lista no deja crear, modificar ni borrar; su «Navegar» abre el documento."
+        ],
+        "capturas": [
+          "Factura antes de registrar con las 4 líneas",
+          "Lista de movimientos con los 2 movimientos de la factura",
+          "Navegar con la línea de movimientos de comisión"
+        ]
+      },
+      {
+        "titulo": "Abono, sin vendedor y divisa (A-4, A-5, A-6)",
+        "pasos": [
+          "Abono de 10 × 100: movimiento −1.000/−50; la comisión pendiente pasa de 75,00 a 25,00.",
+          "Facturas sin vendedor y con vendedor al 0 %: se registran sin movimiento.",
+          "Factura de 1.000 USD con factor 1,10: base 909,09 € y comisión 45,45 €."
+        ],
+        "capturas": [
+          "Movimiento del abono en negativo",
+          "Ficha del vendedor con 25,00 pendientes",
+          "Movimiento de la factura en USD"
+        ]
+      },
+      {
+        "titulo": "Pedido parcial y vista previa (A-7, A-8)",
+        "pasos": [
+          "Pedido de 10: el envío no crea movimiento; facturar 4 da 400/20 y facturar 6 da 600/30.",
+          "La vista previa de registro no crea movimientos."
+        ],
+        "capturas": [
+          "Movimientos de las dos facturas parciales"
+        ]
+      },
+      {
+        "titulo": "No ejecutada (A-11)",
+        "pasos": [
+          "Permisos con un usuario sin Commissions_LDR: no se pudo probar por no haber un segundo usuario en el sandbox. Queda para la aceptación."
+        ]
+      }
+    ],
+    "para_probar": [
+      "Dónde está: búsqueda «Movimientos de comisión»; ficha del vendedor («% Comisión», «Comisión pendiente (DL)»); ficha del producto («Excluir de comisión»); «Navegar» desde facturas y abonos de venta registrados.",
+      "Configuración previa: vendedores con «% Comisión» (uno con 5 y otro con 0), clientes con y sin vendedor, un producto con «Excluir de comisión», divisa USD con tipo de cambio en la fecha de registro.",
+      "Usuario sin Commissions_LDR con los permisos estándar de ventas para probar A-11 y abrir la ficha del vendedor con él."
+    ]
+  }
+}
