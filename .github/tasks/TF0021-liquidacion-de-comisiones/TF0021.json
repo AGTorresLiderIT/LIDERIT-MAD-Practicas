@@ -667,6 +667,64 @@
         ],
         "commit": "f8cb3ec",
         "resumen": "Lista 50003 Commission Settlements_LDR no editable con acción Movimientos (Imprimir, Deshacer y Liquidar se añaden con RF-5.3, RF-4.x y RF-3.6)"
+      },
+      {
+        "id": "C-05",
+        "rf": "RF-3.1",
+        "ficheros": [
+          "src/report/SettleCommissionsLDR.Report.al"
+        ],
+        "commit": "e7f8628",
+        "resumen": "Request page con Fecha hasta (ShowMandatory, por defecto CalcDate('<-CM-1D>', WorkDate()), P-2) y Crear factura de compra; error si falta la fecha; filtro por vendedor (RequestFilterFields = Code)"
+      },
+      {
+        "id": "C-06",
+        "rf": "RF-3.2",
+        "ficheros": [
+          "src/codeunit/SettleSalespCommissionLDR.Codeunit.al",
+          "src/report/SettleCommissionsLDR.Report.al"
+        ],
+        "commit": "e7f8628",
+        "resumen": "Codeunit 50002 filtra pendientes del vendedor hasta la fecha con LockTable; sin pendientes sale sin liquidar y el report pasa al siguiente (CurrReport.Skip)"
+      },
+      {
+        "id": "C-07",
+        "rf": "RF-3.3",
+        "ficheros": [
+          "src/codeunit/SettleSalespCommissionLDR.Codeunit.al"
+        ],
+        "commit": "e7f8628",
+        "resumen": "Marcado con ModifyAll: primero Liquidation No. y después Liquidated (P-1)"
+      },
+      {
+        "id": "C-08",
+        "rf": "RF-3.4",
+        "ficheros": [
+          "src/codeunit/SettleSalespCommissionLDR.Codeunit.al"
+        ],
+        "commit": "e7f8628",
+        "resumen": "Factura de compra borrador (Insert(true), Validate proveedor, Prices Including VAT = false, Vendor Invoice No. = nº liquidación; línea de cuenta, cantidad 1, coste = total); sin proveedor, proveedor bloqueado o en divisa, o total <= 0: aviso sin error (P-8)"
+      },
+      {
+        "id": "C-09",
+        "rf": "RF-3.5",
+        "ficheros": [
+          "src/report/SettleCommissionsLDR.Report.al"
+        ],
+        "commit": "e7f8628",
+        "resumen": "Dialog con el vendedor en curso y mensaje final con nº de liquidaciones, total y avisos, solo si GuiAllowed"
+      },
+      {
+        "id": "C-10",
+        "rf": "RF-3.6",
+        "ficheros": [
+          "src/codeunit/SettleSalespCommissionLDR.Codeunit.al",
+          "src/report/SettleCommissionsLDR.Report.al",
+          "src/page/CommissionSettlementsLDR.Page.al",
+          "src/permissionset/CommissionsLDR.PermissionSet.al"
+        ],
+        "commit": "e7f8628",
+        "resumen": "Lógica en la codeunit 50002 sin interfaz ni Commit (SetParameters, GetSettlementNo, GetWarningText); el report la ejecuta con Codeunit.Run sin if (todo o nada, P-4); acción Liquidar comisiones en la lista, report en el buscador (UsageCategory Tasks) y permisos. Nombre acortado a 'Settle Salesp. Commission_LDR' (el de la tarea supera los 30 caracteres de AL)"
       }
     ],
     "extras": [],
@@ -694,6 +752,14 @@
         "tipo": "al_compile",
         "resultado": "OK",
         "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos; info AA0232 en el FlowField (igual que el previo de TF0020, la clave con SumIndexFields existe). Commit f8cb3ec"
+      },
+      {
+        "id": "E-04",
+        "rf": "RF-3.6",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos (info AA0232 previos). Commit e7f8628"
       }
     ],
     "desviaciones": [],
@@ -880,6 +946,55 @@
       },
       {
         "ts": "2026-11-20T12:35:22",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:38:30",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:38:32",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:38:33",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:38:34",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:38:36",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:38:37",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:38:38",
         "accion": "evidencia",
         "por": "",
         "usuario_gh": "AlejandroGallego-LiderIT",
