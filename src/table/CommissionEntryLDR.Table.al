@@ -99,5 +99,9 @@ table 50001 "Commission Entry_LDR"
         key(DocumentNo; "Document No.", "Posting Date")
         {
         }
+        key(LiquidationNo; "Liquidation No.")
+        {
+            SumIndexFields = "Commission Amount (LCY)";
+        }
     }
 }
