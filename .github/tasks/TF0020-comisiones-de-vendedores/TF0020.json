@@ -710,6 +710,86 @@
         "tipo": "bc-code-intel",
         "resultado": "OK",
         "referencia": "ask_bc_expert (modify ApplicationArea en pageextension) y find_bc_knowledge (FlowField sin permiso de lectura): respuestas genéricas, sin normas aplicables; decisiones basadas en el estándar BC 29 ES"
+      },
+      {
+        "id": "E-03",
+        "rf": "RF-3.1",
+        "escenario": "A-3",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba manual en sandbox por AlejandroGallego-LiderIT (19/11/2026): factura cliente 10000, 2 movimientos 500/25 y 1.000/50; sin movimiento del producto excluido 1006 ni de la línea de cuenta"
+      },
+      {
+        "id": "E-04",
+        "rf": "RF-4.1",
+        "escenario": "A-10",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba manual en sandbox por AlejandroGallego-LiderIT (19/11/2026): Navegar desde la factura registrada de A-3 muestra la línea de movimientos de comisión con 2 registros y abre esos 2"
+      },
+      {
+        "id": "E-05",
+        "rf": "RF-2.2",
+        "escenario": "A-9",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba manual en sandbox por AlejandroGallego-LiderIT (19/11/2026): la lista no permite crear, modificar ni borrar; Navegar abre con fecha y nº de documento"
+      },
+      {
+        "id": "E-06",
+        "rf": "RF-3.2",
+        "escenario": "A-4",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba manual en sandbox por AlejandroGallego-LiderIT (19/11/2026), con el vendedor JR al 5 % en lugar de PS: abono 10 x 100 de 1896-S crea movimiento tipo Abono con base -1.000 y comisión -50; comisión pendiente 75 -> 25 y drilldown con 3 movimientos"
+      },
+      {
+        "id": "E-07",
+        "rf": "RF-2.3",
+        "escenario": "A-4",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba manual en sandbox por AlejandroGallego-LiderIT (19/11/2026), con el vendedor JR al 5 % en lugar de PS: abono 10 x 100 de 1896-S crea movimiento tipo Abono con base -1.000 y comisión -50; comisión pendiente 75 -> 25 y drilldown con 3 movimientos"
+      },
+      {
+        "id": "E-08",
+        "rf": "RF-3.3",
+        "escenario": "A-5",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba manual en sandbox por AlejandroGallego-LiderIT (19/11/2026): facturas de 1 x 100 de 1896-S sin vendedor y con vendedor al 0 %: registradas sin error y sin movimiento"
+      },
+      {
+        "id": "E-09",
+        "rf": "RF-3.4",
+        "escenario": "A-6",
+        "tipo": "manual",
+        "resultado": "No ejecutada",
+        "referencia": "Prueba manual 19/11/2026 (AlejandroGallego-LiderIT) con datos distintos del escenario: factura 103340 de 1 x 1.000.000,00 USD (error al teclear el precio), factor 1,10 -> base 909.090,91 EUR, coherente con la fórmula. Hay que repetir A-6 con 1 x 1.000,00 USD."
+      },
+      {
+        "id": "E-10",
+        "rf": "RF-3.1",
+        "escenario": "A-7",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba manual en sandbox por AlejandroGallego-LiderIT (19/11/2026): pedido 10 x 100 de 1896-S; el envío no crea movimiento; facturar 4: 400/20; facturar 6: 600/30"
+      },
+      {
+        "id": "E-11",
+        "rf": "RF-3.1",
+        "escenario": "A-8",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba manual en sandbox por AlejandroGallego-LiderIT (19/11/2026): vista previa de registro de factura 1 x 100 de 1896-S: sin movimientos de comisión y ninguno nuevo en la lista al cerrarla"
+      },
+      {
+        "id": "E-12",
+        "rf": "RF-3.4",
+        "escenario": "A-6",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba manual repetida en sandbox por AlejandroGallego-LiderIT (19/11/2026): factura en USD 1 x 1.000,00 de 1896-S con factor 1,10: base 909,09 EUR y comisión 45,45 EUR"
       }
     ],
     "desviaciones": [],
@@ -933,6 +1013,76 @@
       },
       {
         "ts": "2026-11-19T10:29:13",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T11:12:10",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T11:18:49",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T11:21:23",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T11:30:58",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T11:31:00",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T11:35:07",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T11:44:01",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T11:50:04",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T11:52:46",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-19T13:10:05",
         "accion": "evidencia",
         "por": "",
         "usuario_gh": "AlejandroGallego-LiderIT",
