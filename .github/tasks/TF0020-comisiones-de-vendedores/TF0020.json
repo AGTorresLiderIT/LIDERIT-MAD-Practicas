@@ -844,6 +844,20 @@
         "motivo": "BCQuality no está instalado en el equipo; revisión con CodeCop, UICop y PerTenantExtensionCop sin avisos.",
         "por": "AlejandroGallego-LiderIT",
         "fecha": "2026-11-20"
+      },
+      {
+        "puerta": "escenarios",
+        "codigo": "A-11:no-ejecutada",
+        "motivo": "No hay un segundo usuario en el sandbox; A-11 lo prueba el consultor en la aceptación.",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-20"
+      },
+      {
+        "puerta": "documentacion",
+        "codigo": "doc:capturas",
+        "motivo": "Tarea de práctica: los datos de prueba ya no existen; las capturas se harán en las siguientes tareas.",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-20"
       }
     ],
     "firmas": {
@@ -852,6 +866,11 @@
         "fecha": "2026-11-19",
         "reformulacion": "Se deberá: mostrar en la page de Vendedor/Comprador el campo \"Commission %\" el cual existe pero no está sacado; en la tabla productos añadir con un tableextension el campo \"Excluir comisión\", visible en la ficha del producto (boolean). Se creará la tabla \"Commission Entry\" con todos los campos que se nombran en el Word, siendo la PK \"Entry No.\", la SK \"Salesperson Code, Liquidated, Posting Date\", con SumIndexFields = \"Commission Amount (LCY)\". Una page list de la tabla llamada \"Commission Entries\", no editable, con una action \"Navegar\" que abra la página estándar de Navigate con fecha y nº documento del movimiento. En la ficha del vendedor FF de \"Comisión Pendiente (DL)\" = suma de \"Commission Amount (LCY)\" de sus movs no liquidados con drilldown a la lista de movimientos. Hay que usar los eventos de la CDU 80 \"Sales-Post\" OnAfterSalesInvLineInsert, OnAfterSalesCrMemoLineInsert.\nNo entra: facturas y abonos de anticipo, documentos de servicio, liquidación de comisiones.\nEjemplo: Pepe, 5 %, Relecloud, cualquiera sin excluir, 1, 10 -> Base Amount (LCY) 10,00 €, Commission Amount (LCY) 0,50 €, Liquidated No.\nP-1: AutoIncrement, para que no se repitan si varios usuarios registran a la vez. P-2: opción B, eventos por línea, porque si la comisión se crea después de confirmar la factura y da error podría quedar sin comisión. P-4: IsActive() para no generar movimientos en la vista previa.\nValidado con el consultor: RF-3.1 solo cantidad > 0; abonos con el % del vendedor en la fecha del abono; servicio y fuera de inventario generan comisión salvo «Excluir de comisión»; «Commission %» se muestra en la ficha del vendedor (por defecto no sale).",
         "validada_por": "AGTorresLiderIT"
+      },
+      "P2": {
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-20",
+        "reformulacion": "Para esta tarea se ha creado una tabla y una página para registrar y consultar las comisiones de facturas y abonos de venta.\nSe han utilizado eventos de Sales-Post para generar las comisiones dentro de la misma transacción y evitar que se registre una factura sin su comisión.\nTambién se ha añadido el campo «Excluir de comisión» en los productos y el cálculo de la comisión pendiente en la ficha del vendedor.\nAdemás, se ha integrado con «Navegar» para consultar los movimientos de cada documento y los abonos generan comisiones negativas."
       }
     },
     "subissues": {
@@ -1193,6 +1212,30 @@
         "usuario_gh": "AlejandroGallego-LiderIT",
         "plugin": "0.4.0",
         "puerta": "herramientas"
+      },
+      {
+        "ts": "2026-11-20T10:52:39",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "escenarios"
+      },
+      {
+        "ts": "2026-11-20T10:52:40",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "documentacion"
+      },
+      {
+        "ts": "2026-11-20T11:00:36",
+        "accion": "firma",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "P2"
       }
     ],
     "solicitudes": [
