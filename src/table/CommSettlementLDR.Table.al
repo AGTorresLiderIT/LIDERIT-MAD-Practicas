@@ -1,4 +1,4 @@
-table 50002 "Commission Settlement_LDR"
+table 50002 "Comm. Settlement_LDR"
 {
     Caption = 'Commission Settlement', Comment = 'ESP="Liquidación de comisiones"';
     DataClassification = CustomerContent;

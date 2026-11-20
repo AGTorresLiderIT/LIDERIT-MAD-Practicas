@@ -4,7 +4,7 @@ codeunit 50002 "Salesp. Comm. Settlement_LDR"
     // job queue (TF0023) share it. The caller runs Clear on the instance before each salesperson and then SetParameters.
     // P-4: errors are normal errors; the caller decides whether they roll back the whole process or only this salesperson.
     Permissions = tabledata "Commission Entry_LDR" = rm,
-                  tabledata "Commission Settlement_LDR" = rim;
+                  tabledata "Comm. Settlement_LDR" = rim;
     TableNo = "Salesperson/Purchaser";
 
     var
@@ -20,7 +20,7 @@ codeunit 50002 "Salesp. Comm. Settlement_LDR"
     trigger OnRun()
     var
         CommissionEntry: Record "Commission Entry_LDR";
-        CommissionSettlement: Record "Commission Settlement_LDR";
+        CommissionSettlement: Record "Comm. Settlement_LDR";
         SalesReceivablesSetup: Record "Sales & Receivables Setup";
         TotalAmountLCY: Decimal;
     begin
@@ -82,7 +82,7 @@ codeunit 50002 "Salesp. Comm. Settlement_LDR"
 
     // RF-3.4: draft purchase invoice to the vendor of the salesperson for the total. Without a valid vendor or with a
     // total <= 0 the settlement stays without invoice and a warning is returned, without error (P-8).
-    local procedure CreateInvoice(var CommissionSettlement: Record "Commission Settlement_LDR"; SalespersonPurchaser: Record "Salesperson/Purchaser"; TotalAmountLCY: Decimal; CommissionAccountNo: Code[20])
+    local procedure CreateInvoice(var CommissionSettlement: Record "Comm. Settlement_LDR"; SalespersonPurchaser: Record "Salesperson/Purchaser"; TotalAmountLCY: Decimal; CommissionAccountNo: Code[20])
     var
         Vendor: Record Vendor;
         PurchaseHeader: Record "Purchase Header";

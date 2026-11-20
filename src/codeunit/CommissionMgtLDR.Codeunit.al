@@ -4,7 +4,7 @@ codeunit 50000 "Commission Mgt._LDR"
     // because of the commission (if a condition is not met it exits without creating the entry).
     // UndoSettlement (TF0021) is called from the settlements list after the user confirms.
     Permissions = tabledata "Commission Entry_LDR" = rim,
-                  tabledata "Commission Settlement_LDR" = rd;
+                  tabledata "Comm. Settlement_LDR" = rd;
 
     procedure CreateFromSalesInvLine(SalesInvLine: Record "Sales Invoice Line"; SalesInvHeader: Record "Sales Invoice Header")
     begin
@@ -144,7 +144,7 @@ codeunit 50000 "Commission Mgt._LDR"
     procedure UndoSettlement(SettlementNo: Code[20])
     var
         CommissionEntry: Record "Commission Entry_LDR";
-        CommissionSettlement: Record "Commission Settlement_LDR";
+        CommissionSettlement: Record "Comm. Settlement_LDR";
         PurchaseHeader: Record "Purchase Header";
     begin
         // Lock and read again so that two users cannot undo the same settlement at the same time.

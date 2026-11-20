@@ -1,4 +1,4 @@
-report 50001 "Commission Settlement_LDR"
+report 50001 "Comm. Settlement_LDR"
 {
     ApplicationArea = All;
     Caption = 'Commission Settlement', Comment = 'ESP="Liquidación de comisiones"';
@@ -8,7 +8,7 @@ report 50001 "Commission Settlement_LDR"
     dataset
     {
         // RF-5.3: filters by settlement no. and salesperson.
-        dataitem(CommissionSettlement; "Commission Settlement_LDR")
+        dataitem(CommissionSettlement; "Comm. Settlement_LDR")
         {
             DataItemTableView = sorting("No.");
             RequestFilterFields = "No.", "Salesperson Code";

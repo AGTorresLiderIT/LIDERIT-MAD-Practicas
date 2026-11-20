@@ -7,7 +7,7 @@ page 50003 "Commission Settlements_LDR"
     InsertAllowed = false;
     ModifyAllowed = false;
     PageType = List;
-    SourceTable = "Commission Settlement_LDR";
+    SourceTable = "Comm. Settlement_LDR";
     UsageCategory = Lists;
 
     layout
@@ -34,7 +34,7 @@ page 50003 "Commission Settlements_LDR"
             {
                 Caption = 'Settle Commissions', Comment = 'ESP="Liquidar comisiones"';
                 Image = CalculateCost;
-                RunObject = report "Settle Commissions_LDR";
+                RunObject = report "Settle Salesp. Commissions_LDR";
                 ToolTip = 'Settle the pending commission entries of the salespeople up to a date.', Comment = 'ESP="Liquida los movimientos de comisión pendientes de los vendedores hasta una fecha."';
             }
             action(UndoSettlement)
@@ -68,12 +68,12 @@ page 50003 "Commission Settlements_LDR"
 
                 trigger OnAction()
                 var
-                    CommissionSettlement: Record "Commission Settlement_LDR";
+                    CommissionSettlement: Record "Comm. Settlement_LDR";
                 begin
                     // RF-5.3: only the selected settlement, on a copy so that the filters of the page do not change.
                     CommissionSettlement := Rec;
                     CommissionSettlement.SetRecFilter();
-                    Report.Run(Report::"Commission Settlement_LDR", true, false, CommissionSettlement);
+                    Report.Run(Report::"Comm. Settlement_LDR", true, false, CommissionSettlement);
                 end;
             }
         }
