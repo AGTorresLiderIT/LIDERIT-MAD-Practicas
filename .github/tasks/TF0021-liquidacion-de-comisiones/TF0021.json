@@ -794,8 +794,8 @@
           "src/report/SettleCommissionsLDR.Report.al",
           "src/permissionset/CommissionsLDR.PermissionSet.al"
         ],
-        "commit": "37af16c",
-        "resumen": "Codeunit 50002 renombrada a 'Salesp. Comm. Settlement_LDR': el nombre anterior ya existía en el sandbox (versión manual de la tarea). TF0023 debe usar este nombre"
+        "commit": "706752a",
+        "resumen": "Codeunit 50002 renombrada a 'Salesp. Comm. Settlement_LDR': el nombre anterior ya existía en el sandbox (versión manual de la tarea). TF0023 debe usar este nombre. El fichero se renombró en 2596a9a."
       }
     ],
     "extras": [],
@@ -854,7 +854,7 @@
         "escenario": "",
         "tipo": "al_compile",
         "resultado": "OK",
-        "referencia": "Tras renombrar la codeunit: alc 18.1, 0 errores, 0 avisos. Commit 37af16c"
+        "referencia": "Tras renombrar la codeunit: alc 18.1, 0 errores, 0 avisos. Commit 706752a"
       }
     ],
     "desviaciones": [],
