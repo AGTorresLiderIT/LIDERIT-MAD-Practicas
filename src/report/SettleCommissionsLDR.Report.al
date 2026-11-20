@@ -15,7 +15,7 @@ report 50000 "Settle Commissions_LDR"
             trigger OnAfterGetRecord()
             var
                 CommissionSettlement: Record "Commission Settlement_LDR";
-                SettleSalespersonCommission: Codeunit "Settle Salesp. Commission_LDR";
+                SettleSalespersonCommission: Codeunit "Salesp. Comm. Settlement_LDR";
                 SettlementNo: Code[20];
                 Warning: Text;
             begin

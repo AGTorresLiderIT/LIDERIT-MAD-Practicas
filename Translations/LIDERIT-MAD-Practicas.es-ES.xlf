@@ -285,29 +285,29 @@
           <note from="Developer" annotates="general" priority="2">ESP="La factura de compra %1 de la liquidación %2 ya está registrada. No se puede deshacer la liquidación." %1 = purchase invoice no., %2 = settlement no.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Commission Mgt._LDR - NamedType InvoicePostedErr</note>
         </trans-unit>
-        <trans-unit id="Codeunit 617500739 - NamedType 526312273" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Codeunit 2114176528 - NamedType 526312273" size-unit="char" translate="yes" xml:space="preserve">
           <source>Settlement %1 has a total of %2: no purchase invoice is created.</source>
           <target state="translated">La liquidación %1 tiene un total de %2: no se crea factura de compra.</target>
           <note from="Developer" annotates="general" priority="2">ESP="La liquidación %1 tiene un total de %2: no se crea factura de compra." %1 = settlement no., %2 = total amount</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Settle Salesp. Commission_LDR - NamedType NonPositiveTotalMsg</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Salesp. Comm. Settlement_LDR - NamedType NonPositiveTotalMsg</note>
         </trans-unit>
-        <trans-unit id="Codeunit 617500739 - NamedType 1592745448" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Codeunit 2114176528 - NamedType 1592745448" size-unit="char" translate="yes" xml:space="preserve">
           <source>Salesperson %1 has no vendor: settlement %2 has been created without an invoice.</source>
           <target state="translated">El vendedor %1 no tiene proveedor: la liquidación %2 se ha creado sin factura.</target>
           <note from="Developer" annotates="general" priority="2">ESP="El vendedor %1 no tiene proveedor: la liquidación %2 se ha creado sin factura." %1 = salesperson code, %2 = settlement no.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Settle Salesp. Commission_LDR - NamedType NoVendorMsg</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Salesp. Comm. Settlement_LDR - NamedType NoVendorMsg</note>
         </trans-unit>
-        <trans-unit id="Codeunit 617500739 - NamedType 1316731485" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Codeunit 2114176528 - NamedType 1316731485" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specify the up-to date.</source>
           <target state="translated">Indique la fecha hasta.</target>
           <note from="Developer" annotates="general" priority="2">ESP="Indique la fecha hasta."</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Settle Salesp. Commission_LDR - NamedType UpToDateMissingErr</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Salesp. Comm. Settlement_LDR - NamedType UpToDateMissingErr</note>
         </trans-unit>
-        <trans-unit id="Codeunit 617500739 - NamedType 3288605770" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Codeunit 2114176528 - NamedType 3288605770" size-unit="char" translate="yes" xml:space="preserve">
           <source>Vendor %1 of salesperson %2 is blocked or has a currency: settlement %3 has been created without an invoice.</source>
           <target state="translated">El proveedor %1 del vendedor %2 está bloqueado o tiene divisa: la liquidación %3 se ha creado sin factura.</target>
           <note from="Developer" annotates="general" priority="2">ESP="El proveedor %1 del vendedor %2 está bloqueado o tiene divisa: la liquidación %3 se ha creado sin factura." %1 = vendor no., %2 = salesperson code, %3 = settlement no.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Settle Salesp. Commission_LDR - NamedType VendorNotValidMsg</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Salesp. Comm. Settlement_LDR - NamedType VendorNotValidMsg</note>
         </trans-unit>
         <trans-unit id="Page 4144747430 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Commission Entries</source>

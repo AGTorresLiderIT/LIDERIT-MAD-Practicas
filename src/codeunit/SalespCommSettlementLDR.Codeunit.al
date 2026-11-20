@@ -1,4 +1,4 @@
-codeunit 50002 "Settle Salesp. Commission_LDR"
+codeunit 50002 "Salesp. Comm. Settlement_LDR"
 {
     // RF-3.6 (P-3): settles one salesperson. No Message, Confirm, Dialog or Commit: the manual report (TF0021) and the
     // job queue (TF0023) share it. The caller runs Clear on the instance before each salesperson and then SetParameters.
