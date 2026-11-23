@@ -1071,6 +1071,14 @@
         "tipo": "manual",
         "resultado": "OK",
         "referencia": "Decisiones de P1 (decisiones-p1.xlsx). Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026), repetida tras crear el vendedor BD (antes se había creado como DB): 2/0/2; celda con formato de porcentaje (0,08) grabada como 8; jr en minúsculas rechazado; fila vacía saltada sin error; fila sin % rechazada; fecha escrita como texto 15/03/2027 aceptada"
+      },
+      {
+        "id": "E-32",
+        "rf": "RF-2.2",
+        "escenario": "A-6",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Revisión de código por el programador AlejandroGallego-LiderIT (23/11/2026) del diff de Commission Mgt._LDR frente a TF0021 (commit e4c9cba): CreateEntry solo cambia la obtención del % (GetOriginalInvoicePct / GetCommissionPct con categoría y fecha); comprobaciones, cálculo, campos e Insert de TF0020 sin cambios; sin lógica de creación duplicada"
       }
     ],
     "desviaciones": [],
@@ -1515,6 +1523,13 @@
       },
       {
         "ts": "2026-11-23T17:42:59",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:46:48",
         "accion": "evidencia",
         "por": "",
         "usuario_gh": "AlejandroGallego-LiderIT",
