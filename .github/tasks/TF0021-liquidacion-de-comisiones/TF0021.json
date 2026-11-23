@@ -896,6 +896,166 @@
         "tipo": "manual",
         "resultado": "OK",
         "referencia": "Prueba del programador en el sandbox (T-01): series, cuentas y proveedores inexistentes rechazados; serie, cuenta y PV1 en V1 guardados tras reabrir. No es resultado de UAT."
+      },
+      {
+        "id": "E-11",
+        "rf": "RF-3.1",
+        "escenario": "A-2",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: con fecha de trabajo 15/02/2027 propone 31/01/2027; sin fecha, error «Indique la fecha hasta.» y no se crea ninguna liquidación. No es resultado de UAT."
+      },
+      {
+        "id": "E-12",
+        "rf": "RF-3.2",
+        "escenario": "A-3",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: hasta 31/01/2027 con factura y sin filtro crea 3 liquidaciones (V1 40,00 con factura, V2 50,00 y V3 -10,00 sin factura; total 80,00, 2 avisos). Numeración LIQ-0005..0007 por liquidaciones previas de CM/JR con datos de TF0020. No es resultado de UAT."
+      },
+      {
+        "id": "E-13",
+        "rf": "RF-3.3",
+        "escenario": "A-3",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: hasta 31/01/2027 con factura y sin filtro crea 3 liquidaciones (V1 40,00 con factura, V2 50,00 y V3 -10,00 sin factura; total 80,00, 2 avisos). Numeración LIQ-0005..0007 por liquidaciones previas de CM/JR con datos de TF0020. No es resultado de UAT."
+      },
+      {
+        "id": "E-14",
+        "rf": "RF-2.1",
+        "escenario": "A-3",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: hasta 31/01/2027 con factura y sin filtro crea 3 liquidaciones (V1 40,00 con factura, V2 50,00 y V3 -10,00 sin factura; total 80,00, 2 avisos). Numeración LIQ-0005..0007 por liquidaciones previas de CM/JR con datos de TF0020. No es resultado de UAT."
+      },
+      {
+        "id": "E-15",
+        "rf": "RF-3.4",
+        "escenario": "A-4",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: LIQ-0005 de V1 con factura de compra borrador al proveedor de V1, Nº factura proveedor LIQ-0005, una línea de cuenta (cuenta de comisiones), cantidad 1, coste 40,00; nº de factura informado en la liquidación; LIQ-0006 y LIQ-0007 sin factura. No es resultado de UAT."
+      },
+      {
+        "id": "E-16",
+        "rf": "RF-3.4",
+        "escenario": "A-5",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: LIQ-0006 de V2 (sin proveedor) creada sin factura; el mensaje final incluye el aviso de vendedor sin proveedor (visto en inglés, sesión en inglés). No es resultado de UAT."
+      },
+      {
+        "id": "E-17",
+        "rf": "RF-3.4",
+        "escenario": "A-6",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: LIQ-0007 de V3 con total -10,00 creada sin factura; aviso de total negativo en el mensaje final (visto en inglés, sesión en inglés). No es resultado de UAT."
+      },
+      {
+        "id": "E-18",
+        "rf": "RF-3.5",
+        "escenario": "A-7",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: mensaje final '3 liquidaciones por un total de 80,00. Avisos: 2' con los dos avisos (visto en inglés). Ventana de progreso vista solo de forma fugaz (3 vendedores); se apoya en el código: Open en OnPreReport y Update por vendedor, con GuiAllowed. No es resultado de UAT."
+      },
+      {
+        "id": "E-19",
+        "rf": "RF-3.2",
+        "escenario": "A-8",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: relanzado hasta 31/01/2027 con factura; mensaje de 0 liquidaciones, sin nuevas liquidaciones (última LIQ-0007), sin nuevas facturas y movimientos de febrero pendientes. No es resultado de UAT."
+      },
+      {
+        "id": "E-20",
+        "rf": "RF-3.5",
+        "escenario": "A-9",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: programado desde la request page hasta 28/02/2027 con filtro V2; la entrada de cola se ejecutó sin error (se borra al terminar) y creó LIQ-0010 de V2 sin mostrar diálogo ni mensaje. No es resultado de UAT."
+      },
+      {
+        "id": "E-21",
+        "rf": "RF-3.6",
+        "escenario": "A-9",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: programado desde la request page hasta 28/02/2027 con filtro V2; la entrada de cola se ejecutó sin error (se borra al terminar) y creó LIQ-0010 de V2 sin mostrar diálogo ni mensaje. No es resultado de UAT."
+      },
+      {
+        "id": "E-22",
+        "rf": "RF-4.2",
+        "escenario": "A-10",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: deshacer LIQ-0005 (V1) respondiendo No no cambia nada; con Sí se borran la factura borrador y la liquidación, y los movimientos 10 y 12 de V1 vuelven a Liquidado = No sin nº de liquidación. No es resultado de UAT."
+      },
+      {
+        "id": "E-23",
+        "rf": "RF-4.1",
+        "escenario": "A-11",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: LIQ-0011 de V1 (40,00) con factura 107232 registrada; deshacer da el error de factura ya registrada (visto en inglés) y no deshace la liquidación. No es resultado de UAT."
+      },
+      {
+        "id": "E-24",
+        "rf": "RF-2.2",
+        "escenario": "A-12",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: la lista de liquidaciones no permite editar, crear ni borrar; Movimientos sobre LIQ-0011 (V1) muestra los movimientos 10 y 12, que suman 40,00, igual que su total. No es resultado de UAT."
+      },
+      {
+        "id": "E-25",
+        "rf": "RF-5.1",
+        "escenario": "A-13",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: Imprimir desde la lista sobre LIQ-0011 (V1) saca solo esa liquidación con el layout RDLC: cabecera con logo y nombre de la empresa, título, nº, vendedor y nombre, fecha hasta y nº de página; 2 líneas (50,00 y -10,00) y total 40,00, igual que Movimientos. No es resultado de UAT."
+      },
+      {
+        "id": "E-26",
+        "rf": "RF-5.2",
+        "escenario": "A-13",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: Imprimir desde la lista sobre LIQ-0011 (V1) saca solo esa liquidación con el layout RDLC: cabecera con logo y nombre de la empresa, título, nº, vendedor y nombre, fecha hasta y nº de página; 2 líneas (50,00 y -10,00) y total 40,00, igual que Movimientos. No es resultado de UAT."
+      },
+      {
+        "id": "E-27",
+        "rf": "RF-5.3",
+        "escenario": "A-13",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: Imprimir desde la lista sobre LIQ-0011 (V1) saca solo esa liquidación con el layout RDLC: cabecera con logo y nombre de la empresa, título, nº, vendedor y nombre, fecha hasta y nº de página; 2 líneas (50,00 y -10,00) y total 40,00, igual que Movimientos. No es resultado de UAT."
+      },
+      {
+        "id": "E-28",
+        "rf": "RF-5.2",
+        "escenario": "A-14",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: informe lanzado desde el buscador con filtro de vendedor V2|V3; una página por liquidación (LIQ-0006 50,00, LIQ-0008 -10,00, LIQ-0010 30,00), cada una con su total, sin otras liquidaciones. No es resultado de UAT."
+      },
+      {
+        "id": "E-29",
+        "rf": "RF-5.3",
+        "escenario": "A-14",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: informe lanzado desde el buscador con filtro de vendedor V2|V3; una página por liquidación (LIQ-0006 50,00, LIQ-0008 -10,00, LIQ-0010 30,00), cada una con su total, sin otras liquidaciones. No es resultado de UAT."
+      },
+      {
+        "id": "E-30",
+        "rf": "RF-3.4",
+        "escenario": "A-15",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: cuenta de comisiones sin Registro directo, pendientes el mov. 11 (V1) y el 15 (V2, tras deshacer LIQ-0010); liquidar hasta 28/02/2027 con factura da error de la cuenta al crear la línea de V1 y no queda ninguna liquidación ni factura nueva; movimientos siguen pendientes (todo o nada, P-4). No es resultado de UAT."
       }
     ],
     "desviaciones": [],
@@ -1229,6 +1389,146 @@
       },
       {
         "ts": "2026-11-23T09:17:37",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T09:26:08",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T10:19:12",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T10:19:14",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T10:19:15",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T10:26:56",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T10:28:54",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T10:29:56",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T10:37:06",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T10:44:24",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T10:51:01",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T10:51:02",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T10:58:39",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T11:01:22",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T11:05:49",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T11:08:44",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T11:08:45",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T11:08:46",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T11:11:58",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T11:11:59",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T11:19:39",
         "accion": "evidencia",
         "por": "AlejandroGallego-LiderIT",
         "usuario_gh": "AlejandroGallego-LiderIT",
