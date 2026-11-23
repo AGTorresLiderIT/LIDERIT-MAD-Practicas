@@ -6,6 +6,8 @@ table 50003 "Commission Rate_LDR"
     Caption = 'Commission Rate', Comment = 'ESP="Tarifa de comisión"';
     DataClassification = CustomerContent;
     DataCaptionFields = "Salesperson Code";
+    DrillDownPageId = "Commission Rates_LDR";
+    LookupPageId = "Commission Rates_LDR";
 
     fields
     {
