@@ -999,6 +999,38 @@
         "tipo": "manual",
         "resultado": "OK",
         "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): primera línea con las cabeceras una sola vez; fecha AAAAMMDD, punto decimal y 2 decimales (80.00)"
+      },
+      {
+        "id": "E-23",
+        "rf": "RF-5.3",
+        "escenario": "A-14",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): con filtro JR y fechas de enero 2027 el fichero se llama COMISIONES_202701.csv; con diciembre 2026, COMISIONES_202612.csv"
+      },
+      {
+        "id": "E-24",
+        "rf": "RF-5.1",
+        "escenario": "A-15",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): con el nombre de JR cambiado a «Pérez; Gómez» el CSV saca «Pérez, Gómez» y las columnas siguen alineadas"
+      },
+      {
+        "id": "E-25",
+        "rf": "RF-4.1",
+        "escenario": "A-16",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): con un vendedor sin movimientos, Exportar a Excel y Exportar fichero nóminas avisan y no generan fichero"
+      },
+      {
+        "id": "E-26",
+        "rf": "RF-5.1",
+        "escenario": "A-16",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): con un vendedor sin movimientos, Exportar fichero nóminas avisa y no genera CSV con solo cabeceras"
       }
     ],
     "desviaciones": [],
@@ -1380,6 +1412,34 @@
       },
       {
         "ts": "2026-11-23T17:23:21",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:30:42",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:30:43",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:30:44",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:30:46",
         "accion": "evidencia",
         "por": "",
         "usuario_gh": "AlejandroGallego-LiderIT",
