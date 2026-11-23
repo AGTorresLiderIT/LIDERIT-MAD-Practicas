@@ -1056,6 +1056,14 @@
         "tipo": "manual",
         "resultado": "OK",
         "referencia": "Prueba del programador en el sandbox: cuenta de comisiones sin Registro directo, pendientes el mov. 11 (V1) y el 15 (V2, tras deshacer LIQ-0010); liquidar hasta 28/02/2027 con factura da error de la cuenta al crear la línea de V1 y no queda ninguna liquidación ni factura nueva; movimientos siguen pendientes (todo o nada, P-4). No es resultado de UAT."
+      },
+      {
+        "id": "E-31",
+        "rf": "RF-1.1",
+        "escenario": "",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Traducción es-ES (T-07) comprobada en el sandbox con idioma Español (España, alfabetización internacional): textos de TF0021 y TF0020 en español. Con la variante Traditional Sort (es-ES_tradnl) se ven en inglés porque la extensión solo trae es-ES. No es resultado de UAT."
       }
     ],
     "desviaciones": [],
@@ -1529,6 +1537,13 @@
       },
       {
         "ts": "2026-11-23T11:19:39",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T11:24:56",
         "accion": "evidencia",
         "por": "AlejandroGallego-LiderIT",
         "usuario_gh": "AlejandroGallego-LiderIT",
