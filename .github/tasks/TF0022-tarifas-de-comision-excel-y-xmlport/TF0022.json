@@ -766,6 +766,16 @@
         ],
         "commit": "8d15270",
         "resumen": "Excel Buffer: 12 columnas (fecha como fecha, tipo y nº documento separados, vendedor y nombre, cliente y nombre leídos al exportar, base, %, comisión con #,##0.00, liquidado, nº liquidación); cabecera en negrita; CreateNewBook, WriteSheet, CloseBook, SetFriendlyFilename y OpenExcel"
+      },
+      {
+        "id": "C-10",
+        "rf": "RF-4.2",
+        "ficheros": [
+          "Translations/LIDERIT-MAD-Practicas.g.xlf",
+          "Translations/LIDERIT-MAD-Practicas.es-ES.xlf"
+        ],
+        "commit": "a9a9aa2",
+        "resumen": "T-06: XLIFF g.xlf regenerado por el compilador y es-ES completado con los ESP de los comentarios (39 unidades nuevas de RF-1.1 a RF-4.2, 137 en total)"
       }
     ],
     "extras": [
@@ -1070,6 +1080,13 @@
       {
         "ts": "2026-11-23T13:42:26",
         "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:43:35",
+        "accion": "cambio",
         "por": "",
         "usuario_gh": "AlejandroGallego-LiderIT",
         "plugin": "0.4.0"
