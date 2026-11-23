@@ -677,8 +677,59 @@
     "Revisado con bc-code-intel (especialistas: sam-coder; ask_bc_expert sobre XMLport VariableText, formato decimal y Excel Buffer): devolvió solo el perfil del especialista, sin normas de LiderIT específicas; la verificación se hizo en Microsoft Learn y en el estándar local."
   ],
   "implementacion": {
-    "cambios": [],
-    "extras": [],
+    "cambios": [
+      {
+        "id": "C-01",
+        "rf": "RF-1.1",
+        "ficheros": [
+          "src/table/CommissionRateLDR.Table.al"
+        ],
+        "commit": "a2bbe9d",
+        "resumen": "Tabla 50003 Commission Rate_LDR: clave vendedor, categoría y fecha de inicio (P-1); % entre 0 y 100 con 5 decimales; relaciones con Salesperson/Purchaser e Item Category"
+      },
+      {
+        "id": "C-02",
+        "rf": "RF-1.2",
+        "ficheros": [
+          "src/page/CommissionRatesLDR.Page.al",
+          "src/table/CommissionRateLDR.Table.al",
+          "src/pageextension/SalespersonPurchaserLDR.PageExt.al",
+          "src/permissionset/CommissionsLDR.PermissionSet.al"
+        ],
+        "commit": "42c6592",
+        "resumen": "Página 50004 Commission Rates_LDR (lista editable, UsageCategory Lists para el buscador) como Lookup/DrillDown de la tabla; acción Tarifas de comisión en la ficha del vendedor con RunPageLink por Code; permission set con table X, tabledata RIMD y page X"
+      },
+      {
+        "id": "C-03",
+        "rf": "RF-2.1",
+        "ficheros": [
+          "src/codeunit/CommissionMgtLDR.Codeunit.al"
+        ],
+        "commit": "e4c9cba",
+        "resumen": "GetCommissionPct(vendedor, categoría, fecha): tarifa vendedor+categoría vigente (SetRange Starting Date 0D..fecha, FindLast), tarifa con categoría en blanco, % de la ficha. Categoría leída de la ficha del producto en la misma lectura que la exclusión (P-2). Abonos: % del movimiento de la factura original (Applies-to Doc. No., si no Corrected Invoice No.); sin factura o sin movimiento, tarifa vigente"
+      },
+      {
+        "id": "C-04",
+        "rf": "RF-2.2",
+        "ficheros": [
+          "src/codeunit/CommissionMgtLDR.Codeunit.al"
+        ],
+        "commit": "e4c9cba",
+        "resumen": "CreateEntry no se duplica: solo cambia la obtención del % y la condición usa el % obtenido (0 = sin movimiento, P-2)"
+      }
+    ],
+    "extras": [
+      {
+        "id": "X-01",
+        "descripcion": "Abonos al % de la factura original (Applies-to Doc. No. o Corrected Invoice No.) en lugar de la tarifa vigente en la fecha del abono que dice RF-2.1; sin factura vinculada o sin movimiento, tarifa vigente. Decisión del programador en P1, sin validar por el consultor",
+        "ficheros": [
+          "src/codeunit/CommissionMgtLDR.Codeunit.al"
+        ],
+        "decision": "Pendiente",
+        "decidido_por": "",
+        "fecha": ""
+      }
+    ],
     "evidencias": [
       {
         "id": "E-01",
@@ -687,6 +738,30 @@
         "tipo": "bc-code-intel",
         "resultado": "OK",
         "referencia": "P1: ask_bc_expert (alex-architect) sobre importación con Excel Buffer, celdas con formato %, Evaluate y permisos de tablas temporales; find_bc_knowledge sobre permisos de tablas temporales: sin contenido específico aplicable. Contraste hecho con el estándar es-29 (ExcelBuffer.Table.al ParseCellValue/NumberFormat; SalesCrMemoHeader.Table.al campos 53 y 10705)"
+      },
+      {
+        "id": "E-02",
+        "rf": "RF-1.1",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos (solo info AA0247/AA0232 previos). Commit a2bbe9d"
+      },
+      {
+        "id": "E-03",
+        "rf": "RF-1.2",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos (solo info AA0247/AA0232 previos). Commit 42c6592"
+      },
+      {
+        "id": "E-04",
+        "rf": "RF-2.1",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos (solo info previos). Commit e4c9cba"
       }
     ],
     "desviaciones": [],
@@ -827,6 +902,62 @@
         "usuario_gh": "AlejandroGallego-LiderIT",
         "plugin": "0.4.0",
         "puerta": "P1"
+      },
+      {
+        "ts": "2026-11-23T13:32:17",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:32:19",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:33:05",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:33:07",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:35:05",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:35:07",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:35:09",
+        "accion": "extra",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:35:10",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
       }
     ]
   }
