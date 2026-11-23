@@ -4,7 +4,8 @@ codeunit 50000 "Commission Mgt._LDR"
     // because of the commission (if a condition is not met it exits without creating the entry).
     // UndoSettlement (TF0021) is called from the settlements list after the user confirms.
     Permissions = tabledata "Commission Entry_LDR" = rim,
-                  tabledata "Comm. Settlement_LDR" = rd;
+                  tabledata "Comm. Settlement_LDR" = rd,
+                  tabledata "Commission Rate_LDR" = r;
 
     procedure CreateFromSalesInvLine(SalesInvLine: Record "Sales Invoice Line"; SalesInvHeader: Record "Sales Invoice Header")
     begin
@@ -14,7 +15,7 @@ codeunit 50000 "Commission Mgt._LDR"
         CreateEntry(
             "Commission Document Type_LDR"::Invoice, SalesInvHeader."Posting Date", SalesInvLine."Document No.", SalesInvLine."Line No.",
             SalesInvHeader."Salesperson Code", SalesInvHeader."Sell-to Customer No.", SalesInvLine."No.", SalesInvLine.Quantity,
-            SalesInvLine.Amount, SalesInvHeader."Currency Code", SalesInvHeader."Currency Factor", 1);
+            SalesInvLine.Amount, SalesInvHeader."Currency Code", SalesInvHeader."Currency Factor", 1, '');
     end;
 
     procedure CreateFromSalesCrMemoLine(SalesCrMemoLine: Record "Sales Cr.Memo Line"; SalesCrMemoHeader: Record "Sales Cr.Memo Header")
@@ -25,12 +26,25 @@ codeunit 50000 "Commission Mgt._LDR"
         CreateEntry(
             "Commission Document Type_LDR"::"Credit Memo", SalesCrMemoHeader."Posting Date", SalesCrMemoLine."Document No.", SalesCrMemoLine."Line No.",
             SalesCrMemoHeader."Salesperson Code", SalesCrMemoHeader."Sell-to Customer No.", SalesCrMemoLine."No.", SalesCrMemoLine.Quantity,
-            SalesCrMemoLine.Amount, SalesCrMemoHeader."Currency Code", SalesCrMemoHeader."Currency Factor", -1);
+            SalesCrMemoLine.Amount, SalesCrMemoHeader."Currency Code", SalesCrMemoHeader."Currency Factor", -1,
+            GetOriginalInvoiceNo(SalesCrMemoHeader));
     end;
 
-    local procedure CreateEntry(DocumentType: Enum "Commission Document Type_LDR"; PostingDate: Date; DocumentNo: Code[20]; DocumentLineNo: Integer; SalespersonCode: Code[20]; CustomerNo: Code[20]; ItemNo: Code[20]; Quantity: Decimal; Amount: Decimal; CurrencyCode: Code[10]; CurrencyFactor: Decimal; Sign: Integer)
+    // TF0022 RF-2.1 (P1): the credit memo uses the % of the original invoice. It is found by "Applies-to Doc. No."
+    // and, if that is blank, by "Corrected Invoice No." (corrective credit memos).
+    local procedure GetOriginalInvoiceNo(SalesCrMemoHeader: Record "Sales Cr.Memo Header"): Code[20]
+    begin
+        if (SalesCrMemoHeader."Applies-to Doc. Type" = SalesCrMemoHeader."Applies-to Doc. Type"::Invoice) and
+           (SalesCrMemoHeader."Applies-to Doc. No." <> '')
+        then
+            exit(SalesCrMemoHeader."Applies-to Doc. No.");
+        exit(SalesCrMemoHeader."Corrected Invoice No.");
+    end;
+
+    local procedure CreateEntry(DocumentType: Enum "Commission Document Type_LDR"; PostingDate: Date; DocumentNo: Code[20]; DocumentLineNo: Integer; SalespersonCode: Code[20]; CustomerNo: Code[20]; ItemNo: Code[20]; Quantity: Decimal; Amount: Decimal; CurrencyCode: Code[10]; CurrencyFactor: Decimal; Sign: Integer; OriginalInvoiceNo: Code[20])
     var
         CommissionEntry: Record "Commission Entry_LDR";
+        ItemCategoryCode: Code[20];
         CommissionPct: Decimal;
         BaseAmountLCY: Decimal;
     begin
@@ -40,10 +54,12 @@ codeunit 50000 "Commission Mgt._LDR"
         // S-01 (RF-3.1): only lines with quantity greater than 0. Credit memo lines also come with positive quantity.
         if Quantity <= 0 then
             exit;
-        if IsItemExcluded(ItemNo) then
+        if IsItemExcluded(ItemNo, ItemCategoryCode) then
             exit;
         // RF-3.3: no salesperson or 0 % means no entry and no error.
-        CommissionPct := GetCommissionPct(SalespersonCode);
+        // TF0022 RF-2.2 / P-2: only the way to get the % changes; a rate with 0 % also means no entry.
+        if not GetOriginalInvoicePct(OriginalInvoiceNo, ItemNo, CommissionPct) then
+            CommissionPct := GetCommissionPct(SalespersonCode, ItemCategoryCode, PostingDate);
         if CommissionPct = 0 then
             exit;
 
@@ -73,26 +89,71 @@ codeunit 50000 "Commission Mgt._LDR"
         exit(GenJnlPostPreview.IsActive());
     end;
 
-    local procedure IsItemExcluded(ItemNo: Code[20]): Boolean
+    // TF0022 P-2: the item category is read from the item card in the same read as the exclusion flag.
+    local procedure IsItemExcluded(ItemNo: Code[20]; var ItemCategoryCode: Code[20]): Boolean
     var
         Item: Record Item;
     begin
-        Item.SetLoadFields("Exclude from Commission_LDR");
+        Item.SetLoadFields("Exclude from Commission_LDR", "Item Category Code");
         if not Item.Get(ItemNo) then
             exit(true);
+        ItemCategoryCode := Item."Item Category Code";
         exit(Item."Exclude from Commission_LDR");
     end;
 
-    local procedure GetCommissionPct(SalespersonCode: Code[20]): Decimal
+    // TF0022 RF-2.1 (P1): % of the commission entry of the same item in the original invoice. If there is no
+    // original invoice or it has no entry, the rate in force on the credit memo date is used.
+    local procedure GetOriginalInvoicePct(OriginalInvoiceNo: Code[20]; ItemNo: Code[20]; var CommissionPct: Decimal): Boolean
+    var
+        CommissionEntry: Record "Commission Entry_LDR";
+    begin
+        if OriginalInvoiceNo = '' then
+            exit(false);
+        CommissionEntry.SetCurrentKey("Document No.", "Posting Date");
+        CommissionEntry.SetRange("Document No.", OriginalInvoiceNo);
+        CommissionEntry.SetRange("Document Type", CommissionEntry."Document Type"::Invoice);
+        CommissionEntry.SetRange("Item No.", ItemNo);
+        CommissionEntry.SetLoadFields("Commission %");
+        if not CommissionEntry.FindFirst() then
+            exit(false);
+        CommissionPct := CommissionEntry."Commission %";
+        exit(true);
+    end;
+
+    // TF0022 RF-2.1: rate of the salesperson and item category in force on the posting date, then the rate of
+    // the salesperson with a blank category, then the "Commission %" of the salesperson card.
+    local procedure GetCommissionPct(SalespersonCode: Code[20]; ItemCategoryCode: Code[20]; PostingDate: Date): Decimal
     var
         SalespersonPurchaser: Record "Salesperson/Purchaser";
+        RatePct: Decimal;
     begin
         if SalespersonCode = '' then
             exit(0);
+        if ItemCategoryCode <> '' then
+            if FindRatePct(SalespersonCode, ItemCategoryCode, PostingDate, RatePct) then
+                exit(RatePct);
+        if FindRatePct(SalespersonCode, '', PostingDate, RatePct) then
+            exit(RatePct);
         SalespersonPurchaser.SetLoadFields("Commission %");
         if not SalespersonPurchaser.Get(SalespersonCode) then
             exit(0);
         exit(SalespersonPurchaser."Commission %");
+    end;
+
+    // The key ends with "Starting Date": the range 0D..PostingDate includes the blank date (always) and FindLast
+    // returns the most recent rate.
+    local procedure FindRatePct(SalespersonCode: Code[20]; ItemCategoryCode: Code[20]; PostingDate: Date; var RatePct: Decimal): Boolean
+    var
+        CommissionRate: Record "Commission Rate_LDR";
+    begin
+        CommissionRate.SetRange("Salesperson Code", SalespersonCode);
+        CommissionRate.SetRange("Item Category Code", ItemCategoryCode);
+        CommissionRate.SetRange("Starting Date", 0D, PostingDate);
+        CommissionRate.SetLoadFields("Commission %");
+        if not CommissionRate.FindLast() then
+            exit(false);
+        RatePct := CommissionRate."Commission %";
+        exit(true);
     end;
 
     // RF-3.4 / P-3: line amount without VAT converted to local currency like the standard, rounded with the
