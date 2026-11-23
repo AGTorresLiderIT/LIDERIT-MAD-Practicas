@@ -950,7 +950,7 @@
         "escenario": "A-5",
         "tipo": "manual",
         "resultado": "OK",
-        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): factura de JR con producto sin categoría (1009) aplica la tarifa general del 4 %; factura de BD (sin tarifas) aplica el 2 % de su ficha"
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): factura de JR con producto sin categoría (1009) aplica la tarifa general del 4 %; factura del vendedor DB (creado así por error en lugar de BD; sin tarifas, 2 % en la ficha) aplica el 2 % de su ficha"
       },
       {
         "id": "E-17",
@@ -1055,6 +1055,22 @@
         "tipo": "manual",
         "resultado": "OK",
         "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): mensaje 1/0/3 y se abre la lista de errores con nº de fila, texto y motivo"
+      },
+      {
+        "id": "E-30",
+        "rf": "RF-3.2",
+        "escenario": "",
+        "tipo": "manual",
+        "resultado": "KO",
+        "referencia": "Decisiones de P1 (decisiones-p1.xlsx). Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026), primer intento: 0/0/4. Filas 3 (jr en minúsculas) y 5 (falta el %) rechazadas como se esperaba; fila 4 vacía saltada; filas 2 y 6 rechazadas con «El vendedor BD no existe», por lo que no se pudo comprobar la conversión del 0,08 ni la fecha en texto. Pendiente de confirmar si BD existe en el sandbox"
+      },
+      {
+        "id": "E-31",
+        "rf": "RF-3.2",
+        "escenario": "",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Decisiones de P1 (decisiones-p1.xlsx). Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026), repetida tras crear el vendedor BD (antes se había creado como DB): 2/0/2; celda con formato de porcentaje (0,08) grabada como 8; jr en minúsculas rechazado; fila vacía saltada sin error; fila sin % rechazada; fecha escrita como texto 15/03/2027 aceptada"
       }
     ],
     "desviaciones": [],
@@ -1485,6 +1501,20 @@
       },
       {
         "ts": "2026-11-23T17:33:34",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:37:32",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:42:59",
         "accion": "evidencia",
         "por": "",
         "usuario_gh": "AlejandroGallego-LiderIT",
