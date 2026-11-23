@@ -879,6 +879,78 @@
         "tipo": "al_compile",
         "resultado": "OK",
         "referencia": "Primer intento con aviso AA0245 (parámetro con el nombre de un nodo del XMLport), corregido antes del commit. alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos. Formato del importe y FieldDelimiter verificados en el estándar es-29 (SEPADDpain00800102.XmlPort.al:377, SIIXMLCreator.Codeunit.al:776, ImportPayroll.XmlPort.al:19). Commit df10ef2"
+      },
+      {
+        "id": "E-08",
+        "rf": "RF-1.1",
+        "escenario": "A-1",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): JR/MOBILIARIO/8 % se guarda; 101 % da error de validación y no se guarda; vendedor XX da error y no se guarda; tarifa borrada al terminar"
+      },
+      {
+        "id": "E-09",
+        "rf": "RF-1.2",
+        "escenario": "A-2",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): desde la ficha de JR solo salen sus tarifas; desde el buscador salen todas"
+      },
+      {
+        "id": "E-10",
+        "rf": "RF-3.1",
+        "escenario": "A-7",
+        "tipo": "manual",
+        "resultado": "KO",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026), primer intento: filas 3 y 6 (JR y PS con ACCESORIOS) rechazadas con «La categoría de producto ACCESORIOS no existe»: la categoría no estaba creada en el sandbox (preparación de datos, no fallo del código). La importación siguió con el resto y abrió la lista de errores. Se repite tras crear la categoría"
+      },
+      {
+        "id": "E-11",
+        "rf": "RF-2.1",
+        "escenario": "A-4",
+        "tipo": "manual",
+        "resultado": "KO",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026), primer intento: salió 80 € (8 %) porque la factura se registró con la fecha de trabajo de 2027, no con 15/12/2026 (preparación, no fallo del código)"
+      },
+      {
+        "id": "E-12",
+        "rf": "RF-2.1",
+        "escenario": "A-4",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026), repetida con fecha de registro 15/12/2026: factura de JR de 1.000 € de MOBILIARIO genera 40,00 € al 4 % (tarifa con categoría en blanco; la del 8 % aún no ha empezado)"
+      },
+      {
+        "id": "E-13",
+        "rf": "RF-3.1",
+        "escenario": "A-7",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026), repetida tras crear la categoría ACCESORIOS: importación de tarifas.xlsx con 5 importadas, 0 modificadas y 0 con error; cabecera no importada"
+      },
+      {
+        "id": "E-14",
+        "rf": "RF-3.3",
+        "escenario": "A-7",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): mensaje final con filas importadas, modificadas y con error (5/0/0); en el primer intento (E-10) se abrió la lista de errores con las filas rechazadas"
+      },
+      {
+        "id": "E-15",
+        "rf": "RF-2.1",
+        "escenario": "A-3",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): factura de JR del 15/01/2027 con 1.000 € de MOBILIARIO y 200 € de ACCESORIOS genera 80,00 € al 8 % y 6,00 € al 3 %"
+      },
+      {
+        "id": "E-16",
+        "rf": "RF-2.1",
+        "escenario": "A-5",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): factura de JR con producto sin categoría (1009) aplica la tarifa general del 4 %; factura de BD (sin tarifas) aplica el 2 % de su ficha"
       }
     ],
     "desviaciones": [],
@@ -1155,6 +1227,69 @@
       },
       {
         "ts": "2026-11-23T13:47:15",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T16:12:35",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T16:12:37",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T16:18:09",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T16:45:03",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T16:45:04",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T16:54:32",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T16:54:33",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T16:54:34",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T16:54:35",
         "accion": "evidencia",
         "por": "",
         "usuario_gh": "AlejandroGallego-LiderIT",
