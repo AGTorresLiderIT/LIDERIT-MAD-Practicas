@@ -776,6 +776,39 @@
         ],
         "commit": "a9a9aa2",
         "resumen": "T-06: XLIFF g.xlf regenerado por el compilador y es-ES completado con los ESP de los comentarios (39 unidades nuevas de RF-1.1 a RF-4.2, 137 en total)"
+      },
+      {
+        "id": "C-11",
+        "rf": "RF-5.1",
+        "ficheros": [
+          "src/page/CommissionEntriesLDR.Page.al",
+          "src/codeunit/CommissionMgtLDR.Codeunit.al",
+          "src/xmlport/CommissionPayrollExportLDR.XmlPort.al",
+          "src/permissionset/CommissionsLDR.PermissionSet.al",
+          "Translations/LIDERIT-MAD-Practicas.g.xlf",
+          "Translations/LIDERIT-MAD-Practicas.es-ES.xlf"
+        ],
+        "commit": "df10ef2",
+        "resumen": "Acción Exportar fichero nóminas en Commission Entries; ExportPayrollFile copia los filtros, SetTableView, SetDestination sobre TempBlob y Export. XMLport 50000 VariableText, separador ;, FieldDelimiter '<None>' (el '' de la tarea no es como lo hace el estándar: XMLport 1660 Import Payroll), UTF8. Sin movimientos, aviso y sin fichero; ; del nombre sustituido por ,"
+      },
+      {
+        "id": "C-12",
+        "rf": "RF-5.2",
+        "ficheros": [
+          "src/xmlport/CommissionPayrollExportLDR.XmlPort.al"
+        ],
+        "commit": "df10ef2",
+        "resumen": "Elemento Header sobre Integer (Number = 1) con las cabeceras fijas de P-5 antes de los movimientos; columnas código, nombre, fecha <Year4><Month,2><Day,2>, nº documento e importe con <Precision,2:2><Standard Format,9> (mismo formato que SEPA DD y SII en el estándar)"
+      },
+      {
+        "id": "C-13",
+        "rf": "RF-5.3",
+        "ficheros": [
+          "src/codeunit/CommissionMgtLDR.Codeunit.al",
+          "src/xmlport/CommissionPayrollExportLDR.XmlPort.al"
+        ],
+        "commit": "df10ef2",
+        "resumen": "El XMLport guarda la fecha de registro más reciente exportada (P-6) y el fichero se descarga con DownloadFromStream como COMISIONES_AAAAMM.csv"
       }
     ],
     "extras": [
@@ -838,6 +871,14 @@
         "tipo": "al_compile",
         "resultado": "OK",
         "referencia": "Primer intento con aviso AA0139 (Text a Text[250] en CreateNewBook), corregido con CopyStr antes del commit. alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos. Commit 8d15270"
+      },
+      {
+        "id": "E-07",
+        "rf": "RF-5.2",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "Primer intento con aviso AA0245 (parámetro con el nombre de un nodo del XMLport), corregido antes del commit. alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos. Formato del importe y FieldDelimiter verificados en el estándar es-29 (SEPADDpain00800102.XmlPort.al:377, SIIXMLCreator.Codeunit.al:776, ImportPayroll.XmlPort.al:19). Commit df10ef2"
       }
     ],
     "desviaciones": [],
@@ -1087,6 +1128,34 @@
       {
         "ts": "2026-11-23T13:43:35",
         "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:47:10",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:47:12",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:47:13",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:47:15",
+        "accion": "evidencia",
         "por": "",
         "usuario_gh": "AlejandroGallego-LiderIT",
         "plugin": "0.4.0"
