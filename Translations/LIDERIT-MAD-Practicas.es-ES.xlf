@@ -3,6 +3,108 @@
   <file datatype="xml" source-language="en-US" target-language="es-ES" original="LIDERIT-MAD-Practicas">
     <body>
       <group id="body">
+        <trans-unit id="Table 3611949638 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Commission Settlement</source>
+          <target state="translated">Liquidación de comisiones</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Liquidación de comisiones"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Comm. Settlement_LDR - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3611949638 - Field 4200184881 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the commission settlement.</source>
+          <target state="translated">Especifica el número de la liquidación de comisiones.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica el número de la liquidación de comisiones."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Comm. Settlement_LDR - Field No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3611949638 - Field 4200184881 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No.</source>
+          <target state="translated">Nº</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Nº"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Comm. Settlement_LDR - Field No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3611949638 - Field 4196669088 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of commission entries included in the settlement.</source>
+          <target state="translated">Especifica el número de movimientos de comisión incluidos en la liquidación.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica el número de movimientos de comisión incluidos en la liquidación."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Comm. Settlement_LDR - Field No. of Entries - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3611949638 - Field 4196669088 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No. of Entries</source>
+          <target state="translated">Nº movimientos</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Nº movimientos"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Comm. Settlement_LDR - Field No. of Entries - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3611949638 - Field 1351594800 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number series from which the settlement number was assigned.</source>
+          <target state="translated">Especifica el nº de serie del que se asignó el número de la liquidación.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica el nº de serie del que se asignó el número de la liquidación."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Comm. Settlement_LDR - Field No. Series - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3611949638 - Field 1351594800 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No. Series</source>
+          <target state="translated">Nº serie</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Nº serie"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Comm. Settlement_LDR - Field No. Series - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3611949638 - Field 3823770551 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the draft purchase invoice created for the settlement, if any.</source>
+          <target state="translated">Especifica la factura de compra borrador creada para la liquidación, si se creó.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica la factura de compra borrador creada para la liquidación, si se creó."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Comm. Settlement_LDR - Field Purchase Invoice No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3611949638 - Field 3823770551 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Purchase Invoice No.</source>
+          <target state="translated">Nº factura compra</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Nº factura compra"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Comm. Settlement_LDR - Field Purchase Invoice No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3611949638 - Field 553464652 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the salesperson whose commissions are settled.</source>
+          <target state="translated">Especifica el vendedor cuyas comisiones se liquidan.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica el vendedor cuyas comisiones se liquidan."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Comm. Settlement_LDR - Field Salesperson Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3611949638 - Field 553464652 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Salesperson Code</source>
+          <target state="translated">Cód. vendedor</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Cód. vendedor"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Comm. Settlement_LDR - Field Salesperson Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3611949638 - Field 317985459 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the date on which the settlement was created.</source>
+          <target state="translated">Especifica la fecha en que se creó la liquidación.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica la fecha en que se creó la liquidación."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Comm. Settlement_LDR - Field Settlement Date - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3611949638 - Field 317985459 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Settlement Date</source>
+          <target state="translated">Fecha liquidación</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Fecha liquidación"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Comm. Settlement_LDR - Field Settlement Date - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3611949638 - Field 1028436379 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the sum of the commission amounts of the entries included in the settlement.</source>
+          <target state="translated">Especifica la suma de los importes de comisión de los movimientos incluidos en la liquidación.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica la suma de los importes de comisión de los movimientos incluidos en la liquidación."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Comm. Settlement_LDR - Field Total Amount (LCY) - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3611949638 - Field 1028436379 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total Amount (LCY)</source>
+          <target state="translated">Importe total (DL)</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Importe total (DL)"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Comm. Settlement_LDR - Field Total Amount (LCY) - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3611949638 - Field 2333747950 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the posting date up to which the commission entries were settled.</source>
+          <target state="translated">Especifica la fecha de registro hasta la que se liquidaron los movimientos de comisión.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica la fecha de registro hasta la que se liquidaron los movimientos de comisión."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Comm. Settlement_LDR - Field Up To Date - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3611949638 - Field 2333747950 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Up To Date</source>
+          <target state="translated">Fecha hasta</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Fecha hasta"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Comm. Settlement_LDR - Field Up To Date - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 170322632 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Commission Entry</source>
           <target state="translated">Movimiento de comisión</target>
@@ -177,6 +279,36 @@
           <note from="Developer" annotates="general" priority="2">ESP="Id. usuario"</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Commission Entry_LDR - Field User ID - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Codeunit 1816461044 - NamedType 1676189551" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Purchase invoice %1 of settlement %2 has already been posted. The settlement cannot be undone.</source>
+          <target state="translated">La factura de compra %1 de la liquidación %2 ya está registrada. No se puede deshacer la liquidación.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="La factura de compra %1 de la liquidación %2 ya está registrada. No se puede deshacer la liquidación." %1 = purchase invoice no., %2 = settlement no.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Commission Mgt._LDR - NamedType InvoicePostedErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2114176528 - NamedType 526312273" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Settlement %1 has a total of %2: no purchase invoice is created.</source>
+          <target state="translated">La liquidación %1 tiene un total de %2: no se crea factura de compra.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="La liquidación %1 tiene un total de %2: no se crea factura de compra." %1 = settlement no., %2 = total amount</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Salesp. Comm. Settlement_LDR - NamedType NonPositiveTotalMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2114176528 - NamedType 1592745448" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Salesperson %1 has no vendor: settlement %2 has been created without an invoice.</source>
+          <target state="translated">El vendedor %1 no tiene proveedor: la liquidación %2 se ha creado sin factura.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="El vendedor %1 no tiene proveedor: la liquidación %2 se ha creado sin factura." %1 = salesperson code, %2 = settlement no.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Salesp. Comm. Settlement_LDR - NamedType NoVendorMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2114176528 - NamedType 1316731485" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specify the up-to date.</source>
+          <target state="translated">Indique la fecha hasta.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Indique la fecha hasta."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Salesp. Comm. Settlement_LDR - NamedType UpToDateMissingErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2114176528 - NamedType 3288605770" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Vendor %1 of salesperson %2 is blocked or has a currency: settlement %3 has been created without an invoice.</source>
+          <target state="translated">El proveedor %1 del vendedor %2 está bloqueado o tiene divisa: la liquidación %3 se ha creado sin factura.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="El proveedor %1 del vendedor %2 está bloqueado o tiene divisa: la liquidación %3 se ha creado sin factura." %1 = vendor no., %2 = salesperson code, %3 = settlement no.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Salesp. Comm. Settlement_LDR - NamedType VendorNotValidMsg</note>
+        </trans-unit>
         <trans-unit id="Page 4144747430 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Commission Entries</source>
           <target state="translated">Movimientos de comisión</target>
@@ -195,6 +327,186 @@
           <note from="Developer" annotates="general" priority="2">ESP="Navegar..."</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Commission Entries_LDR - Action Navigate - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 2266969290 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Commission Settlements</source>
+          <target state="translated">Liquidaciones de comisiones</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Liquidaciones de comisiones"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Settlements_LDR - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2266969290 - NamedType 1235858573" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Do you want to undo settlement %1? The commission entries will be pending again.</source>
+          <target state="translated">¿Desea deshacer la liquidación %1? Los movimientos volverán a quedar pendientes.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="¿Desea deshacer la liquidación %1? Los movimientos volverán a quedar pendientes." %1 = settlement no.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Settlements_LDR - NamedType UndoSettlementNoInvoiceQst</note>
+        </trans-unit>
+        <trans-unit id="Page 2266969290 - NamedType 3147079029" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Do you want to undo settlement %1? Draft purchase invoice %2 will be deleted and the commission entries will be pending again.</source>
+          <target state="translated">¿Desea deshacer la liquidación %1? Se eliminará la factura de compra borrador %2 y los movimientos volverán a quedar pendientes.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="¿Desea deshacer la liquidación %1? Se eliminará la factura de compra borrador %2 y los movimientos volverán a quedar pendientes." %1 = settlement no., %2 = purchase invoice no.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Settlements_LDR - NamedType UndoSettlementQst</note>
+        </trans-unit>
+        <trans-unit id="Page 2266969290 - Action 2571907030 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View the commission entries included in the selected settlement.</source>
+          <target state="translated">Muestra los movimientos de comisión incluidos en la liquidación seleccionada.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Muestra los movimientos de comisión incluidos en la liquidación seleccionada."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Settlements_LDR - Action Entries - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2266969290 - Action 2571907030 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Entries</source>
+          <target state="translated">Movimientos</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Movimientos"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Settlements_LDR - Action Entries - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2266969290 - Action 4120863907 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Settle the pending commission entries of the salespeople up to a date.</source>
+          <target state="translated">Liquida los movimientos de comisión pendientes de los vendedores hasta una fecha.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Liquida los movimientos de comisión pendientes de los vendedores hasta una fecha."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Settlements_LDR - Action SettleCommissions - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2266969290 - Action 4120863907 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Settle Commissions</source>
+          <target state="translated">Liquidar comisiones</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Liquidar comisiones"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Settlements_LDR - Action SettleCommissions - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2266969290 - Action 2512508791 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Undo the selected settlement: its draft purchase invoice is deleted and its commission entries become pending again.</source>
+          <target state="translated">Deshace la liquidación seleccionada: se elimina su factura de compra borrador y sus movimientos de comisión vuelven a quedar pendientes.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Deshace la liquidación seleccionada: se elimina su factura de compra borrador y sus movimientos de comisión vuelven a quedar pendientes."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Settlements_LDR - Action UndoSettlement - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2266969290 - Action 2512508791 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Undo Settlement</source>
+          <target state="translated">Deshacer liquidación</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Deshacer liquidación"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Settlements_LDR - Action UndoSettlement - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2266969290 - Action 1002420131 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Print the selected commission settlement.</source>
+          <target state="translated">Imprime la liquidación de comisiones seleccionada.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Imprime la liquidación de comisiones seleccionada."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Settlements_LDR - Action Print - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2266969290 - Action 1002420131 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Print</source>
+          <target state="translated">Imprimir</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Imprimir"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Settlements_LDR - Action Print - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3611949638 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Commission Settlement</source>
+          <target state="translated">Liquidación de comisiones</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Liquidación de comisiones"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Comm. Settlement_LDR - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3611949638 - ReportLabel 2636616999" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Document Type</source>
+          <target state="translated">Tipo documento</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Tipo documento"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Comm. Settlement_LDR - ReportLabel DocumentTypeLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3611949638 - ReportLabel 1877187315" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Page</source>
+          <target state="translated">Página</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Página"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Comm. Settlement_LDR - ReportLabel PageLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3611949638 - ReportLabel 1027969698" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Posting Date</source>
+          <target state="translated">Fecha registro</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Fecha registro"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Comm. Settlement_LDR - ReportLabel PostingDateLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3611949638 - ReportLabel 3040577680" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Commission Settlement</source>
+          <target state="translated">Liquidación de comisiones</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Liquidación de comisiones"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Comm. Settlement_LDR - ReportLabel ReportTitleLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3611949638 - ReportLabel 1810185916" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Name</source>
+          <target state="translated">Nombre</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Nombre"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Comm. Settlement_LDR - ReportLabel SalespersonNameLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3611949638 - ReportLabel 2410138484" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total</source>
+          <target state="translated">Total</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Total"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Comm. Settlement_LDR - ReportLabel TotalLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3611949638 - ReportLabel 2293309020" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Up To Date</source>
+          <target state="translated">Fecha hasta</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Fecha hasta"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Comm. Settlement_LDR - ReportLabel UpToDateLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3611949638 - ReportLayout 3367648989 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Commission settlement (RDLC)</source>
+          <target state="translated">Liquidación de comisiones (RDLC)</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Liquidación de comisiones (RDLC)"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Comm. Settlement_LDR - ReportLayout RDLCLayout - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 4220838166 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Settle Commissions</source>
+          <target state="translated">Liquidar comisiones</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Liquidar comisiones"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Settle Salesp. Commissions_LDR - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 4220838166 - NamedType 563229157" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 settlements have been created for a total of %2. Warnings: %3</source>
+          <target state="translated">Se han creado %1 liquidaciones por un total de %2. Avisos: %3</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Se han creado %1 liquidaciones por un total de %2. Avisos: %3" %1 = number of settlements, %2 = total amount, %3 = number of warnings</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Settle Salesp. Commissions_LDR - NamedType FinishedMsg</note>
+        </trans-unit>
+        <trans-unit id="Report 4220838166 - NamedType 2779639592" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Settling salesperson #1##########</source>
+          <target state="translated">Liquidando vendedor #1##########</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Liquidando vendedor #1##########"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Settle Salesp. Commissions_LDR - NamedType ProgressMsg</note>
+        </trans-unit>
+        <trans-unit id="Report 4220838166 - NamedType 1316731485" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specify the up-to date.</source>
+          <target state="translated">Indique la fecha hasta.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Indique la fecha hasta."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Settle Salesp. Commissions_LDR - NamedType UpToDateMissingErr</note>
+        </trans-unit>
+        <trans-unit id="Report 4220838166 - Control 2346885236 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Options</source>
+          <target state="translated">Opciones</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Opciones"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Settle Salesp. Commissions_LDR - Control Options - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 4220838166 - Control 645369648 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether a draft purchase invoice is created to the vendor of each salesperson for the settled total.</source>
+          <target state="translated">Especifica si se crea una factura de compra borrador al proveedor de cada vendedor por el total liquidado.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica si se crea una factura de compra borrador al proveedor de cada vendedor por el total liquidado."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Settle Salesp. Commissions_LDR - Control CreatePurchaseInvoiceField - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Report 4220838166 - Control 645369648 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Create Purchase Invoice</source>
+          <target state="translated">Crear factura de compra</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Crear factura de compra"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Settle Salesp. Commissions_LDR - Control CreatePurchaseInvoiceField - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 4220838166 - Control 568438148 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the posting date up to which the pending commission entries are settled.</source>
+          <target state="translated">Especifica la fecha de registro hasta la que se liquidan los movimientos de comisión pendientes.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica la fecha de registro hasta la que se liquidan los movimientos de comisión pendientes."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Settle Salesp. Commissions_LDR - Control UpToDateField - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Report 4220838166 - Control 568438148 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Up To Date</source>
+          <target state="translated">Fecha hasta</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Fecha hasta"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Settle Salesp. Commissions_LDR - Control UpToDateField - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 1275301117 - Control 2770219397 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4145206282">
+          <source>Commissions</source>
+          <target state="translated">Comisiones</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Comisiones"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Sales &amp; Receivables Setup_LDR - Control Commissions_LDR - Property Caption</note>
+        </trans-unit>
         <trans-unit id="TableExtension 798396108 - Field 1122100156 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 3276313895">
           <source>Specifies that sales of this item do not generate salesperson commission, for example freight or packaging.</source>
           <target state="translated">Especifica que las ventas de este producto no generan comisión del vendedor, por ejemplo portes o embalajes.</target>
@@ -207,6 +519,30 @@
           <note from="Developer" annotates="general" priority="2">ESP="Excluir de comisión"</note>
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension Item_LDR - Field Exclude from Commission_LDR - Property Caption</note>
         </trans-unit>
+        <trans-unit id="TableExtension 1275301117 - Field 2660793795 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 4145206282">
+          <source>Specifies the G/L account used in the purchase invoice line created when a commission settlement is invoiced.</source>
+          <target state="translated">Especifica la cuenta contable que se usa en la línea de la factura de compra que se crea al facturar una liquidación de comisiones.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica la cuenta contable que se usa en la línea de la factura de compra que se crea al facturar una liquidación de comisiones."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension Sales &amp; Receivables Setup_LDR - Field Commission Account_LDR - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 1275301117 - Field 2660793795 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 4145206282">
+          <source>Commission Account</source>
+          <target state="translated">Cuenta comisiones</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Cuenta comisiones"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension Sales &amp; Receivables Setup_LDR - Field Commission Account_LDR - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 1275301117 - Field 3441434659 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 4145206282">
+          <source>Specifies the number series used to number the commission settlements.</source>
+          <target state="translated">Especifica el nº de serie que se usa para numerar las liquidaciones de comisiones.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica el nº de serie que se usa para numerar las liquidaciones de comisiones."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension Sales &amp; Receivables Setup_LDR - Field Commission Settlement Nos._LDR - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 1275301117 - Field 3441434659 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 4145206282">
+          <source>Commission Settlement Nos.</source>
+          <target state="translated">Nº serie liquidación comisiones</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Nº serie liquidación comisiones"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension Sales &amp; Receivables Setup_LDR - Field Commission Settlement Nos._LDR - Property Caption</note>
+        </trans-unit>
         <trans-unit id="TableExtension 148138762 - Field 3285629660 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 3399585325">
           <source>Specifies the sum of the commissions of the salesperson that are not liquidated yet.</source>
           <target state="translated">Especifica la suma de las comisiones del vendedor que aún no se han liquidado.</target>
@@ -218,6 +554,18 @@
           <target state="translated">Comisión pendiente (DL)</target>
           <note from="Developer" annotates="general" priority="2">ESP="Comisión pendiente (DL)"</note>
           <note from="Xliff Generator" annotates="general" priority="3">TableExtension Salesperson/Purchaser_LDR - Field Pending Commission (LCY)_LDR - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 148138762 - Field 3164292162 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 3399585325">
+          <source>Specifies the vendor to which the commission of the salesperson is invoiced.</source>
+          <target state="translated">Especifica el proveedor al que se factura la comisión del vendedor.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica el proveedor al que se factura la comisión del vendedor."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension Salesperson/Purchaser_LDR - Field Vendor No._LDR - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 148138762 - Field 3164292162 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 3399585325">
+          <source>Vendor No.</source>
+          <target state="translated">Nº proveedor</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Nº proveedor"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension Salesperson/Purchaser_LDR - Field Vendor No._LDR - Property Caption</note>
         </trans-unit>
         <trans-unit id="Enum 3013160329 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Commission Document Type</source>

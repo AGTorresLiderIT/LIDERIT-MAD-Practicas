@@ -1,0 +1,1998 @@
+{
+  "_version": 2,
+  "codigo": "TF0021",
+  "codigo_erpit": "",
+  "nombre": "Liquidación de comisiones",
+  "cliente": "LiderIT",
+  "fecha": "17/11/2026",
+  "proyecto": "Formación – Bloque 5 (Eventos, registro y procesos)",
+  "destinatario": "Alejandro Gallego",
+  "consultor": "Alejandro González Torres",
+  "ficha": {
+    "origen": "Tarea de formación TF0021 – Liquidación de comisiones (Bloque 5, 19/10/2026). Depende de TF0020.",
+    "riesgo": "ROJO (genera facturas de compra, modifica movimientos de comisión en lote y permite deshacer la liquidación)",
+    "estado": "En desarrollo",
+    "issue_rama": "https://github.com/AGTorresLiderIT/LIDERIT-MAD-Practicas/issues/49 · rama Feature/TF0021-liquidacion-de-comisiones"
+  },
+  "funcional": {
+    "contexto": "Continuación de TF0020. Cada mes el responsable comercial liquida las comisiones pendientes de los vendedores hasta una fecha. Los vendedores son autónomos y facturan su comisión, por lo que la liquidación puede generar una factura de compra en borrador a su proveedor.",
+    "situacion_actual": "Tras TF0020, al registrar facturas y abonos de venta se crean movimientos de comisión con los campos Liquidado y Nº liquidación sin usar. No existe ningún proceso para liquidarlos, imprimirlos ni facturarlos.",
+    "intro_alcance": "La tarea incluye:",
+    "bloques": [
+      {
+        "id": "1",
+        "titulo": "Configuración",
+        "requisitos": [
+          {
+            "id": "RF-1.1",
+            "texto": "En Configuración de ventas y cobros, nº de serie de las liquidaciones de comisiones y cuenta contable de comisiones."
+          },
+          {
+            "id": "RF-1.2",
+            "texto": "En el vendedor, nº de proveedor al que se factura su comisión."
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "titulo": "Liquidaciones de comisiones",
+        "requisitos": [
+          {
+            "id": "RF-2.1",
+            "texto": "Cada liquidación guarda nº, vendedor, fecha de liquidación, fecha hasta, factura de compra generada y muestra el total y el nº de movimientos."
+          },
+          {
+            "id": "RF-2.2",
+            "texto": "Lista de liquidaciones no editable con las acciones Movimientos, Imprimir, Deshacer liquidación y Liquidar comisiones."
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "titulo": "Proceso Liquidar comisiones",
+        "requisitos": [
+          {
+            "id": "RF-3.1",
+            "texto": "Se pide una fecha hasta obligatoria, que por defecto es el último día del mes anterior a la fecha de trabajo, y si se crea factura de compra. Se puede filtrar por vendedor."
+          },
+          {
+            "id": "RF-3.2",
+            "texto": "Por cada vendedor se liquidan sus movimientos pendientes con fecha de registro hasta la fecha indicada; si no tiene, no se crea liquidación."
+          },
+          {
+            "id": "RF-3.3",
+            "texto": "Los movimientos liquidados quedan marcados como liquidados y con el nº de liquidación."
+          },
+          {
+            "id": "RF-3.4",
+            "texto": "Si se pide, se crea una factura de compra en borrador al proveedor del vendedor por el total; sin proveedor o con total menor o igual a cero no se crea y se avisa, sin error."
+          },
+          {
+            "id": "RF-3.5",
+            "texto": "Con interfaz de usuario se muestra el vendedor en curso y, al terminar, el nº de liquidaciones, el importe total y los avisos."
+          },
+          {
+            "id": "RF-3.6",
+            "texto": "La liquidación de un vendedor se hace en una codeunit reutilizable (TF0023 la lanzará desde la cola de proyectos). El proceso está en la lista de liquidaciones y en el buscador."
+          }
+        ]
+      },
+      {
+        "id": "4",
+        "titulo": "Deshacer liquidación",
+        "requisitos": [
+          {
+            "id": "RF-4.1",
+            "texto": "Si la factura de compra de la liquidación ya está registrada, no se puede deshacer y se muestra un error."
+          },
+          {
+            "id": "RF-4.2",
+            "texto": "Si no, tras confirmar se borra la factura borrador (si existe), los movimientos vuelven a pendientes y se borra la liquidación."
+          }
+        ]
+      },
+      {
+        "id": "5",
+        "titulo": "Informe de liquidación",
+        "requisitos": [
+          {
+            "id": "RF-5.1",
+            "texto": "Cabecera con logo y nombre de la empresa, título, nº de liquidación, vendedor y nombre, fecha hasta y nº de página."
+          },
+          {
+            "id": "RF-5.2",
+            "texto": "Líneas con fecha, tipo y nº de documento, cliente, producto, base, % y comisión; total por liquidación y cada liquidación en página nueva."
+          },
+          {
+            "id": "RF-5.3",
+            "texto": "Filtros por nº de liquidación y vendedor; la acción Imprimir de la lista lo lanza solo para la liquidación seleccionada."
+          }
+        ]
+      }
+    ],
+    "puntos": [
+      {
+        "id": "P-1",
+        "tipo": "Supuesto",
+        "texto": "Marcado de movimientos (aviso del origen sobre ModifyAll). Decisión: con el filtro Vendedor + Liquidado = No + Fecha registro <= fecha hasta, primero LockTable y CalcSums(\"Commission Amount (LCY)\") para el total, después ModifyAll(\"Liquidation No.\") y por último ModifyAll(Liquidated, true). Al revés, el primer ModifyAll saca los registros del filtro y el segundo no modifica nada. Al deshacer, filtro por Nº liquidación: primero Liquidated = false y al final \"Liquidation No.\" vacío. ModifyAll sin triggers (la tabla no los necesita) en vez de un bucle con Modify. A cuestionar en P1.",
+        "bloquea": false,
+        "responsable": "Programador (P1) / Consultor",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      },
+      {
+        "id": "P-2",
+        "tipo": "Supuesto",
+        "texto": "Fecha hasta por defecto. Decisión: en OnOpenPage de la request page, si está vacía, CalcDate('<-CM-1D>', WorkDate()) (fecha de trabajo 15/02/2027 → 31/01/2027). Campo con ShowMandatory y error en OnPreReport si se deja vacía. Se usa WorkDate y no Today porque el origen habla de fecha de trabajo. A cuestionar en P1.",
+        "bloquea": false,
+        "responsable": "Programador (P1) / Consultor",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      },
+      {
+        "id": "P-3",
+        "tipo": "Supuesto",
+        "texto": "Reparto de la lógica e interfaz común con TF0023. Decisión: la codeunit \"Settle Salesperson Commission_LDR\" (TableNo = Salesperson/Purchaser) recibe la fecha hasta y la opción de factura con SetParameters(UpToDate, CreateInvoice) y devuelve resultados con GetSettlementNo y GetWarningText (el report obtiene el total con CalcFields de la liquidación). En OnRun limpia los resultados, comprueba ella misma la configuración (TestField de la serie y, si hay factura, de la cuenta), porque TF0023 la llama sin pasar por el report, y usa Settlement Date = WorkDate(). Sin ninguna interacción (ni siquiera protegida con GuiAllowed) y sin Commit; si tras el LockTable no queda ningún pendiente, sale sin liquidar. Los errores son Error normales. El llamante hace Clear de la instancia antes de cada vendedor y después SetParameters (Clear también borra los parámetros). Deshacer va como UndoSettlement en \"Commission Mgt._LDR\"; el Confirm está en la acción de la página. A cuestionar en P1.",
+        "bloquea": false,
+        "responsable": "Programador (P1) / Revisor técnico",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      },
+      {
+        "id": "P-4",
+        "tipo": "Supuesto",
+        "texto": "Errores en el report manual. Decisión: todo o nada. El report comprueba en OnPreReport la fecha y la configuración y, por cada vendedor, ejecuta la codeunit con Codeunit.Run sin if y sin Commit: si falla un vendedor se revierte todo el proceso (liquidaciones, marcas, facturas y números de serie) y el usuario ve el error, lo corrige y relanza. Motivo: el proceso manual no tiene registro donde dejar errores parciales y relanzarlo es idempotente. Las causas previsibles (sin proveedor, proveedor bloqueado o en divisa, total <= 0) son avisos, no errores (P-8). TF0023, desatendida y con registro, aísla por vendedor con if Codeunit.Run + Commit sobre la misma codeunit. A cuestionar en P1.",
+        "bloquea": false,
+        "responsable": "Programador (P1) / Revisor técnico",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      },
+      {
+        "id": "P-5",
+        "tipo": "Supuesto",
+        "texto": "Detección de factura registrada al deshacer. Decisión: si la liquidación tiene nº de factura y no está en Purchase Header, se busca en Purch. Inv. Header (122) por \"Pre-Assigned No.\" = nº de factura (clave Key3; Purch.-Post lo informa en las facturas que no vienen de pedido, PurchPost.Codeunit.al líneas 7100-7101, BC 29 ES). Si existe, error. Si no existe en ningún sitio (borrada a mano), se permite deshacer. A cuestionar en P1.",
+        "bloquea": false,
+        "responsable": "Programador (P1) / Consultor",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      },
+      {
+        "id": "P-6",
+        "tipo": "Supuesto",
+        "texto": "Ubicación de la configuración: se amplía Configuración de ventas y cobros (311), como indica el origen. Criterio: los parámetros son una extensión natural del proceso de ventas y no es un módulo aislado. TF0022 y TF0023 deben seguir la misma decisión.",
+        "bloquea": false,
+        "responsable": "Jefe de proyecto LiderIT",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      },
+      {
+        "id": "P-7",
+        "tipo": "Supuesto",
+        "texto": "Enfoque del informe: extender el estándar o informe nuevo a partir de una copia del estándar. Recomendación: informe nuevo propio con layout Word, porque no hay ningún informe estándar sobre liquidaciones de comisiones que extender ni copiar; los datos son tablas propias.",
+        "bloquea": true,
+        "responsable": "Jefe de proyecto LiderIT",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      },
+      {
+        "id": "P-8",
+        "tipo": "Supuesto",
+        "texto": "Factura de compra. Decisión: sin retención de IRPF (fuera de alcance; si aplica, el usuario la añade en el borrador antes de registrar). El IVA sale del grupo del proveedor y de la cuenta, que debe tener Registro directo = Sí (Purchase Line lo exige: PurchaseLine.Table.al línea 4795). Proveedor bloqueado o con divisa: liquidación sin factura y aviso, como sin proveedor. Proveedor con precios IVA incluido: Validate(\"Prices Including VAT\", false) en la cabecera antes de crear la línea, porque el total es neto. A cuestionar en P1.",
+        "bloquea": false,
+        "responsable": "Consultor (formación)",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      },
+      {
+        "id": "P-9",
+        "tipo": "Supuesto",
+        "texto": "Claves de \"Commission Entry_LDR\" (objeto de TF0020). TF0020 ya define \"Salesperson Code, Liquidated, Posting Date\" con SumIndexFields = \"Commission Amount (LCY)\", que sirve para el filtro y el CalcSums del proceso: no se duplica. TF0021 solo añade en esa tabla la clave \"Liquidation No.\" con SumIndexFields = \"Commission Amount (LCY)\" para los FlowFields de la liquidación, el deshacer y el DataItemLink del informe.",
+        "bloquea": false,
+        "responsable": "Programador / Revisor técnico",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      },
+      {
+        "id": "P-10",
+        "tipo": "Fuera de alcance",
+        "texto": "Registro automático de la factura de compra, retenciones, liquidación parcial o de movimientos sueltos, envío del informe por correo, liquidación programada en la cola de proyectos (TF0023) y exportación para nómina (TF0022).",
+        "bloquea": false,
+        "responsable": "Consultor (formación)",
+        "estado": "Pendiente",
+        "ambito": "Cliente"
+      }
+    ]
+  },
+  "desarrollo": {
+    "intro": "Se crean la tabla de liquidaciones, el proceso de liquidación con su codeunit reutilizable, el deshacer y el informe Word, y se amplían la configuración de ventas y el vendedor. Se realizarán las siguientes modificaciones:",
+    "secciones": [
+      {
+        "id": "1",
+        "titulo": "Configuración",
+        "ubicacion": "Tabla Sales & Receivables Setup (311) y página Sales & Receivables Setup (459); tabla Salesperson/Purchaser (13) y página Salesperson/Purchaser Card (5116).",
+        "parrafos": [
+          "Se añaden dos campos a Configuración de ventas y cobros, en un grupo nuevo «Comisiones», y el proveedor en la ficha del vendedor (en la extensión del vendedor creada en TF0020)."
+        ],
+        "tabla": {
+          "columnas": [
+            "Campo",
+            "Tipo",
+            "Relación",
+            "Tabla",
+            "Comentario"
+          ],
+          "filas": [
+            [
+              "Commission Settlement Nos. (Nº serie liquidación comisiones)",
+              "Code[20]",
+              "No. Series",
+              "Sales & Receivables Setup (311)",
+              "Obligatorio para liquidar"
+            ],
+            [
+              "Commission Account (Cuenta comisiones)",
+              "Code[20]",
+              "G/L Account",
+              "Sales & Receivables Setup (311)",
+              "Obligatoria solo si se pide factura"
+            ],
+            [
+              "Vendor No. (Nº proveedor)",
+              "Code[20]",
+              "Vendor",
+              "Salesperson/Purchaser (13)",
+              "Proveedor al que se factura la comisión"
+            ]
+          ]
+        }
+      },
+      {
+        "id": "2",
+        "titulo": "Liquidaciones de comisiones",
+        "ubicacion": "Tabla y página nuevas; enlazan con Commission Entry_LDR (TF0020).",
+        "parrafos": [
+          "Se crea la tabla «Commission Settlement» con el patrón estándar de nº de serie: en OnInsert, si el nº está vacío, TestField de la serie en la configuración, \"No. Series\" = esa serie y \"No.\" = GetNextNo(\"No. Series\", WorkDate()) de la codeunit «No. Series» (no NoSeriesManagement, obsoleta). La codeunit rellena vendedor y fechas y hace Insert(true). Los totales son FlowFields sobre los movimientos con el mismo nº de liquidación.",
+          "La lista «Commission Settlements_LDR» (UsageCategory = Lists) no permite insertar, modificar ni borrar: las liquidaciones solo se crean con el proceso y se eliminan con Deshacer."
+        ],
+        "tabla": {
+          "columnas": [
+            "Campo",
+            "Tipo",
+            "Comentario"
+          ],
+          "filas": [
+            [
+              "No.",
+              "Code[20]",
+              "PK. Nº de serie de la configuración al insertar"
+            ],
+            [
+              "Salesperson Code",
+              "Code[20]",
+              "Relación con Salesperson/Purchaser"
+            ],
+            [
+              "Settlement Date",
+              "Date",
+              "Fecha de la liquidación (fecha de trabajo)"
+            ],
+            [
+              "Up To Date",
+              "Date",
+              "Fecha hasta la que se liquidó"
+            ],
+            [
+              "Total Amount (LCY)",
+              "Decimal",
+              "FlowField: suma de Commission Amount (LCY) de los movimientos con Liquidation No. = No."
+            ],
+            [
+              "No. of Entries",
+              "Integer",
+              "FlowField: nº de movimientos de la liquidación"
+            ],
+            [
+              "Purchase Invoice No.",
+              "Code[20]",
+              "Factura de compra borrador generada (si se generó)"
+            ],
+            [
+              "No. Series",
+              "Code[20]",
+              "Patrón estándar de nº de serie"
+            ]
+          ]
+        },
+        "puntos": [
+          "Movimientos: abre Commission Entries_LDR filtrada por el nº de liquidación.",
+          "Imprimir: copia la liquidación seleccionada, SetRecFilter y lanza el informe con esa copia.",
+          "Deshacer liquidación: pide confirmación y llama a UndoSettlement.",
+          "Liquidar comisiones: lanza el proceso."
+        ]
+      },
+      {
+        "id": "3",
+        "titulo": "Proceso Liquidar comisiones",
+        "ubicacion": "Report de proceso nuevo (ProcessingOnly, UsageCategory = Tasks) sobre Salesperson/Purchaser (13), RequestFilterFields = Code.",
+        "parrafos": [
+          "La request page pide Fecha hasta (obligatoria; por defecto, último día del mes anterior a la fecha de trabajo) y Crear factura de compra. En OnPreReport se comprueban la fecha y la configuración. Por cada vendedor el report hace Clear de la codeunit «Settle Salesperson Commission_LDR», SetParameters y Codeunit.Run sin if (todo o nada, P-4); si no se ha creado liquidación pasa al siguiente.",
+          "La codeunit filtra los movimientos del vendedor con Liquidado = No y fecha de registro hasta la fecha indicada, hace LockTable y CalcSums. Si hay, inserta la liquidación (Insert(true)) y marca los movimientos con dos ModifyAll en el orden de P-1. Toda la lógica está en la codeunit, sin interfaz ni Commit, para que TF0023 la reutilice desde la cola de proyectos.",
+          "Si se pide factura, con proveedor no bloqueado y en DL y total mayor que cero, crea una factura de compra: Purchase Header tipo Factura con Insert(true), Validate del proveedor, \"Prices Including VAT\" = false y «Vendor Invoice No.» = nº de liquidación; una línea de tipo Cuenta con la cuenta configurada, cantidad 1 y coste unitario directo = total. Guarda el nº de factura en la liquidación."
+        ],
+        "puntos": [
+          "Vendedor sin proveedor, proveedor bloqueado o con divisa, o total <= 0: liquidación creada sin factura; la codeunit devuelve el aviso con GetWarningText y el report lo acumula.",
+          "Dialog con el vendedor en curso y mensaje final solo si GuiAllowed; programado en segundo plano no muestra nada.",
+          "El report se incluye en la lista de liquidaciones y en el buscador («Liquidar comisiones»)."
+        ],
+        "mensajes": [
+          "Se han creado %1 liquidaciones por un total de %2. Avisos: %3",
+          "El vendedor %1 no tiene proveedor: la liquidación %2 se ha creado sin factura.",
+          "El proveedor %1 del vendedor %2 está bloqueado o tiene divisa: la liquidación %3 se ha creado sin factura.",
+          "La liquidación %1 tiene un total de %2: no se crea factura de compra.",
+          "Indique la fecha hasta."
+        ]
+      },
+      {
+        "id": "4",
+        "titulo": "Deshacer liquidación",
+        "ubicacion": "Página Commission Settlements_LDR; tablas Purchase Header (38) y Purch. Inv. Header (122).",
+        "parrafos": [
+          "La acción pide confirmación y llama a UndoSettlement de «Commission Mgt._LDR», que bloquea y relee la liquidación (LockTable + Get) para que dos usuarios no la deshagan a la vez. Si la factura ya está registrada (se localiza por «Pre-Assigned No.», P-5) da error. Si no, borra la factura borrador con Delete(true) (también borra sus líneas), devuelve los movimientos a pendientes con dos ModifyAll en el orden de P-1 y borra la liquidación."
+        ],
+        "mensajes": [
+          "¿Desea deshacer la liquidación %1? Se eliminará la factura de compra borrador %2 y los movimientos volverán a quedar pendientes.",
+          "La factura de compra %1 de la liquidación %2 ya está registrada. No se puede deshacer la liquidación."
+        ]
+      },
+      {
+        "id": "5",
+        "titulo": "Informe de liquidación",
+        "ubicacion": "Informe nuevo con layout Word; tabla Company Information (79) para logo y nombre.",
+        "parrafos": [
+          "DataItems: Commission Settlement → Commission Entry (DataItemLink «Liquidation No.» = field(«No.»)). Company Information se lee una vez con CalcFields(Picture). Cada liquidación empieza en página nueva y termina con su total.",
+          "RequestFilterFields: nº de liquidación y vendedor; UsageCategory = ReportsAndAnalysis para encontrarlo en el buscador. Desde la lista se lanza con la liquidación seleccionada (SetRecFilter sobre una copia)."
+        ],
+        "tabla": {
+          "columnas": [
+            "Parte",
+            "Contenido"
+          ],
+          "filas": [
+            [
+              "Cabecera",
+              "Logo y nombre de la empresa, título, nº de liquidación, vendedor y nombre, fecha hasta, nº de página"
+            ],
+            [
+              "Líneas",
+              "Fecha, tipo y nº de documento, cliente, producto, base, % y comisión"
+            ],
+            [
+              "Pie de liquidación",
+              "Total de comisión"
+            ]
+          ]
+        }
+      }
+    ],
+    "objetos": [
+      {
+        "tipo": "TableExtension",
+        "id": 50002,
+        "nombre": "Sales & Receivables Setup_LDR",
+        "extiende": "tabla Sales & Receivables Setup (311)",
+        "uso": "Commission Settlement Nos. y Commission Account (dueño TF0021)"
+      },
+      {
+        "tipo": "PageExtension",
+        "id": 50004,
+        "nombre": "Sales & Receivables Setup_LDR",
+        "extiende": "página Sales & Receivables Setup (459)",
+        "uso": "grupo «Commissions» con los dos campos"
+      },
+      {
+        "tipo": "TableExtension",
+        "id": 50000,
+        "nombre": "Salesperson/Purchaser_LDR",
+        "extiende": "tabla Salesperson/Purchaser (13)",
+        "uso": "campo Vendor No. (objeto de TF0020; se amplía)"
+      },
+      {
+        "tipo": "PageExtension",
+        "id": 50002,
+        "nombre": "Salesperson/Purchaser_LDR",
+        "extiende": "página Salesperson/Purchaser Card (5116)",
+        "uso": "campo Vendor No. (objeto de TF0020, mismo nombre que allí)"
+      },
+      {
+        "tipo": "Table",
+        "id": 50002,
+        "nombre": "Commission Settlement_LDR",
+        "uso": "cabecera de liquidación"
+      },
+      {
+        "tipo": "Page",
+        "id": 50003,
+        "nombre": "Commission Settlements_LDR",
+        "uso": "lista no editable con acciones Movimientos, Imprimir, Deshacer liquidación y Liquidar comisiones"
+      },
+      {
+        "tipo": "Report",
+        "id": 50000,
+        "nombre": "Settle Commissions_LDR",
+        "uso": "proceso por lotes; recorre vendedores y llama a la codeunit de liquidación"
+      },
+      {
+        "tipo": "Report",
+        "id": 50001,
+        "nombre": "Commission Settlement_LDR",
+        "uso": "informe Word de la liquidación (layout CommissionSettlement.docx)"
+      },
+      {
+        "tipo": "Codeunit",
+        "id": 50002,
+        "nombre": "Settle Salesperson Commission_LDR",
+        "uso": "TableNo = Salesperson/Purchaser; SetParameters, OnRun y Get…; liquida un vendedor y crea su factura, sin interfaz ni Commit (dueño TF0021; TF0023 la reutiliza con if Codeunit.Run)"
+      },
+      {
+        "tipo": "Codeunit",
+        "id": 50000,
+        "nombre": "Commission Mgt._LDR",
+        "uso": "se añade UndoSettlement (objeto de TF0020)"
+      },
+      {
+        "tipo": "Table",
+        "id": 50001,
+        "nombre": "Commission Entry_LDR",
+        "uso": "se usan Liquidated y Liquidation No.; se añade la clave Liquidation No. con SumIndexFields (P-9) (objeto de TF0020)"
+      },
+      {
+        "tipo": "PermissionSet",
+        "id": 50000,
+        "nombre": "Commissions_LDR",
+        "uso": "se añaden los objetos nuevos (objeto de TF0020)"
+      }
+    ],
+    "alcance_tecnico": [
+      "Sin suscripciones a eventos: no se modifica lógica estándar; la factura se crea con Insert(true) y Validate para que actúen los triggers estándar.",
+      "Codeunit de liquidación sin Message, Confirm, Dialog ni Commit: los mensajes al usuario y el progreso están en el report y la página, protegidos con GuiAllowed.",
+      "Se añade la clave \"Liquidation No.\" con SumIndexFields en Commission Entry_LDR (P-9); la clave de vendedor ya la crea TF0020.",
+      "Captions en inglés con Comment = 'ESP=\"...\"' y traducción es-ES.",
+      "Layout Word CommissionSettlement.docx en src/report/layout."
+    ],
+    "eventos": [],
+    "consideraciones": [
+      "Depende de TF0020 (movimientos, Commission Mgt._LDR, extensión del vendedor y permission set). Los nombres de campos de Commission Entry_LDR deben coincidir con los de TF0020.",
+      "Las decisiones de P-1 a P-5 y P-8 resuelven los avisos y ejercicios del origen (orden de ModifyAll, valor por defecto con CalcDate, interfaz de la codeunit, todo o nada, factura registrada, factura sin IRPF). En sdd-implementar el programador debe cuestionarlas en P1 antes de construir.",
+      "La codeunit se crea ya en TF0021 para no refactorizar en TF0023; TF0023 solo la reutiliza y comprueba que funciona sin interfaz.",
+      "Concurrencia (decisión): LockTable sobre los movimientos antes del CalcSums y los ModifyAll; si dos usuarios, o el report y la cola de TF0023, liquidan el mismo vendedor a la vez, el segundo espera y, al releer, ya no encuentra pendientes. El nº de serie queda bloqueado por GetNextNo hasta el final de la transacción. En el deshacer se bloquea la liquidación.",
+      "La factura borrador queda abierta: el usuario la revisa y la registra. Una vez registrada, la liquidación no se puede deshacer.",
+      "Configuración previa: serie de liquidaciones, cuenta de comisiones con grupos contables e IVA y proveedor en cada vendedor que facture.",
+      "Permisos: «Commissions_LDR» cubre los objetos propios; quien liquide con factura necesita además los permisos estándar de compras para crear y borrar facturas (Purchase Header y Purchase Line).",
+      "La app declara application 28 y el estándar consultado es BC 29 ES; no se usan eventos, pero conviene compilar contra 28.",
+      "El origen no pide tests automáticos; si se hacen, van en la app de test.",
+      "Entrega: documentación técnica con explicación de la solución, estructura de objetos, funciones de la codeunit, capturas de código, del informe y de funcionamiento, y problemas o dudas encontrados.",
+      "Referencia LiderIT: el cliente kassandra tiene un informe de comisiones de vendedores (ComisionesVendedores.Report.al) que puede servir de modelo de layout."
+    ],
+    "tareas": [
+      {
+        "id": "T-01",
+        "descripcion": "Campos de configuración y proveedor del vendedor",
+        "depende_de": "TF0020",
+        "hecho_cuando": "Compila y los campos se editan en las fichas (A-1)"
+      },
+      {
+        "id": "T-02",
+        "descripcion": "Tabla y lista de liquidaciones con nº de serie y FlowFields",
+        "depende_de": "T-01",
+        "hecho_cuando": "Inserción con nº de serie y FlowFields correctos"
+      },
+      {
+        "id": "T-03",
+        "descripcion": "Codeunit Settle Salesperson Commission_LDR (liquidación y factura)",
+        "depende_de": "T-02",
+        "hecho_cuando": "Pasan A-3 a A-6"
+      },
+      {
+        "id": "T-04",
+        "descripcion": "Report Liquidar comisiones (request page, progreso, mensaje final)",
+        "depende_de": "T-03",
+        "hecho_cuando": "Pasan A-2, A-7 a A-9"
+      },
+      {
+        "id": "T-05",
+        "descripcion": "UndoSettlement y acciones de la lista",
+        "depende_de": "T-03",
+        "hecho_cuando": "Pasan A-10 a A-12"
+      },
+      {
+        "id": "T-06",
+        "descripcion": "Informe Word de liquidación",
+        "depende_de": "T-02",
+        "hecho_cuando": "Pasan A-13 y A-14"
+      },
+      {
+        "id": "T-07",
+        "descripcion": "Permisos, traducciones y documentación técnica",
+        "depende_de": "T-04, T-05, T-06",
+        "hecho_cuando": "Permission set completo, XLIFF completo y documentación entregada"
+      }
+    ]
+  },
+  "pruebas": {
+    "intro": "Pruebas que valida el consultor en el sandbox de formación con la empresa CRONUS ES y fecha de trabajo 15/02/2027.",
+    "parametrizacion": [
+      "Configuración de ventas y cobros: serie LIQCOM (LIQ-0001…) y cuenta de comisiones de servicios profesionales con grupos contables e IVA y Registro directo = Sí.",
+      "Tres vendedores de prueba: V1 con proveedor de prueba PV1 (en DL, precios sin IVA), V2 sin proveedor y V3 con proveedor.",
+      "Movimientos de comisión de TF0020 (al registrar ventas): V1: 15/01/2027 factura base 1.000,00 € al 5 % (50,00 €), 20/01/2027 abono base -200,00 € al 5 % (-10,00 €), 10/02/2027 factura base 2.000,00 € al 5 % (100,00 €). V2: 25/01/2027 factura base 500,00 € al 10 % (50,00 €), 05/02/2027 factura base 300,00 € al 10 % (30,00 €). V3: 28/01/2027 abono base -100,00 € al 10 % (-10,00 €)."
+    ],
+    "escenarios": [
+      {
+        "id": "A-1",
+        "rf": "RF-1.1, RF-1.2",
+        "escenario": "Informar la serie y la cuenta en Configuración de ventas y cobros y el proveedor PV1 en la ficha de V1",
+        "resultado": "Los campos se guardan; solo admiten series, cuentas y proveedores existentes"
+      },
+      {
+        "id": "A-2",
+        "rf": "RF-3.1",
+        "escenario": "Abrir Liquidar comisiones con fecha de trabajo 15/02/2027; después borrar la fecha hasta y aceptar",
+        "resultado": "Fecha hasta propuesta 31/01/2027; sin fecha, error «Indique la fecha hasta.» y no se crea nada"
+      },
+      {
+        "id": "A-3",
+        "rf": "RF-3.2, RF-3.3, RF-2.1",
+        "escenario": "Liquidar hasta 31/01/2027 con Crear factura de compra marcado, sin filtro de vendedor",
+        "resultado": "LIQ-0001 de V1 (2 movimientos, total 40,00 €), LIQ-0002 de V2 (1 movimiento, 50,00 €) y LIQ-0003 de V3 (1 movimiento, -10,00 €). Los movimientos de febrero siguen pendientes; los liquidados tienen Liquidado = Sí y su nº de liquidación"
+      },
+      {
+        "id": "A-4",
+        "rf": "RF-3.4",
+        "escenario": "Revisar la liquidación LIQ-0001 y su factura de compra",
+        "resultado": "Factura borrador al proveedor PV1 con Nº factura proveedor LIQ-0001 y una línea de tipo Cuenta (cuenta de comisiones), cantidad 1, coste unitario 40,00 €; su nº figura en LIQ-0001"
+      },
+      {
+        "id": "A-5",
+        "rf": "RF-3.4",
+        "escenario": "Caso límite: LIQ-0002 de V2, sin proveedor",
+        "resultado": "Liquidación creada sin factura; el mensaje final incluye el aviso «El vendedor V2 no tiene proveedor…»"
+      },
+      {
+        "id": "A-6",
+        "rf": "RF-3.4",
+        "escenario": "Caso límite: LIQ-0003 de V3, total -10,00 €",
+        "resultado": "Liquidación creada sin factura; aviso «La liquidación LIQ-0003 tiene un total de -10,00…»"
+      },
+      {
+        "id": "A-7",
+        "rf": "RF-3.5",
+        "escenario": "Mensaje final de A-3",
+        "resultado": "«Se han creado 3 liquidaciones por un total de 80,00. Avisos: 2» con los dos avisos; durante el proceso se ve el vendedor en curso"
+      },
+      {
+        "id": "A-8",
+        "rf": "RF-3.2",
+        "escenario": "Caso límite: volver a lanzar hasta 31/01/2027",
+        "resultado": "«Se han creado 0 liquidaciones…»; no se crean liquidaciones, facturas ni cambios en movimientos"
+      },
+      {
+        "id": "A-9",
+        "rf": "RF-3.5, RF-3.6",
+        "escenario": "Buscar «Liquidar comisiones» en el buscador y programarlo desde la request page (Programar) hasta 28/02/2027 con filtro de vendedor V2",
+        "resultado": "Se ejecuta en segundo plano sin errores de interfaz: crea la liquidación de V2 (30,00 €) sin mostrar diálogo ni mensaje"
+      },
+      {
+        "id": "A-10",
+        "rf": "RF-4.2",
+        "escenario": "Deshacer LIQ-0001 y responder No a la confirmación; repetir respondiendo Sí",
+        "resultado": "Con No no cambia nada. Con Sí desaparecen la factura borrador y LIQ-0001, y los dos movimientos de enero de V1 vuelven a pendientes, sin nº de liquidación"
+      },
+      {
+        "id": "A-11",
+        "rf": "RF-4.1",
+        "escenario": "Liquidar V1 de nuevo hasta 31/01/2027 con factura, registrar la factura y deshacer la liquidación",
+        "resultado": "Error «La factura de compra … ya está registrada. No se puede deshacer la liquidación.»; liquidación y movimientos sin cambios"
+      },
+      {
+        "id": "A-12",
+        "rf": "RF-2.2",
+        "escenario": "En la lista, intentar editar o borrar una liquidación y usar la acción Movimientos sobre la de V1",
+        "resultado": "No se puede editar ni borrar; Movimientos muestra los 2 movimientos de la liquidación, que suman su total"
+      },
+      {
+        "id": "A-13",
+        "rf": "RF-5.1, RF-5.2, RF-5.3",
+        "escenario": "Imprimir desde la lista la liquidación de V1 (40,00 €)",
+        "resultado": "Solo esa liquidación: logo y nombre de CRONUS, título, nº, vendedor V1 y nombre, fecha hasta 31/01/2027, nº de página; 2 líneas (50,00 € y -10,00 €) y total 40,00 €, igual que en Movimientos"
+      },
+      {
+        "id": "A-14",
+        "rf": "RF-5.2, RF-5.3",
+        "escenario": "Lanzar el informe desde el buscador filtrando por los vendedores V2 y V3",
+        "resultado": "Una página por liquidación, cada una con su total (50,00 €, 30,00 € y -10,00 €)"
+      },
+      {
+        "id": "A-15",
+        "rf": "RF-3.4",
+        "escenario": "Caso límite (P-4): quitar Registro directo a la cuenta de comisiones, dejar pendientes movimientos de V1 y V2 y liquidar hasta 28/02/2027 con Crear factura de compra marcado",
+        "resultado": "Error de la cuenta al crear la línea de la factura de V1; no se crea ninguna liquidación ni factura y todos los movimientos siguen pendientes"
+      }
+    ]
+  },
+  "fuentes": [
+    "Tarea de formación TF0021 – Liquidación de comisiones (apartado completo); reparto del Bloque 5 (dueños de objetos y decisiones comunes); campos de Commission Entry según el origen de TF0020.",
+    "BC 29 ES: Sales/Setup/SalesReceivablesSetup.Table.al y .Page.al; CRM/Team/SalespersonPurchaser.Table.al y SalespersonPurchaserCard.Page.al; Purchases/History/PurchInvHeader.Table.al (campo 111 Pre-Assigned No.); Business Foundation NoSeries.Codeunit.al; Foundation/Company/CompanyInformation.Table.al. Purchases/Posting/PurchPost.Codeunit.al (líneas 7100-7101, Pre-Assigned No.); Purchases/Document/PurchaseLine.Table.al (línea 4795, Direct Posting); Purchases/Document/PurchaseHeader.Table.al (OnDelete, línea 3049).",
+    "https://learn.microsoft.com/dynamics365/business-central/dev-itpro/developer/methods-auto/record/record-modifyall-method",
+    "https://learn.microsoft.com/dynamics365/business-central/dev-itpro/developer/methods-auto/session/session-guiallowed-method",
+    "Referencia LiderIT: kassandra (informe de comisiones de vendedores).",
+    "Revisado con bc-code-intel (especialistas: alex-architect; sin contenido específico aplicable: decisiones del revisor contrastadas con el código estándar BC 29 ES)."
+  ],
+  "implementacion": {
+    "cambios": [
+      {
+        "id": "C-01",
+        "rf": "RF-1.1",
+        "ficheros": [
+          "src/tableextension/SalesReceivablesSetupLDR.TableExt.al",
+          "src/pageextension/SalesReceivablesSetupLDR.PageExt.al"
+        ],
+        "commit": "b4929c0",
+        "resumen": "Campos Commission Settlement Nos. y Commission Account en Sales & Receivables Setup (ext. 50002) y grupo Commissions en su página (ext. 50004)"
+      },
+      {
+        "id": "C-02",
+        "rf": "RF-1.2",
+        "ficheros": [
+          "src/tableextension/SalespersonPurchaserLDR.TableExt.al",
+          "src/pageextension/SalespersonPurchaserLDR.PageExt.al"
+        ],
+        "commit": "b4929c0",
+        "resumen": "Campo Vendor No. en Salesperson/Purchaser (ext. 50000) y en su ficha (ext. 50002)"
+      },
+      {
+        "id": "C-03",
+        "rf": "RF-2.1",
+        "ficheros": [
+          "src/table/CommissionSettlementLDR.Table.al",
+          "src/table/CommissionEntryLDR.Table.al",
+          "src/permissionset/CommissionsLDR.PermissionSet.al"
+        ],
+        "commit": "f8cb3ec",
+        "resumen": "Tabla 50002 Commission Settlement_LDR con nº de serie (No. Series.GetNextNo) y FlowFields de total y nº de movimientos; clave Liquidation No. con SumIndexFields en Commission Entry_LDR (P-9); permisos de los objetos nuevos"
+      },
+      {
+        "id": "C-04",
+        "rf": "RF-2.2",
+        "ficheros": [
+          "src/page/CommissionSettlementsLDR.Page.al"
+        ],
+        "commit": "f8cb3ec",
+        "resumen": "Lista 50003 Commission Settlements_LDR no editable con acción Movimientos (Imprimir, Deshacer y Liquidar se añaden con RF-5.3, RF-4.x y RF-3.6)"
+      },
+      {
+        "id": "C-05",
+        "rf": "RF-3.1",
+        "ficheros": [
+          "src/report/SettleCommissionsLDR.Report.al"
+        ],
+        "commit": "e7f8628",
+        "resumen": "Request page con Fecha hasta (ShowMandatory, por defecto CalcDate('<-CM-1D>', WorkDate()), P-2) y Crear factura de compra; error si falta la fecha; filtro por vendedor (RequestFilterFields = Code)"
+      },
+      {
+        "id": "C-06",
+        "rf": "RF-3.2",
+        "ficheros": [
+          "src/codeunit/SettleSalespCommissionLDR.Codeunit.al",
+          "src/report/SettleCommissionsLDR.Report.al"
+        ],
+        "commit": "e7f8628",
+        "resumen": "Codeunit 50002 filtra pendientes del vendedor hasta la fecha con LockTable; sin pendientes sale sin liquidar y el report pasa al siguiente (CurrReport.Skip)"
+      },
+      {
+        "id": "C-07",
+        "rf": "RF-3.3",
+        "ficheros": [
+          "src/codeunit/SettleSalespCommissionLDR.Codeunit.al"
+        ],
+        "commit": "e7f8628",
+        "resumen": "Marcado con ModifyAll: primero Liquidation No. y después Liquidated (P-1)"
+      },
+      {
+        "id": "C-08",
+        "rf": "RF-3.4",
+        "ficheros": [
+          "src/codeunit/SettleSalespCommissionLDR.Codeunit.al"
+        ],
+        "commit": "e7f8628",
+        "resumen": "Factura de compra borrador (Insert(true), Validate proveedor, Prices Including VAT = false, Vendor Invoice No. = nº liquidación; línea de cuenta, cantidad 1, coste = total); sin proveedor, proveedor bloqueado o en divisa, o total <= 0: aviso sin error (P-8)"
+      },
+      {
+        "id": "C-09",
+        "rf": "RF-3.5",
+        "ficheros": [
+          "src/report/SettleCommissionsLDR.Report.al"
+        ],
+        "commit": "e7f8628",
+        "resumen": "Dialog con el vendedor en curso y mensaje final con nº de liquidaciones, total y avisos, solo si GuiAllowed"
+      },
+      {
+        "id": "C-10",
+        "rf": "RF-3.6",
+        "ficheros": [
+          "src/codeunit/SettleSalespCommissionLDR.Codeunit.al",
+          "src/report/SettleCommissionsLDR.Report.al",
+          "src/page/CommissionSettlementsLDR.Page.al",
+          "src/permissionset/CommissionsLDR.PermissionSet.al"
+        ],
+        "commit": "e7f8628",
+        "resumen": "Lógica en la codeunit 50002 sin interfaz ni Commit (SetParameters, GetSettlementNo, GetWarningText); el report la ejecuta con Codeunit.Run sin if (todo o nada, P-4); acción Liquidar comisiones en la lista, report en el buscador (UsageCategory Tasks) y permisos. Nombre acortado a 'Settle Salesp. Commission_LDR' (el de la tarea supera los 30 caracteres de AL)"
+      },
+      {
+        "id": "C-11",
+        "rf": "RF-4.1",
+        "ficheros": [
+          "src/codeunit/CommissionMgtLDR.Codeunit.al"
+        ],
+        "commit": "d98e7bc",
+        "resumen": "UndoSettlement en Commission Mgt._LDR: LockTable + Get de la liquidación; si la factura no está en Purchase Header y existe en Purch. Inv. Header por Pre-Assigned No. (P-5), error y sin cambios"
+      },
+      {
+        "id": "C-12",
+        "rf": "RF-4.2",
+        "ficheros": [
+          "src/codeunit/CommissionMgtLDR.Codeunit.al",
+          "src/page/CommissionSettlementsLDR.Page.al"
+        ],
+        "commit": "d98e7bc",
+        "resumen": "Acción Deshacer liquidación con Confirm (texto distinto si no hay factura); borra la factura borrador con Delete(true), ModifyAll Liquidated = false y después Liquidation No. vacío (P-1), y borra la liquidación"
+      },
+      {
+        "id": "C-13",
+        "rf": "RF-5.1",
+        "ficheros": [
+          "src/report/CommissionSettlementLDR.Report.al",
+          "src/report/layout/CommissionSettlement.rdlc"
+        ],
+        "commit": "1fced99",
+        "resumen": "Report 50001 Commission Settlement_LDR con layout RDLC (P-7 respondido por el consultor: RDLC en vez de Word). Cabecera de página con logo y nombre de la empresa, título y nº de página; nº de liquidación, vendedor y nombre y fecha hasta en la cabecera del grupo, repetida en cada página"
+      },
+      {
+        "id": "C-14",
+        "rf": "RF-5.2",
+        "ficheros": [
+          "src/report/CommissionSettlementLDR.Report.al",
+          "src/report/layout/CommissionSettlement.rdlc"
+        ],
+        "commit": "1fced99",
+        "resumen": "Líneas con fecha, tipo y nº de documento, cliente, producto, base, % y comisión; total por liquidación (Sum) y salto de página entre liquidaciones"
+      },
+      {
+        "id": "C-15",
+        "rf": "RF-5.3",
+        "ficheros": [
+          "src/report/CommissionSettlementLDR.Report.al",
+          "src/page/CommissionSettlementsLDR.Page.al",
+          "src/permissionset/CommissionsLDR.PermissionSet.al"
+        ],
+        "commit": "1fced99",
+        "resumen": "RequestFilterFields nº y vendedor, UsageCategory ReportsAndAnalysis; acción Imprimir en la lista con SetRecFilter sobre una copia; permisos"
+      },
+      {
+        "id": "C-16",
+        "rf": "RF-1.1",
+        "ficheros": [
+          "Translations/LIDERIT-MAD-Practicas.es-ES.xlf",
+          "Translations/LIDERIT-MAD-Practicas.g.xlf"
+        ],
+        "commit": "ec4b868",
+        "resumen": "T-07: traducción es-ES de los 58 textos nuevos de TF0021 a partir de los comentarios ESP; se conservan las 40 de TF0020"
+      },
+      {
+        "id": "C-17",
+        "rf": "RF-3.6",
+        "ficheros": [
+          "src/codeunit/SalespCommSettlementLDR.Codeunit.al",
+          "src/report/SettleCommissionsLDR.Report.al",
+          "src/permissionset/CommissionsLDR.PermissionSet.al"
+        ],
+        "commit": "706752a",
+        "resumen": "Codeunit 50002 renombrada a 'Salesp. Comm. Settlement_LDR': el nombre anterior ya existía en el sandbox (versión manual de la tarea). TF0023 debe usar este nombre. El fichero se renombró en 2596a9a."
+      },
+      {
+        "id": "C-18",
+        "rf": "RF-2.1",
+        "ficheros": [
+          "src/table/CommSettlementLDR.Table.al",
+          "src/report/CommSettlementLDR.Report.al",
+          "src/report/SettleSalespCommissionsLDR.Report.al",
+          "src/page/CommissionSettlementsLDR.Page.al",
+          "src/codeunit/CommissionMgtLDR.Codeunit.al",
+          "src/codeunit/SalespCommSettlementLDR.Codeunit.al",
+          "src/permissionset/CommissionsLDR.PermissionSet.al",
+          "Translations/LIDERIT-MAD-Practicas.g.xlf",
+          "Translations/LIDERIT-MAD-Practicas.es-ES.xlf"
+        ],
+        "commit": "b115cc5",
+        "resumen": "Renombrados por choque con la app de la versión manual del sandbox: tabla 50002 y report 50001 'Commission Settlement_LDR' -> 'Comm. Settlement_LDR'; report 50000 'Settle Commissions_LDR' -> 'Settle Salesp. Commissions_LDR'. TF0023 debe usar estos nombres"
+      }
+    ],
+    "extras": [],
+    "evidencias": [
+      {
+        "id": "E-01",
+        "rf": "RF-3.3",
+        "escenario": "",
+        "tipo": "bc-code-intel",
+        "resultado": "OK",
+        "referencia": "P1: find_bc_knowledge (BC26) sobre ModifyAll filtrado/LockTable y sobre RDLC; sin contenido específico aplicable. Contraste hecho con el estándar es-29: PurchPost 7101 (Pre-Assigned No.), PurchInvHeader Key3, PurchaseLine 4795 (Direct Posting), NoSeries.GetNextNo(Code,Date)."
+      },
+      {
+        "id": "E-02",
+        "rf": "RF-1.1",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "alc 18.1 contra símbolos 28.5 con CodeCop y UICop y lider.ruleset: 0 errores, 0 avisos (solo info AA0247 y AA0232 previos de TF0020). Commit b4929c0"
+      },
+      {
+        "id": "E-03",
+        "rf": "RF-2.1",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos; info AA0232 en el FlowField (igual que el previo de TF0020, la clave con SumIndexFields existe). Commit f8cb3ec"
+      },
+      {
+        "id": "E-04",
+        "rf": "RF-3.6",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos (info AA0232 previos). Commit e7f8628"
+      },
+      {
+        "id": "E-05",
+        "rf": "RF-4.2",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos. Commit d98e7bc"
+      },
+      {
+        "id": "E-06",
+        "rf": "RF-5.1",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos; RDLC bien formado (no renderizado: falta probarlo en BC). Commit 1fced99"
+      },
+      {
+        "id": "E-07",
+        "rf": "RF-3.6",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "Tras renombrar la codeunit: alc 18.1, 0 errores, 0 avisos. Commit 706752a"
+      },
+      {
+        "id": "E-08",
+        "rf": "RF-2.1",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "Tras renombrar tabla y reports: alc 18.1, 0 errores, 0 avisos. Commit b115cc5"
+      },
+      {
+        "id": "E-09",
+        "rf": "RF-1.1",
+        "escenario": "A-1",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox (T-01): series, cuentas y proveedores inexistentes rechazados; serie, cuenta y PV1 en V1 guardados tras reabrir. No es resultado de UAT."
+      },
+      {
+        "id": "E-10",
+        "rf": "RF-1.2",
+        "escenario": "A-1",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox (T-01): series, cuentas y proveedores inexistentes rechazados; serie, cuenta y PV1 en V1 guardados tras reabrir. No es resultado de UAT."
+      },
+      {
+        "id": "E-11",
+        "rf": "RF-3.1",
+        "escenario": "A-2",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: con fecha de trabajo 15/02/2027 propone 31/01/2027; sin fecha, error «Indique la fecha hasta.» y no se crea ninguna liquidación. No es resultado de UAT."
+      },
+      {
+        "id": "E-12",
+        "rf": "RF-3.2",
+        "escenario": "A-3",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: hasta 31/01/2027 con factura y sin filtro crea 3 liquidaciones (V1 40,00 con factura, V2 50,00 y V3 -10,00 sin factura; total 80,00, 2 avisos). Numeración LIQ-0005..0007 por liquidaciones previas de CM/JR con datos de TF0020. No es resultado de UAT."
+      },
+      {
+        "id": "E-13",
+        "rf": "RF-3.3",
+        "escenario": "A-3",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: hasta 31/01/2027 con factura y sin filtro crea 3 liquidaciones (V1 40,00 con factura, V2 50,00 y V3 -10,00 sin factura; total 80,00, 2 avisos). Numeración LIQ-0005..0007 por liquidaciones previas de CM/JR con datos de TF0020. No es resultado de UAT."
+      },
+      {
+        "id": "E-14",
+        "rf": "RF-2.1",
+        "escenario": "A-3",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: hasta 31/01/2027 con factura y sin filtro crea 3 liquidaciones (V1 40,00 con factura, V2 50,00 y V3 -10,00 sin factura; total 80,00, 2 avisos). Numeración LIQ-0005..0007 por liquidaciones previas de CM/JR con datos de TF0020. No es resultado de UAT."
+      },
+      {
+        "id": "E-15",
+        "rf": "RF-3.4",
+        "escenario": "A-4",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: LIQ-0005 de V1 con factura de compra borrador al proveedor de V1, Nº factura proveedor LIQ-0005, una línea de cuenta (cuenta de comisiones), cantidad 1, coste 40,00; nº de factura informado en la liquidación; LIQ-0006 y LIQ-0007 sin factura. No es resultado de UAT."
+      },
+      {
+        "id": "E-16",
+        "rf": "RF-3.4",
+        "escenario": "A-5",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: LIQ-0006 de V2 (sin proveedor) creada sin factura; el mensaje final incluye el aviso de vendedor sin proveedor (visto en inglés, sesión en inglés). No es resultado de UAT."
+      },
+      {
+        "id": "E-17",
+        "rf": "RF-3.4",
+        "escenario": "A-6",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: LIQ-0007 de V3 con total -10,00 creada sin factura; aviso de total negativo en el mensaje final (visto en inglés, sesión en inglés). No es resultado de UAT."
+      },
+      {
+        "id": "E-18",
+        "rf": "RF-3.5",
+        "escenario": "A-7",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: mensaje final '3 liquidaciones por un total de 80,00. Avisos: 2' con los dos avisos (visto en inglés). Ventana de progreso vista solo de forma fugaz (3 vendedores); se apoya en el código: Open en OnPreReport y Update por vendedor, con GuiAllowed. No es resultado de UAT."
+      },
+      {
+        "id": "E-19",
+        "rf": "RF-3.2",
+        "escenario": "A-8",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: relanzado hasta 31/01/2027 con factura; mensaje de 0 liquidaciones, sin nuevas liquidaciones (última LIQ-0007), sin nuevas facturas y movimientos de febrero pendientes. No es resultado de UAT."
+      },
+      {
+        "id": "E-20",
+        "rf": "RF-3.5",
+        "escenario": "A-9",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: programado desde la request page hasta 28/02/2027 con filtro V2; la entrada de cola se ejecutó sin error (se borra al terminar) y creó LIQ-0010 de V2 sin mostrar diálogo ni mensaje. No es resultado de UAT."
+      },
+      {
+        "id": "E-21",
+        "rf": "RF-3.6",
+        "escenario": "A-9",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: programado desde la request page hasta 28/02/2027 con filtro V2; la entrada de cola se ejecutó sin error (se borra al terminar) y creó LIQ-0010 de V2 sin mostrar diálogo ni mensaje. No es resultado de UAT."
+      },
+      {
+        "id": "E-22",
+        "rf": "RF-4.2",
+        "escenario": "A-10",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: deshacer LIQ-0005 (V1) respondiendo No no cambia nada; con Sí se borran la factura borrador y la liquidación, y los movimientos 10 y 12 de V1 vuelven a Liquidado = No sin nº de liquidación. No es resultado de UAT."
+      },
+      {
+        "id": "E-23",
+        "rf": "RF-4.1",
+        "escenario": "A-11",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: LIQ-0011 de V1 (40,00) con factura 107232 registrada; deshacer da el error de factura ya registrada (visto en inglés) y no deshace la liquidación. No es resultado de UAT."
+      },
+      {
+        "id": "E-24",
+        "rf": "RF-2.2",
+        "escenario": "A-12",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: la lista de liquidaciones no permite editar, crear ni borrar; Movimientos sobre LIQ-0011 (V1) muestra los movimientos 10 y 12, que suman 40,00, igual que su total. No es resultado de UAT."
+      },
+      {
+        "id": "E-25",
+        "rf": "RF-5.1",
+        "escenario": "A-13",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: Imprimir desde la lista sobre LIQ-0011 (V1) saca solo esa liquidación con el layout RDLC: cabecera con logo y nombre de la empresa, título, nº, vendedor y nombre, fecha hasta y nº de página; 2 líneas (50,00 y -10,00) y total 40,00, igual que Movimientos. No es resultado de UAT."
+      },
+      {
+        "id": "E-26",
+        "rf": "RF-5.2",
+        "escenario": "A-13",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: Imprimir desde la lista sobre LIQ-0011 (V1) saca solo esa liquidación con el layout RDLC: cabecera con logo y nombre de la empresa, título, nº, vendedor y nombre, fecha hasta y nº de página; 2 líneas (50,00 y -10,00) y total 40,00, igual que Movimientos. No es resultado de UAT."
+      },
+      {
+        "id": "E-27",
+        "rf": "RF-5.3",
+        "escenario": "A-13",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: Imprimir desde la lista sobre LIQ-0011 (V1) saca solo esa liquidación con el layout RDLC: cabecera con logo y nombre de la empresa, título, nº, vendedor y nombre, fecha hasta y nº de página; 2 líneas (50,00 y -10,00) y total 40,00, igual que Movimientos. No es resultado de UAT."
+      },
+      {
+        "id": "E-28",
+        "rf": "RF-5.2",
+        "escenario": "A-14",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: informe lanzado desde el buscador con filtro de vendedor V2|V3; una página por liquidación (LIQ-0006 50,00, LIQ-0008 -10,00, LIQ-0010 30,00), cada una con su total, sin otras liquidaciones. No es resultado de UAT."
+      },
+      {
+        "id": "E-29",
+        "rf": "RF-5.3",
+        "escenario": "A-14",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: informe lanzado desde el buscador con filtro de vendedor V2|V3; una página por liquidación (LIQ-0006 50,00, LIQ-0008 -10,00, LIQ-0010 30,00), cada una con su total, sin otras liquidaciones. No es resultado de UAT."
+      },
+      {
+        "id": "E-30",
+        "rf": "RF-3.4",
+        "escenario": "A-15",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox: cuenta de comisiones sin Registro directo, pendientes el mov. 11 (V1) y el 15 (V2, tras deshacer LIQ-0010); liquidar hasta 28/02/2027 con factura da error de la cuenta al crear la línea de V1 y no queda ninguna liquidación ni factura nueva; movimientos siguen pendientes (todo o nada, P-4). No es resultado de UAT."
+      },
+      {
+        "id": "E-31",
+        "rf": "RF-1.1",
+        "escenario": "",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Traducción es-ES (T-07) comprobada en el sandbox con idioma Español (España, alfabetización internacional): textos de TF0021 y TF0020 en español. Con la variante Traditional Sort (es-ES_tradnl) se ven en inglés porque la extensión solo trae es-ES. No es resultado de UAT."
+      }
+    ],
+    "desviaciones": [
+      {
+        "puerta": "alcance",
+        "codigo": "fichero:\".github/tasks/TF0021-liquidacion-de-comisiones/TF0021 - Liquidaci/303/263n de comisiones.docx\"",
+        "motivo": "Son documentación de la tarea, no código; reescribir commits no compensa.",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-23"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "fichero:\".github/tasks/TF0021-liquidacion-de-comisiones/TF0021 - Liquidaci/303/263n de comisiones.md\"",
+        "motivo": "Son documentación de la tarea, no código; reescribir commits no compensa.",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-23"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:88fc406",
+        "motivo": "Son documentación de la tarea, no código; reescribir commits no compensa.",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-23"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:37997bc",
+        "motivo": "Son documentación de la tarea, no código; reescribir commits no compensa.",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-23"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:c320218",
+        "motivo": "Son documentación de la tarea, no código; reescribir commits no compensa.",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-23"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:ce84113",
+        "motivo": "Son documentación de la tarea, no código; reescribir commits no compensa.",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-23"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:3b41685",
+        "motivo": "Son documentación de la tarea, no código; reescribir commits no compensa.",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-23"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:4d51323",
+        "motivo": "Son documentación de la tarea, no código; reescribir commits no compensa.",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-23"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:3c1b6e7",
+        "motivo": "Son documentación de la tarea, no código; reescribir commits no compensa.",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-23"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:d2259f9",
+        "motivo": "Son documentación de la tarea, no código; reescribir commits no compensa.",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-23"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:a0e4446",
+        "motivo": "Son documentación de la tarea, no código; reescribir commits no compensa.",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-23"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:d225426",
+        "motivo": "Son documentación de la tarea, no código; reescribir commits no compensa.",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-23"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:fdf528c",
+        "motivo": "Son documentación de la tarea, no código; reescribir commits no compensa.",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-23"
+      },
+      {
+        "puerta": "herramientas",
+        "codigo": "uso:bcquality",
+        "motivo": "BCQuality no está instalado en la formación",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-23"
+      }
+    ],
+    "firmas": {
+      "P1": {
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-20",
+        "reformulacion": "Qué se construye: añadir campo \"N serie liquidacion comisiones\" con tablerelation a No.series y \"cuanta comisiones, tablerrlation con G/L account, deben estar visibles en pagian de conf de  entas. Añadir a la tabla de veendedor el campo N proveedor, relacion c on Vendor. Taba \"Commission Settlement\" deonde estaran las liquidacopnes, con page list no editable, con acciones \"Movimientos para abrir los movimientos de liquidacion, Imprimir y deshacer liqudiacion. Report de proceso con request page, con Fecha hasta (obligatoria) dato predeterminado tien que ser el ultimo dia del mes anterior a la fecha de trabajo. Tambien con crear factura de compra (boolean). [Por cada vendedor, según el enunciado del origen: movimientos no liquidados hasta la fecha, cabecera de liquidación y marcado, factura de compra con avisos sin error, Dialog solo si GuiAllowed, Message final; report en la lista y en el buscador.] La logicva de la liquidacion debe estar ecentralizada en una cdu, accions de deshacre liquidacion. reprot Commission settlement, debe ser rdlc, no word como dice.\nCasos límite: Si el proveedor esta bloqueado se cera la liquidacion pero la factura de compra no y sale como aviso. Cada vendedor tendra su propia liquidacion ycfactrua. Sec rea la liuqidacion pero no la factura. Acepto los huecos. entonces se eliminara a menos que este registrada.\nQué no: No se tienen que hacer facturas de compra automaticamente  ni ejecutar el proceso en cola de proyectos.\nEjemplo: Un vendedor con dos movimientos de comisión, uno de 50 € y otro de -10 €, ambos de enero. Al liquidar hasta el 31/01 se creará una liquidación de 40 €, se marcarán ambos movimientos como liquidados y, si está activada la opción, se generará una factura de compra de 40 € para su proveedor.\nDeshacer: Antes de deshacer se pedira confirmacion, pero si ya esta registrada (factura de compra) no se podra deshacer.\nInforme: El informe RDLC mostrará los datos de la liquidación y del vendedor en la cabecera, y los movimientos incluidos con sus importes en las líneas. Cada liquidación comenzará en una página nueva. Se podrán filtrar las liquidaciones y la acción «Imprimir» mostrará únicamente la seleccionada.\nEnfoque: Utilizaría TableExtensions para los campos nuevos, una tabla y una página List para las liquidaciones, un report de proceso con RequestPage y otro report RDLC para imprimir. La lógica de liquidación y de deshacer estará centralizada en una codeunit reutilizable. Quiero utilizar RDLC porque es el formato que estamos trabajando durante la formación.\nDecisiones: PRimero obtendria los movimientos y despues los marcaria como liqudiados para evitar modificarlos cuando se estan usando como filtro (Nº liquidación primero). La cdu comprobar si hyam ovimientos pendientes, si no hay saldra sin crear la liqudiacion, el report lo comprobara y seguira con el siguiente. De momento la dejaria en 2. SI falla algo se deshace el proceso.\nValidación del consultor: agtorres dice que confirma (incluye el informe en RDLC, P-7).",
+        "validada_por": "AGTorresLiderIT"
+      },
+      "P2": {
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-23",
+        "reformulacion": "Se a  creado la tabla de liquidaciones, en el que estan las acciones \"Liquidar comisiones\" en el que debes de poner una fecha hasta en el RP para poder hacerlo, tambien puedes añadir filtros como el codigo e incluso crear una factura de compra al crearse. Tamvien estan las accioens Movimientos, que abriria la page de Buscar Movs., deshacefr liquidacion, la cual quitara la liquidacion seleccionada y volvera a ser un movimiento de comision y por ultimo se a creado un report rldc que muestra las liquidaciones, en la que puedes filtrar por el vendedor.\n\nSe a crado con espacios de numeracion por que consideró que ayuda a ordenar mejor los datos, se a creado otra CDU que se podra reutilizar en el tf 23. Usé RDLC y no word por que es como me he enseñaron. Si fallaalgun dato de algun vednedor o algo en una factura o lo que sea he hecho que si hay un fallo se cancele el registro de la liquidacion o registro."
+      }
+    },
+    "subissues": {
+      "RF-1.1": 62,
+      "RF-1.2": 63,
+      "RF-2.1": 64,
+      "RF-2.2": 65,
+      "RF-3.1": 66,
+      "RF-3.2": 67,
+      "RF-3.3": 68,
+      "RF-3.4": 69,
+      "RF-3.5": 70,
+      "RF-3.6": 71,
+      "RF-4.1": 72,
+      "RF-4.2": 73,
+      "RF-5.1": 74,
+      "RF-5.2": 75,
+      "RF-5.3": 76
+    },
+    "traza": [
+      {
+        "ts": "2026-11-20T11:32:17",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T11:32:18",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T11:32:19",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T11:32:20",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T11:32:22",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T11:32:23",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T11:32:24",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T11:32:25",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T11:32:27",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T11:32:28",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T11:32:29",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T11:32:30",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T11:32:31",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T11:32:32",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T11:32:34",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:06:37",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:30:42",
+        "accion": "firma",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "P1"
+      },
+      {
+        "ts": "2026-11-20T12:33:13",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:33:15",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:33:16",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:35:19",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:35:21",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:35:22",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:38:30",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:38:32",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:38:33",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:38:34",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:38:36",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:38:37",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:38:38",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:42:35",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:42:37",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:42:39",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:44:52",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:44:54",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:44:55",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:44:57",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:47:09",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:54:09",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T12:54:11",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T13:00:43",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-20T13:00:44",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T09:17:35",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T09:17:37",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T09:26:08",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T10:19:12",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T10:19:14",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T10:19:15",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T10:26:56",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T10:28:54",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T10:29:56",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T10:37:06",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T10:44:24",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T10:51:01",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T10:51:02",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T10:58:39",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T11:01:22",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T11:05:49",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T11:08:44",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T11:08:45",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T11:08:46",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T11:11:58",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T11:11:59",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T11:19:39",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T11:24:56",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T11:43:03",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-23T11:43:04",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-23T11:43:05",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-23T11:43:06",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-23T11:43:08",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-23T11:43:09",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-23T11:43:10",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-23T11:43:11",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-23T11:43:12",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-23T11:43:13",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-23T11:43:14",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-23T11:43:16",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-23T11:43:17",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-23T11:50:03",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "herramientas"
+      },
+      {
+        "ts": "2026-11-23T11:52:57",
+        "accion": "firma",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "P2"
+      },
+      {
+        "ts": "2026-11-23T11:58:58",
+        "accion": "pr",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      }
+    ],
+    "pr": {
+      "url": "https://github.com/AGTorresLiderIT/LIDERIT-MAD-Practicas/pull/102",
+      "numero": 102,
+      "fecha": "2026-11-23"
+    }
+  },
+  "documentacion": {
+    "enlaces": {
+      "rama": "https://github.com/AGTorresLiderIT/LIDERIT-MAD-Practicas/tree/Feature/TF0021-liquidacion-de-comisiones"
+    },
+    "resumen": "Se liquidan las comisiones de los vendedores hasta una fecha: cada vendedor con movimientos pendientes recibe una liquidación numerada y, si se pide, una factura de compra borrador a su proveedor. La liquidación se puede deshacer mientras la factura no esté registrada y se imprime en un informe RDLC. El proceso se puede lanzar a mano o programar.",
+    "objetos": [
+      {
+        "tipo": "tableextension",
+        "id": "50002",
+        "nombre": "Sales & Receivables Setup_LDR",
+        "cambio": "Nuevos campos Nº serie liquidación comisiones y Cuenta comisiones."
+      },
+      {
+        "tipo": "pageextension",
+        "id": "50004",
+        "nombre": "Sales & Receivables Setup_LDR",
+        "cambio": "Grupo Comisiones con los dos campos en Configuración de ventas y cobros."
+      },
+      {
+        "tipo": "tableextension",
+        "id": "50000",
+        "nombre": "Salesperson/Purchaser_LDR",
+        "cambio": "Nuevo campo Nº proveedor (objeto de TF0020)."
+      },
+      {
+        "tipo": "pageextension",
+        "id": "50002",
+        "nombre": "Salesperson/Purchaser_LDR",
+        "cambio": "Nº proveedor en la ficha del vendedor (objeto de TF0020)."
+      },
+      {
+        "tipo": "table",
+        "id": "50002",
+        "nombre": "Comm. Settlement_LDR",
+        "cambio": "Nueva tabla de liquidaciones: nº, vendedor, fechas, factura de compra, total y nº de movimientos."
+      },
+      {
+        "tipo": "page",
+        "id": "50003",
+        "nombre": "Commission Settlements_LDR",
+        "cambio": "Nueva lista no editable con Liquidar comisiones, Deshacer liquidación, Movimientos e Imprimir."
+      },
+      {
+        "tipo": "report",
+        "id": "50000",
+        "nombre": "Settle Salesp. Commissions_LDR",
+        "cambio": "Nuevo proceso Liquidar comisiones (fecha hasta, crear factura, filtro de vendedor)."
+      },
+      {
+        "tipo": "codeunit",
+        "id": "50002",
+        "nombre": "Salesp. Comm. Settlement_LDR",
+        "cambio": "Nueva codeunit que liquida un vendedor y crea su factura, sin interfaz (reutilizable por TF0023)."
+      },
+      {
+        "tipo": "codeunit",
+        "id": "50000",
+        "nombre": "Commission Mgt._LDR",
+        "cambio": "Nuevo procedimiento UndoSettlement (objeto de TF0020)."
+      },
+      {
+        "tipo": "report",
+        "id": "50001",
+        "nombre": "Comm. Settlement_LDR",
+        "cambio": "Nuevo informe de liquidación con layout RDLC."
+      },
+      {
+        "tipo": "table",
+        "id": "50001",
+        "nombre": "Commission Entry_LDR",
+        "cambio": "Nueva clave Liquidation No. con suma de la comisión (objeto de TF0020)."
+      },
+      {
+        "tipo": "permissionset",
+        "id": "50000",
+        "nombre": "Commissions_LDR",
+        "cambio": "Se añaden los objetos nuevos (objeto de TF0020)."
+      }
+    ],
+    "detalles": [
+      {
+        "rf": "RF-1.1, RF-1.2",
+        "titulo": "Configuración",
+        "parrafos": [
+          "Configuración de ventas y cobros (tableextension 50002, pageextension 50004) guarda la serie de las liquidaciones y la cuenta de la línea de la factura. Se amplía esta tabla porque los parámetros son del proceso de ventas (P-6); TF0022 y TF0023 deben seguir la misma decisión.",
+          "El vendedor (tableextension 50000) recibe el proveedor al que se le factura. Los tres campos tienen relación con su tabla, así que solo admiten valores existentes. Sin impacto en datos existentes: son campos nuevos y vacíos."
+        ],
+        "tabla": {
+          "columnas": [
+            "Campo",
+            "Id",
+            "Tipo dato",
+            "Comentario"
+          ],
+          "filas": [
+            [
+              "Commission Settlement Nos._LDR",
+              "50000",
+              "Code[20]",
+              "Sales & Receivables Setup; relación con No. Series."
+            ],
+            [
+              "Commission Account_LDR",
+              "50001",
+              "Code[20]",
+              "Sales & Receivables Setup; relación con G/L Account. Debe tener Registro directo."
+            ],
+            [
+              "Vendor No._LDR",
+              "50001",
+              "Code[20]",
+              "Salesperson/Purchaser; relación con Vendor."
+            ]
+          ]
+        },
+        "capturas": [
+          "Grupo Comisiones en Configuración de ventas y cobros",
+          "Nº proveedor en la ficha del vendedor"
+        ]
+      },
+      {
+        "rf": "RF-2.1, RF-2.2",
+        "titulo": "Liquidaciones de comisiones",
+        "parrafos": [
+          "La tabla 50002 numera cada liquidación con la serie de configuración al insertarla. El total y el nº de movimientos son campos calculados sobre los movimientos que llevan su número, con una clave nueva en Commission Entry_LDR (P-9): no se guardan importes duplicados.",
+          "La lista 50003 no deja crear, modificar ni borrar: una liquidación solo se crea con el proceso y solo desaparece al deshacerla. La acción Movimientos abre los movimientos filtrados por la liquidación."
+        ],
+        "capturas": [
+          "Lista de liquidaciones con sus acciones"
+        ]
+      },
+      {
+        "rf": "RF-3.1, RF-3.2, RF-3.3, RF-3.5, RF-3.6",
+        "titulo": "Proceso Liquidar comisiones",
+        "parrafos": [
+          "El report 50000 propone como fecha hasta el último día del mes anterior a la fecha de trabajo (P-2) y da error si se deja vacía. Por cada vendedor ejecuta la codeunit 50002, que toma con bloqueo los movimientos no liquidados hasta esa fecha; si no hay ninguno, no crea nada.",
+          "Los movimientos se marcan con dos ModifyAll en este orden: primero el nº de liquidación y después Liquidado, porque Liquidado forma parte del filtro y al revés no se marcaría ninguno (P-1).",
+          "La codeunit no tiene mensajes, diálogos ni Commit, para que TF0023 la reutilice desde la cola. El report la lanza sin capturar errores: si falla un vendedor se revierte todo el proceso (P-4). La ventana de progreso y el mensaje final solo se muestran con interfaz, así que el proceso también se puede programar."
+        ],
+        "capturas": [
+          "Request page con la fecha hasta propuesta",
+          "Mensaje final con liquidaciones, total y avisos"
+        ]
+      },
+      {
+        "rf": "RF-3.4",
+        "titulo": "Factura de compra",
+        "parrafos": [
+          "Si se marca Crear factura de compra, la codeunit 50002 crea una factura borrador al proveedor del vendedor con el nº de la liquidación como nº de factura del proveedor y una línea de la cuenta de comisiones, cantidad 1 y el total como coste. Se rellena con Validate para que el estándar ponga IVA y grupos; precios sin IVA porque el total es neto (P-8).",
+          "Sin proveedor, con proveedor bloqueado o en divisa, o con total menor o igual que cero, la liquidación se crea sin factura y se avisa en el mensaje final, sin error. La factura no se registra: la registra el usuario."
+        ],
+        "capturas": [
+          "Factura de compra borrador de una liquidación"
+        ]
+      },
+      {
+        "rf": "RF-4.1, RF-4.2",
+        "titulo": "Deshacer liquidación",
+        "parrafos": [
+          "La acción de la lista pide confirmación y llama a UndoSettlement (codeunit 50000), que bloquea y relee la liquidación. Si su factura ya está registrada (se busca en las facturas registradas por Nº preasignado, P-5), da error y no cambia nada.",
+          "Si no, borra la factura borrador con sus líneas, devuelve los movimientos a pendientes (primero Liquidado y después el nº de liquidación, P-1) y borra la liquidación. Los números de serie usados quedan como hueco."
+        ]
+      },
+      {
+        "rf": "RF-5.1, RF-5.2, RF-5.3",
+        "titulo": "Informe de liquidación",
+        "parrafos": [
+          "El report 50001 usa layout RDLC y no Word, por decisión del consultor en P1 (P-7). Cabecera con logo y nombre de la empresa, título, nº, vendedor y nombre, fecha hasta y nº de página; líneas con los movimientos y total por liquidación, con salto de página entre liquidaciones.",
+          "Se filtra por nº y vendedor y está en el buscador. La acción Imprimir de la lista lo lanza solo con la liquidación seleccionada, sobre una copia del registro para no cambiar los filtros de la página."
+        ],
+        "capturas": [
+          "Informe de una liquidación"
+        ]
+      },
+      {
+        "bloque": "Permisos y traducción",
+        "titulo": "Permisos y traducción",
+        "parrafos": [
+          "El conjunto Commissions_LDR da lectura de liquidaciones y movimientos y ejecución de los objetos nuevos. Las modificaciones las hacen las codeunits con permisos indirectos, así que el usuario no puede tocar los datos a mano.",
+          "Los textos nuevos se traducen a es-ES. Solo se ven en español con el idioma Español (España, alfabetización internacional); con la variante tradicional salen en inglés."
+        ]
+      }
+    ],
+    "pruebas": [
+      {
+        "titulo": "Prueba manual de los escenarios A-1 a A-15 en el sandbox",
+        "pasos": [
+          "Con fecha de trabajo 15/02/2027 y la parametrización de la sección 4, se recorrieron los 15 escenarios (evidencias E-09 a E-31).",
+          "Se liquidó hasta 31/01/2027 con factura: una liquidación por vendedor, factura solo para el que tiene proveedor y total positivo, y avisos para los demás. Al relanzar no se creó nada.",
+          "Se programó el proceso desde la request page con filtro de un vendedor y se ejecutó en la cola sin mensajes.",
+          "Se deshizo una liquidación con factura borrador (respondiendo No y luego Sí) y se comprobó el error al deshacer otra con la factura registrada.",
+          "Con la cuenta sin Registro directo, el error al crear la factura revirtió todo el proceso.",
+          "Se imprimió una liquidación desde la lista y varias desde el buscador filtrando por vendedor."
+        ],
+        "capturas": [
+          "Movimientos de comisión liquidados con su nº de liquidación",
+          "Error al deshacer una liquidación con la factura registrada",
+          "Error de la cuenta y ninguna liquidación creada (todo o nada)"
+        ]
+      }
+    ],
+    "para_probar": [
+      "Dónde está: buscar «Liquidaciones de comisiones» (lista), «Liquidar comisiones» (proceso) y «Liquidación de comisiones» (informe). Los campos nuevos están en Configuración de ventas y cobros (grupo Comisiones) y en la ficha del vendedor.",
+      "Configuración previa: serie de liquidaciones con línea abierta, cuenta de comisiones con Registro directo y grupos contables, proveedores en divisa local con grupos contables y vendedores con % comisión.",
+      "Datos de prueba: ventas registradas con TF0020 con el vendedor en la cabecera (no el del cliente por defecto). No dejar movimientos pendientes de otros vendedores, porque también se liquidan.",
+      "Idioma de la sesión: Español (España, alfabetización internacional)."
+    ]
+  }
+}

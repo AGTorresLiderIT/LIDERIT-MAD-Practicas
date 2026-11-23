@@ -2,7 +2,9 @@ codeunit 50000 "Commission Mgt._LDR"
 {
     // Runs inside the sales posting transaction: no Commit, Message or Confirm, and it never raises an error
     // because of the commission (if a condition is not met it exits without creating the entry).
-    Permissions = tabledata "Commission Entry_LDR" = ri;
+    // UndoSettlement (TF0021) is called from the settlements list after the user confirms.
+    Permissions = tabledata "Commission Entry_LDR" = rim,
+                  tabledata "Comm. Settlement_LDR" = rd;
 
     procedure CreateFromSalesInvLine(SalesInvLine: Record "Sales Invoice Line"; SalesInvHeader: Record "Sales Invoice Header")
     begin
@@ -138,6 +140,44 @@ codeunit 50000 "Commission Mgt._LDR"
         CommissionEntry.SetFilter("Posting Date", PostingDateFilter);
     end;
 
+    // TF0021 RF-4.1 / RF-4.2: undoes a commission settlement. No Confirm here: the action of the page asks first.
+    procedure UndoSettlement(SettlementNo: Code[20])
+    var
+        CommissionEntry: Record "Commission Entry_LDR";
+        CommissionSettlement: Record "Comm. Settlement_LDR";
+        PurchaseHeader: Record "Purchase Header";
+    begin
+        // Lock and read again so that two users cannot undo the same settlement at the same time.
+        CommissionSettlement.LockTable();
+        CommissionSettlement.Get(SettlementNo);
+
+        if CommissionSettlement."Purchase Invoice No." <> '' then
+            if PurchaseHeader.Get(PurchaseHeader."Document Type"::Invoice, CommissionSettlement."Purchase Invoice No.") then
+                PurchaseHeader.Delete(true) // The OnDelete trigger of the header also deletes its lines.
+            else
+                // RF-4.1 (P-5): not in Purchase Header. If it was posted, it is found by "Pre-Assigned No.";
+                // if it was deleted by hand, the settlement can be undone.
+                if IsPurchaseInvoicePosted(CommissionSettlement."Purchase Invoice No.") then
+                    Error(InvoicePostedErr, CommissionSettlement."Purchase Invoice No.", CommissionSettlement."No.");
+
+        // RF-4.2 (P-1): the filter is "Liquidation No.", so Liquidated first and "Liquidation No." last.
+        CommissionEntry.SetCurrentKey("Liquidation No.");
+        CommissionEntry.SetRange("Liquidation No.", CommissionSettlement."No.");
+        CommissionEntry.ModifyAll(Liquidated, false);
+        CommissionEntry.ModifyAll("Liquidation No.", '');
+
+        CommissionSettlement.Delete();
+    end;
+
+    local procedure IsPurchaseInvoicePosted(PurchaseInvoiceNo: Code[20]): Boolean
+    var
+        PurchInvHeader: Record "Purch. Inv. Header";
+    begin
+        PurchInvHeader.SetCurrentKey("Pre-Assigned No.");
+        PurchInvHeader.SetRange("Pre-Assigned No.", PurchaseInvoiceNo);
+        exit(not PurchInvHeader.IsEmpty());
+    end;
+
     local procedure CalcCommissionAmount(BaseAmountLCY: Decimal; CommissionPct: Decimal): Decimal
     var
         GeneralLedgerSetup: Record "General Ledger Setup";
@@ -145,4 +185,7 @@ codeunit 50000 "Commission Mgt._LDR"
         GeneralLedgerSetup.Get();
         exit(Round(BaseAmountLCY * CommissionPct / 100, GeneralLedgerSetup."Amount Rounding Precision"));
     end;
+
+    var
+        InvoicePostedErr: Label 'Purchase invoice %1 of settlement %2 has already been posted. The settlement cannot be undone.', Comment = 'ESP="La factura de compra %1 de la liquidación %2 ya está registrada. No se puede deshacer la liquidación." %1 = purchase invoice no., %2 = settlement no.';
 }

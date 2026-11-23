@@ -11,5 +11,12 @@ tableextension 50000 "Salesperson/Purchaser_LDR" extends "Salesperson/Purchaser"
             FieldClass = FlowField;
             ToolTip = 'Specifies the sum of the commissions of the salesperson that are not liquidated yet.', Comment = 'ESP="Especifica la suma de las comisiones del vendedor que aún no se han liquidado."';
         }
+        field(50001; "Vendor No._LDR"; Code[20])
+        {
+            Caption = 'Vendor No.', Comment = 'ESP="Nº proveedor"';
+            DataClassification = CustomerContent;
+            TableRelation = Vendor;
+            ToolTip = 'Specifies the vendor to which the commission of the salesperson is invoiced.', Comment = 'ESP="Especifica el proveedor al que se factura la comisión del vendedor."';
+        }
     }
 }
