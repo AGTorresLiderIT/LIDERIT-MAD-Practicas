@@ -1031,6 +1031,30 @@
         "tipo": "manual",
         "resultado": "OK",
         "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): con un vendedor sin movimientos, Exportar fichero nóminas avisa y no genera CSV con solo cabeceras"
+      },
+      {
+        "id": "E-27",
+        "rf": "RF-3.2",
+        "escenario": "A-8",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): reimportación de tarifas-mod.xlsx con 0 importadas, 5 modificadas y 0 con error; siguen 5 tarifas sin duplicados y JR/MOBILIARIO pasa a 9 %"
+      },
+      {
+        "id": "E-28",
+        "rf": "RF-3.2",
+        "escenario": "A-9",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): con la tabla vacía, errores.xlsx da 1 importada, 0 modificadas y 3 con error; lista con fila 2 vendedor XX inexistente, fila 3 % 150 fuera de rango y fila 4 % abc no numérico; queda PS/MOBILIARIO/6 %"
+      },
+      {
+        "id": "E-29",
+        "rf": "RF-3.3",
+        "escenario": "A-9",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): mensaje 1/0/3 y se abre la lista de errores con nº de fila, texto y motivo"
       }
     ],
     "desviaciones": [],
@@ -1440,6 +1464,27 @@
       },
       {
         "ts": "2026-11-23T17:30:46",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:33:31",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:33:33",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:33:34",
         "accion": "evidencia",
         "por": "",
         "usuario_gh": "AlejandroGallego-LiderIT",
