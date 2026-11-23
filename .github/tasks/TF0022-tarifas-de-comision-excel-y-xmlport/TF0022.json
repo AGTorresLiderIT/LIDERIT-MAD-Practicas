@@ -747,6 +747,25 @@
         ],
         "commit": "cf5bf75",
         "resumen": "Mensaje con filas importadas, modificadas y con error; si hay errores se abre la página 50005 (solo lectura) con la tabla temporal"
+      },
+      {
+        "id": "C-08",
+        "rf": "RF-4.1",
+        "ficheros": [
+          "src/page/CommissionEntriesLDR.Page.al",
+          "src/codeunit/CommissionMgtLDR.Codeunit.al"
+        ],
+        "commit": "8d15270",
+        "resumen": "Acción Exportar a Excel en Commission Entries que pasa Rec a ExportToExcel (CopyFilters: filtros del usuario); sin movimientos, aviso y no se genera fichero"
+      },
+      {
+        "id": "C-09",
+        "rf": "RF-4.2",
+        "ficheros": [
+          "src/codeunit/CommissionMgtLDR.Codeunit.al"
+        ],
+        "commit": "8d15270",
+        "resumen": "Excel Buffer: 12 columnas (fecha como fecha, tipo y nº documento separados, vendedor y nombre, cliente y nombre leídos al exportar, base, %, comisión con #,##0.00, liquidado, nº liquidación); cabecera en negrita; CreateNewBook, WriteSheet, CloseBook, SetFriendlyFilename y OpenExcel"
       }
     ],
     "extras": [
@@ -801,6 +820,14 @@
         "tipo": "al_compile",
         "resultado": "OK",
         "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos (solo info previos). Commit cf5bf75"
+      },
+      {
+        "id": "E-06",
+        "rf": "RF-4.2",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "Primer intento con aviso AA0139 (Text a Text[250] en CreateNewBook), corregido con CopyStr antes del commit. alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos. Commit 8d15270"
       }
     ],
     "desviaciones": [],
@@ -1021,6 +1048,27 @@
       },
       {
         "ts": "2026-11-23T13:40:46",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:42:23",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:42:24",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:42:26",
         "accion": "evidencia",
         "por": "",
         "usuario_gh": "AlejandroGallego-LiderIT",
