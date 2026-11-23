@@ -880,6 +880,22 @@
         "tipo": "al_compile",
         "resultado": "OK",
         "referencia": "Tras renombrar tabla y reports: alc 18.1, 0 errores, 0 avisos. Commit b115cc5"
+      },
+      {
+        "id": "E-09",
+        "rf": "RF-1.1",
+        "escenario": "A-1",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox (T-01): series, cuentas y proveedores inexistentes rechazados; serie, cuenta y PV1 en V1 guardados tras reabrir. No es resultado de UAT."
+      },
+      {
+        "id": "E-10",
+        "rf": "RF-1.2",
+        "escenario": "A-1",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador en el sandbox (T-01): series, cuentas y proveedores inexistentes rechazados; serie, cuenta y PV1 en V1 guardados tras reabrir. No es resultado de UAT."
       }
     ],
     "desviaciones": [],
@@ -1201,6 +1217,20 @@
         "ts": "2026-11-20T13:00:44",
         "accion": "evidencia",
         "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T09:17:35",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T09:17:37",
+        "accion": "evidencia",
+        "por": "AlejandroGallego-LiderIT",
         "usuario_gh": "AlejandroGallego-LiderIT",
         "plugin": "0.4.0"
       }
