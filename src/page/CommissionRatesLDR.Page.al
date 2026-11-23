@@ -22,4 +22,29 @@ page 50004 "Commission Rates_LDR"
             }
         }
     }
+    actions
+    {
+        area(Processing)
+        {
+            // TF0022 RF-3.1: the action only calls the import codeunit.
+            action(ImportFromExcel)
+            {
+                Caption = 'Import from Excel', Comment = 'ESP="Importar desde Excel"';
+                Image = ImportExcel;
+                ToolTip = 'Import commission rates from an Excel file with four columns (salesperson, item category, commission %, starting date) and the headers in row 1.', Comment = 'ESP="Importa tarifas de comisión desde un fichero Excel de cuatro columnas (vendedor, categoría, % comisión, fecha inicio) con las cabeceras en la fila 1."';
+
+                trigger OnAction()
+                var
+                    CommissionRateImport: Codeunit "Commission Rate Import_LDR";
+                begin
+                    CommissionRateImport.ImportFromExcel();
+                    CurrPage.Update(false);
+                end;
+            }
+        }
+        area(Promoted)
+        {
+            actionref(ImportFromExcel_Promoted; ImportFromExcel) { }
+        }
+    }
 }
