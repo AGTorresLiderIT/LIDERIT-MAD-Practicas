@@ -11,7 +11,7 @@
   "ficha": {
     "origen": "Tarea de formación TF0022 (apartado del Bloque 5), continuación de TF0020 y TF0021",
     "riesgo": "AMARILLO (tabla y lógica nuevas acotadas; cambia el cálculo del % de comisión de TF0020; no toca contabilidad, IVA ni almacén)",
-    "estado": "En GitHub",
+    "estado": "En desarrollo",
     "issue_rama": "https://github.com/AGTorresLiderIT/LIDERIT-MAD-Practicas/issues/50 · rama Feature/TF0022-tarifas-de-comision-excel-y-xmlport"
   },
   "funcional": {
@@ -675,5 +675,159 @@
     "BC 29 ES: System/DataExchange/ExcelBuffer.Table.al (funciones y campos Row No., Column No., Cell Value as Text, Cell Type); CRM/Team/SalespersonPurchaser.Table.al (13) y SalespersonPurchaserCard.Page.al (5116); Inventory/Item/ItemCategory.Table.al (5722).",
     "Microsoft Learn: propiedades de XMLport (devenv-xmlport-properties; no existe FirstLineHasFieldNames), Format Property de XMLport (VariableText) y «Formatting values, dates, and time» (atributos Precision y Standard Format; formato 9 = XML). La combinación Precision + Standard Format 9 no figura en ejemplos: [Verificar en BC].",
     "Revisado con bc-code-intel (especialistas: sam-coder; ask_bc_expert sobre XMLport VariableText, formato decimal y Excel Buffer): devolvió solo el perfil del especialista, sin normas de LiderIT específicas; la verificación se hizo en Microsoft Learn y en el estándar local."
-  ]
+  ],
+  "implementacion": {
+    "cambios": [],
+    "extras": [],
+    "evidencias": [
+      {
+        "id": "E-01",
+        "rf": "RF-3.2",
+        "escenario": "",
+        "tipo": "bc-code-intel",
+        "resultado": "OK",
+        "referencia": "P1: ask_bc_expert (alex-architect) sobre importación con Excel Buffer, celdas con formato %, Evaluate y permisos de tablas temporales; find_bc_knowledge sobre permisos de tablas temporales: sin contenido específico aplicable. Contraste hecho con el estándar es-29 (ExcelBuffer.Table.al ParseCellValue/NumberFormat; SalesCrMemoHeader.Table.al campos 53 y 10705)"
+      }
+    ],
+    "desviaciones": [],
+    "firmas": {
+      "P1": {
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-23",
+        "reformulacion": "Crearemos la tabla de tarifas editable con acceso desde la ficha del vendedor; las líneas se introducen a mano y también importando desde Excel. Cambiaremos el cálculo del % de TF0020 en CommissionMgtLDR, en GetCommissionPct, cambiando el orden a: 1. tarifa del vendedor + categoría del producto (con Starting Date <= fecha de registro, la más reciente); 2. tarifa del vendedor con categoría en blanco; 3. el «% Comisión» de la ficha del vendedor. No se duplica código de TF0020: solo cambia la función que obtiene el %. Importación con Excel Buffer (UploadIntoStream, SelectSheetsNameStream, OpenBookStream, ReadSheet), recorriendo las celdas por Row No. y saltando la fila 1; cada fila se valida (vendedor existente, categoría, Evaluate). Las líneas erróneas van a una tabla temporal de errores y el resto sigue; al final, un mensaje con filas importadas, modificadas y con error. Excel Buffer y no XMLport porque un XMLport no puede leer ficheros Excel. Exportación de movimientos con Excel Buffer desde Commission Entries, con los filtros del usuario pasados con Rec: columnas fecha registro, tipo y nº documento, vendedor, nombre vendedor, cliente, nombre cliente, base, %, comisión, liquidado, nº liquidación; cabecera en negrita y formato numérico en importes; CreateNewBook, WriteSheet, CloseBook, SetFriendlyFilename y OpenExcel. XMLport solo puede sacar texto y queremos Excel, por eso no es una opción válida frente a Excel Buffer. No se recalcularán los movimientos de comisión ya registrados; las nuevas tarifas solo se aplican a los movimientos que se generen después. Ejemplo: JR tiene una tarifa del 8 % para MOBILIARIO. Al registrar una factura el 15/01/2027 con una línea de 1.000 € sin IVA, se genera un movimiento con base 1.000 €, 8 % y comisión de 80 €. Otra línea de 1.000 € de una categoría sin tarifa específica aplica la tarifa general de JR del 4 % y genera otro movimiento de 40 €.",
+        "validacion_omitida": "Prueba del procedimiento, no es trabajo real; consultor no disponible (palabras del programador)"
+      }
+    },
+    "subissues": {
+      "RF-1.1": 77,
+      "RF-1.2": 78,
+      "RF-2.1": 79,
+      "RF-2.2": 80,
+      "RF-3.1": 81,
+      "RF-3.2": 82,
+      "RF-3.3": 83,
+      "RF-4.1": 84,
+      "RF-4.2": 85,
+      "RF-5.1": 86,
+      "RF-5.2": 87,
+      "RF-5.3": 88,
+      "RF-6.1": 89,
+      "RF-6.2": 90
+    },
+    "traza": [
+      {
+        "ts": "2026-11-23T12:17:38",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T12:17:40",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T12:17:41",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T12:17:42",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T12:17:43",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T12:17:44",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T12:17:45",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T12:17:46",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T12:17:47",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T12:17:48",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T12:17:49",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T12:17:50",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T12:17:51",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T12:17:52",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:28:34",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:31:09",
+        "accion": "firma",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "P1"
+      }
+    ]
+  }
 }
