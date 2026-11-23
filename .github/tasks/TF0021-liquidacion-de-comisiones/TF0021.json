@@ -1772,8 +1772,20 @@
         "usuario_gh": "AlejandroGallego-LiderIT",
         "plugin": "0.4.0",
         "puerta": "P2"
+      },
+      {
+        "ts": "2026-11-23T11:58:58",
+        "accion": "pr",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
       }
-    ]
+    ],
+    "pr": {
+      "url": "https://github.com/AGTorresLiderIT/LIDERIT-MAD-Practicas/pull/102",
+      "numero": 102,
+      "fecha": "2026-11-23"
+    }
   },
   "documentacion": {
     "enlaces": {
