@@ -716,6 +716,37 @@
         ],
         "commit": "e4c9cba",
         "resumen": "CreateEntry no se duplica: solo cambia la obtención del % y la condición usa el % obtenido (0 = sin movimiento, P-2)"
+      },
+      {
+        "id": "C-05",
+        "rf": "RF-3.1",
+        "ficheros": [
+          "src/page/CommissionRatesLDR.Page.al",
+          "src/codeunit/CommissionRateImportLDR.Codeunit.al",
+          "src/permissionset/CommissionsLDR.PermissionSet.al"
+        ],
+        "commit": "cf5bf75",
+        "resumen": "Acción Importar desde Excel en la lista de tarifas que llama a la codeunit 50005: UploadIntoStream, SelectSheetsNameStream, OpenBookStream, ReadSheet; fila 1 de cabeceras saltada; celdas agrupadas por Row No."
+      },
+      {
+        "id": "C-06",
+        "rf": "RF-3.2",
+        "ficheros": [
+          "src/codeunit/CommissionRateImportLDR.Codeunit.al",
+          "src/table/CommissionImportErrorLDR.Table.al"
+        ],
+        "commit": "cf5bf75",
+        "resumen": "Validación por fila sin errores de ejecución: vendedor obligatorio, en mayúsculas y existente; categoría opcional existente; % numérico (Evaluate) 0-100, multiplicado por 100 si la celda tiene formato %; fecha opcional (texto o nº de serie). Correctas insertan o modifican (la última gana); erróneas a la tabla temporal 50004 con nº de fila, texto y motivo; fila vacía se salta"
+      },
+      {
+        "id": "C-07",
+        "rf": "RF-3.3",
+        "ficheros": [
+          "src/codeunit/CommissionRateImportLDR.Codeunit.al",
+          "src/page/CommissionImportErrorsLDR.Page.al"
+        ],
+        "commit": "cf5bf75",
+        "resumen": "Mensaje con filas importadas, modificadas y con error; si hay errores se abre la página 50005 (solo lectura) con la tabla temporal"
       }
     ],
     "extras": [
@@ -762,6 +793,14 @@
         "tipo": "al_compile",
         "resultado": "OK",
         "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos (solo info previos). Commit e4c9cba"
+      },
+      {
+        "id": "E-05",
+        "rf": "RF-3.2",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos (solo info previos). Commit cf5bf75"
       }
     ],
     "desviaciones": [],
@@ -954,6 +993,34 @@
       },
       {
         "ts": "2026-11-23T13:35:10",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:40:41",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:40:43",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:40:44",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:40:46",
         "accion": "evidencia",
         "por": "",
         "usuario_gh": "AlejandroGallego-LiderIT",
