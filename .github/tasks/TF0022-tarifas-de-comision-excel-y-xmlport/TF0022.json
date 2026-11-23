@@ -951,6 +951,22 @@
         "tipo": "manual",
         "resultado": "OK",
         "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): factura de JR con producto sin categoría (1009) aplica la tarifa general del 4 %; factura de BD (sin tarifas) aplica el 2 % de su ficha"
+      },
+      {
+        "id": "E-17",
+        "rf": "RF-2.1",
+        "escenario": "",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Extra X-01. Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): abono de JR del 15/01/2027 de 1.000 € del producto 1008 liquidado contra la factura del 15/12/2026 (A-4) genera -1.000,00 al 4 % = -40,00 (% de la factura original, no la tarifa del 8 % vigente en la fecha del abono)"
+      },
+      {
+        "id": "E-18",
+        "rf": "RF-2.1",
+        "escenario": "",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Extra X-01. Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): abono de JR del 15/01/2027 de 1.000 € del producto 1008 sin factura vinculada (sin Liq. por nº documento ni Nº factura corregida) genera -1.000,00 al 8 % = -80,00 (tarifa vigente en la fecha del abono)"
       }
     ],
     "desviaciones": [],
@@ -1290,6 +1306,20 @@
       },
       {
         "ts": "2026-11-23T16:54:35",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:17:48",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:19:10",
         "accion": "evidencia",
         "por": "",
         "usuario_gh": "AlejandroGallego-LiderIT",
