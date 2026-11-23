@@ -967,6 +967,38 @@
         "tipo": "manual",
         "resultado": "OK",
         "referencia": "Extra X-01. Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): abono de JR del 15/01/2027 de 1.000 € del producto 1008 sin factura vinculada (sin Liq. por nº documento ni Nº factura corregida) genera -1.000,00 al 8 % = -80,00 (tarifa vigente en la fecha del abono)"
+      },
+      {
+        "id": "E-19",
+        "rf": "RF-4.1",
+        "escenario": "A-10",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): Exportar a Excel con filtro JR solo saca movimientos de JR; sin filtro saca todos"
+      },
+      {
+        "id": "E-20",
+        "rf": "RF-4.2",
+        "escenario": "A-11",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): 12 columnas en orden con nombres de vendedor y cliente, cabecera en negrita, importes como números (base 1.000,00, % 8, comisión 80,00)"
+      },
+      {
+        "id": "E-21",
+        "rf": "RF-5.1",
+        "escenario": "A-12",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): Exportar fichero nóminas con filtro JR solo saca movimientos de JR, separados por ; y sin comillas. El Bloc de notas indica UTF-8 con BOM (P-5 pedía sin BOM; pendiente de nóminas)"
+      },
+      {
+        "id": "E-22",
+        "rf": "RF-5.2",
+        "escenario": "A-13",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): primera línea con las cabeceras una sola vez; fecha AAAAMMDD, punto decimal y 2 decimales (80.00)"
       }
     ],
     "desviaciones": [],
@@ -1320,6 +1352,34 @@
       },
       {
         "ts": "2026-11-23T17:19:10",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:23:17",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:23:18",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:23:19",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:23:21",
         "accion": "evidencia",
         "por": "",
         "usuario_gh": "AlejandroGallego-LiderIT",
