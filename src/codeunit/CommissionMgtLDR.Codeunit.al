@@ -333,7 +333,34 @@ codeunit 50000 "Commission Mgt._LDR"
             exit(Customer.Name);
     end;
 
+    // TF0022 RF-5.1 / RF-5.3: exports the filtered entries with the XMLport to a CSV file and downloads it as
+    // COMISIONES_AAAAMM.csv. Returns false when the filters return no entries (no file is created).
+    procedure ExportPayrollFile(var CommissionEntryFilters: Record "Commission Entry_LDR"): Boolean
     var
+        CommissionEntry: Record "Commission Entry_LDR";
+        TempBlob: Codeunit "Temp Blob";
+        CommissionPayrollExport: XmlPort "Commission Payroll Export_LDR";
+        FileOutStream: OutStream;
+        FileInStream: InStream;
+        FileName: Text;
+    begin
+        CommissionEntry.CopyFilters(CommissionEntryFilters);
+        if CommissionEntry.IsEmpty() then
+            exit(false);
+
+        TempBlob.CreateOutStream(FileOutStream, TextEncoding::UTF8);
+        CommissionPayrollExport.SetTableView(CommissionEntry);
+        CommissionPayrollExport.SetDestination(FileOutStream);
+        CommissionPayrollExport.Export();
+
+        FileName := StrSubstNo(PayrollFileNameTxt, Format(CommissionPayrollExport.GetLatestPostingDate(), 0, '<Year4><Month,2>'));
+        TempBlob.CreateInStream(FileInStream, TextEncoding::UTF8);
+        DownloadFromStream(FileInStream, '', '', '', FileName);
+        exit(true);
+    end;
+
+    var
+        PayrollFileNameTxt: Label 'COMISIONES_%1.csv', Locked = true;
         SalespersonNameTxt: Label 'Salesperson Name', Comment = 'ESP="Nombre vendedor"';
         CustomerNameTxt: Label 'Customer Name', Comment = 'ESP="Nombre cliente"';
         AmountFormatTxt: Label '#,##0.00', Locked = true;

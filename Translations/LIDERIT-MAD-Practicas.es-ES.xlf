@@ -501,6 +501,18 @@
           <note from="Developer" annotates="general" priority="2">ESP="No hay movimientos de comisión que exportar con los filtros actuales."</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Commission Entries_LDR - NamedType NoEntriesToExportMsg</note>
         </trans-unit>
+        <trans-unit id="Page 4144747430 - Action 1185729249 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Export the filtered commission entries to the CSV file of the payroll program.</source>
+          <target state="translated">Exporta los movimientos de comisión filtrados al fichero CSV del programa de nóminas.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Exporta los movimientos de comisión filtrados al fichero CSV del programa de nóminas."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Entries_LDR - Action ExportPayrollFile - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4144747430 - Action 1185729249 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Export payroll file</source>
+          <target state="translated">Exportar fichero nóminas</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Exportar fichero nóminas"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Entries_LDR - Action ExportPayrollFile - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 4144747430 - Action 2851454604 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Export the filtered commission entries to an Excel file with the salesperson and customer names.</source>
           <target state="translated">Exporta a un fichero Excel los movimientos de comisión filtrados, con los nombres de vendedor y cliente.</target>
@@ -722,6 +734,12 @@
           <target state="translated">Fecha hasta</target>
           <note from="Developer" annotates="general" priority="2">ESP="Fecha hasta"</note>
           <note from="Xliff Generator" annotates="general" priority="3">Report Settle Salesp. Commissions_LDR - Control UpToDateField - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="XmlPort 2696831835 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Commission Payroll Export</source>
+          <target state="translated">Exportación de comisiones para nóminas</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Exportación de comisiones para nóminas"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">XmlPort Commission Payroll Export_LDR - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 1275301117 - Control 2770219397 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4145206282">
           <source>Commissions</source>

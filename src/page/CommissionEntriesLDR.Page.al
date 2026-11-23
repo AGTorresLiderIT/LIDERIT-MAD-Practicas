@@ -67,11 +67,27 @@ page 50000 "Commission Entries_LDR"
                         Message(NoEntriesToExportMsg);
                 end;
             }
+            // TF0022 RF-5.1: CSV file for payroll with the same filtered entries.
+            action(ExportPayrollFile)
+            {
+                Caption = 'Export payroll file', Comment = 'ESP="Exportar fichero nóminas"';
+                Image = ExportFile;
+                ToolTip = 'Export the filtered commission entries to the CSV file of the payroll program.', Comment = 'ESP="Exporta los movimientos de comisión filtrados al fichero CSV del programa de nóminas."';
+
+                trigger OnAction()
+                var
+                    CommissionMgt: Codeunit "Commission Mgt._LDR";
+                begin
+                    if not CommissionMgt.ExportPayrollFile(Rec) then
+                        Message(NoEntriesToExportMsg);
+                end;
+            }
         }
         area(Promoted)
         {
             actionref(Navigate_Promoted; Navigate) { }
             actionref(ExportToExcel_Promoted; ExportToExcel) { }
+            actionref(ExportPayrollFile_Promoted; ExportPayrollFile) { }
         }
     }
 

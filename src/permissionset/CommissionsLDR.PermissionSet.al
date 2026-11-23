@@ -14,6 +14,7 @@ permissionset 50000 "Commissions_LDR"
         table "Commission Import Error_LDR" = X,
         page "Commission Import Errors_LDR" = X,
         codeunit "Commission Rate Import_LDR" = X,
+        xmlport "Commission Payroll Export_LDR" = X,
         page "Commission Settlements_LDR" = X,
         codeunit "Commission Mgt._LDR" = X,
         codeunit "Commission Subscribers_LDR" = X,
