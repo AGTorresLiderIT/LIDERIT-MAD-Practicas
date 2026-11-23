@@ -52,10 +52,29 @@ page 50000 "Commission Entries_LDR"
                     Navigate.Run();
                 end;
             }
+            // TF0022 RF-4.1: exports the entries with the filters the user has applied on the page.
+            action(ExportToExcel)
+            {
+                Caption = 'Export to Excel', Comment = 'ESP="Exportar a Excel"';
+                Image = ExportToExcel;
+                ToolTip = 'Export the filtered commission entries to an Excel file with the salesperson and customer names.', Comment = 'ESP="Exporta a un fichero Excel los movimientos de comisión filtrados, con los nombres de vendedor y cliente."';
+
+                trigger OnAction()
+                var
+                    CommissionMgt: Codeunit "Commission Mgt._LDR";
+                begin
+                    if not CommissionMgt.ExportToExcel(Rec) then
+                        Message(NoEntriesToExportMsg);
+                end;
+            }
         }
         area(Promoted)
         {
             actionref(Navigate_Promoted; Navigate) { }
+            actionref(ExportToExcel_Promoted; ExportToExcel) { }
         }
     }
+
+    var
+        NoEntriesToExportMsg: Label 'There are no commission entries to export with the current filters.', Comment = 'ESP="No hay movimientos de comisión que exportar con los filtros actuales."';
 }

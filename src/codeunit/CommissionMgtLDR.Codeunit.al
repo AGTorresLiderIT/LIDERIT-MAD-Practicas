@@ -247,6 +247,96 @@ codeunit 50000 "Commission Mgt._LDR"
         exit(Round(BaseAmountLCY * CommissionPct / 100, GeneralLedgerSetup."Amount Rounding Precision"));
     end;
 
+    // TF0022 RF-4.1 / RF-4.2: exports the commission entries with the filters of the page to Excel with Excel
+    // Buffer. Returns false when the filters return no entries (no file is created).
+    procedure ExportToExcel(var CommissionEntryFilters: Record "Commission Entry_LDR"): Boolean
     var
+        CommissionEntry: Record "Commission Entry_LDR";
+        TempExcelBuffer: Record "Excel Buffer" temporary;
+    begin
+        CommissionEntry.CopyFilters(CommissionEntryFilters);
+        if CommissionEntry.IsEmpty() then
+            exit(false);
+
+        AddExcelHeader(TempExcelBuffer, CommissionEntry);
+        CommissionEntry.SetLoadFields(
+            "Posting Date", "Document Type", "Document No.", "Salesperson Code", "Customer No.", "Base Amount (LCY)",
+            "Commission %", "Commission Amount (LCY)", Liquidated, "Liquidation No.");
+        CommissionEntry.FindSet();
+        repeat
+            AddExcelLine(TempExcelBuffer, CommissionEntry);
+        until CommissionEntry.Next() = 0;
+
+        TempExcelBuffer.CreateNewBook(CopyStr(CommissionEntry.TableCaption(), 1, 250));
+        TempExcelBuffer.WriteSheet(CommissionEntry.TableCaption(), CompanyName(), UserId());
+        TempExcelBuffer.CloseBook();
+        TempExcelBuffer.SetFriendlyFilename(CommissionEntry.TableCaption());
+        TempExcelBuffer.OpenExcel();
+        exit(true);
+    end;
+
+    local procedure AddExcelHeader(var TempExcelBuffer: Record "Excel Buffer" temporary; CommissionEntry: Record "Commission Entry_LDR")
+    begin
+        TempExcelBuffer.NewRow();
+        AddHeaderColumn(TempExcelBuffer, CommissionEntry.FieldCaption("Posting Date"));
+        AddHeaderColumn(TempExcelBuffer, CommissionEntry.FieldCaption("Document Type"));
+        AddHeaderColumn(TempExcelBuffer, CommissionEntry.FieldCaption("Document No."));
+        AddHeaderColumn(TempExcelBuffer, CommissionEntry.FieldCaption("Salesperson Code"));
+        AddHeaderColumn(TempExcelBuffer, SalespersonNameTxt);
+        AddHeaderColumn(TempExcelBuffer, CommissionEntry.FieldCaption("Customer No."));
+        AddHeaderColumn(TempExcelBuffer, CustomerNameTxt);
+        AddHeaderColumn(TempExcelBuffer, CommissionEntry.FieldCaption("Base Amount (LCY)"));
+        AddHeaderColumn(TempExcelBuffer, CommissionEntry.FieldCaption("Commission %"));
+        AddHeaderColumn(TempExcelBuffer, CommissionEntry.FieldCaption("Commission Amount (LCY)"));
+        AddHeaderColumn(TempExcelBuffer, CommissionEntry.FieldCaption(Liquidated));
+        AddHeaderColumn(TempExcelBuffer, CommissionEntry.FieldCaption("Liquidation No."));
+    end;
+
+    local procedure AddHeaderColumn(var TempExcelBuffer: Record "Excel Buffer" temporary; Caption: Text)
+    begin
+        TempExcelBuffer.AddColumn(Caption, false, '', true, false, false, '', TempExcelBuffer."Cell Type"::Text);
+    end;
+
+    // P-8: the names are not stored in the entry; they are read from their tables when exporting.
+    local procedure AddExcelLine(var TempExcelBuffer: Record "Excel Buffer" temporary; CommissionEntry: Record "Commission Entry_LDR")
+    begin
+        TempExcelBuffer.NewRow();
+        TempExcelBuffer.AddColumn(CommissionEntry."Posting Date", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Date);
+        TempExcelBuffer.AddColumn(Format(CommissionEntry."Document Type"), false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        TempExcelBuffer.AddColumn(CommissionEntry."Document No.", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        TempExcelBuffer.AddColumn(CommissionEntry."Salesperson Code", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        TempExcelBuffer.AddColumn(GetSalespersonName(CommissionEntry."Salesperson Code"), false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        TempExcelBuffer.AddColumn(CommissionEntry."Customer No.", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        TempExcelBuffer.AddColumn(GetCustomerName(CommissionEntry."Customer No."), false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        TempExcelBuffer.AddColumn(CommissionEntry."Base Amount (LCY)", false, '', false, false, false, AmountFormatTxt, TempExcelBuffer."Cell Type"::Number);
+        TempExcelBuffer.AddColumn(CommissionEntry."Commission %", false, '', false, false, false, PctFormatTxt, TempExcelBuffer."Cell Type"::Number);
+        TempExcelBuffer.AddColumn(CommissionEntry."Commission Amount (LCY)", false, '', false, false, false, AmountFormatTxt, TempExcelBuffer."Cell Type"::Number);
+        TempExcelBuffer.AddColumn(Format(CommissionEntry.Liquidated), false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        TempExcelBuffer.AddColumn(CommissionEntry."Liquidation No.", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+    end;
+
+    local procedure GetSalespersonName(SalespersonCode: Code[20]): Text
+    var
+        SalespersonPurchaser: Record "Salesperson/Purchaser";
+    begin
+        SalespersonPurchaser.SetLoadFields(Name);
+        if SalespersonPurchaser.Get(SalespersonCode) then
+            exit(SalespersonPurchaser.Name);
+    end;
+
+    local procedure GetCustomerName(CustomerNo: Code[20]): Text
+    var
+        Customer: Record Customer;
+    begin
+        Customer.SetLoadFields(Name);
+        if Customer.Get(CustomerNo) then
+            exit(Customer.Name);
+    end;
+
+    var
+        SalespersonNameTxt: Label 'Salesperson Name', Comment = 'ESP="Nombre vendedor"';
+        CustomerNameTxt: Label 'Customer Name', Comment = 'ESP="Nombre cliente"';
+        AmountFormatTxt: Label '#,##0.00', Locked = true;
+        PctFormatTxt: Label '0.00###', Locked = true;
         InvoicePostedErr: Label 'Purchase invoice %1 of settlement %2 has already been posted. The settlement cannot be undone.', Comment = 'ESP="La factura de compra %1 de la liquidación %2 ya está registrada. No se puede deshacer la liquidación." %1 = purchase invoice no., %2 = settlement no.';
 }
