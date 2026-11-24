@@ -694,6 +694,38 @@
         "tipo": "manual",
         "resultado": "OK",
         "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026): ejecución en primer plano sin comisiones pendientes hasta la fecha calculada; una sola línea Aviso «Sin comisiones pendientes hasta el 31/10/26», sin vendedor, sin liquidaciones nuevas, entrada de la cola en Correcto y sin mensajes del proceso (fecha hasta con Today correcta: último día del mes anterior)"
+      },
+      {
+        "id": "E-07",
+        "rf": "RF-3.2",
+        "escenario": "A-5",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026), ejecución en primer plano con FACTURA=SI;DIAS=0 (Run ID 50ff8e9c…): el vendedor A quedó en Error con «Registro directo debe ser igual a Sí en Cuenta 62300…» (la cuenta de comisiones no tiene Registro directo) y B y C se liquidaron igualmente en la misma ejecución; la entrada de la cola terminó en Correcto. El error lo dio A y no B: B (proveedor bloqueado) es Aviso por la decisión de P1"
+      },
+      {
+        "id": "E-08",
+        "rf": "RF-3.3",
+        "escenario": "A-6",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026), ejecución en primer plano con FACTURA=SI;DIAS=0 (Run ID 50ff8e9c…): C sin proveedor liquidado (LIQ-0013) con Aviso «no tiene proveedor»; B con proveedor bloqueado liquidado (LIQ-0012) con Aviso, como el report manual de TF0021"
+      },
+      {
+        "id": "E-09",
+        "rf": "RF-3.1",
+        "escenario": "A-4",
+        "tipo": "manual",
+        "resultado": "KO",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026), ejecución en primer plano con FACTURA=SI;DIAS=0 (Run ID 50ff8e9c…): A no se liquidó porque la creación de la factura falló por la cuenta de comisiones sin Registro directo (configuración del sandbox). Se repite tras corregir la cuenta"
+      },
+      {
+        "id": "E-10",
+        "rf": "RF-3.1",
+        "escenario": "A-4",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026), repetida tras activar Registro directo en la cuenta de comisiones: el vendedor A se liquida en Correcto por 10,00 € (comisiones del 15/10/2026) con factura de compra; la comisión del 05/11/2026 sigue pendiente; sin mensajes del proceso"
       }
     ],
     "desviaciones": [],
@@ -903,6 +935,34 @@
       },
       {
         "ts": "2026-11-24T11:00:07",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T11:34:34",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T11:34:36",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T11:34:37",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T11:46:40",
         "accion": "evidencia",
         "por": "",
         "usuario_gh": "AlejandroGallego-LiderIT",
