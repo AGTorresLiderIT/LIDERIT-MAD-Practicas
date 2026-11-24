@@ -758,6 +758,22 @@
         "tipo": "manual",
         "resultado": "OK",
         "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026): con FACTURA=QUIZA;DIAS=0 y con FACTURA=SI;DIAS=-3 la ejecución termina en Error con el mensaje de parámetro no válido, sin liquidaciones ni líneas en el registro"
+      },
+      {
+        "id": "E-15",
+        "rf": "RF-3.1",
+        "escenario": "A-7",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026): con FACTURA=NO;DIAS=10 solo se liquida la comisión de A del 18/10/2026 (fecha hasta 21/10/2026), sin factura y en Correcto; las del 25/10 y 05/11 siguen pendientes"
+      },
+      {
+        "id": "E-16",
+        "rf": "RF-1.2",
+        "escenario": "A-2",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026): el report manual Liquidar comisiones de TF0021 sigue mostrando la ventana de progreso y el mensaje final"
       }
     ],
     "desviaciones": [],
@@ -1023,6 +1039,20 @@
       },
       {
         "ts": "2026-11-24T11:51:14",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T12:03:21",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T12:03:23",
         "accion": "evidencia",
         "por": "",
         "usuario_gh": "AlejandroGallego-LiderIT",
