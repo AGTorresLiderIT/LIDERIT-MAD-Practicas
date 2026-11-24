@@ -11,7 +11,7 @@
   "ficha": {
     "origen": "Tarea de formación TF0023 – Liquidación automática con cola de proyectos (19/10/2026), Bloque 5. Depende de TF0021.",
     "riesgo": "ROJO (proceso desatendido en la cola de proyectos, Commit por vendedor, Codeunit.Run con gestión de errores y generación de liquidaciones sin intervención)",
-    "estado": "En GitHub",
+    "estado": "En desarrollo",
     "issue_rama": "https://github.com/AGTorresLiderIT/LIDERIT-MAD-Practicas/issues/51 · rama Feature/TF0023-liquidacion-automatica-con-cola-de-proyectos"
   },
   "funcional": {
@@ -543,5 +543,111 @@
     "https://learn.microsoft.com/dynamics365/business-central/dev-itpro/developer/methods-auto/codeunit/codeunit-run-method (con valor de retorno confirma al final; si hay transacción abierta hay que hacer Commit antes)",
     "https://learn.microsoft.com/dynamics365/business-central/admin-job-queues-schedule-tasks (recurrencia, Earliest Start, reintentos con Maximum No. of Attempts y Rerun Delay)",
     "Revisado con bc-code-intel (especialistas: sam-coder; find_bc_knowledge: eva-errors/codeunit-run-pattern). La respuesta fue genérica: las decisiones de transacciones se apoyan en Learn y en el código estándar."
-  ]
+  ],
+  "implementacion": {
+    "cambios": [],
+    "extras": [],
+    "evidencias": [],
+    "desviaciones": [],
+    "firmas": {
+      "P1": {
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24",
+        "reformulacion": "Se hará un proceso para que la liquidación de comisiones se haga una vez al mes, un día de madrugada, hasta el último día del mes anterior. Registro: tabla Commission Process Log con Entry No., Run ID, Start Date-Time, End Date-Time, Salesperson Code, Status (Correcto/Aviso/Error), Settlement No., Message (texto del error con GetLastErrorText o el aviso de GetWarningText) y User ID. Página lista no editable, ordenada de la más reciente a la más antigua, con una acción para abrir la liquidación. Proceso: codeunit de la cola Commission Settlement JQ con TableNo = Job Queue Entry. En OnRun lee Rec.\"Parameter String\" con formato FACTURA=SI;DIAS=0 (DIAS es un entero >= 0 que se resta a la fecha hasta); si está mal escrito, o falta la serie de liquidaciones (o la cuenta con FACTURA=SI), da error y no se liquida nada. La fecha hasta es el último día del mes anterior a Today menos DIAS, sin WorkDate, porque la fecha de trabajo no cambia sola. Commit antes del primer vendedor. Por cada vendedor con comisiones pendientes: ClearLastError, if Codeunit.Run de la codeunit de liquidación de TF0021, y se registra Correcto, Aviso (sin proveedor, proveedor bloqueado o total <= 0: liquida sin factura, como el report manual) o Error, insertando la línea fuera del Run, y Commit después de cada vendedor para que un error no deshaga lo correcto. Si al liquidar ya no queda nada pendiente, o no hay ningún vendedor pendiente, se registra un Aviso «Sin comisiones pendientes». Sin Message, Confirm ni Dialog en el proceso. Programar: en la lista de liquidaciones, una acción que crea la entrada de la cola si no existe ya: Object Type to Run = Codeunit, Object ID to Run = la codeunit anterior, Recurring Job = sí, Next Run Date Formula = <CM+1D>, Earliest Start Date/Time = día 1 del mes siguiente a las 02:00, 3 intentos con 300 s entre ellos y Parameter String FACTURA=SI;DIAS=0; se pone en marcha con Codeunit.Run(Codeunit::\"Job Queue - Enqueue\", JobQueueEntry). No se hace: ningún control extra de doble ejecución en el mes (un segundo intento solo encuentra lo no liquidado); no se cambia la lógica del report ni de la codeunit de TF0021 (la lógica ya se movió a la codeunit en TF0021); ni correos, ni limpieza del registro. Ejemplo: JR, con proveedor, tiene comisiones de 120 € y 80 € de octubre y de 30 € del 05/11/2026. Se ejecuta el 24/11/2026 con FACTURA=SI;DIAS=0: se liquida hasta el 31/10/2026, sale una liquidación de 200 € con factura de compra, los 30 € de noviembre siguen pendientes y en el registro aparece una línea de JR en estado Correcto con el nº de liquidación. Si se ejecuta otra vez, no se liquida nada y sale una línea Aviso «Sin comisiones pendientes». (Los puntos de qué falta, qué no se hace y el ejemplo se adoptaron de la propuesta de Claude a petición del programador.)",
+        "validacion_omitida": "Prueba del procedimiento en prácticas; consultor no disponible. Quedan sin validar P-1 a P-4 y P-6 y el cambio de A-5 (proveedor bloqueado = Aviso, como TF0021)"
+      }
+    },
+    "subissues": {
+      "RF-1.1": 91,
+      "RF-1.2": 92,
+      "RF-2.1": 93,
+      "RF-2.2": 94,
+      "RF-3.1": 95,
+      "RF-3.2": 96,
+      "RF-3.3": 97,
+      "RF-3.4": 98,
+      "RF-3.5": 99,
+      "RF-4.1": 100
+    },
+    "traza": [
+      {
+        "ts": "2026-11-24T09:17:27",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T09:17:29",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T09:17:30",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T09:17:32",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T09:17:33",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T09:17:34",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T09:17:36",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T09:17:37",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T09:17:39",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T09:17:40",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T10:11:25",
+        "accion": "firma",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "P1"
+      }
+    ]
+  }
 }
