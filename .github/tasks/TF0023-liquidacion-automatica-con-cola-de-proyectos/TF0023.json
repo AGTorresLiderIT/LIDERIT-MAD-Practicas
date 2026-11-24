@@ -1120,5 +1120,209 @@
         "plugin": "0.4.0"
       }
     ]
+  },
+  "documentacion": {
+    "enlaces": {
+      "rama": "https://github.com/AGTorresLiderIT/LIDERIT-MAD-Practicas/tree/Feature/TF0023-liquidacion-automatica-con-cola-de-proyectos"
+    },
+    "resumen": "La liquidación de comisiones de TF0021 se puede programar en la cola de proyectos para que se ejecute sola el día 1 de cada mes a las 02:00, liquidando hasta el último día del mes anterior. Cada ejecución deja un registro por vendedor (Correcto, Aviso o Error) y el error de un vendedor no impide liquidar a los demás.",
+    "objetos": [
+      {
+        "tipo": "codeunit",
+        "id": "50007",
+        "nombre": "Commission Settlement JQ_LDR",
+        "cambio": "Nueva codeunit de la cola: valida parámetros y configuración, liquida cada vendedor pendiente y lo registra."
+      },
+      {
+        "tipo": "enum",
+        "id": "50001",
+        "nombre": "Commission Process Status_LDR",
+        "cambio": "Nuevo estado de cada línea del registro: Correcto, Aviso o Error."
+      },
+      {
+        "tipo": "table",
+        "id": "50006",
+        "nombre": "Commission Process Log_LDR",
+        "cambio": "Nueva tabla del registro de ejecuciones, una línea por vendedor procesado."
+      },
+      {
+        "tipo": "page",
+        "id": "50007",
+        "nombre": "Commission Process Log_LDR",
+        "cambio": "Nueva lista no editable del registro, la más reciente arriba, con la acción Abrir liquidación."
+      },
+      {
+        "tipo": "page",
+        "id": "50003",
+        "nombre": "Commission Settlements_LDR",
+        "cambio": "Acciones Programar liquidación automática y Registro del proceso (objeto de TF0021)."
+      },
+      {
+        "tipo": "codeunit",
+        "id": "50000",
+        "nombre": "Commission Mgt._LDR",
+        "cambio": "Nuevas funciones para saber si un vendedor tiene comisiones pendientes y para crear la entrada de la cola (objeto de TF0020)."
+      },
+      {
+        "tipo": "permissionset",
+        "id": "50000",
+        "nombre": "Commissions_LDR",
+        "cambio": "Se añaden la tabla, la página y la codeunit nuevas (objeto de TF0020)."
+      }
+    ],
+    "detalles": [
+      {
+        "rf": "RF-1.1, RF-1.2",
+        "titulo": "1. Reutilización de la liquidación por vendedor",
+        "parrafos": [
+          "No se ha movido ni copiado lógica: la codeunit 50002 «Salesp. Comm. Settlement_LDR» de TF0021 ya liquidaba un vendedor sin mensajes ni Commit, con SetParameters antes de Run y GetSettlementNo y GetWarningText después. El report manual 50000 y la codeunit nueva de la cola la llaman igual; TF0021 no se modifica.",
+          "La única diferencia es intencionada: el report usa Run sin if (todo o nada, el usuario ve el error) y la cola usa if Run (el error de un vendedor queda registrado y se sigue con el resto). El report mantiene su ventana de progreso y su mensaje final."
+        ]
+      },
+      {
+        "rf": "RF-2.1, RF-2.2",
+        "titulo": "2. Registro de ejecuciones",
+        "parrafos": [
+          "La tabla 50006 guarda una línea por vendedor procesado; todas las líneas de una ejecución comparten el mismo Id. ejecución. Si no hay nada pendiente se guarda una sola línea Aviso sin vendedor. El usuario es el de la entrada de la cola.",
+          "La página 50007 es de solo lectura, ordenada de la más reciente a la más antigua, con la acción Abrir liquidación. Se abre desde Registro del proceso en la lista de liquidaciones o desde el buscador. Sin impacto en datos existentes: tabla nueva."
+        ],
+        "tabla": {
+          "columnas": [
+            "Campo",
+            "Id",
+            "Tipo dato",
+            "Comentario"
+          ],
+          "filas": [
+            [
+              "Entry No.",
+              "1",
+              "Integer",
+              "Clave, autoincremental."
+            ],
+            [
+              "Run ID",
+              "2",
+              "Guid",
+              "Igual en todas las líneas de una ejecución."
+            ],
+            [
+              "Start Date-Time / End Date-Time",
+              "3, 4",
+              "DateTime",
+              "Inicio de la ejecución y fin del vendedor."
+            ],
+            [
+              "Salesperson Code",
+              "5",
+              "Code[20]",
+              "En blanco en la línea Sin comisiones pendientes."
+            ],
+            [
+              "Status",
+              "6",
+              "Enum 50001",
+              "Correcto, Aviso o Error."
+            ],
+            [
+              "Settlement No.",
+              "7",
+              "Code[20]",
+              "Liquidación creada, si la hay."
+            ],
+            [
+              "Message",
+              "8",
+              "Text[250]",
+              "Texto del aviso o del error."
+            ],
+            [
+              "User ID",
+              "9",
+              "Code[50]",
+              "Usuario con el que corre la cola."
+            ]
+          ]
+        },
+        "capturas": [
+          "Registro del proceso con una ejecución: A en Correcto, B y C en Aviso"
+        ]
+      },
+      {
+        "rf": "RF-3.1, RF-3.2, RF-3.3, RF-3.4, RF-3.5",
+        "titulo": "3. Proceso automático de liquidación",
+        "parrafos": [
+          "La codeunit 50007 (TableNo = Job Queue Entry) lee los parámetros FACTURA=SI|NO;DIAS=n (vacío equivale a FACTURA=SI;DIAS=0) y comprueba la configuración antes de escribir nada: serie de liquidaciones y, con factura, que la cuenta de comisiones sea auxiliar y admita Registro directo. Si algo falla, la entrada de la cola queda en Error con el mensaje y no se liquida a nadie. La comprobación de la cuenta se añadió tras ver en las pruebas que, sin Registro directo, fallaban uno a uno todos los vendedores con proveedor.",
+          "La fecha hasta es el último día del mes anterior a la fecha real (Today) menos DIAS: la fecha de trabajo es un ajuste de la sesión y no avanza sola (P-1).",
+          "Tras un Commit, recorre los vendedores con comisiones sin liquidar hasta esa fecha y llama a la codeunit de TF0021 con if Run. La línea del registro se inserta fuera del Run y se confirma con Commit por vendedor, así el error de uno no deshace lo de los demás (P-4).",
+          "Los avisos (sin proveedor, proveedor bloqueado o total <= 0) son los de TF0021: se liquida sin factura y la línea queda en Aviso. Si al liquidar ya no queda nada, por ejemplo porque lo ha liquidado el report manual, la línea es Aviso «Sin comisiones pendientes».",
+          "No hay control de doble ejecución en el mes (P-3): solo se seleccionan comisiones no liquidadas y la codeunit de TF0021 las bloquea al leerlas, así que una segunda ejecución o un reintento solo recoge lo que quedó pendiente."
+        ],
+        "codigo": "ClearLastError();\nClear(SettleSalespersonCommission);\nSettleSalespersonCommission.SetParameters(UpToDate, CreateInvoice);\nif not SettleSalespersonCommission.Run(SalespersonPurchaser) then begin\n    InsertLog(SalespersonCode, \"Commission Process Status_LDR\"::Error, '', GetLastErrorText());\n    exit;\nend;"
+      },
+      {
+        "rf": "RF-4.1",
+        "titulo": "4. Programación de la tarea",
+        "parrafos": [
+          "La acción Programar liquidación automática de la lista de liquidaciones llama a ScheduleAutomaticSettlement de la codeunit 50000. Si ya existe una entrada para la codeunit 50007 (FindJobQueueEntry), avisa y no crea otra. Si no, la crea y la pone en marcha con la codeunit estándar 453 Job Queue - Enqueue.",
+          "La hora y la primera fecha se asignan antes de validar la fórmula: si la primera fecha estuviera vacía, la validación la calcularía desde la fecha y hora actuales. Se usa <CM+1D> y no <1M> porque la cola calcula la siguiente fecha desde el final real de la ejecución: con <1M>, un retraso al día 2 desplazaría la serie (P-2)."
+        ],
+        "tabla": {
+          "columnas": [
+            "Campo de Job Queue Entry",
+            "Valor"
+          ],
+          "filas": [
+            [
+              "Object Type / ID to Run",
+              "Codeunit 50007"
+            ],
+            [
+              "Recurring Job / Next Run Date Formula",
+              "Sí / <CM+1D>"
+            ],
+            [
+              "Starting Time / Earliest Start Date/Time",
+              "02:00 / día 1 del mes siguiente a las 02:00"
+            ],
+            [
+              "Maximum No. of Attempts / Rerun Delay",
+              "3 / 300 s"
+            ],
+            [
+              "Parameter String",
+              "FACTURA=SI;DIAS=0"
+            ]
+          ]
+        },
+        "capturas": [
+          "Entrada de la cola creada por la acción, con la fórmula y los parámetros"
+        ]
+      }
+    ],
+    "pruebas": [
+      {
+        "titulo": "Prueba manual de los escenarios A-1 a A-11 en el sandbox",
+        "pasos": [
+          "Con fecha real 24/11/2026 (fecha hasta 31/10/2026) se registraron comisiones del 15/10/2026 para tres vendedores: A con proveedor, B con proveedor bloqueado y C sin proveedor, y una del 05/11/2026 para A.",
+          "Se programó la entrada (A-10) y al repetir la acción avisó de que ya existía (A-11).",
+          "Con Ejecutar una vez (primer plano): sin datos de octubre dejó una sola línea Sin comisiones pendientes; después, A falló por la cuenta de comisiones sin Registro directo mientras B y C se liquidaban con Aviso (A-5, A-6) y la entrada terminó en Correcto. Corregida la cuenta, A se liquidó en Correcto por 10,00 € y la comisión de noviembre siguió pendiente (A-4).",
+          "Una segunda ejecución no liquidó nada (A-9); con FACTURA=QUIZA y con DIAS=-3 la entrada terminó en Error sin líneas (A-8); con FACTURA=NO;DIAS=10 solo se liquidó hasta el 21/10/2026 y sin factura (A-7).",
+          "Con la cuenta sin Registro directo y la comprobación nueva, la entrada terminó en Error sin liquidar ni registrar nada.",
+          "El report manual mantuvo su progreso y su mensaje final (A-2); A-1 se revisó en el código. A-12 (report y cola a la vez) no se ha probado."
+        ],
+        "capturas": [
+          "Liquidaciones creadas por la cola con fecha hasta 31/10/2026",
+          "Error de la entrada de la cola por parámetro no válido",
+          "Movimientos de A con la comisión del 05/11/2026 pendiente"
+        ]
+      }
+    ],
+    "para_probar": [
+      "Dónde está: en «Liquidaciones de comisiones», las acciones Programar liquidación automática y Registro del proceso; la entrada se ve y se ejecuta en «Movs. cola proyectos» (Ejecutar una vez, primer plano).",
+      "Configuración previa: serie de liquidaciones; cuenta de comisiones auxiliar con Registro directo; vendedores con % de comisión (con 0 % no se generan comisiones) y, para la factura, proveedor en la ficha del vendedor.",
+      "Datos de prueba: el proceso liquida hasta el último día del mes anterior a la fecha real, no a la fecha de trabajo; las facturas de prueba deben tener fecha de registro de ese mes o anterior.",
+      "Las dos ventanas que salen al ejecutar en primer plano (confirmación y Estado: Correcto) son del estándar; el proceso no muestra ningún mensaje propio."
+    ]
   }
 }

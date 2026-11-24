@@ -2,7 +2,7 @@
 
 Código ERPIT: pendiente · Código en el origen: TF0023
 Cliente: LiderIT · Fecha: 17/11/2026 · Proyecto: Formación – Bloque 5 (Eventos, registro y procesos) · Consultor: Alejandro González Torres
-Origen: Tarea de formación TF0023 – Liquidación automática con cola de proyectos (19/10/2026), Bloque 5. Depende de TF0021. · Riesgo: ROJO (proceso desatendido en la cola de proyectos, Commit por vendedor, Codeunit.Run con gestión de errores y generación de liquidaciones sin intervención) · Estado: En GitHub · Puntos a validar pendientes: 10 (5 bloqueantes)
+Origen: Tarea de formación TF0023 – Liquidación automática con cola de proyectos (19/10/2026), Bloque 5. Depende de TF0021. · Riesgo: ROJO (proceso desatendido en la cola de proyectos, Commit por vendedor, Codeunit.Run con gestión de errores y generación de liquidaciones sin intervención) · Estado: En desarrollo · Puntos a validar pendientes: 10 (5 bloqueantes)
 
 ## 1. Descripción funcional
 
@@ -147,7 +147,105 @@ Al aprobar la tarea, cada fila se crea como sub-issue en GitHub.
 
 ## 3. Documentación técnica del desarrollo realizado
 
-_Pendiente del técnico._
+- Issue y rama: https://github.com/AGTorresLiderIT/LIDERIT-MAD-Practicas/issues/51 · rama Feature/TF0023-liquidacion-automatica-con-cola-de-proyectos
+- Rama: https://github.com/AGTorresLiderIT/LIDERIT-MAD-Practicas/tree/Feature/TF0023-liquidacion-automatica-con-cola-de-proyectos
+
+La liquidación de comisiones de TF0021 se puede programar en la cola de proyectos para que se ejecute sola el día 1 de cada mes a las 02:00, liquidando hasta el último día del mes anterior. Cada ejecución deja un registro por vendedor (Correcto, Aviso o Error) y el error de un vendedor no impide liquidar a los demás.
+
+### Objetos creados o modificados
+
+| Tipo | Id | Nombre | Cambio |
+| --- | --- | --- | --- |
+| codeunit | 50007 | Commission Settlement JQ_LDR | Nueva codeunit de la cola: valida parámetros y configuración, liquida cada vendedor pendiente y lo registra. |
+| enum | 50001 | Commission Process Status_LDR | Nuevo estado de cada línea del registro: Correcto, Aviso o Error. |
+| table | 50006 | Commission Process Log_LDR | Nueva tabla del registro de ejecuciones, una línea por vendedor procesado. |
+| page | 50007 | Commission Process Log_LDR | Nueva lista no editable del registro, la más reciente arriba, con la acción Abrir liquidación. |
+| page | 50003 | Commission Settlements_LDR | Acciones Programar liquidación automática y Registro del proceso (objeto de TF0021). |
+| codeunit | 50000 | Commission Mgt._LDR | Nuevas funciones para saber si un vendedor tiene comisiones pendientes y para crear la entrada de la cola (objeto de TF0020). |
+| permissionset | 50000 | Commissions_LDR | Se añaden la tabla, la página y la codeunit nuevas (objeto de TF0020). |
+
+### RF-1.1, RF-1.2 · 1. Reutilización de la liquidación por vendedor
+
+No se ha movido ni copiado lógica: la codeunit 50002 «Salesp. Comm. Settlement_LDR» de TF0021 ya liquidaba un vendedor sin mensajes ni Commit, con SetParameters antes de Run y GetSettlementNo y GetWarningText después. El report manual 50000 y la codeunit nueva de la cola la llaman igual; TF0021 no se modifica.
+
+La única diferencia es intencionada: el report usa Run sin if (todo o nada, el usuario ve el error) y la cola usa if Run (el error de un vendedor queda registrado y se sigue con el resto). El report mantiene su ventana de progreso y su mensaje final.
+
+### RF-2.1, RF-2.2 · 2. Registro de ejecuciones
+
+La tabla 50006 guarda una línea por vendedor procesado; todas las líneas de una ejecución comparten el mismo Id. ejecución. Si no hay nada pendiente se guarda una sola línea Aviso sin vendedor. El usuario es el de la entrada de la cola.
+
+La página 50007 es de solo lectura, ordenada de la más reciente a la más antigua, con la acción Abrir liquidación. Se abre desde Registro del proceso en la lista de liquidaciones o desde el buscador. Sin impacto en datos existentes: tabla nueva.
+
+| Campo | Id | Tipo dato | Comentario |
+| --- | --- | --- | --- |
+| Entry No. | 1 | Integer | Clave, autoincremental. |
+| Run ID | 2 | Guid | Igual en todas las líneas de una ejecución. |
+| Start Date-Time / End Date-Time | 3, 4 | DateTime | Inicio de la ejecución y fin del vendedor. |
+| Salesperson Code | 5 | Code[20] | En blanco en la línea Sin comisiones pendientes. |
+| Status | 6 | Enum 50001 | Correcto, Aviso o Error. |
+| Settlement No. | 7 | Code[20] | Liquidación creada, si la hay. |
+| Message | 8 | Text[250] | Texto del aviso o del error. |
+| User ID | 9 | Code[50] | Usuario con el que corre la cola. |
+
+[Captura: Registro del proceso con una ejecución: A en Correcto, B y C en Aviso]
+
+### RF-3.1, RF-3.2, RF-3.3, RF-3.4, RF-3.5 · 3. Proceso automático de liquidación
+
+La codeunit 50007 (TableNo = Job Queue Entry) lee los parámetros FACTURA=SI|NO;DIAS=n (vacío equivale a FACTURA=SI;DIAS=0) y comprueba la configuración antes de escribir nada: serie de liquidaciones y, con factura, que la cuenta de comisiones sea auxiliar y admita Registro directo. Si algo falla, la entrada de la cola queda en Error con el mensaje y no se liquida a nadie. La comprobación de la cuenta se añadió tras ver en las pruebas que, sin Registro directo, fallaban uno a uno todos los vendedores con proveedor.
+
+La fecha hasta es el último día del mes anterior a la fecha real (Today) menos DIAS: la fecha de trabajo es un ajuste de la sesión y no avanza sola (P-1).
+
+Tras un Commit, recorre los vendedores con comisiones sin liquidar hasta esa fecha y llama a la codeunit de TF0021 con if Run. La línea del registro se inserta fuera del Run y se confirma con Commit por vendedor, así el error de uno no deshace lo de los demás (P-4).
+
+Los avisos (sin proveedor, proveedor bloqueado o total <= 0) son los de TF0021: se liquida sin factura y la línea queda en Aviso. Si al liquidar ya no queda nada, por ejemplo porque lo ha liquidado el report manual, la línea es Aviso «Sin comisiones pendientes».
+
+No hay control de doble ejecución en el mes (P-3): solo se seleccionan comisiones no liquidadas y la codeunit de TF0021 las bloquea al leerlas, así que una segunda ejecución o un reintento solo recoge lo que quedó pendiente.
+
+```al
+ClearLastError();
+Clear(SettleSalespersonCommission);
+SettleSalespersonCommission.SetParameters(UpToDate, CreateInvoice);
+if not SettleSalespersonCommission.Run(SalespersonPurchaser) then begin
+    InsertLog(SalespersonCode, "Commission Process Status_LDR"::Error, '', GetLastErrorText());
+    exit;
+end;
+```
+
+### RF-4.1 · 4. Programación de la tarea
+
+La acción Programar liquidación automática de la lista de liquidaciones llama a ScheduleAutomaticSettlement de la codeunit 50000. Si ya existe una entrada para la codeunit 50007 (FindJobQueueEntry), avisa y no crea otra. Si no, la crea y la pone en marcha con la codeunit estándar 453 Job Queue - Enqueue.
+
+La hora y la primera fecha se asignan antes de validar la fórmula: si la primera fecha estuviera vacía, la validación la calcularía desde la fecha y hora actuales. Se usa <CM+1D> y no <1M> porque la cola calcula la siguiente fecha desde el final real de la ejecución: con <1M>, un retraso al día 2 desplazaría la serie (P-2).
+
+| Campo de Job Queue Entry | Valor |
+| --- | --- |
+| Object Type / ID to Run | Codeunit 50007 |
+| Recurring Job / Next Run Date Formula | Sí / <CM+1D> |
+| Starting Time / Earliest Start Date/Time | 02:00 / día 1 del mes siguiente a las 02:00 |
+| Maximum No. of Attempts / Rerun Delay | 3 / 300 s |
+| Parameter String | FACTURA=SI;DIAS=0 |
+
+[Captura: Entrada de la cola creada por la acción, con la fórmula y los parámetros]
+
+### Pruebas técnicas realizadas
+
+**Prueba manual de los escenarios A-1 a A-11 en el sandbox**
+- Con fecha real 24/11/2026 (fecha hasta 31/10/2026) se registraron comisiones del 15/10/2026 para tres vendedores: A con proveedor, B con proveedor bloqueado y C sin proveedor, y una del 05/11/2026 para A.
+- Se programó la entrada (A-10) y al repetir la acción avisó de que ya existía (A-11).
+- Con Ejecutar una vez (primer plano): sin datos de octubre dejó una sola línea Sin comisiones pendientes; después, A falló por la cuenta de comisiones sin Registro directo mientras B y C se liquidaban con Aviso (A-5, A-6) y la entrada terminó en Correcto. Corregida la cuenta, A se liquidó en Correcto por 10,00 € y la comisión de noviembre siguió pendiente (A-4).
+- Una segunda ejecución no liquidó nada (A-9); con FACTURA=QUIZA y con DIAS=-3 la entrada terminó en Error sin líneas (A-8); con FACTURA=NO;DIAS=10 solo se liquidó hasta el 21/10/2026 y sin factura (A-7).
+- Con la cuenta sin Registro directo y la comprobación nueva, la entrada terminó en Error sin liquidar ni registrar nada.
+- El report manual mantuvo su progreso y su mensaje final (A-2); A-1 se revisó en el código. A-12 (report y cola a la vez) no se ha probado.
+[Captura: Liquidaciones creadas por la cola con fecha hasta 31/10/2026]
+[Captura: Error de la entrada de la cola por parámetro no válido]
+[Captura: Movimientos de A con la comisión del 05/11/2026 pendiente]
+
+### Para quien prueba
+- Dónde está: en «Liquidaciones de comisiones», las acciones Programar liquidación automática y Registro del proceso; la entrada se ve y se ejecuta en «Movs. cola proyectos» (Ejecutar una vez, primer plano).
+- Configuración previa: serie de liquidaciones; cuenta de comisiones auxiliar con Registro directo; vendedores con % de comisión (con 0 % no se generan comisiones) y, para la factura, proveedor en la ficha del vendedor.
+- Datos de prueba: el proceso liquida hasta el último día del mes anterior a la fecha real, no a la fecha de trabajo; las facturas de prueba deben tener fecha de registro de ese mes o anterior.
+- Las dos ventanas que salen al ejecutar en primer plano (confirmación y Estado: Correcto) son del estándar; el proceso no muestra ningún mensaje propio.
+
 
 ## 4. Guion de pruebas funcional key-user
 
@@ -177,6 +275,29 @@ Pruebas que valida el consultor en el sandbox de prácticas (CRONUS ES) con fech
 | A-10 | RF-4.1 | En la lista de liquidaciones, pulsar «Programar liquidación automática» el 17/11/2026 y abrir «Movs. cola proyectos» | Entrada En espera para la codeunit, recurrente, fórmula <CM+1D>, hora 02:00, inicio 01/12/2026 02:00, 3 intentos y parámetros FACTURA=SI;DIAS=0 |  |
 | A-11 | RF-4.1 | Pulsar de nuevo «Programar liquidación automática» | Mensaje de que ya está programada; sigue habiendo una sola entrada |  |
 | A-12 | RF-3.5 | Con una comisión pendiente nueva del vendedor A, ejecutar a la vez el report manual para A y la entrada de la cola (en el test automático, con dos sesiones o simulando el bloqueo) | Solo uno de los dos liquida a A; el otro no crea liquidación (Aviso «Sin comisiones pendientes» o Error de bloqueo en el registro) |  |
+
+## Anexo · Control de la implementación
+
+**Firmas y revisión**
+
+| Quién | Usuario | Fecha | Detalle |
+| --- | --- | --- | --- |
+| P1 | AlejandroGallego-LiderIT | 2026-11-24 | Se hará un proceso para que la liquidación de comisiones se haga una vez al mes, un día de madrugada, hasta el último día del mes anterior. Registro: tabla Commission Process Log con Entry No., Run ID, Start Date-Time, End Date-Time, Salesperson Code, Status (Correcto/Aviso/Error), Settlement No., Message (texto del error con GetLastErrorText o el aviso de GetWarningText) y User ID. Página lista no editable, ordenada de la más reciente a la más antigua, con una acción para abrir la liquidación. Proceso: codeunit de la cola Commission Settlement JQ con TableNo = Job Queue Entry. En OnRun lee Rec."Parameter String" con formato FACTURA=SI;DIAS=0 (DIAS es un entero >= 0 que se resta a la fecha hasta); si está mal escrito, o falta la serie de liquidaciones (o la cuenta con FACTURA=SI), da error y no se liquida nada. La fecha hasta es el último día del mes anterior a Today menos DIAS, sin WorkDate, porque la fecha de trabajo no cambia sola. Commit antes del primer vendedor. Por cada vendedor con comisiones pendientes: ClearLastError, if Codeunit.Run de la codeunit de liquidación de TF0021, y se registra Correcto, Aviso (sin proveedor, proveedor bloqueado o total <= 0: liquida sin factura, como el report manual) o Error, insertando la línea fuera del Run, y Commit después de cada vendedor para que un error no deshaga lo correcto. Si al liquidar ya no queda nada pendiente, o no hay ningún vendedor pendiente, se registra un Aviso «Sin comisiones pendientes». Sin Message, Confirm ni Dialog en el proceso. Programar: en la lista de liquidaciones, una acción que crea la entrada de la cola si no existe ya: Object Type to Run = Codeunit, Object ID to Run = la codeunit anterior, Recurring Job = sí, Next Run Date Formula = <CM+1D>, Earliest Start Date/Time = día 1 del mes siguiente a las 02:00, 3 intentos con 300 s entre ellos y Parameter String FACTURA=SI;DIAS=0; se pone en marcha con Codeunit.Run(Codeunit::"Job Queue - Enqueue", JobQueueEntry). No se hace: ningún control extra de doble ejecución en el mes (un segundo intento solo encuentra lo no liquidado); no se cambia la lógica del report ni de la codeunit de TF0021 (la lógica ya se movió a la codeunit en TF0021); ni correos, ni limpieza del registro. Ejemplo: JR, con proveedor, tiene comisiones de 120 € y 80 € de octubre y de 30 € del 05/11/2026. Se ejecuta el 24/11/2026 con FACTURA=SI;DIAS=0: se liquida hasta el 31/10/2026, sale una liquidación de 200 € con factura de compra, los 30 € de noviembre siguen pendientes y en el registro aparece una línea de JR en estado Correcto con el nº de liquidación. Si se ejecuta otra vez, no se liquida nada y sale una línea Aviso «Sin comisiones pendientes». (Los puntos de qué falta, qué no se hace y el ejemplo se adoptaron de la propuesta de Claude a petición del programador.) |
+
+**Trazabilidad requisito → cambio → prueba → evidencia**
+
+| Requisito | Cambios | Escenarios | Evidencia |
+| --- | --- | --- | --- |
+| RF-1.1 | C-03 La codeunit de la cola llama a Salesp. Comm. Settlement_LDR (50002) igual que el report 50000 de TF0021 (SetParameters, Run, GetSettlementNo, GetWarningText); no se copia lógica de liquidación | A-1 | E-17 manual OK |
+| RF-1.2 | — | A-2 | E-16 manual OK |
+| RF-2.1 | C-01 Enum 50001 (Success/Warning/Error, Correcto/Aviso/Error) y tabla 50006 Commission Process Log_LDR con Entry No. autoincremental, Run ID, inicio y fin, vendedor, estado, nº liquidación, mensaje y usuario; permission set con tabledata RIMD | A-3 | E-01 al_compile OK; E-11 manual OK; E-12 manual OK |
+| RF-2.2 | C-02 Página 50007 no editable ordenada por Entry No. descendente con acción Abrir liquidación; acción Registro del proceso en la lista de liquidaciones | A-3 | E-11 manual OK; E-12 manual OK |
+| RF-3.1 | C-04 Codeunit 50007 con TableNo Job Queue Entry: fecha hasta CalcDate('<-CM-1D>', Today) - DIAS; FACTURA según parámetros; HasPendingCommissions en Commission Mgt para seleccionar vendedores con pendientes | A-4, A-7 | E-09 manual KO; E-10 manual OK; E-15 manual OK |
+| RF-3.2 | C-05 Commit antes del primer vendedor; por vendedor ClearLastError, Clear, if Run; si falla, línea Error con GetLastErrorText insertada fuera del Run y Commit, y se sigue con el resto | A-5 | E-02 al_compile OK; E-07 manual OK |
+| RF-3.3 | C-06 Si la codeunit de TF0021 devuelve aviso (sin proveedor, proveedor no válido o total <= 0, liquida sin factura) la línea queda Aviso con el texto y la liquidación | A-6 | E-08 manual OK |
+| RF-3.4 | C-07 Parámetros FACTURA=SI/NO;DIAS=n validados antes de escribir (clave desconocida, valor no válido o repetida = Error); vacío = FACTURA=SI;DIAS=0; además se comprueba la configuración (serie y, con factura, cuenta) al principio (decisión de P1); C-11 CheckSetup: con FACTURA=SI la cuenta de comisiones debe existir, ser de tipo Auxiliar y tener Registro directo; si no, error antes de liquidar (decisión del programador tras el fallo de A en las pruebas) | A-8 | E-14 manual OK; E-18 al_compile OK; E-19 manual OK |
+| RF-3.5 | C-08 Sin control extra (P-3): solo se seleccionan movimientos no liquidados y TF0021 bloquea con LockTable; si al liquidar ya no queda nada, Aviso Sin comisiones pendientes; sin vendedores pendientes, una línea Aviso | A-9, A-12 | E-06 manual OK; E-13 manual OK |
+| RF-4.1 | C-09 Acción Programar liquidación automática en la lista de liquidaciones; ScheduleAutomaticSettlement en Commission Mgt: si FindJobQueueEntry la encuentra, avisa y no crea otra; si no, crea la entrada (Codeunit 50007, recurrente, Starting Time 02:00, Earliest Start día 1 del mes siguiente 02:00 antes de validar <CM+1D>, 3 intentos, 300 s, FACTURA=SI;DIAS=0) y la pone en marcha con Job Queue - Enqueue; C-10 XLIFF g.xlf regenerado y es-ES completado con los ESP de TF0023 | A-10, A-11 | E-03 al_compile OK; E-04 manual OK; E-05 manual OK |
 
 ## Fuentes
 - Tarea de formación TF0023 (apartados/TF0023.md); reparto.md del Bloque 5 (dueños de objetos).
