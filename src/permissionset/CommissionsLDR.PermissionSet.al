@@ -18,6 +18,7 @@ permissionset 50000 "Commissions_LDR"
         table "Commission Process Log_LDR" = X,
         tabledata "Commission Process Log_LDR" = RIMD,
         page "Commission Process Log_LDR" = X,
+        codeunit "Commission Settlement JQ_LDR" = X,
         page "Commission Settlements_LDR" = X,
         codeunit "Commission Mgt._LDR" = X,
         codeunit "Commission Subscribers_LDR" = X,

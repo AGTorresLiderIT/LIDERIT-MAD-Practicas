@@ -359,6 +359,18 @@ codeunit 50000 "Commission Mgt._LDR"
         exit(true);
     end;
 
+    // TF0023 RF-3.1: true when the salesperson has commission entries not settled up to the date. Only reads.
+    procedure HasPendingCommissions(SalespersonCode: Code[20]; UpToDate: Date): Boolean
+    var
+        CommissionEntry: Record "Commission Entry_LDR";
+    begin
+        CommissionEntry.SetCurrentKey("Salesperson Code", Liquidated, "Posting Date");
+        CommissionEntry.SetRange("Salesperson Code", SalespersonCode);
+        CommissionEntry.SetRange(Liquidated, false);
+        CommissionEntry.SetRange("Posting Date", 0D, UpToDate);
+        exit(not CommissionEntry.IsEmpty());
+    end;
+
     var
         PayrollFileNameTxt: Label 'COMISIONES_%1.csv', Locked = true;
         SalespersonNameTxt: Label 'Salesperson Name', Comment = 'ESP="Nombre vendedor"';
