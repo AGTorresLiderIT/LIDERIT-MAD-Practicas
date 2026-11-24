@@ -943,6 +943,11 @@
         "fecha": "2026-11-24",
         "reformulacion": "Se hará un proceso para que la liquidación de comisiones se haga una vez al mes, un día de madrugada, hasta el último día del mes anterior. Registro: tabla Commission Process Log con Entry No., Run ID, Start Date-Time, End Date-Time, Salesperson Code, Status (Correcto/Aviso/Error), Settlement No., Message (texto del error con GetLastErrorText o el aviso de GetWarningText) y User ID. Página lista no editable, ordenada de la más reciente a la más antigua, con una acción para abrir la liquidación. Proceso: codeunit de la cola Commission Settlement JQ con TableNo = Job Queue Entry. En OnRun lee Rec.\"Parameter String\" con formato FACTURA=SI;DIAS=0 (DIAS es un entero >= 0 que se resta a la fecha hasta); si está mal escrito, o falta la serie de liquidaciones (o la cuenta con FACTURA=SI), da error y no se liquida nada. La fecha hasta es el último día del mes anterior a Today menos DIAS, sin WorkDate, porque la fecha de trabajo no cambia sola. Commit antes del primer vendedor. Por cada vendedor con comisiones pendientes: ClearLastError, if Codeunit.Run de la codeunit de liquidación de TF0021, y se registra Correcto, Aviso (sin proveedor, proveedor bloqueado o total <= 0: liquida sin factura, como el report manual) o Error, insertando la línea fuera del Run, y Commit después de cada vendedor para que un error no deshaga lo correcto. Si al liquidar ya no queda nada pendiente, o no hay ningún vendedor pendiente, se registra un Aviso «Sin comisiones pendientes». Sin Message, Confirm ni Dialog en el proceso. Programar: en la lista de liquidaciones, una acción que crea la entrada de la cola si no existe ya: Object Type to Run = Codeunit, Object ID to Run = la codeunit anterior, Recurring Job = sí, Next Run Date Formula = <CM+1D>, Earliest Start Date/Time = día 1 del mes siguiente a las 02:00, 3 intentos con 300 s entre ellos y Parameter String FACTURA=SI;DIAS=0; se pone en marcha con Codeunit.Run(Codeunit::\"Job Queue - Enqueue\", JobQueueEntry). No se hace: ningún control extra de doble ejecución en el mes (un segundo intento solo encuentra lo no liquidado); no se cambia la lógica del report ni de la codeunit de TF0021 (la lógica ya se movió a la codeunit en TF0021); ni correos, ni limpieza del registro. Ejemplo: JR, con proveedor, tiene comisiones de 120 € y 80 € de octubre y de 30 € del 05/11/2026. Se ejecuta el 24/11/2026 con FACTURA=SI;DIAS=0: se liquida hasta el 31/10/2026, sale una liquidación de 200 € con factura de compra, los 30 € de noviembre siguen pendientes y en el registro aparece una línea de JR en estado Correcto con el nº de liquidación. Si se ejecuta otra vez, no se liquida nada y sale una línea Aviso «Sin comisiones pendientes». (Los puntos de qué falta, qué no se hace y el ejemplo se adoptaron de la propuesta de Claude a petición del programador.)",
         "validacion_omitida": "Prueba del procedimiento en prácticas; consultor no disponible. Quedan sin validar P-1 a P-4 y P-6 y el cambio de A-5 (proveedor bloqueado = Aviso, como TF0021)"
+      },
+      "P2": {
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24",
+        "reformulacion": "Se hizo una tabla para el registro de ejecuciones,ordenada de reciente a antigua ocn accion para abrir las liquidaciones y no editable. Se creo la CDU para la cola detrabajo, con TableNo = \"Job Que Entry\", con trigger OnRUn en el que hay que leer el parameter string, si estan mal escritos = ERROR. Se calcua la fecha hasta con  UpToDate := CalcDate('<-CM-1D>', Today()) - DaysBefore;. Al regisrarse cada vendeedor, commit. No puede haber mensajes si no hay GuiAllowed, se crea la accion  de programar liqudaciomn automatica,"
       }
     },
     "subissues": {
@@ -1405,6 +1410,14 @@
         "usuario_gh": "AlejandroGallego-LiderIT",
         "plugin": "0.4.0",
         "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:46:09",
+        "accion": "firma",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "P2"
       }
     ]
   },
