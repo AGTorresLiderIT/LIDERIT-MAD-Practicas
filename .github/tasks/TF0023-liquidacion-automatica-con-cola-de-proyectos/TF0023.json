@@ -545,9 +545,133 @@
     "Revisado con bc-code-intel (especialistas: sam-coder; find_bc_knowledge: eva-errors/codeunit-run-pattern). La respuesta fue genérica: las decisiones de transacciones se apoyan en Learn y en el código estándar."
   ],
   "implementacion": {
-    "cambios": [],
+    "cambios": [
+      {
+        "id": "C-01",
+        "rf": "RF-2.1",
+        "ficheros": [
+          "src/enum/CommissionProcessStatusLDR.Enum.al",
+          "src/table/CommissionProcessLogLDR.Table.al",
+          "src/permissionset/CommissionsLDR.PermissionSet.al"
+        ],
+        "commit": "ff5b29a",
+        "resumen": "Enum 50001 (Success/Warning/Error, Correcto/Aviso/Error) y tabla 50006 Commission Process Log_LDR con Entry No. autoincremental, Run ID, inicio y fin, vendedor, estado, nº liquidación, mensaje y usuario; permission set con tabledata RIMD"
+      },
+      {
+        "id": "C-02",
+        "rf": "RF-2.2",
+        "ficheros": [
+          "src/page/CommissionProcessLogLDR.Page.al",
+          "src/page/CommissionSettlementsLDR.Page.al",
+          "src/permissionset/CommissionsLDR.PermissionSet.al"
+        ],
+        "commit": "ff5b29a",
+        "resumen": "Página 50007 no editable ordenada por Entry No. descendente con acción Abrir liquidación; acción Registro del proceso en la lista de liquidaciones"
+      },
+      {
+        "id": "C-03",
+        "rf": "RF-1.1",
+        "ficheros": [
+          "src/codeunit/CommissionSettlementJQLDR.Codeunit.al"
+        ],
+        "commit": "1c567cb",
+        "resumen": "La codeunit de la cola llama a Salesp. Comm. Settlement_LDR (50002) igual que el report 50000 de TF0021 (SetParameters, Run, GetSettlementNo, GetWarningText); no se copia lógica de liquidación"
+      },
+      {
+        "id": "C-04",
+        "rf": "RF-3.1",
+        "ficheros": [
+          "src/codeunit/CommissionSettlementJQLDR.Codeunit.al",
+          "src/codeunit/CommissionMgtLDR.Codeunit.al",
+          "src/permissionset/CommissionsLDR.PermissionSet.al"
+        ],
+        "commit": "1c567cb",
+        "resumen": "Codeunit 50007 con TableNo Job Queue Entry: fecha hasta CalcDate('<-CM-1D>', Today) - DIAS; FACTURA según parámetros; HasPendingCommissions en Commission Mgt para seleccionar vendedores con pendientes"
+      },
+      {
+        "id": "C-05",
+        "rf": "RF-3.2",
+        "ficheros": [
+          "src/codeunit/CommissionSettlementJQLDR.Codeunit.al"
+        ],
+        "commit": "1c567cb",
+        "resumen": "Commit antes del primer vendedor; por vendedor ClearLastError, Clear, if Run; si falla, línea Error con GetLastErrorText insertada fuera del Run y Commit, y se sigue con el resto"
+      },
+      {
+        "id": "C-06",
+        "rf": "RF-3.3",
+        "ficheros": [
+          "src/codeunit/CommissionSettlementJQLDR.Codeunit.al"
+        ],
+        "commit": "1c567cb",
+        "resumen": "Si la codeunit de TF0021 devuelve aviso (sin proveedor, proveedor no válido o total <= 0, liquida sin factura) la línea queda Aviso con el texto y la liquidación"
+      },
+      {
+        "id": "C-07",
+        "rf": "RF-3.4",
+        "ficheros": [
+          "src/codeunit/CommissionSettlementJQLDR.Codeunit.al"
+        ],
+        "commit": "1c567cb",
+        "resumen": "Parámetros FACTURA=SI|NO;DIAS=n validados antes de escribir (clave desconocida, valor no válido o repetida = Error); vacío = FACTURA=SI;DIAS=0; además se comprueba la configuración (serie y, con factura, cuenta) al principio (decisión de P1)"
+      },
+      {
+        "id": "C-08",
+        "rf": "RF-3.5",
+        "ficheros": [
+          "src/codeunit/CommissionSettlementJQLDR.Codeunit.al"
+        ],
+        "commit": "1c567cb",
+        "resumen": "Sin control extra (P-3): solo se seleccionan movimientos no liquidados y TF0021 bloquea con LockTable; si al liquidar ya no queda nada, Aviso Sin comisiones pendientes; sin vendedores pendientes, una línea Aviso"
+      },
+      {
+        "id": "C-09",
+        "rf": "RF-4.1",
+        "ficheros": [
+          "src/codeunit/CommissionMgtLDR.Codeunit.al",
+          "src/page/CommissionSettlementsLDR.Page.al"
+        ],
+        "commit": "2fb3ad5",
+        "resumen": "Acción Programar liquidación automática en la lista de liquidaciones; ScheduleAutomaticSettlement en Commission Mgt: si FindJobQueueEntry la encuentra, avisa y no crea otra; si no, crea la entrada (Codeunit 50007, recurrente, Starting Time 02:00, Earliest Start día 1 del mes siguiente 02:00 antes de validar <CM+1D>, 3 intentos, 300 s, FACTURA=SI;DIAS=0) y la pone en marcha con Job Queue - Enqueue"
+      },
+      {
+        "id": "C-10",
+        "rf": "RF-4.1",
+        "ficheros": [
+          "Translations/LIDERIT-MAD-Practicas.g.xlf",
+          "Translations/LIDERIT-MAD-Practicas.es-ES.xlf"
+        ],
+        "commit": "2b99103",
+        "resumen": "XLIFF g.xlf regenerado y es-ES completado con los ESP de TF0023"
+      }
+    ],
     "extras": [],
-    "evidencias": [],
+    "evidencias": [
+      {
+        "id": "E-01",
+        "rf": "RF-2.1",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos (solo info previos). Commit ff5b29a"
+      },
+      {
+        "id": "E-02",
+        "rf": "RF-3.2",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos. Commit 1c567cb"
+      },
+      {
+        "id": "E-03",
+        "rf": "RF-4.1",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos. FindJobQueueEntry y OnValidate de Next Run Date Formula comprobados en el estándar es-29 (JobQueueEntry.Table.al l. 292-306 y 1432). Commit 2fb3ad5"
+      }
+    ],
     "desviaciones": [],
     "firmas": {
       "P1": {
@@ -647,6 +771,97 @@
         "usuario_gh": "AlejandroGallego-LiderIT",
         "plugin": "0.4.0",
         "puerta": "P1"
+      },
+      {
+        "ts": "2026-11-24T10:12:42",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T10:12:43",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T10:12:45",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T10:13:55",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T10:13:56",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T10:13:57",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T10:13:58",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T10:13:59",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T10:14:00",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T10:14:01",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T10:15:00",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T10:15:01",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T10:15:04",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
       }
     ]
   }
