@@ -1,0 +1,1640 @@
+{
+  "_version": 2,
+  "codigo": "TF0023",
+  "codigo_erpit": "",
+  "nombre": "Liquidación automática con cola de proyectos",
+  "cliente": "LiderIT",
+  "fecha": "17/11/2026",
+  "proyecto": "Formación – Bloque 5 (Eventos, registro y procesos)",
+  "destinatario": "Alejandro Gallego",
+  "consultor": "Alejandro González Torres",
+  "ficha": {
+    "origen": "Tarea de formación TF0023 – Liquidación automática con cola de proyectos (19/10/2026), Bloque 5. Depende de TF0021.",
+    "riesgo": "ROJO (proceso desatendido en la cola de proyectos, Commit por vendedor, Codeunit.Run con gestión de errores y generación de liquidaciones sin intervención)",
+    "estado": "En desarrollo",
+    "issue_rama": "https://github.com/AGTorresLiderIT/LIDERIT-MAD-Practicas/issues/51 · rama Feature/TF0023-liquidacion-automatica-con-cola-de-proyectos"
+  },
+  "funcional": {
+    "contexto": "Cierre del Bloque 5. Dirección quiere que la liquidación de comisiones de TF0021 se haga sola el día 1 de cada mes de madrugada, liquidando hasta el último día del mes anterior, sin que nadie lance el proceso.",
+    "situacion_actual": "Tras TF0021 la liquidación se lanza a mano con el report «Settle Commissions_LDR», que muestra progreso y un mensaje final. La lógica de un vendedor ya está en la codeunit «Settle Salesperson Commission_LDR». No hay programación automática ni registro de ejecuciones.",
+    "intro_alcance": "La tarea incluye:",
+    "bloques": [
+      {
+        "id": "1",
+        "titulo": "Reutilización de la liquidación por vendedor",
+        "requisitos": [
+          {
+            "id": "RF-1.1",
+            "texto": "La liquidación automática y el report manual de TF0021 liquidan cada vendedor con la misma codeunit, sin duplicar lógica."
+          },
+          {
+            "id": "RF-1.2",
+            "texto": "La liquidación de un vendedor no muestra mensajes, confirmaciones ni ventanas cuando no hay interfaz; el report manual sigue con su ventana de progreso y su mensaje final."
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "titulo": "Registro de ejecuciones",
+        "requisitos": [
+          {
+            "id": "RF-2.1",
+            "texto": "Cada ejecución automática deja una línea por vendedor procesado con identificador de ejecución, fecha y hora de inicio y fin, vendedor, estado (Correcto, Aviso o Error), liquidación generada, mensaje y usuario."
+          },
+          {
+            "id": "RF-2.2",
+            "texto": "El registro se consulta en una lista no editable, de la más reciente a la más antigua, con una acción para abrir la liquidación."
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "titulo": "Proceso automático de liquidación",
+        "requisitos": [
+          {
+            "id": "RF-3.1",
+            "texto": "El proceso liquida hasta el último día del mes anterior a la fecha de ejecución, menos los días indicados en los parámetros, y genera o no factura según los parámetros."
+          },
+          {
+            "id": "RF-3.2",
+            "texto": "Si falla la liquidación de un vendedor, queda en el registro con estado Error y el texto del error, y el resto de vendedores se liquida."
+          },
+          {
+            "id": "RF-3.3",
+            "texto": "Si se pide factura y el vendedor no tiene proveedor o su total es menor o igual que cero, se liquida sin factura (como el report manual de TF0021) y la línea queda con estado Aviso y el motivo."
+          },
+          {
+            "id": "RF-3.4",
+            "texto": "Si los parámetros están mal escritos, el proceso no liquida nada y la entrada de la cola queda en Error con un mensaje entendible."
+          },
+          {
+            "id": "RF-3.5",
+            "texto": "Ejecutar el proceso dos veces en el mismo mes, o a la vez que el report manual, no liquida dos veces las mismas comisiones."
+          }
+        ]
+      },
+      {
+        "id": "4",
+        "titulo": "Programación de la tarea",
+        "requisitos": [
+          {
+            "id": "RF-4.1",
+            "texto": "Una acción «Programar liquidación automática» en la lista de liquidaciones crea, si no existe ya, la entrada recurrente de la cola (día 1 de cada mes a las 02:00, parámetros FACTURA=SI;DIAS=0) y la pone en marcha."
+          }
+        ]
+      }
+    ],
+    "puntos": [
+      {
+        "id": "P-1",
+        "tipo": "Supuesto",
+        "texto": "Fecha hasta con Today y no con WorkDate: la fecha de trabajo es un ajuste del usuario en su sesión (en «Ejecutar una vez (en primer plano)» sería la del usuario que lo lanza) y el proceso debe liquidar según la fecha real de ejecución. Fecha hasta = CalcDate('<-CM-1D>', Today) - DIAS. Cuestionar en P1 de sdd-implementar.",
+        "bloquea": true,
+        "responsable": "Programador (validación del consultor)",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      },
+      {
+        "id": "P-2",
+        "tipo": "Supuesto",
+        "texto": "Recurrencia con <CM+1D> y no con <1M>: al terminar cada ejecución la cola calcula la siguiente fecha desde la fecha real en que termina (CleanupAfterExecution pasa CurrentDateTime a CalcNextRunTimeForRecurringJob, que hace CalcDate sobre esa fecha). Si una ejecución se retrasa al día 2, <1M> desplazaría la serie al día 2 de los meses siguientes; <CM+1D> vuelve siempre al día 1. Cuestionar en P1.",
+        "bloquea": true,
+        "responsable": "Programador (validación del consultor)",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      },
+      {
+        "id": "P-3",
+        "tipo": "Supuesto",
+        "texto": "Doble ejecución en el mismo mes (decisión del revisor): basta con seleccionar solo movimientos no liquidados (Liquidated de TF0021) porque cada vendedor se confirma con su propio Commit; una segunda ejecución o un reintento de la cola solo encuentra lo que quedó pendiente (vendedores con Error). No se añade control por mes ni marca de «ejecución en curso»: la cola no ejecuta a la vez dos veces la misma entrada. La protección frente a ejecuciones simultáneas con el report está en P-8. Cuestionar en P1.",
+        "bloquea": true,
+        "responsable": "Programador (validación del consultor)",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      },
+      {
+        "id": "P-4",
+        "tipo": "Supuesto",
+        "texto": "Commit y Codeunit.Run (decisión del revisor, confirmada en Learn): Codeunit.Run con valor de retorno exige no tener transacción de escritura abierta. Orden: validar parámetros (sin escribir), Commit, y por cada vendedor: ClearLastError, Clear de la variable de la codeunit, pasar fecha y opción, if Run, insertar la línea del registro fuera del Run (así sobrevive al error) y Commit. La codeunit de TF0021 no hace Commit ni usa CommitBehavior. Cuestionar en P1.",
+        "bloquea": true,
+        "responsable": "Programador (validación del consultor)",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      },
+      {
+        "id": "P-5",
+        "tipo": "Supuesto",
+        "texto": "Parámetros: formato CLAVE=VALOR separado por «;», claves FACTURA (SI/NO) y DIAS (entero >= 0), sin distinguir mayúsculas. Si el campo está vacío se usan FACTURA=SI;DIAS=0. Clave desconocida, valor no válido o clave repetida: error antes de procesar ningún vendedor. Cuestionar en P1.",
+        "bloquea": false,
+        "responsable": "Programador (validación del consultor)",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      },
+      {
+        "id": "P-6",
+        "tipo": "Supuesto",
+        "texto": "Avisos alineados con TF0021 (decisión del revisor): el proceso no detecta por su cuenta los casos sin proveedor o total <= 0, porque duplicaría la lógica de la codeunit y daría un resultado distinto al del report manual. La codeunit de TF0021 liquida sin factura y devuelve el motivo del aviso; el proceso lo registra como Aviso con la liquidación. Con FACTURA=NO esos vendedores salen como Correcto. El consultor confirma que el automático debe liquidar estos casos igual que el manual (incluido un total negativo).",
+        "bloquea": true,
+        "responsable": "Consultor",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      },
+      {
+        "id": "P-7",
+        "tipo": "Supuesto",
+        "texto": "Permisos (decisión del revisor): la cola ejecuta la tarea con el usuario del campo «User ID» de la entrada, que es quien la programa (Job Queue Entry, SetDefaultValues). Ese usuario necesita «Commissions_LDR» (tabla de registro con RIMD, página y codeunit nuevas), permisos estándar para crear facturas de compra y para programar tareas en la cola; no se crea un conjunto aparte. Se documenta en la parametrización de pruebas. Cuestionar en P1.",
+        "bloquea": false,
+        "responsable": "Programador (validación del consultor)",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      },
+      {
+        "id": "P-8",
+        "tipo": "Supuesto",
+        "texto": "Concurrencia con el report manual (decisión del revisor): no se bloquea el report. La codeunit de TF0021 lee los movimientos pendientes del vendedor con bloqueo (LockTable o ReadIsolation UpdLock) dentro de su transacción y, si ya no queda ninguno, termina sin crear liquidación y devuelve el aviso «Sin comisiones pendientes». Si choca con el report, el que espera puede acabar en tiempo de bloqueo agotado: ese vendedor queda en Error y se liquida en el reintento o en la siguiente ejecución. Es un cambio sobre la codeunit de TF0021. Cuestionar en P1.",
+        "bloquea": false,
+        "responsable": "Programador (validación del consultor)",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      },
+      {
+        "id": "P-10",
+        "tipo": "Supuesto",
+        "texto": "Interfaz de «Settle Salesperson Commission_LDR» (alineada con TF0021, que es su dueña): SetParameters(UpToDate: Date; CreateInvoice: Boolean) antes de Run(Salesperson), y GetSettlementNo(): Code[20] y GetWarningText(): Text después. Si TF0021 la crea con otros nombres se usan los suyos; lo imprescindible es pasar fecha y opción antes de Run y leer liquidación y aviso después.",
+        "bloquea": false,
+        "responsable": "Programador",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      },
+      {
+        "id": "P-9",
+        "tipo": "Fuera de alcance",
+        "texto": "Avisos por correo o notificaciones de errores, limpieza automática del registro de ejecuciones, programación en varias empresas a la vez y edición de la entrada de la cola desde la acción (se hace en «Movs. cola proyectos»).",
+        "bloquea": false,
+        "responsable": "Consultor",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      }
+    ]
+  },
+  "desarrollo": {
+    "intro": "Se añade un proceso para la cola de proyectos que reutiliza la liquidación por vendedor de TF0021. Se realizarán las siguientes modificaciones:",
+    "secciones": [
+      {
+        "id": "1",
+        "titulo": "Reutilización de la liquidación por vendedor",
+        "ubicacion": "Codeunit «Settle Salesperson Commission_LDR» y report «Settle Commissions_LDR» (TF0021); tabla Salesperson/Purchaser (13).",
+        "parrafos": [
+          "La codeunit de un vendedor ya existe desde TF0021 (TableNo = Salesperson/Purchaser). No se mueve lógica: se comprueba que el report y el proceso nuevo la llaman igual, con la interfaz de P-10 (fecha hasta y opción de factura antes de Run; nº de liquidación y texto de aviso después).",
+          "La codeunit no debe usar Message, Confirm ni Dialog en ningún caso (no basta con GuiAllowed: «Ejecutar una vez (en primer plano)» corre con interfaz), ni Commit. La ventana de progreso y el mensaje final se quedan en el report, que cuenta los avisos con GetWarningText.",
+          "Se añade en la codeunit la lectura con bloqueo de los movimientos pendientes y la salida sin liquidación si ya no queda ninguno (P-8)."
+        ],
+        "puntos": [
+          "Los cambios en la codeunit (interacción, bloqueo, GetWarningText) se anotan como cambio sobre TF0021.",
+          "El report manual debe seguir funcionando igual (escenario A-2)."
+        ]
+      },
+      {
+        "id": "2",
+        "titulo": "Registro de ejecuciones",
+        "ubicacion": "Tabla y página nuevas «Commission Process Log_LDR»; tabla «Commission Settlement_LDR» (TF0021).",
+        "parrafos": [
+          "Tabla nueva con una línea por vendedor procesado. Todas las líneas de una ejecución comparten el mismo «Run ID». La página es una lista no editable ordenada por «Entry No.» descendente, con la acción «Open Settlement» que abre la liquidación indicada."
+        ],
+        "tabla": {
+          "columnas": [
+            "Campo",
+            "Tipo",
+            "Comentario"
+          ],
+          "filas": [
+            [
+              "Entry No.",
+              "Integer",
+              "Clave primaria (AutoIncrement)"
+            ],
+            [
+              "Run ID",
+              "Guid",
+              "Mismo valor para todas las líneas de una ejecución"
+            ],
+            [
+              "Start Date-Time",
+              "DateTime",
+              "Inicio de la ejecución"
+            ],
+            [
+              "End Date-Time",
+              "DateTime",
+              "Fin del proceso del vendedor"
+            ],
+            [
+              "Salesperson Code",
+              "Code[20]",
+              "Relación con Salesperson/Purchaser; vacío en la línea «Sin comisiones pendientes»"
+            ],
+            [
+              "Status",
+              "Enum «Commission Process Status_LDR»",
+              "Correcto (Success) / Aviso (Warning) / Error"
+            ],
+            [
+              "Settlement No.",
+              "Code[20]",
+              "Liquidación generada, si la hay"
+            ],
+            [
+              "Message",
+              "Text[250]",
+              "Texto del aviso o GetLastErrorText recortado a 250"
+            ],
+            [
+              "User ID",
+              "Code[50]",
+              "Usuario con el que corre la cola"
+            ]
+          ]
+        }
+      },
+      {
+        "id": "3",
+        "titulo": "Proceso automático de liquidación",
+        "ubicacion": "Tabla Job Queue Entry (472); codeunit nueva «Commission Settlement JQ_LDR»; codeunit «Commission Mgt._LDR» (TF0020).",
+        "parrafos": [
+          "Codeunit nueva con TableNo = Job Queue Entry. En OnRun lee y valida Rec.\"Parameter String\" antes de escribir nada; si es incorrecto lanza Error y la cola deja la entrada en Error con ese texto. Calcula la fecha hasta = CalcDate('<-CM-1D>', Today) - DIAS (P-1).",
+          "Hace Commit y recorre los vendedores con comisiones no liquidadas hasta esa fecha (función nueva en «Commission Mgt._LDR», con SetLoadFields). Por cada uno: ClearLastError, Clear de la codeunit de TF0021, SetParameters e if Run(Salesperson). Si va bien registra Correcto con la liquidación, o Aviso con la liquidación y el texto de GetWarningText si lo hay; si falla, Error con GetLastErrorText recortado. La línea se inserta fuera del Run y después se hace Commit (P-4).",
+          "Sin Message, Confirm ni Dialog. Si no hay ningún vendedor pendiente, registra una única línea Aviso «Sin comisiones pendientes»."
+        ],
+        "mensajes": [
+          "Error de parámetros: «The parameter string '%1' is not valid. Use FACTURA=SI|NO;DIAS=<number of days>.» (ESP=\"El parámetro '%1' no es válido. Use FACTURA=SI|NO;DIAS=<nº de días>.\")",
+          "Los avisos de vendedor sin proveedor y total <= 0 son los de la codeunit de TF0021 (GetWarningText); no se crean textos nuevos.",
+          "Aviso: «No pending commissions up to %1.» (ESP=\"Sin comisiones pendientes hasta el %1.\")"
+        ]
+      },
+      {
+        "id": "4",
+        "titulo": "Programación de la tarea",
+        "ubicacion": "Página lista de «Commission Settlement_LDR» (TF0021); tabla Job Queue Entry (472); codeunit Job Queue - Enqueue (453); página Job Queue Entries (672).",
+        "parrafos": [
+          "Acción «Schedule Automatic Settlement» (ESP=\"Programar liquidación automática\"). Si ya existe una entrada para la codeunit (FindJobQueueEntry), informa y no crea otra. Si no, crea la entrada con los valores de la tabla y la pone en marcha con Codeunit.Run(Codeunit::\"Job Queue - Enqueue\", JobQueueEntry).",
+          "Orden de asignación: «Starting Time» y «Earliest Start Date/Time» antes de validar «Next Run Date Formula»; si la fecha de inicio está vacía, el OnValidate de la fórmula la calcula sobre la fecha actual (Job Queue Entry, campo 29)."
+        ],
+        "tabla": {
+          "columnas": [
+            "Campo de Job Queue Entry",
+            "Valor"
+          ],
+          "filas": [
+            [
+              "Object Type to Run / Object ID to Run",
+              "Codeunit / «Commission Settlement JQ_LDR»"
+            ],
+            [
+              "Description",
+              "«Automatic commission settlement» (Label, ESP=\"Liquidación automática de comisiones\")"
+            ],
+            [
+              "Recurring Job",
+              "Sí"
+            ],
+            [
+              "Starting Time",
+              "02:00"
+            ],
+            [
+              "Earliest Start Date/Time",
+              "CreateDateTime(CalcDate('<CM+1D>', Today), 020000T)"
+            ],
+            [
+              "Next Run Date Formula",
+              "<CM+1D> (Validate, ver P-2)"
+            ],
+            [
+              "Maximum No. of Attempts to Run / Rerun Delay (sec.)",
+              "3 / 300: los reintentos son seguros (P-3) y cubren bloqueos con el report manual (P-8)"
+            ],
+            [
+              "Parameter String",
+              "FACTURA=SI;DIAS=0"
+            ]
+          ]
+        },
+        "mensajes": [
+          "«The automatic settlement is already scheduled. You can review it in Job Queue Entries.» (ESP=\"La liquidación automática ya está programada. Puede revisarla en Movs. cola proyectos.\")",
+          "«The automatic settlement has been scheduled for %1.» (ESP=\"La liquidación automática se ha programado para el %1.\")"
+        ]
+      }
+    ],
+    "objetos": [
+      {
+        "tipo": "Table",
+        "id": 50006,
+        "nombre": "Commission Process Log_LDR",
+        "extiende": "",
+        "uso": "registro de ejecuciones del proceso automático"
+      },
+      {
+        "tipo": "Enum",
+        "id": 50001,
+        "nombre": "Commission Process Status_LDR",
+        "extiende": "",
+        "uso": "estado de cada línea del registro: Success, Warning, Error"
+      },
+      {
+        "tipo": "Page",
+        "id": 50007,
+        "nombre": "Commission Process Log_LDR",
+        "extiende": "",
+        "uso": "lista no editable del registro, descendente, con acción para abrir la liquidación"
+      },
+      {
+        "tipo": "Codeunit",
+        "id": 50007,
+        "nombre": "Commission Settlement JQ_LDR",
+        "extiende": "",
+        "uso": "codeunit de la cola (TableNo = Job Queue Entry): parámetros, recorrido de vendedores, Codeunit.Run, registro y Commit"
+      },
+      {
+        "tipo": "Codeunit",
+        "id": 50000,
+        "nombre": "Commission Mgt._LDR",
+        "extiende": "",
+        "uso": "existente (TF0020): se añade la selección de vendedores con comisiones pendientes hasta una fecha y la programación de la entrada de la cola"
+      },
+      {
+        "tipo": "Codeunit",
+        "id": 50002,
+        "nombre": "Settle Salesperson Commission_LDR",
+        "extiende": "",
+        "uso": "existente (TF0021): se reutiliza; se comprueba que no tenga interacción ni Commit y se añaden lectura con bloqueo y GetWarningText si TF0021 no los tiene"
+      },
+      {
+        "tipo": "Page",
+        "id": 50003,
+        "nombre": "Commission Settlements_LDR",
+        "extiende": "",
+        "uso": "existente (TF0021, «Commission Settlements» en su origen): acción «Schedule Automatic Settlement» y acceso al registro"
+      },
+      {
+        "tipo": "PermissionSet",
+        "id": 50000,
+        "nombre": "Commissions_LDR",
+        "extiende": "",
+        "uso": "existente (TF0020): se añaden la tabla, la página y la codeunit nuevas"
+      },
+      {
+        "tipo": "Codeunit",
+        "id": 50008,
+        "nombre": "Commission Settlement JQ Test_LDR",
+        "extiende": "",
+        "uso": "tests automáticos (app de test): parámetros, error de un vendedor, avisos y doble ejecución"
+      }
+    ],
+    "alcance_tecnico": [
+      "Sin suscripciones a eventos: se usan la tabla Job Queue Entry (472) y la codeunit Job Queue - Enqueue (453) del estándar.",
+      "Textos en Labels con Comment = 'ESP=\"...\"'; los errores del proceso, con Label y sin concatenar texto libre.",
+      "Codeunit.Run con valor de retorno solo sin transacción de escritura abierta: Commit antes del primer vendedor y tras la línea de registro de cada uno."
+    ],
+    "eventos": [],
+    "consideraciones": [
+      "Depende de TF0021: tabla y lista de liquidaciones, report «Settle Commissions_LDR» y codeunit «Settle Salesperson Commission_LDR» (la crea TF0021; aquí solo se reutiliza). La «refactorización previa» del enunciado queda en verificar ese uso y GuiAllowed.",
+      "Las decisiones de P-1 a P-5 (Today, <CM+1D>, doble ejecución, Commit y Codeunit.Run, parámetros) se resuelven en la tarea por decisión del consultor. En sdd-implementar el programador debe cuestionarlas en P1 antes de construir.",
+      "Today en la cola usa la zona horaria de la sesión de la cola; a las 02:00 de España el día 1 sigue siendo día 1, pero conviene comprobarlo en el entorno.",
+      "«Ejecutar una vez (en primer plano)» corre con interfaz (GuiAllowed verdadero): el proceso no debe mostrar nada aunque pueda.",
+      "Comprobado en application 28 (bc-observatory): los campos de Job Queue Entry usados (6, 7, 8, 11, 16, 17, 26, 29, 30, 47) y FindJobQueueEntry existen en 28, 29 y 30.",
+      "Reintentos y doble ejecución son seguros porque cada vendedor se confirma por separado y solo se seleccionan movimientos no liquidados; un fallo a mitad deja firme lo anterior y el resto se recoge en la siguiente ejecución.",
+      "Repositorio de prácticas compartido: sin objetos previos en main, sin impacto sobre desarrollos instalados."
+    ],
+    "tareas": [
+      {
+        "id": "T-01",
+        "descripcion": "Revisar en P1 las decisiones P-1 a P-8 y la interfaz de P-10 con el consultor",
+        "depende_de": "TF0021 terminada",
+        "hecho_cuando": "Plan P1 firmado"
+      },
+      {
+        "id": "T-02",
+        "descripcion": "Revisar interacción, Commit, bloqueo y aviso en la codeunit de liquidación de TF0021",
+        "depende_de": "T-01",
+        "hecho_cuando": "Pasa A-2"
+      },
+      {
+        "id": "T-03",
+        "descripcion": "Tabla, enum y página del registro de ejecuciones",
+        "depende_de": "T-01",
+        "hecho_cuando": "Compila; pasa A-3"
+      },
+      {
+        "id": "T-04",
+        "descripcion": "Codeunit de la cola con parámetros, avisos, Codeunit.Run y Commit",
+        "depende_de": "T-02, T-03",
+        "hecho_cuando": "Pasan A-4 a A-9 y A-12"
+      },
+      {
+        "id": "T-05",
+        "descripcion": "Acción de programación en la lista de liquidaciones",
+        "depende_de": "T-04",
+        "hecho_cuando": "Pasan A-10 y A-11"
+      },
+      {
+        "id": "T-06",
+        "descripcion": "Permisos, traducciones es-ES y tests automáticos",
+        "depende_de": "T-05",
+        "hecho_cuando": "Tests en verde y XLIFF completo"
+      },
+      {
+        "id": "T-07",
+        "descripcion": "Documentación técnica de entrega (solución, gestión de errores y transacciones, capturas de código, de la cola y del registro, dudas)",
+        "depende_de": "T-06",
+        "hecho_cuando": "Documento entregado al consultor"
+      }
+    ]
+  },
+  "pruebas": {
+    "intro": "Pruebas que valida el consultor en el sandbox de prácticas (CRONUS ES) con fecha real 17/11/2026, por lo que la fecha hasta por defecto es 31/10/2026.",
+    "parametrizacion": [
+      "TF0020 a TF0021 instaladas y configuradas (configuración de ventas, serie de liquidaciones).",
+      "Vendedor A con proveedor y comisiones pendientes de 120,00 € y 80,00 € de octubre, y otra de 30,00 € del 05/11/2026.",
+      "Vendedor B con proveedor bloqueado y comisión pendiente de 50,00 € de octubre.",
+      "Vendedor C sin proveedor y comisión pendiente de 40,00 € de octubre.",
+      "Vendedor D con proveedor y un abono que deja su comisión pendiente de octubre en -15,00 €.",
+      "Sin otras entradas de la cola para la codeunit «Commission Settlement JQ_LDR».",
+      "La entrada se programa con un usuario con «Commissions_LDR», permisos de compras para crear facturas y permisos de cola de proyectos."
+    ],
+    "escenarios": [
+      {
+        "id": "A-1",
+        "rf": "RF-1.1",
+        "escenario": "Revisar con el programador el código del report y de la codeunit de la cola",
+        "resultado": "Ambos llaman a «Settle Salesperson Commission_LDR»; no hay lógica de liquidación copiada"
+      },
+      {
+        "id": "A-2",
+        "rf": "RF-1.2",
+        "escenario": "Lanzar a mano el report de TF0021 para el vendedor A hasta 31/10/2026",
+        "resultado": "Ventana de progreso y mensaje final como en TF0021; liquidación de 200,00 €"
+      },
+      {
+        "id": "A-3",
+        "rf": "RF-2.1, RF-2.2",
+        "escenario": "Tras A-5, abrir el registro de ejecuciones y usar «Abrir liquidación» en la línea del vendedor A",
+        "resultado": "Lista no editable, la ejecución más reciente arriba, todas sus líneas con el mismo Run ID y el usuario de la cola; se abre la liquidación de A"
+      },
+      {
+        "id": "A-4",
+        "rf": "RF-3.1",
+        "escenario": "Con Parameter String FACTURA=SI;DIAS=0, ejecutar la entrada con «Ejecutar una vez (en primer plano)»",
+        "resultado": "Vendedor A liquidado por 200,00 € con factura; la comisión del 05/11/2026 (30,00 €) sigue pendiente; sin mensajes en pantalla"
+      },
+      {
+        "id": "A-5",
+        "rf": "RF-3.2",
+        "escenario": "La misma ejecución de A-4, con el proveedor del vendedor B bloqueado",
+        "resultado": "Línea de B con estado Error y el texto del error de proveedor bloqueado; A liquidado igualmente; la entrada de la cola no queda en Error"
+      },
+      {
+        "id": "A-6",
+        "rf": "RF-3.3",
+        "escenario": "La misma ejecución de A-4 para los vendedores C y D",
+        "resultado": "C liquidado por 40,00 € sin factura, con Aviso de que no tiene proveedor; D liquidado por -15,00 € sin factura, con Aviso de total no positivo (mismo resultado que el report manual)"
+      },
+      {
+        "id": "A-7",
+        "rf": "RF-3.1",
+        "escenario": "Deshacer la liquidación de A, cambiar a FACTURA=NO;DIAS=10 y ejecutar en primer plano",
+        "resultado": "Solo se liquidan las comisiones de A hasta 21/10/2026, sin factura"
+      },
+      {
+        "id": "A-8",
+        "rf": "RF-3.4",
+        "escenario": "Poner Parameter String FACTURA=QUIZA;DIAS=0 (y después DIAS=-3) y ejecutar",
+        "resultado": "La entrada queda en Error con el mensaje de parámetro no válido; no se crea ninguna liquidación ni línea en el registro"
+      },
+      {
+        "id": "A-9",
+        "rf": "RF-3.5",
+        "escenario": "Ejecutar dos veces seguidas la entrada con FACTURA=SI;DIAS=0",
+        "resultado": "La segunda no crea liquidaciones; solo aparece la línea Error de B si su proveedor sigue bloqueado"
+      },
+      {
+        "id": "A-10",
+        "rf": "RF-4.1",
+        "escenario": "En la lista de liquidaciones, pulsar «Programar liquidación automática» el 17/11/2026 y abrir «Movs. cola proyectos»",
+        "resultado": "Entrada En espera para la codeunit, recurrente, fórmula <CM+1D>, hora 02:00, inicio 01/12/2026 02:00, 3 intentos y parámetros FACTURA=SI;DIAS=0"
+      },
+      {
+        "id": "A-11",
+        "rf": "RF-4.1",
+        "escenario": "Pulsar de nuevo «Programar liquidación automática»",
+        "resultado": "Mensaje de que ya está programada; sigue habiendo una sola entrada"
+      },
+      {
+        "id": "A-12",
+        "rf": "RF-3.5",
+        "escenario": "Con una comisión pendiente nueva del vendedor A, ejecutar a la vez el report manual para A y la entrada de la cola (en el test automático, con dos sesiones o simulando el bloqueo)",
+        "resultado": "Solo uno de los dos liquida a A; el otro no crea liquidación (Aviso «Sin comisiones pendientes» o Error de bloqueo en el registro)"
+      }
+    ]
+  },
+  "fuentes": [
+    "Tarea de formación TF0023 (apartados/TF0023.md); reparto.md del Bloque 5 (dueños de objetos).",
+    "BC 29 ES: Modules/System/JobQueue/JobQueueEntry.Table.al (campos 6, 7, 8, 11, 16, 17, 26, 29, 30, 47; OnValidate de Next Run Date Formula l. 305; SetDefaultValues l. 969, User ID; CleanupAfterExecution l. 1006; FindJobQueueEntry l. 1432); JobQueueDispatcher.Codeunit.al l. 329 (CalcDate de Next Run Date Formula); codeunit 453 Job Queue - Enqueue; página 672.",
+    "bc-observatory: tabla 472 Job Queue Entry, campos y procedimientos (BC 28, 29 y 30).",
+    "https://learn.microsoft.com/dynamics365/business-central/dev-itpro/developer/methods-auto/codeunit/codeunit-run-method (con valor de retorno confirma al final; si hay transacción abierta hay que hacer Commit antes)",
+    "https://learn.microsoft.com/dynamics365/business-central/admin-job-queues-schedule-tasks (recurrencia, Earliest Start, reintentos con Maximum No. of Attempts y Rerun Delay)",
+    "Revisado con bc-code-intel (especialistas: sam-coder; find_bc_knowledge: eva-errors/codeunit-run-pattern). La respuesta fue genérica: las decisiones de transacciones se apoyan en Learn y en el código estándar."
+  ],
+  "implementacion": {
+    "cambios": [
+      {
+        "id": "C-01",
+        "rf": "RF-2.1",
+        "ficheros": [
+          "src/enum/CommissionProcessStatusLDR.Enum.al",
+          "src/table/CommissionProcessLogLDR.Table.al",
+          "src/permissionset/CommissionsLDR.PermissionSet.al"
+        ],
+        "commit": "ff5b29a",
+        "resumen": "Enum 50001 (Success/Warning/Error, Correcto/Aviso/Error) y tabla 50006 Commission Process Log_LDR con Entry No. autoincremental, Run ID, inicio y fin, vendedor, estado, nº liquidación, mensaje y usuario; permission set con tabledata RIMD"
+      },
+      {
+        "id": "C-02",
+        "rf": "RF-2.2",
+        "ficheros": [
+          "src/page/CommissionProcessLogLDR.Page.al",
+          "src/page/CommissionSettlementsLDR.Page.al",
+          "src/permissionset/CommissionsLDR.PermissionSet.al"
+        ],
+        "commit": "ff5b29a",
+        "resumen": "Página 50007 no editable ordenada por Entry No. descendente con acción Abrir liquidación; acción Registro del proceso en la lista de liquidaciones"
+      },
+      {
+        "id": "C-03",
+        "rf": "RF-1.1",
+        "ficheros": [
+          "src/codeunit/CommissionSettlementJQLDR.Codeunit.al"
+        ],
+        "commit": "1c567cb",
+        "resumen": "La codeunit de la cola llama a Salesp. Comm. Settlement_LDR (50002) igual que el report 50000 de TF0021 (SetParameters, Run, GetSettlementNo, GetWarningText); no se copia lógica de liquidación"
+      },
+      {
+        "id": "C-04",
+        "rf": "RF-3.1",
+        "ficheros": [
+          "src/codeunit/CommissionSettlementJQLDR.Codeunit.al",
+          "src/codeunit/CommissionMgtLDR.Codeunit.al",
+          "src/permissionset/CommissionsLDR.PermissionSet.al"
+        ],
+        "commit": "1c567cb",
+        "resumen": "Codeunit 50007 con TableNo Job Queue Entry: fecha hasta CalcDate('<-CM-1D>', Today) - DIAS; FACTURA según parámetros; HasPendingCommissions en Commission Mgt para seleccionar vendedores con pendientes"
+      },
+      {
+        "id": "C-05",
+        "rf": "RF-3.2",
+        "ficheros": [
+          "src/codeunit/CommissionSettlementJQLDR.Codeunit.al"
+        ],
+        "commit": "1c567cb",
+        "resumen": "Commit antes del primer vendedor; por vendedor ClearLastError, Clear, if Run; si falla, línea Error con GetLastErrorText insertada fuera del Run y Commit, y se sigue con el resto"
+      },
+      {
+        "id": "C-06",
+        "rf": "RF-3.3",
+        "ficheros": [
+          "src/codeunit/CommissionSettlementJQLDR.Codeunit.al"
+        ],
+        "commit": "1c567cb",
+        "resumen": "Si la codeunit de TF0021 devuelve aviso (sin proveedor, proveedor no válido o total <= 0, liquida sin factura) la línea queda Aviso con el texto y la liquidación"
+      },
+      {
+        "id": "C-07",
+        "rf": "RF-3.4",
+        "ficheros": [
+          "src/codeunit/CommissionSettlementJQLDR.Codeunit.al"
+        ],
+        "commit": "1c567cb",
+        "resumen": "Parámetros FACTURA=SI|NO;DIAS=n validados antes de escribir (clave desconocida, valor no válido o repetida = Error); vacío = FACTURA=SI;DIAS=0; además se comprueba la configuración (serie y, con factura, cuenta) al principio (decisión de P1)"
+      },
+      {
+        "id": "C-08",
+        "rf": "RF-3.5",
+        "ficheros": [
+          "src/codeunit/CommissionSettlementJQLDR.Codeunit.al"
+        ],
+        "commit": "1c567cb",
+        "resumen": "Sin control extra (P-3): solo se seleccionan movimientos no liquidados y TF0021 bloquea con LockTable; si al liquidar ya no queda nada, Aviso Sin comisiones pendientes; sin vendedores pendientes, una línea Aviso"
+      },
+      {
+        "id": "C-09",
+        "rf": "RF-4.1",
+        "ficheros": [
+          "src/codeunit/CommissionMgtLDR.Codeunit.al",
+          "src/page/CommissionSettlementsLDR.Page.al"
+        ],
+        "commit": "2fb3ad5",
+        "resumen": "Acción Programar liquidación automática en la lista de liquidaciones; ScheduleAutomaticSettlement en Commission Mgt: si FindJobQueueEntry la encuentra, avisa y no crea otra; si no, crea la entrada (Codeunit 50007, recurrente, Starting Time 02:00, Earliest Start día 1 del mes siguiente 02:00 antes de validar <CM+1D>, 3 intentos, 300 s, FACTURA=SI;DIAS=0) y la pone en marcha con Job Queue - Enqueue"
+      },
+      {
+        "id": "C-10",
+        "rf": "RF-4.1",
+        "ficheros": [
+          "Translations/LIDERIT-MAD-Practicas.g.xlf",
+          "Translations/LIDERIT-MAD-Practicas.es-ES.xlf"
+        ],
+        "commit": "2b99103",
+        "resumen": "XLIFF g.xlf regenerado y es-ES completado con los ESP de TF0023"
+      },
+      {
+        "id": "C-11",
+        "rf": "RF-3.4",
+        "ficheros": [
+          "src/codeunit/CommissionSettlementJQLDR.Codeunit.al"
+        ],
+        "commit": "c4b4ccd",
+        "resumen": "CheckSetup: con FACTURA=SI la cuenta de comisiones debe existir, ser de tipo Auxiliar y tener Registro directo; si no, error antes de liquidar (decisión del programador tras el fallo de A en las pruebas)"
+      }
+    ],
+    "extras": [],
+    "evidencias": [
+      {
+        "id": "E-01",
+        "rf": "RF-2.1",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos (solo info previos). Commit ff5b29a"
+      },
+      {
+        "id": "E-02",
+        "rf": "RF-3.2",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos. Commit 1c567cb"
+      },
+      {
+        "id": "E-03",
+        "rf": "RF-4.1",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos. FindJobQueueEntry y OnValidate de Next Run Date Formula comprobados en el estándar es-29 (JobQueueEntry.Table.al l. 292-306 y 1432). Commit 2fb3ad5"
+      },
+      {
+        "id": "E-04",
+        "rf": "RF-4.1",
+        "escenario": "A-10",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026): Programar liquidación automática crea la entrada de la cola para la codeunit 50007, recurrente, <CM+1D>, 02:00, inicio 01/12/2026 02:00, 3 intentos, 300 s, FACTURA=SI;DIAS=0"
+      },
+      {
+        "id": "E-05",
+        "rf": "RF-4.1",
+        "escenario": "A-11",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026): al pulsar de nuevo avisa de que ya está programada y sigue habiendo una sola entrada"
+      },
+      {
+        "id": "E-06",
+        "rf": "RF-3.5",
+        "escenario": "",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026): ejecución en primer plano sin comisiones pendientes hasta la fecha calculada; una sola línea Aviso «Sin comisiones pendientes hasta el 31/10/26», sin vendedor, sin liquidaciones nuevas, entrada de la cola en Correcto y sin mensajes del proceso (fecha hasta con Today correcta: último día del mes anterior)"
+      },
+      {
+        "id": "E-07",
+        "rf": "RF-3.2",
+        "escenario": "A-5",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026), ejecución en primer plano con FACTURA=SI;DIAS=0 (Run ID 50ff8e9c…): el vendedor A quedó en Error con «Registro directo debe ser igual a Sí en Cuenta 62300…» (la cuenta de comisiones no tiene Registro directo) y B y C se liquidaron igualmente en la misma ejecución; la entrada de la cola terminó en Correcto. El error lo dio A y no B: B (proveedor bloqueado) es Aviso por la decisión de P1"
+      },
+      {
+        "id": "E-08",
+        "rf": "RF-3.3",
+        "escenario": "A-6",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026), ejecución en primer plano con FACTURA=SI;DIAS=0 (Run ID 50ff8e9c…): C sin proveedor liquidado (LIQ-0013) con Aviso «no tiene proveedor»; B con proveedor bloqueado liquidado (LIQ-0012) con Aviso, como el report manual de TF0021"
+      },
+      {
+        "id": "E-09",
+        "rf": "RF-3.1",
+        "escenario": "A-4",
+        "tipo": "manual",
+        "resultado": "KO",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026), ejecución en primer plano con FACTURA=SI;DIAS=0 (Run ID 50ff8e9c…): A no se liquidó porque la creación de la factura falló por la cuenta de comisiones sin Registro directo (configuración del sandbox). Se repite tras corregir la cuenta"
+      },
+      {
+        "id": "E-10",
+        "rf": "RF-3.1",
+        "escenario": "A-4",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026), repetida tras activar Registro directo en la cuenta de comisiones: el vendedor A se liquida en Correcto por 10,00 € (comisiones del 15/10/2026) con factura de compra; la comisión del 05/11/2026 sigue pendiente; sin mensajes del proceso"
+      },
+      {
+        "id": "E-11",
+        "rf": "RF-2.2",
+        "escenario": "A-3",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026): registro no editable con lo más reciente arriba, líneas de una ejecución con el mismo Run ID y el usuario de la cola; Abrir liquidación abre la liquidación de A"
+      },
+      {
+        "id": "E-12",
+        "rf": "RF-2.1",
+        "escenario": "A-3",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026): cada ejecución deja una línea por vendedor con Run ID, inicio y fin, vendedor, estado, nº liquidación, mensaje y usuario"
+      },
+      {
+        "id": "E-13",
+        "rf": "RF-3.5",
+        "escenario": "A-9",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026): segunda ejecución seguida sin cambios: una sola línea Aviso Sin comisiones pendientes, ninguna liquidación nueva y la comisión del 05/11 de A sigue pendiente"
+      },
+      {
+        "id": "E-14",
+        "rf": "RF-3.4",
+        "escenario": "A-8",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026): con FACTURA=QUIZA;DIAS=0 y con FACTURA=SI;DIAS=-3 la ejecución termina en Error con el mensaje de parámetro no válido, sin liquidaciones ni líneas en el registro"
+      },
+      {
+        "id": "E-15",
+        "rf": "RF-3.1",
+        "escenario": "A-7",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026): con FACTURA=NO;DIAS=10 solo se liquida la comisión de A del 18/10/2026 (fecha hasta 21/10/2026), sin factura y en Correcto; las del 25/10 y 05/11 siguen pendientes"
+      },
+      {
+        "id": "E-16",
+        "rf": "RF-1.2",
+        "escenario": "A-2",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026): el report manual Liquidar comisiones de TF0021 sigue mostrando la ventana de progreso y el mensaje final"
+      },
+      {
+        "id": "E-17",
+        "rf": "RF-1.1",
+        "escenario": "A-1",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Revisión de código por el programador AlejandroGallego-LiderIT (24/11/2026): el report 50000 de TF0021 y la codeunit de la cola 50007 llaman a Salesp. Comm. Settlement_LDR con SetParameters, Run, GetSettlementNo y GetWarningText; sin lógica de liquidación copiada; la única diferencia es Run sin if (todo o nada) frente a if Run (error aislado por vendedor); la codeunit de TF0021 no se modifica"
+      },
+      {
+        "id": "E-18",
+        "rf": "RF-3.4",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos. Commit c4b4ccd"
+      },
+      {
+        "id": "E-19",
+        "rf": "RF-3.4",
+        "escenario": "",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026): con la cuenta de comisiones sin Registro directo y FACTURA=SI;DIAS=0 la ejecución termina en Error con el mensaje de Registro directo, sin líneas nuevas en el registro y sin liquidar; al reactivarlo se liquida en Correcto"
+      }
+    ],
+    "desviaciones": [
+      {
+        "puerta": "escenarios",
+        "codigo": "A-12:sin-validar",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "trazabilidad",
+        "codigo": "RF-1.2:sin-cambio",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "trazabilidad",
+        "codigo": "RF-3.1:evidencia-ko",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "herramientas",
+        "codigo": "uso:bc-code-intel",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "herramientas",
+        "codigo": "uso:bcquality",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "fichero:\".github/tasks/TF0023-liquidacion-automatica-con-cola-de-proyectos/TF0023 - Liquidaci/303/263n autom/303/241tica con cola de proyectos.docx\"",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "fichero:\".github/tasks/TF0023-liquidacion-automatica-con-cola-de-proyectos/TF0023 - Liquidaci/303/263n autom/303/241tica con cola de proyectos.md\"",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:ddca636",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:ca4fa1d",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:95b4c08",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:5dbac3e",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:fd61999",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:61d4c75",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:6dce723",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:a30f621",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:4236f64",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:9c4580b",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:4041113",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      }
+    ],
+    "firmas": {
+      "P1": {
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24",
+        "reformulacion": "Se hará un proceso para que la liquidación de comisiones se haga una vez al mes, un día de madrugada, hasta el último día del mes anterior. Registro: tabla Commission Process Log con Entry No., Run ID, Start Date-Time, End Date-Time, Salesperson Code, Status (Correcto/Aviso/Error), Settlement No., Message (texto del error con GetLastErrorText o el aviso de GetWarningText) y User ID. Página lista no editable, ordenada de la más reciente a la más antigua, con una acción para abrir la liquidación. Proceso: codeunit de la cola Commission Settlement JQ con TableNo = Job Queue Entry. En OnRun lee Rec.\"Parameter String\" con formato FACTURA=SI;DIAS=0 (DIAS es un entero >= 0 que se resta a la fecha hasta); si está mal escrito, o falta la serie de liquidaciones (o la cuenta con FACTURA=SI), da error y no se liquida nada. La fecha hasta es el último día del mes anterior a Today menos DIAS, sin WorkDate, porque la fecha de trabajo no cambia sola. Commit antes del primer vendedor. Por cada vendedor con comisiones pendientes: ClearLastError, if Codeunit.Run de la codeunit de liquidación de TF0021, y se registra Correcto, Aviso (sin proveedor, proveedor bloqueado o total <= 0: liquida sin factura, como el report manual) o Error, insertando la línea fuera del Run, y Commit después de cada vendedor para que un error no deshaga lo correcto. Si al liquidar ya no queda nada pendiente, o no hay ningún vendedor pendiente, se registra un Aviso «Sin comisiones pendientes». Sin Message, Confirm ni Dialog en el proceso. Programar: en la lista de liquidaciones, una acción que crea la entrada de la cola si no existe ya: Object Type to Run = Codeunit, Object ID to Run = la codeunit anterior, Recurring Job = sí, Next Run Date Formula = <CM+1D>, Earliest Start Date/Time = día 1 del mes siguiente a las 02:00, 3 intentos con 300 s entre ellos y Parameter String FACTURA=SI;DIAS=0; se pone en marcha con Codeunit.Run(Codeunit::\"Job Queue - Enqueue\", JobQueueEntry). No se hace: ningún control extra de doble ejecución en el mes (un segundo intento solo encuentra lo no liquidado); no se cambia la lógica del report ni de la codeunit de TF0021 (la lógica ya se movió a la codeunit en TF0021); ni correos, ni limpieza del registro. Ejemplo: JR, con proveedor, tiene comisiones de 120 € y 80 € de octubre y de 30 € del 05/11/2026. Se ejecuta el 24/11/2026 con FACTURA=SI;DIAS=0: se liquida hasta el 31/10/2026, sale una liquidación de 200 € con factura de compra, los 30 € de noviembre siguen pendientes y en el registro aparece una línea de JR en estado Correcto con el nº de liquidación. Si se ejecuta otra vez, no se liquida nada y sale una línea Aviso «Sin comisiones pendientes». (Los puntos de qué falta, qué no se hace y el ejemplo se adoptaron de la propuesta de Claude a petición del programador.)",
+        "validacion_omitida": "Prueba del procedimiento en prácticas; consultor no disponible. Quedan sin validar P-1 a P-4 y P-6 y el cambio de A-5 (proveedor bloqueado = Aviso, como TF0021)"
+      },
+      "P2": {
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24",
+        "reformulacion": "Se hizo una tabla para el registro de ejecuciones,ordenada de reciente a antigua ocn accion para abrir las liquidaciones y no editable. Se creo la CDU para la cola detrabajo, con TableNo = \"Job Que Entry\", con trigger OnRUn en el que hay que leer el parameter string, si estan mal escritos = ERROR. Se calcua la fecha hasta con  UpToDate := CalcDate('<-CM-1D>', Today()) - DaysBefore;. Al regisrarse cada vendeedor, commit. No puede haber mensajes si no hay GuiAllowed, se crea la accion  de programar liqudaciomn automatica,"
+      }
+    },
+    "subissues": {
+      "RF-1.1": 91,
+      "RF-1.2": 92,
+      "RF-2.1": 93,
+      "RF-2.2": 94,
+      "RF-3.1": 95,
+      "RF-3.2": 96,
+      "RF-3.3": 97,
+      "RF-3.4": 98,
+      "RF-3.5": 99,
+      "RF-4.1": 100
+    },
+    "traza": [
+      {
+        "ts": "2026-11-24T09:17:27",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T09:17:29",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T09:17:30",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T09:17:32",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T09:17:33",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T09:17:34",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T09:17:36",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T09:17:37",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T09:17:39",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T09:17:40",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T10:11:25",
+        "accion": "firma",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "P1"
+      },
+      {
+        "ts": "2026-11-24T10:12:42",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T10:12:43",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T10:12:45",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T10:13:55",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T10:13:56",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T10:13:57",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T10:13:58",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T10:13:59",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T10:14:00",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T10:14:01",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T10:15:00",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T10:15:01",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T10:15:04",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T10:36:56",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T10:36:57",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T11:00:07",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T11:34:34",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T11:34:36",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T11:34:37",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T11:46:40",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T11:51:10",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T11:51:11",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T11:51:13",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T11:51:14",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T12:03:21",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T12:03:23",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T12:05:51",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T12:06:14",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T12:06:16",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T12:58:06",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T16:24:50",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "escenarios"
+      },
+      {
+        "ts": "2026-11-24T16:24:51",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "trazabilidad"
+      },
+      {
+        "ts": "2026-11-24T16:24:52",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "trazabilidad"
+      },
+      {
+        "ts": "2026-11-24T16:24:54",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "herramientas"
+      },
+      {
+        "ts": "2026-11-24T16:24:55",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "herramientas"
+      },
+      {
+        "ts": "2026-11-24T16:24:56",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:24:57",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:24:58",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:25:00",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:25:01",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:25:02",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:25:03",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:25:04",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:25:05",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:25:06",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:25:07",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:25:08",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:25:09",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:25:10",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:25:11",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:46:09",
+        "accion": "firma",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "P2"
+      },
+      {
+        "ts": "2026-11-24T16:47:21",
+        "accion": "pr",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      }
+    ],
+    "pr": {
+      "url": "https://github.com/AGTorresLiderIT/LIDERIT-MAD-Practicas/pull/104",
+      "numero": 104,
+      "fecha": "2026-11-24"
+    }
+  },
+  "documentacion": {
+    "enlaces": {
+      "rama": "https://github.com/AGTorresLiderIT/LIDERIT-MAD-Practicas/tree/Feature/TF0023-liquidacion-automatica-con-cola-de-proyectos"
+    },
+    "resumen": "La liquidación de comisiones de TF0021 se puede programar en la cola de proyectos para que se ejecute sola el día 1 de cada mes a las 02:00, liquidando hasta el último día del mes anterior. Cada ejecución deja un registro por vendedor (Correcto, Aviso o Error) y el error de un vendedor no impide liquidar a los demás.",
+    "objetos": [
+      {
+        "tipo": "codeunit",
+        "id": "50007",
+        "nombre": "Commission Settlement JQ_LDR",
+        "cambio": "Nueva codeunit de la cola: valida parámetros y configuración, liquida cada vendedor pendiente y lo registra."
+      },
+      {
+        "tipo": "enum",
+        "id": "50001",
+        "nombre": "Commission Process Status_LDR",
+        "cambio": "Nuevo estado de cada línea del registro: Correcto, Aviso o Error."
+      },
+      {
+        "tipo": "table",
+        "id": "50006",
+        "nombre": "Commission Process Log_LDR",
+        "cambio": "Nueva tabla del registro de ejecuciones, una línea por vendedor procesado."
+      },
+      {
+        "tipo": "page",
+        "id": "50007",
+        "nombre": "Commission Process Log_LDR",
+        "cambio": "Nueva lista no editable del registro, la más reciente arriba, con la acción Abrir liquidación."
+      },
+      {
+        "tipo": "page",
+        "id": "50003",
+        "nombre": "Commission Settlements_LDR",
+        "cambio": "Acciones Programar liquidación automática y Registro del proceso (objeto de TF0021)."
+      },
+      {
+        "tipo": "codeunit",
+        "id": "50000",
+        "nombre": "Commission Mgt._LDR",
+        "cambio": "Nuevas funciones para saber si un vendedor tiene comisiones pendientes y para crear la entrada de la cola (objeto de TF0020)."
+      },
+      {
+        "tipo": "permissionset",
+        "id": "50000",
+        "nombre": "Commissions_LDR",
+        "cambio": "Se añaden la tabla, la página y la codeunit nuevas (objeto de TF0020)."
+      }
+    ],
+    "detalles": [
+      {
+        "rf": "RF-1.1, RF-1.2",
+        "titulo": "1. Reutilización de la liquidación por vendedor",
+        "parrafos": [
+          "No se ha movido ni copiado lógica: la codeunit 50002 «Salesp. Comm. Settlement_LDR» de TF0021 ya liquidaba un vendedor sin mensajes ni Commit, con SetParameters antes de Run y GetSettlementNo y GetWarningText después. El report manual 50000 y la codeunit nueva de la cola la llaman igual; TF0021 no se modifica.",
+          "La única diferencia es intencionada: el report usa Run sin if (todo o nada, el usuario ve el error) y la cola usa if Run (el error de un vendedor queda registrado y se sigue con el resto). El report mantiene su ventana de progreso y su mensaje final."
+        ]
+      },
+      {
+        "rf": "RF-2.1, RF-2.2",
+        "titulo": "2. Registro de ejecuciones",
+        "parrafos": [
+          "La tabla 50006 guarda una línea por vendedor procesado; todas las líneas de una ejecución comparten el mismo Id. ejecución. Si no hay nada pendiente se guarda una sola línea Aviso sin vendedor. El usuario es el de la entrada de la cola.",
+          "La página 50007 es de solo lectura, ordenada de la más reciente a la más antigua, con la acción Abrir liquidación. Se abre desde Registro del proceso en la lista de liquidaciones o desde el buscador. Sin impacto en datos existentes: tabla nueva."
+        ],
+        "tabla": {
+          "columnas": [
+            "Campo",
+            "Id",
+            "Tipo dato",
+            "Comentario"
+          ],
+          "filas": [
+            [
+              "Entry No.",
+              "1",
+              "Integer",
+              "Clave, autoincremental."
+            ],
+            [
+              "Run ID",
+              "2",
+              "Guid",
+              "Igual en todas las líneas de una ejecución."
+            ],
+            [
+              "Start Date-Time / End Date-Time",
+              "3, 4",
+              "DateTime",
+              "Inicio de la ejecución y fin del vendedor."
+            ],
+            [
+              "Salesperson Code",
+              "5",
+              "Code[20]",
+              "En blanco en la línea Sin comisiones pendientes."
+            ],
+            [
+              "Status",
+              "6",
+              "Enum 50001",
+              "Correcto, Aviso o Error."
+            ],
+            [
+              "Settlement No.",
+              "7",
+              "Code[20]",
+              "Liquidación creada, si la hay."
+            ],
+            [
+              "Message",
+              "8",
+              "Text[250]",
+              "Texto del aviso o del error."
+            ],
+            [
+              "User ID",
+              "9",
+              "Code[50]",
+              "Usuario con el que corre la cola."
+            ]
+          ]
+        },
+        "capturas": [
+          "Registro del proceso con una ejecución: A en Correcto, B y C en Aviso"
+        ]
+      },
+      {
+        "rf": "RF-3.1, RF-3.2, RF-3.3, RF-3.4, RF-3.5",
+        "titulo": "3. Proceso automático de liquidación",
+        "parrafos": [
+          "La codeunit 50007 (TableNo = Job Queue Entry) lee los parámetros FACTURA=SI|NO;DIAS=n (vacío equivale a FACTURA=SI;DIAS=0) y comprueba la configuración antes de escribir nada: serie de liquidaciones y, con factura, que la cuenta de comisiones sea auxiliar y admita Registro directo. Si algo falla, la entrada de la cola queda en Error con el mensaje y no se liquida a nadie. La comprobación de la cuenta se añadió tras ver en las pruebas que, sin Registro directo, fallaban uno a uno todos los vendedores con proveedor.",
+          "La fecha hasta es el último día del mes anterior a la fecha real (Today) menos DIAS: la fecha de trabajo es un ajuste de la sesión y no avanza sola (P-1).",
+          "Tras un Commit, recorre los vendedores con comisiones sin liquidar hasta esa fecha y llama a la codeunit de TF0021 con if Run. La línea del registro se inserta fuera del Run y se confirma con Commit por vendedor, así el error de uno no deshace lo de los demás (P-4).",
+          "Los avisos (sin proveedor, proveedor bloqueado o total <= 0) son los de TF0021: se liquida sin factura y la línea queda en Aviso. Si al liquidar ya no queda nada, por ejemplo porque lo ha liquidado el report manual, la línea es Aviso «Sin comisiones pendientes».",
+          "No hay control de doble ejecución en el mes (P-3): solo se seleccionan comisiones no liquidadas y la codeunit de TF0021 las bloquea al leerlas, así que una segunda ejecución o un reintento solo recoge lo que quedó pendiente."
+        ],
+        "codigo": "ClearLastError();\nClear(SettleSalespersonCommission);\nSettleSalespersonCommission.SetParameters(UpToDate, CreateInvoice);\nif not SettleSalespersonCommission.Run(SalespersonPurchaser) then begin\n    InsertLog(SalespersonCode, \"Commission Process Status_LDR\"::Error, '', GetLastErrorText());\n    exit;\nend;"
+      },
+      {
+        "rf": "RF-4.1",
+        "titulo": "4. Programación de la tarea",
+        "parrafos": [
+          "La acción Programar liquidación automática de la lista de liquidaciones llama a ScheduleAutomaticSettlement de la codeunit 50000. Si ya existe una entrada para la codeunit 50007 (FindJobQueueEntry), avisa y no crea otra. Si no, la crea y la pone en marcha con la codeunit estándar 453 Job Queue - Enqueue.",
+          "La hora y la primera fecha se asignan antes de validar la fórmula: si la primera fecha estuviera vacía, la validación la calcularía desde la fecha y hora actuales. Se usa <CM+1D> y no <1M> porque la cola calcula la siguiente fecha desde el final real de la ejecución: con <1M>, un retraso al día 2 desplazaría la serie (P-2)."
+        ],
+        "tabla": {
+          "columnas": [
+            "Campo de Job Queue Entry",
+            "Valor"
+          ],
+          "filas": [
+            [
+              "Object Type / ID to Run",
+              "Codeunit 50007"
+            ],
+            [
+              "Recurring Job / Next Run Date Formula",
+              "Sí / <CM+1D>"
+            ],
+            [
+              "Starting Time / Earliest Start Date/Time",
+              "02:00 / día 1 del mes siguiente a las 02:00"
+            ],
+            [
+              "Maximum No. of Attempts / Rerun Delay",
+              "3 / 300 s"
+            ],
+            [
+              "Parameter String",
+              "FACTURA=SI;DIAS=0"
+            ]
+          ]
+        },
+        "capturas": [
+          "Entrada de la cola creada por la acción, con la fórmula y los parámetros"
+        ]
+      }
+    ],
+    "pruebas": [
+      {
+        "titulo": "Prueba manual de los escenarios A-1 a A-11 en el sandbox",
+        "pasos": [
+          "Con fecha real 24/11/2026 (fecha hasta 31/10/2026) se registraron comisiones del 15/10/2026 para tres vendedores: A con proveedor, B con proveedor bloqueado y C sin proveedor, y una del 05/11/2026 para A.",
+          "Se programó la entrada (A-10) y al repetir la acción avisó de que ya existía (A-11).",
+          "Con Ejecutar una vez (primer plano): sin datos de octubre dejó una sola línea Sin comisiones pendientes; después, A falló por la cuenta de comisiones sin Registro directo mientras B y C se liquidaban con Aviso (A-5, A-6) y la entrada terminó en Correcto. Corregida la cuenta, A se liquidó en Correcto por 10,00 € y la comisión de noviembre siguió pendiente (A-4).",
+          "Una segunda ejecución no liquidó nada (A-9); con FACTURA=QUIZA y con DIAS=-3 la entrada terminó en Error sin líneas (A-8); con FACTURA=NO;DIAS=10 solo se liquidó hasta el 21/10/2026 y sin factura (A-7).",
+          "Con la cuenta sin Registro directo y la comprobación nueva, la entrada terminó en Error sin liquidar ni registrar nada.",
+          "El report manual mantuvo su progreso y su mensaje final (A-2); A-1 se revisó en el código. A-12 (report y cola a la vez) no se ha probado."
+        ],
+        "capturas": [
+          "Liquidaciones creadas por la cola con fecha hasta 31/10/2026",
+          "Error de la entrada de la cola por parámetro no válido",
+          "Movimientos de A con la comisión del 05/11/2026 pendiente"
+        ]
+      }
+    ],
+    "para_probar": [
+      "Dónde está: en «Liquidaciones de comisiones», las acciones Programar liquidación automática y Registro del proceso; la entrada se ve y se ejecuta en «Movs. cola proyectos» (Ejecutar una vez, primer plano).",
+      "Configuración previa: serie de liquidaciones; cuenta de comisiones auxiliar con Registro directo; vendedores con % de comisión (con 0 % no se generan comisiones) y, para la factura, proveedor en la ficha del vendedor.",
+      "Datos de prueba: el proceso liquida hasta el último día del mes anterior a la fecha real, no a la fecha de trabajo; las facturas de prueba deben tener fecha de registro de ese mes o anterior.",
+      "Las dos ventanas que salen al ejecutar en primer plano (confirmación y Estado: Correcto) son del estándar; el proceso no muestra ningún mensaje propio."
+    ]
+  }
+}

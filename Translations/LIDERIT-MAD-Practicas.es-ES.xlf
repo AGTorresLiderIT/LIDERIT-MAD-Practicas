@@ -321,6 +321,120 @@
           <note from="Developer" annotates="general" priority="2">ESP="Texto de la fila"</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Commission Import Error_LDR - Field Row Text - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 3844393665 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Commission Process Log</source>
+          <target state="translated">Registro del proceso de comisiones</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Registro del proceso de comisiones"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Process Log_LDR - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3844393665 - Field 4022852301 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies when the salesperson was processed.</source>
+          <target state="translated">Especifica cuándo terminó el proceso del vendedor.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica cuándo terminó el proceso del vendedor."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Process Log_LDR - Field End Date-Time - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3844393665 - Field 4022852301 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>End Date-Time</source>
+          <target state="translated">Fecha-hora fin</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Fecha-hora fin"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Process Log_LDR - Field End Date-Time - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3844393665 - Field 883711285 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the log entry.</source>
+          <target state="translated">Especifica el número de la línea del registro.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica el número de la línea del registro."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Process Log_LDR - Field Entry No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3844393665 - Field 883711285 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Entry No.</source>
+          <target state="translated">Nº mov.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Nº mov."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Process Log_LDR - Field Entry No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3844393665 - Field 3080618677 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the warning or the error text.</source>
+          <target state="translated">Especifica el texto del aviso o del error.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica el texto del aviso o del error."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Process Log_LDR - Field Message - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3844393665 - Field 3080618677 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Message</source>
+          <target state="translated">Mensaje</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Mensaje"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Process Log_LDR - Field Message - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3844393665 - Field 2565378072 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the run of the automatic settlement. All the lines of the same run have the same value.</source>
+          <target state="translated">Especifica la ejecución de la liquidación automática. Todas las líneas de una misma ejecución tienen el mismo valor.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica la ejecución de la liquidación automática. Todas las líneas de una misma ejecución tienen el mismo valor."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Process Log_LDR - Field Run ID - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3844393665 - Field 2565378072 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Run ID</source>
+          <target state="translated">Id. ejecución</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Id. ejecución"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Process Log_LDR - Field Run ID - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3844393665 - Field 553464652 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the salesperson processed. It is blank when there were no pending commissions.</source>
+          <target state="translated">Especifica el vendedor procesado. Está en blanco cuando no había comisiones pendientes.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica el vendedor procesado. Está en blanco cuando no había comisiones pendientes."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Process Log_LDR - Field Salesperson Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3844393665 - Field 553464652 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Salesperson Code</source>
+          <target state="translated">Cód. vendedor</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Cód. vendedor"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Process Log_LDR - Field Salesperson Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3844393665 - Field 127113374 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the settlement created, if any.</source>
+          <target state="translated">Especifica la liquidación creada, si la hay.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica la liquidación creada, si la hay."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Process Log_LDR - Field Settlement No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3844393665 - Field 127113374 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Settlement No.</source>
+          <target state="translated">Nº liquidación</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Nº liquidación"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Process Log_LDR - Field Settlement No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3844393665 - Field 2484838920 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies when the run started.</source>
+          <target state="translated">Especifica cuándo empezó la ejecución.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica cuándo empezó la ejecución."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Process Log_LDR - Field Start Date-Time - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3844393665 - Field 2484838920 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Start Date-Time</source>
+          <target state="translated">Fecha-hora inicio</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Fecha-hora inicio"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Process Log_LDR - Field Start Date-Time - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3844393665 - Field 513339096 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether the salesperson was settled correctly, with a warning or with an error.</source>
+          <target state="translated">Especifica si el vendedor se liquidó correctamente, con aviso o con error.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica si el vendedor se liquidó correctamente, con aviso o con error."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Process Log_LDR - Field Status - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3844393665 - Field 513339096 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Status</source>
+          <target state="translated">Estado</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Estado"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Process Log_LDR - Field Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3844393665 - Field 2708250016 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the user that ran the process (the user of the job queue entry).</source>
+          <target state="translated">Especifica el usuario que ejecutó el proceso (el usuario de la entrada de la cola).</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica el usuario que ejecutó el proceso (el usuario de la entrada de la cola)."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Process Log_LDR - Field User ID - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 3844393665 - Field 2708250016 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>User ID</source>
+          <target state="translated">Id. usuario</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Id. usuario"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Process Log_LDR - Field User ID - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 2454434334 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Commission Rate</source>
           <target state="translated">Tarifa de comisión</target>
@@ -374,6 +488,12 @@
           <target state="translated">Fecha inicio</target>
           <note from="Developer" annotates="general" priority="2">ESP="Fecha inicio"</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Commission Rate_LDR - Field Starting Date - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1816461044 - NamedType 115594796" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Automatic commission settlement</source>
+          <target state="translated">Liquidación automática de comisiones</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Liquidación automática de comisiones"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Commission Mgt._LDR - NamedType AutomaticSettlementTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 1816461044 - NamedType 3599302989" size-unit="char" translate="yes" xml:space="preserve">
           <source>Customer Name</source>
@@ -465,6 +585,18 @@
           <note from="Developer" annotates="general" priority="2">ESP="Seleccione el fichero Excel con las tarifas de comisión"</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Commission Rate Import_LDR - NamedType SelectFileTxt</note>
         </trans-unit>
+        <trans-unit id="Codeunit 2524276754 - NamedType 991639743" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The parameter string '%1' is not valid. Use FACTURA=SI|NO;DIAS=&lt;number of days&gt;.</source>
+          <target state="translated">El parámetro '%1' no es válido. Use FACTURA=SI|NO;DIAS=&lt;nº de días&gt;.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="El parámetro '%1' no es válido. Use FACTURA=SI|NO;DIAS=&lt;nº de días&gt;." %1 = parameter string of the job queue entry</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Commission Settlement JQ_LDR - NamedType InvalidParameterErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2524276754 - NamedType 3171898899" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No pending commissions up to %1.</source>
+          <target state="translated">Sin comisiones pendientes hasta el %1.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Sin comisiones pendientes hasta el %1." %1 = up to date</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Commission Settlement JQ_LDR - NamedType NoPendingCommissionsMsg</note>
+        </trans-unit>
         <trans-unit id="Codeunit 2114176528 - NamedType 526312273" size-unit="char" translate="yes" xml:space="preserve">
           <source>Settlement %1 has a total of %2: no purchase invoice is created.</source>
           <target state="translated">La liquidación %1 tiene un total de %2: no se crea factura de compra.</target>
@@ -543,6 +675,24 @@
           <note from="Developer" annotates="general" priority="2">ESP="Errores de importación de tarifas"</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Commission Import Errors_LDR - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 3844393665 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Commission Process Log</source>
+          <target state="translated">Registro del proceso de comisiones</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Registro del proceso de comisiones"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Process Log_LDR - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3844393665 - Action 2817965395 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open the settlement created for the selected line.</source>
+          <target state="translated">Abre la liquidación creada en la línea seleccionada.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Abre la liquidación creada en la línea seleccionada."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Process Log_LDR - Action OpenSettlement - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3844393665 - Action 2817965395 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open Settlement</source>
+          <target state="translated">Abrir liquidación</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Abrir liquidación"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Process Log_LDR - Action OpenSettlement - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 483639139 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Commission Rates</source>
           <target state="translated">Tarifas de comisión</target>
@@ -567,6 +717,18 @@
           <note from="Developer" annotates="general" priority="2">ESP="Liquidaciones de comisiones"</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Commission Settlements_LDR - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 2266969290 - NamedType 1711960538" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The automatic settlement is already scheduled. You can review it in Job Queue Entries.</source>
+          <target state="translated">La liquidación automática ya está programada. Puede revisarla en Movs. cola proyectos.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="La liquidación automática ya está programada. Puede revisarla en Movs. cola proyectos."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Settlements_LDR - NamedType AlreadyScheduledMsg</note>
+        </trans-unit>
+        <trans-unit id="Page 2266969290 - NamedType 3967458668" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The automatic settlement has been scheduled for %1.</source>
+          <target state="translated">La liquidación automática se ha programado para el %1.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="La liquidación automática se ha programado para el %1." %1 = earliest start date and time</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Settlements_LDR - NamedType ScheduledMsg</note>
+        </trans-unit>
         <trans-unit id="Page 2266969290 - NamedType 1235858573" size-unit="char" translate="yes" xml:space="preserve">
           <source>Do you want to undo settlement %1? The commission entries will be pending again.</source>
           <target state="translated">¿Desea deshacer la liquidación %1? Los movimientos volverán a quedar pendientes.</target>
@@ -590,6 +752,30 @@
           <target state="translated">Movimientos</target>
           <note from="Developer" annotates="general" priority="2">ESP="Movimientos"</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Commission Settlements_LDR - Action Entries - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2266969290 - Action 2667276465 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View the log of the automatic commission settlement.</source>
+          <target state="translated">Muestra el registro de la liquidación automática de comisiones.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Muestra el registro de la liquidación automática de comisiones."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Settlements_LDR - Action ProcessLog - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2266969290 - Action 2667276465 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Process Log</source>
+          <target state="translated">Registro del proceso</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Registro del proceso"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Settlements_LDR - Action ProcessLog - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2266969290 - Action 967597215 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Create the job queue entry that settles the commissions on day 1 of every month at 02:00, if it does not exist yet.</source>
+          <target state="translated">Crea la entrada de la cola de proyectos que liquida las comisiones el día 1 de cada mes a las 02:00, si no existe ya.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Crea la entrada de la cola de proyectos que liquida las comisiones el día 1 de cada mes a las 02:00, si no existe ya."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Settlements_LDR - Action ScheduleAutomaticSettlement - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2266969290 - Action 967597215 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Schedule Automatic Settlement</source>
+          <target state="translated">Programar liquidación automática</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Programar liquidación automática"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Settlements_LDR - Action ScheduleAutomaticSettlement - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 2266969290 - Action 4120863907 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Settle the pending commission entries of the salespeople up to a date.</source>
@@ -836,6 +1022,30 @@
           <target state="translated">Factura</target>
           <note from="Developer" annotates="general" priority="2">ESP="Factura"</note>
           <note from="Xliff Generator" annotates="general" priority="3">Enum Commission Document Type_LDR - EnumValue Invoice - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3339581977 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Commission Process Status</source>
+          <target state="translated">Estado del proceso de comisiones</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Estado del proceso de comisiones"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Commission Process Status_LDR - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3339581977 - EnumValue 2248886284 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Error</source>
+          <target state="translated">Error</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Error"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Commission Process Status_LDR - EnumValue Error - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3339581977 - EnumValue 3878926381 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Success</source>
+          <target state="translated">Correcto</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Correcto"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Commission Process Status_LDR - EnumValue Success - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3339581977 - EnumValue 3955473374 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warning</source>
+          <target state="translated">Aviso</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Aviso"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Commission Process Status_LDR - EnumValue Warning - Property Caption</note>
         </trans-unit>
         <trans-unit id="PermissionSet 2770219397 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Salesperson commissions</source>
