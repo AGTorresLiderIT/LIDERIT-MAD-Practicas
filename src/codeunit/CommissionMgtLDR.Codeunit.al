@@ -371,7 +371,42 @@ codeunit 50000 "Commission Mgt._LDR"
         exit(not CommissionEntry.IsEmpty());
     end;
 
+    // TF0023 RF-4.1: creates the recurring job queue entry of the automatic settlement if it does not exist and
+    // starts it. Returns false when it already exists. The page shows the messages.
+    procedure ScheduleAutomaticSettlement(var EarliestStartDateTime: DateTime): Boolean
     var
+        JobQueueEntry: Record "Job Queue Entry";
+        NextRunDateFormula: DateFormula;
+    begin
+        if JobQueueEntry.FindJobQueueEntry(JobQueueEntry."Object Type to Run"::Codeunit, Codeunit::"Commission Settlement JQ_LDR") then begin
+            EarliestStartDateTime := JobQueueEntry."Earliest Start Date/Time";
+            exit(false);
+        end;
+
+        JobQueueEntry.Init();
+        JobQueueEntry."Object Type to Run" := JobQueueEntry."Object Type to Run"::Codeunit;
+        JobQueueEntry."Object ID to Run" := Codeunit::"Commission Settlement JQ_LDR";
+        JobQueueEntry.Description := AutomaticSettlementTxt;
+        // Starting time and earliest start before the formula: if the earliest start were blank, the OnValidate of
+        // "Next Run Date Formula" would calculate it from the current date and time.
+        JobQueueEntry."Starting Time" := 020000T;
+        JobQueueEntry."Earliest Start Date/Time" := CreateDateTime(CalcDate('<CM+1D>', Today()), 020000T);
+        // P-2: <CM+1D> always goes back to day 1, even if a run finishes late; <1M> would move the series.
+        Evaluate(NextRunDateFormula, '<CM+1D>');
+        JobQueueEntry.Validate("Next Run Date Formula", NextRunDateFormula);
+        JobQueueEntry."Recurring Job" := true;
+        // P-3 / P-8: retries are safe because only entries not settled are selected.
+        JobQueueEntry."Maximum No. of Attempts to Run" := 3;
+        JobQueueEntry."Rerun Delay (sec.)" := 300;
+        JobQueueEntry."Parameter String" := DefaultParameterStringTxt;
+        Codeunit.Run(Codeunit::"Job Queue - Enqueue", JobQueueEntry);
+        EarliestStartDateTime := JobQueueEntry."Earliest Start Date/Time";
+        exit(true);
+    end;
+
+    var
+        AutomaticSettlementTxt: Label 'Automatic commission settlement', Comment = 'ESP="Liquidación automática de comisiones"';
+        DefaultParameterStringTxt: Label 'FACTURA=SI;DIAS=0', Locked = true;
         PayrollFileNameTxt: Label 'COMISIONES_%1.csv', Locked = true;
         SalespersonNameTxt: Label 'Salesperson Name', Comment = 'ESP="Nombre vendedor"';
         CustomerNameTxt: Label 'Customer Name', Comment = 'ESP="Nombre cliente"';
