@@ -809,7 +809,134 @@
         "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026): con la cuenta de comisiones sin Registro directo y FACTURA=SI;DIAS=0 la ejecución termina en Error con el mensaje de Registro directo, sin líneas nuevas en el registro y sin liquidar; al reactivarlo se liquida en Correcto"
       }
     ],
-    "desviaciones": [],
+    "desviaciones": [
+      {
+        "puerta": "escenarios",
+        "codigo": "A-12:sin-validar",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "trazabilidad",
+        "codigo": "RF-1.2:sin-cambio",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "trazabilidad",
+        "codigo": "RF-3.1:evidencia-ko",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "herramientas",
+        "codigo": "uso:bc-code-intel",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "herramientas",
+        "codigo": "uso:bcquality",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "fichero:\".github/tasks/TF0023-liquidacion-automatica-con-cola-de-proyectos/TF0023 - Liquidaci/303/263n autom/303/241tica con cola de proyectos.docx\"",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "fichero:\".github/tasks/TF0023-liquidacion-automatica-con-cola-de-proyectos/TF0023 - Liquidaci/303/263n autom/303/241tica con cola de proyectos.md\"",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:ddca636",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:ca4fa1d",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:95b4c08",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:5dbac3e",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:fd61999",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:61d4c75",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:6dce723",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:a30f621",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:4236f64",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:9c4580b",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:4041113",
+        "motivo": "Práctica sin consultor disponible; RF-1.2 se cumple reutilizando la codeunit de TF0021 sin cambios; el KO de E-09 se corrigió y se repitió en OK (E-10, E-15); A-12 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      }
+    ],
     "firmas": {
       "P1": {
         "por": "AlejandroGallego-LiderIT",
@@ -1118,6 +1245,166 @@
         "por": "",
         "usuario_gh": "AlejandroGallego-LiderIT",
         "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T16:24:50",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "escenarios"
+      },
+      {
+        "ts": "2026-11-24T16:24:51",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "trazabilidad"
+      },
+      {
+        "ts": "2026-11-24T16:24:52",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "trazabilidad"
+      },
+      {
+        "ts": "2026-11-24T16:24:54",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "herramientas"
+      },
+      {
+        "ts": "2026-11-24T16:24:55",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "herramientas"
+      },
+      {
+        "ts": "2026-11-24T16:24:56",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:24:57",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:24:58",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:25:00",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:25:01",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:25:02",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:25:03",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:25:04",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:25:05",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:25:06",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:25:07",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:25:08",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:25:09",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:25:10",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:25:11",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
       }
     ]
   },
