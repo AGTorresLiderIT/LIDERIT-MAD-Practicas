@@ -25,4 +25,20 @@ pageextension 50002 "Salesperson/Purchaser_LDR" extends "Salesperson/Purchaser C
             }
         }
     }
+    actions
+    {
+        addlast(navigation)
+        {
+            // TF0022 RF-1.2: rates of this salesperson only.
+            action("Commission Rates_LDR")
+            {
+                ApplicationArea = All;
+                Caption = 'Commission Rates', Comment = 'ESP="Tarifas de comisión"';
+                Image = SalesPrices;
+                RunObject = page "Commission Rates_LDR";
+                RunPageLink = "Salesperson Code" = field(Code);
+                ToolTip = 'View or edit the commission rates of the salesperson by item category and starting date.', Comment = 'ESP="Permite ver o modificar las tarifas de comisión del vendedor por categoría de producto y fecha de inicio."';
+            }
+        }
+    }
 }

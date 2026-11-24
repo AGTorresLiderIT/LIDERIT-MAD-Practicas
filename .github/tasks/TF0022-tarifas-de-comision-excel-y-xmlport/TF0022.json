@@ -1,0 +1,2165 @@
+{
+  "_version": 2,
+  "codigo": "TF0022",
+  "codigo_erpit": "",
+  "nombre": "Tarifas de comisión Excel y XMLport",
+  "cliente": "LiderIT",
+  "fecha": "17/11/2026",
+  "proyecto": "Formación – Bloque 5 (Eventos, registro y procesos)",
+  "destinatario": "Alejandro Gallego",
+  "consultor": "Alejandro González Torres",
+  "ficha": {
+    "origen": "Tarea de formación TF0022 (apartado del Bloque 5), continuación de TF0020 y TF0021",
+    "riesgo": "AMARILLO (tabla y lógica nuevas acotadas; cambia el cálculo del % de comisión de TF0020; no toca contabilidad, IVA ni almacén)",
+    "estado": "En desarrollo",
+    "issue_rama": "https://github.com/AGTorresLiderIT/LIDERIT-MAD-Practicas/issues/50 · rama Feature/TF0022-tarifas-de-comision-excel-y-xmlport"
+  },
+  "funcional": {
+    "contexto": "Continuación de TF0020 y TF0021. Dirección comercial negocia porcentajes distintos por vendedor y categoría de producto (por ejemplo, 8 % en mobiliario y 3 % en accesorios), los prepara en Excel y quiere cargarlos en BC en lugar de teclearlos. Nóminas necesita los movimientos de comisión de un periodo en Excel, para cuadrarlos a mano, y en un CSV de formato fijo para su programa de nóminas.",
+    "situacion_actual": "Tras TF0020 cada vendedor tiene un único «% Comisión» en su ficha, que se aplica a todas sus ventas. Los movimientos de comisión se consultan en la lista «Commission Entries» sin exportación propia; solo está el «Abrir en Excel» estándar de la lista.",
+    "intro_alcance": "La tarea incluye:",
+    "bloques": [
+      {
+        "id": "1",
+        "titulo": "Tarifas por vendedor y categoría",
+        "requisitos": [
+          {
+            "id": "RF-1.1",
+            "texto": "Tabla de tarifas por vendedor y categoría de producto, con porcentaje entre 0 y 100 y fecha de inicio opcional. Categoría en blanco = cualquier categoría."
+          },
+          {
+            "id": "RF-1.2",
+            "texto": "Lista editable de tarifas, accesible desde la ficha del vendedor (filtrada por él) y desde el buscador."
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "titulo": "Cálculo del % de comisión",
+        "requisitos": [
+          {
+            "id": "RF-2.1",
+            "texto": "El % de cada línea se busca por este orden: tarifa de vendedor y categoría (la más reciente con fecha de inicio igual o anterior a la fecha de registro); tarifa del vendedor con categoría en blanco; «% Comisión» de la ficha del vendedor."
+          },
+          {
+            "id": "RF-2.2",
+            "texto": "No se duplica código: la función de TF0020 que crea el movimiento solo cambia la forma de obtener el %."
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "titulo": "Importar tarifas desde Excel",
+        "requisitos": [
+          {
+            "id": "RF-3.1",
+            "texto": "Acción «Importar desde Excel» en la lista de tarifas, con fichero de cuatro columnas (vendedor, categoría, % comisión, fecha inicio) y cabeceras en la fila 1."
+          },
+          {
+            "id": "RF-3.2",
+            "texto": "Cada fila se valida (vendedor y categoría existentes, % numérico entre 0 y 100, fecha válida). Las correctas insertan o modifican la tarifa; las erróneas se guardan con nº de fila y motivo y la importación sigue."
+          },
+          {
+            "id": "RF-3.3",
+            "texto": "Al terminar se informa de filas importadas, modificadas y con error; si hay errores, se abre la lista de errores."
+          }
+        ]
+      },
+      {
+        "id": "4",
+        "titulo": "Exportar movimientos a Excel",
+        "requisitos": [
+          {
+            "id": "RF-4.1",
+            "texto": "Acción «Exportar a Excel» en la lista «Commission Entries» con los filtros que tenga aplicados el usuario."
+          },
+          {
+            "id": "RF-4.2",
+            "texto": "Columnas: fecha de registro, tipo y nº de documento, vendedor, nombre del vendedor, cliente, nombre del cliente, base, %, comisión, liquidado y nº de liquidación, con cabecera en negrita e importes con formato numérico."
+          }
+        ]
+      },
+      {
+        "id": "5",
+        "titulo": "Exportar fichero CSV para nóminas",
+        "requisitos": [
+          {
+            "id": "RF-5.1",
+            "texto": "Acción «Exportar fichero nóminas» en la misma lista, con los mismos movimientos filtrados, mediante el XMLport «Commission Payroll Export» (texto variable, separador «;», sin delimitador, UTF-8)."
+          },
+          {
+            "id": "RF-5.2",
+            "texto": "Primera fila con cabeceras y columnas en este orden: código de vendedor, nombre de vendedor, fecha de registro (AAAAMMDD), nº de documento e importe de comisión con 2 decimales y punto decimal."
+          },
+          {
+            "id": "RF-5.3",
+            "texto": "El fichero se descarga con el nombre COMISIONES_AAAAMM.csv."
+          }
+        ]
+      },
+      {
+        "id": "6",
+        "titulo": "Comparativa y documentación técnica",
+        "requisitos": [
+          {
+            "id": "RF-6.1",
+            "texto": "La documentación de entrega explica por qué se importa con Excel Buffer y no con XMLport, qué ventajas tiene el XMLport para nóminas y en qué se diferencia la exportación a Excel del «Abrir en Excel» estándar."
+          },
+          {
+            "id": "RF-6.2",
+            "texto": "La entrega incluye explicación de la solución, lectura del Excel Buffer, estructura del XMLport, funciones de la codeunit, capturas de código y de funcionamiento (Excel de entrada, Excel y CSV de salida) y problemas o dudas encontrados."
+          }
+        ]
+      }
+    ],
+    "puntos": [
+      {
+        "id": "P-1",
+        "tipo": "Supuesto",
+        "texto": "Decisión (validada en revisión): clave de tres campos (vendedor, categoría y fecha de inicio; fecha en blanco = siempre). El origen fija la clave en vendedor y categoría, pero pide «la tarifa más reciente con fecha de inicio igual o anterior a la de registro», lo que exige varias filas por pareja; con dos campos una tarifa nueva machacaría la anterior y no habría histórico. Categoría y fecha en blanco son válidas en la clave. La búsqueda filtra vendedor y categoría, SetRange(«Starting Date», 0D, fecha) y toma el último registro de la clave (FindLast), sin ordenar aparte. El programador la cuestiona en P1.",
+        "bloquea": false,
+        "responsable": "Consultor LiderIT",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      },
+      {
+        "id": "P-2",
+        "tipo": "Supuesto",
+        "texto": "La categoría se lee de «Item Category Code» de la ficha del producto de la línea (no se hereda de la categoría padre). Si el producto no tiene categoría, se usa la tarifa del vendedor con categoría en blanco y, si no existe, el % de la ficha. Cambio sobre TF0020: la condición «% del vendedor distinto de 0» pasa a «% devuelto por GetCommissionPct distinto de 0», porque una tarifa puede dar un % aunque la ficha tenga 0; una tarifa con 0 % no genera movimiento. Las líneas excluidas de comisión siguen lo definido en TF0020.",
+        "bloquea": false,
+        "responsable": "Consultor LiderIT",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      },
+      {
+        "id": "P-3",
+        "tipo": "Supuesto",
+        "texto": "Lectura de celdas: se lee el texto de cada celda y se interpreta con Evaluate según la configuración regional del usuario (coma decimal y fecha dd/mm/aaaa en un BC en español). Si la celda de fecha llega como número de serie de Excel, también se acepta. Una fila repetida (misma clave) dentro del mismo fichero prevalece la última.",
+        "bloquea": false,
+        "responsable": "Consultor LiderIT",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      },
+      {
+        "id": "P-4",
+        "tipo": "Supuesto",
+        "texto": "La importación no es todo o nada: cada fila se procesa de forma independiente y las erróneas no deshacen las correctas. Una fila cuya clave ya existe cuenta como «modificada», aunque el % sea el mismo.",
+        "bloquea": false,
+        "responsable": "Consultor LiderIT",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      },
+      {
+        "id": "P-5",
+        "tipo": "Pregunta",
+        "texto": "Cabeceras exactas del CSV de nóminas, presencia o no de BOM en el UTF-8 y si el programa de nóminas admite nombres con tildes. Propuesta: cabeceras en inglés sin espacios (SalespersonCode, SalespersonName, PostingDate, DocumentNo, CommissionAmount), escritas como textos fijos en una primera fila (el XMLport de texto no tiene propiedad para sacar nombres de campo), UTF-8 sin BOM.",
+        "bloquea": false,
+        "responsable": "Nóminas (LiderIT)",
+        "estado": "Pendiente",
+        "ambito": "Cliente"
+      },
+      {
+        "id": "P-6",
+        "tipo": "Supuesto",
+        "texto": "AAAAMM del nombre del fichero: año y mes de la «Posting Date» más reciente de los movimientos filtrados (SetCurrentKey por fecha y FindLast), no de la fecha de hoy ni del filtro: así no hay que interpretar filtros complejos y el nombre refleja lo exportado. Un «;» dentro del nombre del vendedor se sustituye por «,» para no romper el CSV (sin delimitador de texto no hay otra forma de protegerlo).",
+        "bloquea": false,
+        "responsable": "Consultor LiderIT",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      },
+      {
+        "id": "P-7",
+        "tipo": "Supuesto",
+        "texto": "La exportación a Excel con Excel Buffer carga todo el conjunto en una tabla temporal y en memoria. Es válida para el volumen de un periodo de comisiones; si crece a decenas de miles de movimientos, el CSV (XMLport, que escribe en flujo) es la vía. Se avisa si el filtro supera un límite razonable (propuesta: 20.000 filas) y no se exporta sin confirmar. Si el filtro no devuelve movimientos, se avisa y no se genera fichero.",
+        "bloquea": false,
+        "responsable": "Consultor LiderIT",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      },
+      {
+        "id": "P-8",
+        "tipo": "Supuesto",
+        "texto": "Los nombres de vendedor y cliente no se guardan en el movimiento (TF0020); se buscan en sus tablas al exportar. Campos de «Commission Entry_LDR» usados, tal como están en TF0020 y TF0021: Posting Date, Document Type (enum «Commission Document Type_LDR»), Document No., Salesperson Code, Customer No., Base Amount (LCY), Commission %, Commission Amount (LCY), Liquidated y Liquidation No. La extensión de página de la ficha del vendedor se llama «Salesperson/Purchaser_LDR» (nombre de TF0020; TF0021 la llama «Salesperson/Purchaser Card_LDR», a unificar).",
+        "bloquea": false,
+        "responsable": "Programador LiderIT",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      },
+      {
+        "id": "P-9",
+        "tipo": "Fuera de alcance",
+        "texto": "Exportar tarifas a Excel, plantilla Excel descargable, importar tarifas desde CSV o XML, importar movimientos, programar la exportación en cola de trabajos (TF0023) y permisos distintos del conjunto «Commissions».",
+        "bloquea": false,
+        "responsable": "Dirección comercial (LiderIT)",
+        "estado": "Pendiente",
+        "ambito": "Cliente"
+      },
+      {
+        "id": "P-10",
+        "tipo": "Supuesto",
+        "texto": "La app declara application 28 y el estándar consultado es BC 29. Las funciones de Excel Buffer usadas existen en ambos, pero hay que verificarlas en 28 si se publica allí.",
+        "bloquea": false,
+        "responsable": "Programador LiderIT",
+        "estado": "Pendiente",
+        "ambito": "Interno"
+      }
+    ]
+  },
+  "desarrollo": {
+    "intro": "Se añade una tabla de tarifas con su lista, se cambia la forma de obtener el % en la codeunit de TF0020 y se crean la importación desde Excel y las dos exportaciones. Se realizarán las siguientes modificaciones:",
+    "secciones": [
+      {
+        "id": "1",
+        "titulo": "Tarifas por vendedor y categoría",
+        "ubicacion": "Tabla Salesperson/Purchaser (13), Página Salesperson/Purchaser Card (5116), Tabla Item Category (5722).",
+        "parrafos": [
+          "Se crea la tabla «Commission Rate» con la clave propuesta en P-1. Las dos relaciones usan TableRelation, y la categoría en blanco significa «cualquier categoría».",
+          "La página lista editable «Commission Rates» se abre desde una acción nueva «Tarifas de comisión» en la ficha del vendedor (filtrada por él) y se puede buscar por nombre. Contiene las acciones de importación del bloque 3. La acción se añade en la extensión de página de la ficha creada en TF0020."
+        ],
+        "tabla": {
+          "columnas": [
+            "Campo",
+            "Tipo",
+            "Comentario"
+          ],
+          "filas": [
+            [
+              "Salesperson Code",
+              "Code[20]",
+              "Clave 1. Relación con Salesperson/Purchaser"
+            ],
+            [
+              "Item Category Code",
+              "Code[20]",
+              "Clave 2. Relación con Item Category. En blanco = cualquier categoría"
+            ],
+            [
+              "Starting Date",
+              "Date",
+              "Clave 3 (P-1). Opcional: en blanco aplica siempre"
+            ],
+            [
+              "Commission %",
+              "Decimal",
+              "MinValue 0, MaxValue 100, DecimalPlaces 0:5"
+            ]
+          ]
+        }
+      },
+      {
+        "id": "2",
+        "titulo": "Cálculo del % de comisión",
+        "ubicacion": "Codeunit «Commission Mgt._LDR» (TF0020), Tabla Item (27), Tabla Item Category (5722).",
+        "parrafos": [
+          "Se añade a la codeunit de TF0020 la función GetCommissionPct(Salesperson, ItemCategory, PostingDate): primero busca la tarifa del vendedor y la categoría con Starting Date <= fecha de registro y la más reciente (SetRange hasta la fecha y FindLast, ya que la clave termina en la fecha); si no hay, repite con categoría en blanco; si no hay, devuelve el «% Comisión» de la ficha del vendedor. La categoría la lee de «Item Category Code» del producto (SetLoadFields).",
+          "La función de TF0020 que crea el movimiento solo cambia la obtención del %: llama a GetCommissionPct y la condición de crear movimiento pasa a «% obtenido distinto de 0» (P-2). Los movimientos ya creados no se recalculan."
+        ]
+      },
+      {
+        "id": "3",
+        "titulo": "Importar tarifas desde Excel",
+        "ubicacion": "Página «Commission Rates»; tabla Excel Buffer (370).",
+        "parrafos": [
+          "La acción «Importar desde Excel» llama a una codeunit nueva, no a la página. Sube el fichero con UploadIntoStream, elige la hoja con SelectSheetsNameStream, la abre con OpenBookStream y la lee con ReadSheet. Se usa Excel Buffer porque un XMLport solo lee XML o texto delimitado, nunca un .xlsx (bloque 6).",
+          "Las celdas se recorren ordenadas por «Row No.», agrupando las de cada fila y saltando la primera. Cada fila se valida y, si es correcta, se inserta o modifica la tarifa; si no, se añade a una tabla temporal de errores y se sigue (P-3, P-4). Al final se muestra el mensaje y, si hay errores, la lista de errores."
+        ],
+        "tabla": {
+          "columnas": [
+            "Columna",
+            "Contenido",
+            "Validación"
+          ],
+          "filas": [
+            [
+              "A",
+              "Vendedor",
+              "Obligatorio; debe existir en Salesperson/Purchaser"
+            ],
+            [
+              "B",
+              "Categoría",
+              "Opcional; si viene, debe existir en Item Category"
+            ],
+            [
+              "C",
+              "% Comisión",
+              "Obligatorio; numérico (Evaluate) entre 0 y 100"
+            ],
+            [
+              "D",
+              "Fecha inicio",
+              "Opcional; fecha válida (Evaluate)"
+            ]
+          ]
+        },
+        "puntos": [
+          "Tabla temporal «Commission Import Error»: nº de fila, texto de la fila y motivo.",
+          "Si la hoja no tiene datos tras la cabecera o el fichero no se puede abrir, se muestra un error y no se modifica nada."
+        ],
+        "mensajes": [
+          "Importación terminada. Filas importadas: %1. Modificadas: %2. Con error: %3.",
+          "El vendedor %1 no existe.",
+          "El porcentaje debe estar entre 0 y 100."
+        ]
+      },
+      {
+        "id": "4",
+        "titulo": "Exportar movimientos a Excel",
+        "ubicacion": "Página «Commission Entries» (TF0020), tabla Excel Buffer (370).",
+        "parrafos": [
+          "La acción «Exportar a Excel» pasa los registros de la página con sus filtros (Rec) a una función de «Commission Mgt._LDR». Esta construye el libro con Excel Buffer: NewRow y AddColumn con cabecera en negrita e importes con formato numérico, y después CreateNewBook, WriteSheet, CloseBook, SetFriendlyFilename y OpenExcel.",
+          "Los nombres de vendedor y cliente se buscan al escribir cada fila. Las fechas se escriben como fecha, no como texto. Son 12 columnas, con tipo y nº de documento en columnas separadas. Antes de exportar se aplican los avisos de P-7 (sin movimientos o más de 20.000)."
+        ],
+        "tabla": {
+          "columnas": [
+            "Columna",
+            "Origen"
+          ],
+          "filas": [
+            [
+              "1 Fecha registro",
+              "Posting Date"
+            ],
+            [
+              "2 Tipo documento, 3 Nº documento",
+              "Document Type y Document No."
+            ],
+            [
+              "4 Vendedor, 5 Nombre vendedor",
+              "Salesperson Code y nombre de Salesperson/Purchaser"
+            ],
+            [
+              "6 Cliente, 7 Nombre cliente",
+              "Customer No. y nombre de Customer"
+            ],
+            [
+              "8 Base, 9 %, 10 Comisión",
+              "Base Amount (LCY), Commission % y Commission Amount (LCY); formato #,##0.00 en importes"
+            ],
+            [
+              "11 Liquidado, 12 Nº liquidación",
+              "Liquidated y Liquidation No. (TF0021)"
+            ]
+          ]
+        }
+      },
+      {
+        "id": "5",
+        "titulo": "Exportar fichero CSV para nóminas",
+        "ubicacion": "Página «Commission Entries» (TF0020); XMLport nuevo.",
+        "parrafos": [
+          "El XMLport «Commission Payroll Export» se configura con Direction = Export, Format = VariableText, FieldSeparator = ';', FieldDelimiter = '' (sin comillas) y TextEncoding = UTF8. Tiene un solo elemento de tabla, «Commission Entry», y sus columnas en el orden del requisito.",
+          "Fila de títulos: la propiedad FirstLineHasFieldNames no existe en los XMLport de AL (no figura entre las propiedades de XMLport de Microsoft Learn), así que no se usa.",
+          "Se añade, antes del elemento de movimientos, un elemento de tabla «Header» sobre Integer con SourceTableView = Number 1, cuyos cinco elementos de texto se rellenan en su OnAfterGetRecord con las cabeceras de P-5; el elemento de movimientos va después en el mismo nivel y ambos salen separados por el salto de línea. Así la cabecera sale una sola vez y con el mismo separador que los datos.",
+          "El nombre del vendedor y los valores formateados salen de elementos de texto rellenados en OnAfterGetRecord del elemento de tabla, que busca el vendedor y sustituye «;» por «,». La fecha se formatea con '<Year4><Month,2><Day,2>'.",
+          "El importe se formatea con Format(Importe, 0, '<Precision,2:2><Standard Format,9>'): la sintaxis es válida (Precision y Standard Format son atributos combinables y el formato 9 es el XML, con punto), pero la combinación con el 9 no está documentada y debe comprobarse en BC; alternativa determinista: pasar el importe a céntimos enteros con Round(Importe * 100, 1) e insertar el punto en el texto."
+        ],
+        "tabla": {
+          "columnas": [
+            "Posición",
+            "Nodo",
+            "Valor"
+          ],
+          "filas": [
+            [
+              "Fila 1 (elemento Header)",
+              "Textos fijos",
+              "SalespersonCode;SalespersonName;PostingDate;DocumentNo;CommissionAmount"
+            ],
+            [
+              "1",
+              "SalespersonCode",
+              "Código de vendedor"
+            ],
+            [
+              "2",
+              "SalespersonName",
+              "Nombre del vendedor (texto)"
+            ],
+            [
+              "3",
+              "PostingDate",
+              "AAAAMMDD (texto)"
+            ],
+            [
+              "4",
+              "DocumentNo",
+              "Nº de documento"
+            ],
+            [
+              "5",
+              "CommissionAmount",
+              "Commission Amount (LCY) con 2 decimales y punto (texto)"
+            ]
+          ]
+        },
+        "puntos": [
+          "La acción crea el XMLport en una variable, le pasa los filtros con SetTableView, fija UseRequestPage = false, lo ejecuta contra un OutStream de un TempBlob con SetDestination y Export, y descarga el flujo con DownloadFromStream.",
+          "Nombre del fichero: COMISIONES_AAAAMM.csv según P-6."
+        ]
+      },
+      {
+        "id": "6",
+        "titulo": "Comparativa y documentación técnica",
+        "ubicacion": "Documentación de entrega de la tarea.",
+        "parrafos": [
+          "Importación con Excel Buffer y no con XMLport: un XMLport solo lee XML o texto delimitado/fijo. Un .xlsx es un ZIP con XML interno, así que solo Excel Buffer lo abre, elige hoja y entrega celda a celda. Dirección trabaja en Excel; pedirle un CSV añadiría un paso manual y fallos de formato.",
+          "XMLport para nóminas: formato exacto y repetible (separador, sin delimitador, codificación, AAAAMMDD, decimales), escritura en flujo sin cargar todo en memoria, sin depender de Excel en el equipo del usuario y reutilizable en una cola de trabajos (TF0023). Excel Buffer sirve para ficheros que una persona revisa o formatea, o que hay que leer desde .xlsx. Regla de proyecto: .xlsx de entrada o de revisión = Excel Buffer; fichero máquina a máquina con formato fijo o volumen = XMLport.",
+          "Frente al «Abrir en Excel» estándar: el estándar vuelca las columnas de la página tal como estén (personalización del usuario incluida) y no añade nombres de vendedor ni cliente, ni da control de columnas, orden, formato o nombre del fichero. Tiene sentido desarrollarla cuando se necesita un formato fijo y estable para un proceso (cuadre con nóminas); para una consulta puntual basta el estándar. La opción propuesta es mantenerla porque nóminas cuadra siempre con las mismas columnas (P-7 limita su volumen)."
+        ],
+        "puntos": [
+          "Se entrega un documento con las secciones del RF-6.2 y las capturas (Excel de entrada, Excel y CSV de salida)."
+        ]
+      }
+    ],
+    "objetos": [
+      {
+        "tipo": "Table",
+        "id": 50003,
+        "nombre": "Commission Rate_LDR",
+        "extiende": "",
+        "uso": "tarifas por vendedor, categoría y fecha de inicio"
+      },
+      {
+        "tipo": "Page",
+        "id": 50004,
+        "nombre": "Commission Rates_LDR",
+        "extiende": "",
+        "uso": "lista editable de tarifas con acción «Importar desde Excel»"
+      },
+      {
+        "tipo": "Codeunit",
+        "id": 50005,
+        "nombre": "Commission Rate Import_LDR",
+        "extiende": "",
+        "uso": "importación desde Excel con Excel Buffer y validación por fila"
+      },
+      {
+        "tipo": "Table",
+        "id": 50004,
+        "nombre": "Commission Import Error_LDR",
+        "extiende": "",
+        "uso": "tabla temporal de errores de importación (nº de fila y motivo)"
+      },
+      {
+        "tipo": "Page",
+        "id": 50005,
+        "nombre": "Commission Import Errors_LDR",
+        "extiende": "",
+        "uso": "lista de solo lectura de la tabla temporal de errores"
+      },
+      {
+        "tipo": "XMLport",
+        "id": 50000,
+        "nombre": "Commission Payroll Export_LDR",
+        "extiende": "",
+        "uso": "CSV para nóminas, con elemento de cabecera de textos fijos"
+      },
+      {
+        "tipo": "Codeunit",
+        "id": 50000,
+        "nombre": "Commission Mgt._LDR",
+        "extiende": "",
+        "uso": "objeto de TF0020: se añaden GetCommissionPct y la exportación a Excel, y se cambia la obtención del % y la condición de crear movimiento"
+      },
+      {
+        "tipo": "Page",
+        "id": 50000,
+        "nombre": "Commission Entries_LDR",
+        "extiende": "",
+        "uso": "objeto de TF0020: dos acciones nuevas, «Exportar a Excel» y «Exportar fichero nóminas»"
+      },
+      {
+        "tipo": "PageExtension",
+        "id": 50002,
+        "nombre": "Salesperson/Purchaser_LDR",
+        "extiende": "página Salesperson/Purchaser Card (5116)",
+        "uso": "acción «Tarifas de comisión»; es la extensión de la ficha creada en TF0020 (mismo nombre que allí)"
+      },
+      {
+        "tipo": "PermissionSet",
+        "id": 50000,
+        "nombre": "Commissions_LDR",
+        "extiende": "",
+        "uso": "objeto de TF0020: se añaden los objetos de esta tarea"
+      },
+      {
+        "tipo": "Codeunit",
+        "id": 50006,
+        "nombre": "Commission Rates Test_LDR",
+        "extiende": "",
+        "uso": "tests automáticos (app de test)"
+      }
+    ],
+    "alcance_tecnico": [
+      "Sin suscripciones a eventos nuevas: el cambio de cálculo es una llamada dentro de la codeunit de TF0020, no un evento.",
+      "Funciones de Excel Buffer verificadas en BC 29 ES (ExcelBuffer.Table.al): CreateNewBook, OpenBookStream, SelectSheetsNameStream, ReadSheet, WriteSheet, CloseBook, NewRow, AddColumn, SetFriendlyFilename y OpenExcel. UploadIntoStream y DownloadFromStream son métodos del sistema. XMLport: FirstLineHasFieldNames no existe (Microsoft Learn); la cabecera es un elemento de tabla de textos fijos.",
+      "Captions en inglés con Comment = 'ESP=\"...\"' y textos de mensajes en Labels."
+    ],
+    "eventos": [],
+    "consideraciones": [
+      "Depende de TF0020 (codeunit «Commission Mgt._LDR» y tabla/página de movimientos) y de TF0021 (campos Liquidated y Liquidation No.). Esta tarea se desarrolla después y amplía esos objetos, no los crea.",
+      "El cambio del % solo afecta a los movimientos nuevos; los ya registrados conservan su %.",
+      "Importación: el fichero se lee entero en el Excel Buffer (tabla temporal); no es apto para cargas masivas.",
+      "Sin parámetros de configuración nuevos: no se crea tabla de configuración.",
+      "Datos de prueba con CRONUS; ningún dato real.",
+      "Los ejercicios del origen (fila de títulos en un XMLport, comparativa, diferencia con «Abrir en Excel») están resueltos en este documento con su justificación. En sdd-implementar el programador debe cuestionarlos en P1; a comprobar en BC: el formato '<Precision,2:2><Standard Format,9>' y el elemento Header del XMLport.",
+      "Cambio en TF0020: la condición de crear movimiento usa el % de GetCommissionPct y no el de la ficha (P-2).",
+      "Nombres de nodos del XMLport sin espacios ni tildes."
+    ],
+    "tareas": [
+      {
+        "id": "T-01",
+        "descripcion": "Tabla «Commission Rate» y página lista, acción en la ficha del vendedor",
+        "depende_de": "TF0020",
+        "hecho_cuando": "Compila y se crean tarifas con validación 0-100 y relaciones"
+      },
+      {
+        "id": "T-02",
+        "descripcion": "GetCommissionPct y cambio en la función de creación del movimiento",
+        "depende_de": "T-01",
+        "hecho_cuando": "Pasan A-3 a A-6"
+      },
+      {
+        "id": "T-03",
+        "descripcion": "Importación desde Excel con tabla y página de errores",
+        "depende_de": "T-01",
+        "hecho_cuando": "Pasan A-7 a A-9"
+      },
+      {
+        "id": "T-04",
+        "descripcion": "Exportar a Excel desde la lista de movimientos",
+        "depende_de": "TF0021",
+        "hecho_cuando": "Pasan A-10 y A-11"
+      },
+      {
+        "id": "T-05",
+        "descripcion": "XMLport de nóminas y acción de exportación",
+        "depende_de": "TF0021",
+        "hecho_cuando": "Pasan A-12 a A-16"
+      },
+      {
+        "id": "T-06",
+        "descripcion": "Tests automáticos, permission set y traducciones es-ES",
+        "depende_de": "T-02, T-03, T-04, T-05",
+        "hecho_cuando": "Tests en verde (incluye el límite de 20.000 del A-18) y XLIFF completo"
+      },
+      {
+        "id": "T-07",
+        "descripcion": "Documentación técnica con comparativa y capturas",
+        "depende_de": "T-04, T-05",
+        "hecho_cuando": "Contiene todo lo del RF-6.2"
+      }
+    ]
+  },
+  "pruebas": {
+    "intro": "Pruebas que valida el consultor en un entorno de pruebas con datos de CRONUS, con TF0020 y TF0021 ya instaladas.",
+    "parametrizacion": [
+      "Vendedores JR (con «% Comisión» 5 en la ficha), PS (con 2) y BD (con 2 y sin ninguna tarifa); categorías de producto MOBILIARIO y ACCESORIOS con un producto de cada una, y un producto sin categoría. Tabla de tarifas vacía al empezar cada escenario de importación (A-7 y A-9).",
+      "Fichero Excel «tarifas.xlsx» con cabeceras en la fila 1 y filas: JR / MOBILIARIO / 8 / 01/01/2027; JR / ACCESORIOS / 3 / (vacía); JR / (vacía) / 4 / (vacía); PS / MOBILIARIO / 7 / (vacía); PS / ACCESORIOS / 2,5 / (vacía).",
+      "Fichero «errores.xlsx» con cabeceras y filas: XX / MOBILIARIO / 8; JR / MOBILIARIO / 150; JR / ACCESORIOS / abc; PS / MOBILIARIO / 6 / (vacía)."
+    ],
+    "escenarios": [
+      {
+        "id": "A-1",
+        "rf": "RF-1.1",
+        "escenario": "Crear una tarifa JR / MOBILIARIO / 8 % sin fecha. Intentar otra con 101 % y otra con el vendedor XX. Borrar la primera al terminar",
+        "resultado": "La primera se guarda; el 101 % y el vendedor inexistente dan error de validación y no se guardan"
+      },
+      {
+        "id": "A-2",
+        "rf": "RF-1.2",
+        "escenario": "Abrir «Tarifas de comisión» desde la ficha de JR y desde el buscador",
+        "resultado": "Desde la ficha solo salen las tarifas de JR; desde el buscador salen todas"
+      },
+      {
+        "id": "A-3",
+        "rf": "RF-2.1",
+        "escenario": "Con las tarifas de «tarifas.xlsx» importadas (A-7), registrar el 15/01/2027 una factura de JR con 1.000 € de producto MOBILIARIO y 200 € de ACCESORIOS",
+        "resultado": "Dos movimientos: base 1.000,00 € al 8 % = 80,00 € y base 200,00 € al 3 % = 6,00 €"
+      },
+      {
+        "id": "A-4",
+        "rf": "RF-2.1",
+        "escenario": "Registrar el 15/12/2026 la misma factura de MOBILIARIO de JR (antes de la fecha de inicio de la tarifa del 8 %)",
+        "resultado": "Se aplica la tarifa de categoría en blanco: 1.000,00 € al 4 % = 40,00 €"
+      },
+      {
+        "id": "A-5",
+        "rf": "RF-2.1",
+        "escenario": "Registrar una factura de JR de un producto sin categoría por 500 € y otra del vendedor BD (sin tarifas, 2 % en la ficha) por 500 €",
+        "resultado": "JR: 4 % (tarifa en blanco) = 20,00 €. BD: 2 % de la ficha = 10,00 €"
+      },
+      {
+        "id": "A-6",
+        "rf": "RF-2.2",
+        "escenario": "Revisar el código de la función que crea el movimiento tras el cambio",
+        "resultado": "Solo cambia la obtención del %: sin lógica de creación duplicada"
+      },
+      {
+        "id": "A-7",
+        "rf": "RF-3.1, RF-3.3",
+        "escenario": "Con la tabla de tarifas vacía, importar «tarifas.xlsx» (5 filas)",
+        "resultado": "Mensaje «Filas importadas: 5. Modificadas: 0. Con error: 0» y 5 tarifas en la lista; la fila de cabeceras no se importa"
+      },
+      {
+        "id": "A-8",
+        "rf": "RF-3.2",
+        "escenario": "Cambiar en el Excel el % de JR / MOBILIARIO de 8 a 9 y reimportar",
+        "resultado": "Siguen 5 tarifas, sin duplicados; la de JR / MOBILIARIO pasa a 9 %. Mensaje «Filas importadas: 0. Modificadas: 5. Con error: 0» (P-4)"
+      },
+      {
+        "id": "A-9",
+        "rf": "RF-3.2, RF-3.3",
+        "escenario": "Con la tabla de tarifas vacía, importar «errores.xlsx»",
+        "resultado": "Mensaje «Filas importadas: 1. Modificadas: 0. Con error: 3». Se importa la fila de PS (6 %); se abre la lista con 3 errores: fila 2 vendedor XX inexistente, fila 3 % de 150 fuera de rango, fila 4 % «abc» no numérico"
+      },
+      {
+        "id": "A-10",
+        "rf": "RF-4.1",
+        "escenario": "En «Commission Entries» filtrar por vendedor JR y pulsar «Exportar a Excel»",
+        "resultado": "El Excel solo contiene los movimientos de JR; sin filtro, todos"
+      },
+      {
+        "id": "A-11",
+        "rf": "RF-4.2",
+        "escenario": "Abrir el Excel exportado con los movimientos de A-3",
+        "resultado": "Las 12 columnas en orden con nombres de vendedor y cliente; cabecera en negrita; la fila de 1.000,00 € muestra base 1.000,00, % 8 y comisión 80,00 con formato numérico"
+      },
+      {
+        "id": "A-12",
+        "rf": "RF-5.1",
+        "escenario": "Filtrar por JR y pulsar «Exportar fichero nóminas»; abrir el CSV con el Bloc de notas",
+        "resultado": "Solo movimientos de JR, separados por «;», sin comillas"
+      },
+      {
+        "id": "A-13",
+        "rf": "RF-5.2",
+        "escenario": "Revisar el contenido del CSV de A-12",
+        "resultado": "Primera línea con las cabeceras SalespersonCode;SalespersonName;PostingDate;DocumentNo;CommissionAmount; las líneas de A-3 salen como JR;<nombre>;20270115;<nº documento>;80.00 y ...;6.00 (fecha AAAAMMDD, punto decimal y 2 decimales)"
+      },
+      {
+        "id": "A-14",
+        "rf": "RF-5.3",
+        "escenario": "Con filtro de vendedor JR, exportar con fecha de registro 01/01/2027..31/01/2027 y otra vez con 01/12/2026..31/12/2026 (movimiento de A-4)",
+        "resultado": "Los ficheros se llaman COMISIONES_202701.csv y COMISIONES_202612.csv (mes de la fecha de registro más reciente exportada, P-6)"
+      },
+      {
+        "id": "A-15",
+        "rf": "RF-5.1",
+        "escenario": "Cambiar el nombre de un vendedor a «Pérez; Gómez» y exportar sus movimientos",
+        "resultado": "En el CSV el nombre sale como «Pérez, Gómez» (sin «;» interno) y las columnas siguen alineadas"
+      },
+      {
+        "id": "A-16",
+        "rf": "RF-5.1, RF-4.1",
+        "escenario": "Filtrar por un vendedor sin movimientos y exportar con las dos opciones",
+        "resultado": "Aviso de que no hay movimientos a exportar y no se genera Excel ni CSV con solo cabeceras"
+      },
+      {
+        "id": "A-17",
+        "rf": "RF-6.1, RF-6.2",
+        "escenario": "Revisar el documento de entrega",
+        "resultado": "Contiene las tres respuestas de la comparativa y todos los apartados de RF-6.2 con capturas"
+      },
+      {
+        "id": "A-18",
+        "rf": "RF-4.1",
+        "escenario": "Test automático: exportar a Excel con 20.001 movimientos filtrados",
+        "resultado": "Pide confirmación antes de exportar; si el usuario no confirma, no se genera el fichero (P-7)"
+      }
+    ]
+  },
+  "fuentes": [
+    "Tarea de formación TF0022 (apartado del origen); reparto del Bloque 5 (reparto.md).",
+    "BC 29 ES: System/DataExchange/ExcelBuffer.Table.al (funciones y campos Row No., Column No., Cell Value as Text, Cell Type); CRM/Team/SalespersonPurchaser.Table.al (13) y SalespersonPurchaserCard.Page.al (5116); Inventory/Item/ItemCategory.Table.al (5722).",
+    "Microsoft Learn: propiedades de XMLport (devenv-xmlport-properties; no existe FirstLineHasFieldNames), Format Property de XMLport (VariableText) y «Formatting values, dates, and time» (atributos Precision y Standard Format; formato 9 = XML). La combinación Precision + Standard Format 9 no figura en ejemplos: [Verificar en BC].",
+    "Revisado con bc-code-intel (especialistas: sam-coder; ask_bc_expert sobre XMLport VariableText, formato decimal y Excel Buffer): devolvió solo el perfil del especialista, sin normas de LiderIT específicas; la verificación se hizo en Microsoft Learn y en el estándar local."
+  ],
+  "implementacion": {
+    "cambios": [
+      {
+        "id": "C-01",
+        "rf": "RF-1.1",
+        "ficheros": [
+          "src/table/CommissionRateLDR.Table.al"
+        ],
+        "commit": "a2bbe9d",
+        "resumen": "Tabla 50003 Commission Rate_LDR: clave vendedor, categoría y fecha de inicio (P-1); % entre 0 y 100 con 5 decimales; relaciones con Salesperson/Purchaser e Item Category"
+      },
+      {
+        "id": "C-02",
+        "rf": "RF-1.2",
+        "ficheros": [
+          "src/page/CommissionRatesLDR.Page.al",
+          "src/table/CommissionRateLDR.Table.al",
+          "src/pageextension/SalespersonPurchaserLDR.PageExt.al",
+          "src/permissionset/CommissionsLDR.PermissionSet.al"
+        ],
+        "commit": "42c6592",
+        "resumen": "Página 50004 Commission Rates_LDR (lista editable, UsageCategory Lists para el buscador) como Lookup/DrillDown de la tabla; acción Tarifas de comisión en la ficha del vendedor con RunPageLink por Code; permission set con table X, tabledata RIMD y page X"
+      },
+      {
+        "id": "C-03",
+        "rf": "RF-2.1",
+        "ficheros": [
+          "src/codeunit/CommissionMgtLDR.Codeunit.al"
+        ],
+        "commit": "e4c9cba",
+        "resumen": "GetCommissionPct(vendedor, categoría, fecha): tarifa vendedor+categoría vigente (SetRange Starting Date 0D..fecha, FindLast), tarifa con categoría en blanco, % de la ficha. Categoría leída de la ficha del producto en la misma lectura que la exclusión (P-2). Abonos: % del movimiento de la factura original (Applies-to Doc. No., si no Corrected Invoice No.); sin factura o sin movimiento, tarifa vigente"
+      },
+      {
+        "id": "C-04",
+        "rf": "RF-2.2",
+        "ficheros": [
+          "src/codeunit/CommissionMgtLDR.Codeunit.al"
+        ],
+        "commit": "e4c9cba",
+        "resumen": "CreateEntry no se duplica: solo cambia la obtención del % y la condición usa el % obtenido (0 = sin movimiento, P-2)"
+      },
+      {
+        "id": "C-05",
+        "rf": "RF-3.1",
+        "ficheros": [
+          "src/page/CommissionRatesLDR.Page.al",
+          "src/codeunit/CommissionRateImportLDR.Codeunit.al",
+          "src/permissionset/CommissionsLDR.PermissionSet.al"
+        ],
+        "commit": "cf5bf75",
+        "resumen": "Acción Importar desde Excel en la lista de tarifas que llama a la codeunit 50005: UploadIntoStream, SelectSheetsNameStream, OpenBookStream, ReadSheet; fila 1 de cabeceras saltada; celdas agrupadas por Row No."
+      },
+      {
+        "id": "C-06",
+        "rf": "RF-3.2",
+        "ficheros": [
+          "src/codeunit/CommissionRateImportLDR.Codeunit.al",
+          "src/table/CommissionImportErrorLDR.Table.al"
+        ],
+        "commit": "cf5bf75",
+        "resumen": "Validación por fila sin errores de ejecución: vendedor obligatorio, en mayúsculas y existente; categoría opcional existente; % numérico (Evaluate) 0-100, multiplicado por 100 si la celda tiene formato %; fecha opcional (texto o nº de serie). Correctas insertan o modifican (la última gana); erróneas a la tabla temporal 50004 con nº de fila, texto y motivo; fila vacía se salta"
+      },
+      {
+        "id": "C-07",
+        "rf": "RF-3.3",
+        "ficheros": [
+          "src/codeunit/CommissionRateImportLDR.Codeunit.al",
+          "src/page/CommissionImportErrorsLDR.Page.al"
+        ],
+        "commit": "cf5bf75",
+        "resumen": "Mensaje con filas importadas, modificadas y con error; si hay errores se abre la página 50005 (solo lectura) con la tabla temporal"
+      },
+      {
+        "id": "C-08",
+        "rf": "RF-4.1",
+        "ficheros": [
+          "src/page/CommissionEntriesLDR.Page.al",
+          "src/codeunit/CommissionMgtLDR.Codeunit.al"
+        ],
+        "commit": "8d15270",
+        "resumen": "Acción Exportar a Excel en Commission Entries que pasa Rec a ExportToExcel (CopyFilters: filtros del usuario); sin movimientos, aviso y no se genera fichero"
+      },
+      {
+        "id": "C-09",
+        "rf": "RF-4.2",
+        "ficheros": [
+          "src/codeunit/CommissionMgtLDR.Codeunit.al"
+        ],
+        "commit": "8d15270",
+        "resumen": "Excel Buffer: 12 columnas (fecha como fecha, tipo y nº documento separados, vendedor y nombre, cliente y nombre leídos al exportar, base, %, comisión con #,##0.00, liquidado, nº liquidación); cabecera en negrita; CreateNewBook, WriteSheet, CloseBook, SetFriendlyFilename y OpenExcel"
+      },
+      {
+        "id": "C-10",
+        "rf": "RF-4.2",
+        "ficheros": [
+          "Translations/LIDERIT-MAD-Practicas.g.xlf",
+          "Translations/LIDERIT-MAD-Practicas.es-ES.xlf"
+        ],
+        "commit": "a9a9aa2",
+        "resumen": "T-06: XLIFF g.xlf regenerado por el compilador y es-ES completado con los ESP de los comentarios (39 unidades nuevas de RF-1.1 a RF-4.2, 137 en total)"
+      },
+      {
+        "id": "C-11",
+        "rf": "RF-5.1",
+        "ficheros": [
+          "src/page/CommissionEntriesLDR.Page.al",
+          "src/codeunit/CommissionMgtLDR.Codeunit.al",
+          "src/xmlport/CommissionPayrollExportLDR.XmlPort.al",
+          "src/permissionset/CommissionsLDR.PermissionSet.al",
+          "Translations/LIDERIT-MAD-Practicas.g.xlf",
+          "Translations/LIDERIT-MAD-Practicas.es-ES.xlf"
+        ],
+        "commit": "df10ef2",
+        "resumen": "Acción Exportar fichero nóminas en Commission Entries; ExportPayrollFile copia los filtros, SetTableView, SetDestination sobre TempBlob y Export. XMLport 50000 VariableText, separador ;, FieldDelimiter '<None>' (el '' de la tarea no es como lo hace el estándar: XMLport 1660 Import Payroll), UTF8. Sin movimientos, aviso y sin fichero; ; del nombre sustituido por ,"
+      },
+      {
+        "id": "C-12",
+        "rf": "RF-5.2",
+        "ficheros": [
+          "src/xmlport/CommissionPayrollExportLDR.XmlPort.al"
+        ],
+        "commit": "df10ef2",
+        "resumen": "Elemento Header sobre Integer (Number = 1) con las cabeceras fijas de P-5 antes de los movimientos; columnas código, nombre, fecha <Year4><Month,2><Day,2>, nº documento e importe con <Precision,2:2><Standard Format,9> (mismo formato que SEPA DD y SII en el estándar)"
+      },
+      {
+        "id": "C-13",
+        "rf": "RF-5.3",
+        "ficheros": [
+          "src/codeunit/CommissionMgtLDR.Codeunit.al",
+          "src/xmlport/CommissionPayrollExportLDR.XmlPort.al"
+        ],
+        "commit": "df10ef2",
+        "resumen": "El XMLport guarda la fecha de registro más reciente exportada (P-6) y el fichero se descarga con DownloadFromStream como COMISIONES_AAAAMM.csv"
+      },
+      {
+        "id": "C-14",
+        "rf": "RF-6.1",
+        "ficheros": [
+          ".github/tasks/TF0022-tarifas-de-comision-excel-y-xmlport/TF0022.json",
+          ".github/tasks/TF0022-tarifas-de-comision-excel-y-xmlport/TF0022 - Tarifas de comisión Excel y XMLport.docx",
+          ".github/tasks/TF0022-tarifas-de-comision-excel-y-xmlport/TF0022 - Tarifas de comisión Excel y XMLport.md"
+        ],
+        "commit": "13a5a1e",
+        "resumen": "Sección 3 del documento de tarea, punto 6 (comparativa Excel Buffer / XMLport / Abrir en Excel, decisiones y problemas) y pruebas con pies de captura"
+      },
+      {
+        "id": "C-15",
+        "rf": "RF-6.2",
+        "ficheros": [
+          ".github/tasks/TF0022-tarifas-de-comision-excel-y-xmlport/TF0022.json",
+          ".github/tasks/TF0022-tarifas-de-comision-excel-y-xmlport/TF0022 - Tarifas de comisión Excel y XMLport.docx",
+          ".github/tasks/TF0022-tarifas-de-comision-excel-y-xmlport/TF0022 - Tarifas de comisión Excel y XMLport.md"
+        ],
+        "commit": "13a5a1e",
+        "resumen": "Sección 3 del documento de tarea, punto 6 (comparativa Excel Buffer / XMLport / Abrir en Excel, decisiones y problemas) y pruebas con pies de captura"
+      }
+    ],
+    "extras": [
+      {
+        "id": "X-01",
+        "descripcion": "Abonos al % de la factura original (Applies-to Doc. No. o Corrected Invoice No.) en lugar de la tarifa vigente en la fecha del abono que dice RF-2.1; sin factura vinculada o sin movimiento, tarifa vigente. Decisión del programador en P1, sin validar por el consultor",
+        "ficheros": [
+          "src/codeunit/CommissionMgtLDR.Codeunit.al"
+        ],
+        "decision": "Pendiente",
+        "decidido_por": "",
+        "fecha": ""
+      }
+    ],
+    "evidencias": [
+      {
+        "id": "E-01",
+        "rf": "RF-3.2",
+        "escenario": "",
+        "tipo": "bc-code-intel",
+        "resultado": "OK",
+        "referencia": "P1: ask_bc_expert (alex-architect) sobre importación con Excel Buffer, celdas con formato %, Evaluate y permisos de tablas temporales; find_bc_knowledge sobre permisos de tablas temporales: sin contenido específico aplicable. Contraste hecho con el estándar es-29 (ExcelBuffer.Table.al ParseCellValue/NumberFormat; SalesCrMemoHeader.Table.al campos 53 y 10705)"
+      },
+      {
+        "id": "E-02",
+        "rf": "RF-1.1",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos (solo info AA0247/AA0232 previos). Commit a2bbe9d"
+      },
+      {
+        "id": "E-03",
+        "rf": "RF-1.2",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos (solo info AA0247/AA0232 previos). Commit 42c6592"
+      },
+      {
+        "id": "E-04",
+        "rf": "RF-2.1",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos (solo info previos). Commit e4c9cba"
+      },
+      {
+        "id": "E-05",
+        "rf": "RF-3.2",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos (solo info previos). Commit cf5bf75"
+      },
+      {
+        "id": "E-06",
+        "rf": "RF-4.2",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "Primer intento con aviso AA0139 (Text a Text[250] en CreateNewBook), corregido con CopyStr antes del commit. alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos. Commit 8d15270"
+      },
+      {
+        "id": "E-07",
+        "rf": "RF-5.2",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "Primer intento con aviso AA0245 (parámetro con el nombre de un nodo del XMLport), corregido antes del commit. alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos. Formato del importe y FieldDelimiter verificados en el estándar es-29 (SEPADDpain00800102.XmlPort.al:377, SIIXMLCreator.Codeunit.al:776, ImportPayroll.XmlPort.al:19). Commit df10ef2"
+      },
+      {
+        "id": "E-08",
+        "rf": "RF-1.1",
+        "escenario": "A-1",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): JR/MOBILIARIO/8 % se guarda; 101 % da error de validación y no se guarda; vendedor XX da error y no se guarda; tarifa borrada al terminar"
+      },
+      {
+        "id": "E-09",
+        "rf": "RF-1.2",
+        "escenario": "A-2",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): desde la ficha de JR solo salen sus tarifas; desde el buscador salen todas"
+      },
+      {
+        "id": "E-10",
+        "rf": "RF-3.1",
+        "escenario": "A-7",
+        "tipo": "manual",
+        "resultado": "KO",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026), primer intento: filas 3 y 6 (JR y PS con ACCESORIOS) rechazadas con «La categoría de producto ACCESORIOS no existe»: la categoría no estaba creada en el sandbox (preparación de datos, no fallo del código). La importación siguió con el resto y abrió la lista de errores. Se repite tras crear la categoría"
+      },
+      {
+        "id": "E-11",
+        "rf": "RF-2.1",
+        "escenario": "A-4",
+        "tipo": "manual",
+        "resultado": "KO",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026), primer intento: salió 80 € (8 %) porque la factura se registró con la fecha de trabajo de 2027, no con 15/12/2026 (preparación, no fallo del código)"
+      },
+      {
+        "id": "E-12",
+        "rf": "RF-2.1",
+        "escenario": "A-4",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026), repetida con fecha de registro 15/12/2026: factura de JR de 1.000 € de MOBILIARIO genera 40,00 € al 4 % (tarifa con categoría en blanco; la del 8 % aún no ha empezado)"
+      },
+      {
+        "id": "E-13",
+        "rf": "RF-3.1",
+        "escenario": "A-7",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026), repetida tras crear la categoría ACCESORIOS: importación de tarifas.xlsx con 5 importadas, 0 modificadas y 0 con error; cabecera no importada"
+      },
+      {
+        "id": "E-14",
+        "rf": "RF-3.3",
+        "escenario": "A-7",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): mensaje final con filas importadas, modificadas y con error (5/0/0); en el primer intento (E-10) se abrió la lista de errores con las filas rechazadas"
+      },
+      {
+        "id": "E-15",
+        "rf": "RF-2.1",
+        "escenario": "A-3",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): factura de JR del 15/01/2027 con 1.000 € de MOBILIARIO y 200 € de ACCESORIOS genera 80,00 € al 8 % y 6,00 € al 3 %"
+      },
+      {
+        "id": "E-16",
+        "rf": "RF-2.1",
+        "escenario": "A-5",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): factura de JR con producto sin categoría (1009) aplica la tarifa general del 4 %; factura del vendedor DB (creado así por error en lugar de BD; sin tarifas, 2 % en la ficha) aplica el 2 % de su ficha"
+      },
+      {
+        "id": "E-17",
+        "rf": "RF-2.1",
+        "escenario": "",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Extra X-01. Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): abono de JR del 15/01/2027 de 1.000 € del producto 1008 liquidado contra la factura del 15/12/2026 (A-4) genera -1.000,00 al 4 % = -40,00 (% de la factura original, no la tarifa del 8 % vigente en la fecha del abono)"
+      },
+      {
+        "id": "E-18",
+        "rf": "RF-2.1",
+        "escenario": "",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Extra X-01. Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): abono de JR del 15/01/2027 de 1.000 € del producto 1008 sin factura vinculada (sin Liq. por nº documento ni Nº factura corregida) genera -1.000,00 al 8 % = -80,00 (tarifa vigente en la fecha del abono)"
+      },
+      {
+        "id": "E-19",
+        "rf": "RF-4.1",
+        "escenario": "A-10",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): Exportar a Excel con filtro JR solo saca movimientos de JR; sin filtro saca todos"
+      },
+      {
+        "id": "E-20",
+        "rf": "RF-4.2",
+        "escenario": "A-11",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): 12 columnas en orden con nombres de vendedor y cliente, cabecera en negrita, importes como números (base 1.000,00, % 8, comisión 80,00)"
+      },
+      {
+        "id": "E-21",
+        "rf": "RF-5.1",
+        "escenario": "A-12",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): Exportar fichero nóminas con filtro JR solo saca movimientos de JR, separados por ; y sin comillas. El Bloc de notas indica UTF-8 con BOM (P-5 pedía sin BOM; pendiente de nóminas)"
+      },
+      {
+        "id": "E-22",
+        "rf": "RF-5.2",
+        "escenario": "A-13",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): primera línea con las cabeceras una sola vez; fecha AAAAMMDD, punto decimal y 2 decimales (80.00)"
+      },
+      {
+        "id": "E-23",
+        "rf": "RF-5.3",
+        "escenario": "A-14",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): con filtro JR y fechas de enero 2027 el fichero se llama COMISIONES_202701.csv; con diciembre 2026, COMISIONES_202612.csv"
+      },
+      {
+        "id": "E-24",
+        "rf": "RF-5.1",
+        "escenario": "A-15",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): con el nombre de JR cambiado a «Pérez; Gómez» el CSV saca «Pérez, Gómez» y las columnas siguen alineadas"
+      },
+      {
+        "id": "E-25",
+        "rf": "RF-4.1",
+        "escenario": "A-16",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): con un vendedor sin movimientos, Exportar a Excel y Exportar fichero nóminas avisan y no generan fichero"
+      },
+      {
+        "id": "E-26",
+        "rf": "RF-5.1",
+        "escenario": "A-16",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): con un vendedor sin movimientos, Exportar fichero nóminas avisa y no genera CSV con solo cabeceras"
+      },
+      {
+        "id": "E-27",
+        "rf": "RF-3.2",
+        "escenario": "A-8",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): reimportación de tarifas-mod.xlsx con 0 importadas, 5 modificadas y 0 con error; siguen 5 tarifas sin duplicados y JR/MOBILIARIO pasa a 9 %"
+      },
+      {
+        "id": "E-28",
+        "rf": "RF-3.2",
+        "escenario": "A-9",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): con la tabla vacía, errores.xlsx da 1 importada, 0 modificadas y 3 con error; lista con fila 2 vendedor XX inexistente, fila 3 % 150 fuera de rango y fila 4 % abc no numérico; queda PS/MOBILIARIO/6 %"
+      },
+      {
+        "id": "E-29",
+        "rf": "RF-3.3",
+        "escenario": "A-9",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026): mensaje 1/0/3 y se abre la lista de errores con nº de fila, texto y motivo"
+      },
+      {
+        "id": "E-30",
+        "rf": "RF-3.2",
+        "escenario": "",
+        "tipo": "manual",
+        "resultado": "KO",
+        "referencia": "Decisiones de P1 (decisiones-p1.xlsx). Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026), primer intento: 0/0/4. Filas 3 (jr en minúsculas) y 5 (falta el %) rechazadas como se esperaba; fila 4 vacía saltada; filas 2 y 6 rechazadas con «El vendedor BD no existe», por lo que no se pudo comprobar la conversión del 0,08 ni la fecha en texto. Pendiente de confirmar si BD existe en el sandbox"
+      },
+      {
+        "id": "E-31",
+        "rf": "RF-3.2",
+        "escenario": "",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Decisiones de P1 (decisiones-p1.xlsx). Prueba del programador AlejandroGallego-LiderIT en el sandbox (23/11/2026), repetida tras crear el vendedor BD (antes se había creado como DB): 2/0/2; celda con formato de porcentaje (0,08) grabada como 8; jr en minúsculas rechazado; fila vacía saltada sin error; fila sin % rechazada; fecha escrita como texto 15/03/2027 aceptada"
+      },
+      {
+        "id": "E-32",
+        "rf": "RF-2.2",
+        "escenario": "A-6",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Revisión de código por el programador AlejandroGallego-LiderIT (23/11/2026) del diff de Commission Mgt._LDR frente a TF0021 (commit e4c9cba): CreateEntry solo cambia la obtención del % (GetOriginalInvoicePct / GetCommissionPct con categoría y fecha); comprobaciones, cálculo, campos e Insert de TF0020 sin cambios; sin lógica de creación duplicada"
+      }
+    ],
+    "desviaciones": [
+      {
+        "puerta": "escenarios",
+        "codigo": "A-17:sin-validar",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "escenarios",
+        "codigo": "A-18:sin-validar",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "trazabilidad",
+        "codigo": "RF-2.1:evidencia-ko",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "trazabilidad",
+        "codigo": "RF-3.1:evidencia-ko",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "trazabilidad",
+        "codigo": "RF-3.2:evidencia-ko",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "trazabilidad",
+        "codigo": "RF-3.3:evidencia-ko",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "trazabilidad",
+        "codigo": "RF-6.1:sin-evidencia",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "trazabilidad",
+        "codigo": "RF-6.2:sin-evidencia",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "herramientas",
+        "codigo": "uso:bcquality",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "fichero:\".github/tasks/TF0022-tarifas-de-comision-excel-y-xmlport/TF0022 - Tarifas de comisi/303/263n Excel y XMLport.docx\"",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "fichero:\".github/tasks/TF0022-tarifas-de-comision-excel-y-xmlport/TF0022 - Tarifas de comisi/303/263n Excel y XMLport.md\"",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:9bb7f36",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:ef6142a",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:33663de",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:9d6e51e",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:f42fdb7",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:a01dd9f",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:e9366ac",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:6259af3",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:44830c9",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:c65da67",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:16b3c67",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      }
+    ],
+    "firmas": {
+      "P1": {
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-23",
+        "reformulacion": "Crearemos la tabla de tarifas editable con acceso desde la ficha del vendedor; las líneas se introducen a mano y también importando desde Excel. Cambiaremos el cálculo del % de TF0020 en CommissionMgtLDR, en GetCommissionPct, cambiando el orden a: 1. tarifa del vendedor + categoría del producto (con Starting Date <= fecha de registro, la más reciente); 2. tarifa del vendedor con categoría en blanco; 3. el «% Comisión» de la ficha del vendedor. No se duplica código de TF0020: solo cambia la función que obtiene el %. Importación con Excel Buffer (UploadIntoStream, SelectSheetsNameStream, OpenBookStream, ReadSheet), recorriendo las celdas por Row No. y saltando la fila 1; cada fila se valida (vendedor existente, categoría, Evaluate). Las líneas erróneas van a una tabla temporal de errores y el resto sigue; al final, un mensaje con filas importadas, modificadas y con error. Excel Buffer y no XMLport porque un XMLport no puede leer ficheros Excel. Exportación de movimientos con Excel Buffer desde Commission Entries, con los filtros del usuario pasados con Rec: columnas fecha registro, tipo y nº documento, vendedor, nombre vendedor, cliente, nombre cliente, base, %, comisión, liquidado, nº liquidación; cabecera en negrita y formato numérico en importes; CreateNewBook, WriteSheet, CloseBook, SetFriendlyFilename y OpenExcel. XMLport solo puede sacar texto y queremos Excel, por eso no es una opción válida frente a Excel Buffer. No se recalcularán los movimientos de comisión ya registrados; las nuevas tarifas solo se aplican a los movimientos que se generen después. Ejemplo: JR tiene una tarifa del 8 % para MOBILIARIO. Al registrar una factura el 15/01/2027 con una línea de 1.000 € sin IVA, se genera un movimiento con base 1.000 €, 8 % y comisión de 80 €. Otra línea de 1.000 € de una categoría sin tarifa específica aplica la tarifa general de JR del 4 % y genera otro movimiento de 40 €.",
+        "validacion_omitida": "Prueba del procedimiento, no es trabajo real; consultor no disponible (palabras del programador)"
+      },
+      "P2": {
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24",
+        "reformulacion": "Se a creado la tabla de tarifas, se a ajustado la busqueda de las lineas al calcular el %, es del TF0020, no se duplicó el código, solo de como lo buscaba. Para meter las tarifas se creo la accion de importar desde excel, hecho con excel buffer, validando cada fila y ademas las lineas que salgan con error se van a una tabka temporal de errores, al final, un mensaje informado sobre cuantas se han añadido, modificado o tuvieron un error.\nLuego se creó la accion para exportar a excel los movimientos de comision,, con CreateNewBook, Write Sheet, CloseBook setFriendlyFileName y OpenExcel, y tambien se creo la opcion de exportar a CSV con xml port, con filtros con SetTableView, con propiedasdes Export, VariableText, FIeldSeparator, FieldDelimiter..."
+      }
+    },
+    "subissues": {
+      "RF-1.1": 77,
+      "RF-1.2": 78,
+      "RF-2.1": 79,
+      "RF-2.2": 80,
+      "RF-3.1": 81,
+      "RF-3.2": 82,
+      "RF-3.3": 83,
+      "RF-4.1": 84,
+      "RF-4.2": 85,
+      "RF-5.1": 86,
+      "RF-5.2": 87,
+      "RF-5.3": 88,
+      "RF-6.1": 89,
+      "RF-6.2": 90
+    },
+    "traza": [
+      {
+        "ts": "2026-11-23T12:17:38",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T12:17:40",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T12:17:41",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T12:17:42",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T12:17:43",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T12:17:44",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T12:17:45",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T12:17:46",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T12:17:47",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T12:17:48",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T12:17:49",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T12:17:50",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T12:17:51",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T12:17:52",
+        "accion": "subissue",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:28:34",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:31:09",
+        "accion": "firma",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "P1"
+      },
+      {
+        "ts": "2026-11-23T13:32:17",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:32:19",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:33:05",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:33:07",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:35:05",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:35:07",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:35:09",
+        "accion": "extra",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:35:10",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:40:41",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:40:43",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:40:44",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:40:46",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:42:23",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:42:24",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:42:26",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:43:35",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:47:10",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:47:12",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:47:13",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T13:47:15",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T16:12:35",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T16:12:37",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T16:18:09",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T16:45:03",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T16:45:04",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T16:54:32",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T16:54:33",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T16:54:34",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T16:54:35",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:17:48",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:19:10",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:23:17",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:23:18",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:23:19",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:23:21",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:30:42",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:30:43",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:30:44",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:30:46",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:33:31",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:33:33",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:33:34",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:37:32",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:42:59",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-23T17:46:48",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T09:07:09",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T09:07:11",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T16:15:32",
+        "accion": "firma",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "P2"
+      },
+      {
+        "ts": "2026-11-24T16:18:21",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "escenarios"
+      },
+      {
+        "ts": "2026-11-24T16:18:22",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "escenarios"
+      },
+      {
+        "ts": "2026-11-24T16:18:23",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "trazabilidad"
+      },
+      {
+        "ts": "2026-11-24T16:18:24",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "trazabilidad"
+      },
+      {
+        "ts": "2026-11-24T16:18:25",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "trazabilidad"
+      },
+      {
+        "ts": "2026-11-24T16:18:27",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "trazabilidad"
+      },
+      {
+        "ts": "2026-11-24T16:18:28",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "trazabilidad"
+      },
+      {
+        "ts": "2026-11-24T16:18:29",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "trazabilidad"
+      },
+      {
+        "ts": "2026-11-24T16:18:30",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "herramientas"
+      },
+      {
+        "ts": "2026-11-24T16:18:43",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:18:44",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:18:45",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:18:47",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:18:48",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:18:49",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:18:50",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:18:52",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:18:53",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:18:55",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:18:56",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:18:57",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:18:59",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:21:54",
+        "accion": "pr",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      }
+    ],
+    "pr": {
+      "url": "https://github.com/AGTorresLiderIT/LIDERIT-MAD-Practicas/pull/103",
+      "numero": 103,
+      "fecha": "2026-11-24"
+    }
+  },
+  "documentacion": {
+    "enlaces": {
+      "rama": "https://github.com/AGTorresLiderIT/LIDERIT-MAD-Practicas/tree/Feature/TF0022-tarifas-de-comision-excel-y-xmlport"
+    },
+    "resumen": "El % de comisión de cada venta sale ahora de una tabla de tarifas por vendedor, categoría de producto y fecha de inicio, que se mantiene a mano o importando un Excel; si no hay tarifa, se usa el % de la ficha del vendedor. Los movimientos de comisión se exportan a Excel para cuadrarlos y a un fichero CSV de formato fijo para el programa de nóminas.",
+    "objetos": [
+      {
+        "tipo": "table",
+        "id": "50003",
+        "nombre": "Commission Rate_LDR",
+        "cambio": "Nueva tabla de tarifas: vendedor, categoría de producto, fecha de inicio y % comisión."
+      },
+      {
+        "tipo": "page",
+        "id": "50004",
+        "nombre": "Commission Rates_LDR",
+        "cambio": "Nueva lista editable de tarifas con la acción Importar desde Excel."
+      },
+      {
+        "tipo": "pageextension",
+        "id": "50002",
+        "nombre": "Salesperson/Purchaser_LDR",
+        "cambio": "Acción Tarifas de comisión en la ficha del vendedor (objeto de TF0020)."
+      },
+      {
+        "tipo": "codeunit",
+        "id": "50000",
+        "nombre": "Commission Mgt._LDR",
+        "cambio": "Nueva forma de obtener el % (tarifas y factura original en abonos), exportación a Excel y al fichero de nóminas (objeto de TF0020)."
+      },
+      {
+        "tipo": "codeunit",
+        "id": "50005",
+        "nombre": "Commission Rate Import_LDR",
+        "cambio": "Nueva codeunit que importa las tarifas desde Excel y valida cada fila."
+      },
+      {
+        "tipo": "table",
+        "id": "50004",
+        "nombre": "Commission Import Error_LDR",
+        "cambio": "Nueva tabla temporal con las filas no importadas y su motivo."
+      },
+      {
+        "tipo": "page",
+        "id": "50005",
+        "nombre": "Commission Import Errors_LDR",
+        "cambio": "Nueva lista de solo lectura con los errores de la importación."
+      },
+      {
+        "tipo": "page",
+        "id": "50000",
+        "nombre": "Commission Entries_LDR",
+        "cambio": "Acciones Exportar a Excel y Exportar fichero nóminas (objeto de TF0020)."
+      },
+      {
+        "tipo": "xmlport",
+        "id": "50000",
+        "nombre": "Commission Payroll Export_LDR",
+        "cambio": "Nuevo XMLport que genera el CSV de nóminas."
+      },
+      {
+        "tipo": "permissionset",
+        "id": "50000",
+        "nombre": "Commissions_LDR",
+        "cambio": "Se añaden los objetos nuevos; las tarifas se pueden crear, modificar y borrar (objeto de TF0020)."
+      }
+    ],
+    "detalles": [
+      {
+        "rf": "RF-1.1, RF-1.2",
+        "titulo": "1. Tarifas por vendedor y categoría",
+        "parrafos": [
+          "La tabla 50003 guarda una tarifa por vendedor, categoría y fecha de inicio. La fecha forma parte de la clave (P-1) para conservar el histórico: una tarifa nueva no machaca la anterior. Categoría en blanco significa cualquier categoría y fecha en blanco, desde siempre. El % solo admite valores de 0 a 100 y las relaciones con vendedor y categoría solo admiten códigos existentes.",
+          "La lista 50004 es editable y aparece en el buscador. Desde la ficha del vendedor (pageextension 50002, acción Tarifas de comisión) se abre filtrada por él. El conjunto de permisos Commissions_LDR da alta, modificación y borrado de tarifas a quien lo tenga. Sin impacto en datos existentes: tabla nueva y vacía."
+        ],
+        "tabla": {
+          "columnas": [
+            "Campo",
+            "Id",
+            "Tipo dato",
+            "Comentario"
+          ],
+          "filas": [
+            [
+              "Salesperson Code",
+              "1",
+              "Code[20]",
+              "Clave. Relación con Salesperson/Purchaser."
+            ],
+            [
+              "Item Category Code",
+              "2",
+              "Code[20]",
+              "Clave. Relación con Item Category; en blanco = cualquier categoría."
+            ],
+            [
+              "Starting Date",
+              "3",
+              "Date",
+              "Clave. En blanco = desde siempre."
+            ],
+            [
+              "Commission %",
+              "4",
+              "Decimal",
+              "Entre 0 y 100, hasta 5 decimales."
+            ]
+          ]
+        },
+        "capturas": [
+          "Acción Tarifas de comisión en la ficha del vendedor",
+          "Lista de tarifas filtrada por el vendedor"
+        ]
+      },
+      {
+        "rf": "RF-2.1, RF-2.2",
+        "titulo": "2. Cálculo del % de comisión",
+        "parrafos": [
+          "En la codeunit 50000 de TF0020 solo cambia cómo se obtiene el % al crear el movimiento; la creación no se duplica. GetCommissionPct recibe ahora vendedor, categoría y fecha de registro y busca, por este orden: la tarifa del vendedor y la categoría vigente en la fecha (la de fecha de inicio más reciente), la tarifa del vendedor con categoría en blanco y el % de la ficha. La categoría se lee de la ficha del producto (P-2) en la misma lectura que ya hacía TF0020 para la exclusión.",
+          "Un % 0, venga de una tarifa o de la ficha, no crea movimiento. Los abonos usan el % del movimiento de la factura original del mismo producto, localizada por Liq. por nº documento o, si está vacío, por Nº factura corregida; sin factura vinculada se aplica la tarifa vigente en la fecha del abono. Este criterio lo decidió el programador en P1 y está pendiente del consultor (extra X-01). Los movimientos ya registrados no se recalculan."
+        ],
+        "codigo": "if not GetOriginalInvoicePct(OriginalInvoiceNo, ItemNo, CommissionPct) then\n    CommissionPct := GetCommissionPct(SalespersonCode, ItemCategoryCode, PostingDate);\nif CommissionPct = 0 then\n    exit;"
+      },
+      {
+        "rf": "RF-3.1, RF-3.2, RF-3.3",
+        "titulo": "3. Importar tarifas desde Excel",
+        "parrafos": [
+          "La acción Importar desde Excel de la lista de tarifas llama a la codeunit 50005, que sube el fichero, deja elegir la hoja y la lee con Excel Buffer (UploadIntoStream, SelectSheetsNameStream, OpenBookStream y ReadSheet). Las celdas se recorren ordenadas por fila y columna; se salta la fila 1 de cabeceras y una fila totalmente vacía no cuenta.",
+          "Cada fila se valida sin interrumpir el proceso (P-4): vendedor obligatorio, en mayúsculas y existente; categoría existente si viene; % numérico entre 0 y 100; fecha opcional, como fecha de Excel o como texto. Si la celda del % tiene formato de porcentaje, Excel guarda 0,08 para un 8 % y se multiplica por 100 (se detecta por el formato que Excel Buffer guarda en NumberFormat).",
+          "Las filas correctas crean la tarifa o, si ya existe, la modifican; las erróneas van a la tabla temporal 50004 con su nº de fila, el texto leído y el motivo.",
+          "Al terminar se muestra cuántas filas se han importado, modificado y rechazado y, si hay errores, se abre la lista 50005."
+        ],
+        "capturas": [
+          "Mensaje de fin de importación con filas importadas, modificadas y con error",
+          "Lista de errores de importación con fila y motivo"
+        ]
+      },
+      {
+        "rf": "RF-4.1, RF-4.2",
+        "titulo": "4. Exportar movimientos a Excel",
+        "parrafos": [
+          "La acción Exportar a Excel de la lista de movimientos (página 50000) pasa los filtros que tenga el usuario a ExportToExcel de la codeunit 50000. Se construye el libro con Excel Buffer: cabecera en negrita, fecha como fecha, importes con formato #,##0.00 y los nombres de vendedor y cliente leídos al exportar, porque el movimiento no los guarda (P-8). Si el filtro no devuelve movimientos, se avisa y no se genera el fichero.",
+          "No se ha incluido el aviso de más de 20.000 filas que proponía P-7 (escenario A-18): lo descartó el programador en P1 y queda como desviación declarada."
+        ],
+        "tabla": {
+          "columnas": [
+            "Columna",
+            "Origen"
+          ],
+          "filas": [
+            [
+              "1 Fecha registro",
+              "Posting Date"
+            ],
+            [
+              "2 Tipo documento, 3 Nº documento",
+              "Document Type y Document No."
+            ],
+            [
+              "4 Vendedor, 5 Nombre vendedor",
+              "Salesperson Code y nombre del vendedor"
+            ],
+            [
+              "6 Cliente, 7 Nombre cliente",
+              "Customer No. y nombre del cliente"
+            ],
+            [
+              "8 Base, 9 %, 10 Comisión",
+              "Base Amount (LCY), Commission %, Commission Amount (LCY)"
+            ],
+            [
+              "11 Liquidado, 12 Nº liquidación",
+              "Liquidated y Liquidation No. (TF0021)"
+            ]
+          ]
+        },
+        "capturas": [
+          "Excel exportado con la cabecera en negrita y los importes como número"
+        ]
+      },
+      {
+        "rf": "RF-5.1, RF-5.2, RF-5.3",
+        "titulo": "5. Exportar fichero CSV para nóminas",
+        "parrafos": [
+          "La acción Exportar fichero nóminas pasa los mismos filtros al XMLport 50000, que escribe texto variable con separador «;», sin delimitador y en UTF-8. El documento de la tarea indicaba FieldDelimiter vacío; se usa '<None>', que es como lo hace el estándar (XMLport 1660 Import Payroll). El fichero sale con BOM; si el programa de nóminas no lo admite (P-5, pendiente), hay que quitarlo.",
+          "La fila de cabeceras sale de un elemento Header sobre la tabla Integer con un solo registro y textos fijos, porque los XMLport no tienen propiedad para escribir los nombres de los campos. La fecha va como AAAAMMDD y el importe con dos decimales y punto, con el mismo formato que usa el estándar en SEPA y SII. Un «;» en el nombre del vendedor se cambia por «,» para no descuadrar las columnas (P-6).",
+          "El fichero se descarga como COMISIONES_AAAAMM.csv, con el año y el mes de la fecha de registro más reciente exportada (P-6). Sin movimientos, se avisa y no se genera."
+        ],
+        "codigo": "SalespersonCode;SalespersonName;PostingDate;DocumentNo;CommissionAmount\nJR;<nombre del vendedor>;20270115;<nº factura>;80.00",
+        "capturas": [
+          "Fichero COMISIONES_202701.csv abierto en el Bloc de notas"
+        ],
+        "lenguaje": "text"
+      },
+      {
+        "rf": "RF-6.1, RF-6.2",
+        "titulo": "6. Comparativa y decisiones",
+        "parrafos": [
+          "Importación con Excel Buffer y no con XMLport: un XMLport solo lee XML o texto delimitado o de ancho fijo, y un .xlsx es un ZIP con XML interno. Excel Buffer abre el libro, deja elegir la hoja y entrega las celdas con su formato, que es lo que permite leer bien fechas y porcentajes. Dirección comercial trabaja en Excel; pedirle un CSV añadiría un paso manual y errores de formato.",
+          "XMLport para nóminas: el formato es exacto y repetible (separador, sin comillas, codificación, AAAAMMDD, punto decimal), escribe en flujo sin cargar todo en memoria y no depende de Excel. Criterio para el proyecto: .xlsx de entrada o para revisar a mano, Excel Buffer; fichero entre programas con formato fijo o mucho volumen, XMLport.",
+          "Frente al Abrir en Excel estándar: el estándar vuelca las columnas tal como estén en la página del usuario y no añade los nombres de vendedor y cliente; la exportación propia da siempre las mismas columnas, formato y nombres, que es lo que necesita el cuadre con nóminas. Para una consulta puntual basta el estándar.",
+          "Problemas encontrados: en las pruebas, tres escenarios fallaron por datos del sandbox (categoría ACCESORIOS sin crear, factura registrada con la fecha de trabajo de 2027 y un vendedor creado como DB en lugar de BD) y se repitieron con resultado correcto. Dudas abiertas: X-01 (abonos) y P-5 (BOM)."
+        ]
+      }
+    ],
+    "pruebas": [
+      {
+        "titulo": "Prueba manual de los escenarios A-1 a A-16 en el sandbox",
+        "pasos": [
+          "Con la parametrización de la sección 4 (vendedores JR, PS y BD; categorías MOBILIARIO y ACCESORIOS y un producto sin categoría) se recorrieron los escenarios A-1 a A-16 (evidencias E-08 a E-29).",
+          "Se crearon tarifas a mano y se comprobó la validación del 0-100 y del vendedor, y el filtro desde la ficha frente al buscador.",
+          "Se importó tarifas.xlsx (5/0/0), se reimportó con un cambio (0/5/0) y se importó un fichero con errores (1/0/3 y lista de errores).",
+          "Se registraron facturas en diciembre de 2026 y enero de 2027 que pasan por los tres niveles de búsqueda: 8 % y 3 % por categoría, 4 % de la tarifa general y 2 % de la ficha.",
+          "Se registraron dos abonos: liquidado contra una factura al 4 % sale al 4 %; sin vincular sale al 8 % vigente (extra X-01).",
+          "Se exportó a Excel y a CSV con y sin filtro, se comprobó el nombre COMISIONES_202701 y COMISIONES_202612, el «;» en el nombre y el aviso sin movimientos.",
+          "Se importó un fichero con las decisiones de P1: un 8 % con formato de porcentaje se graba como 8, «jr» en minúsculas se rechaza, la fila vacía se salta, la fila sin % se rechaza y la fecha escrita como texto se acepta (E-31).",
+          "El escenario A-6 se comprobó revisando el código (E-32). A-18 no se ha probado porque el aviso de 20.000 filas no se ha desarrollado."
+        ],
+        "capturas": [
+          "Movimientos de comisión de A-3 a A-5 con los % 8, 3, 4 y 2",
+          "Movimientos de los dos abonos de X-01 al 4 % y al 8 %",
+          "Excel de entrada tarifas.xlsx",
+          "Lista de errores de la importación de errores.xlsx"
+        ]
+      }
+    ],
+    "para_probar": [
+      "Dónde está: buscar «Tarifas de comisión» (lista) o abrirla desde la ficha del vendedor; en «Movimientos de comisión», las acciones Exportar a Excel y Exportar fichero nóminas.",
+      "Configuración previa: vendedores con su % en la ficha, categorías de producto creadas con el código exacto que usará el Excel y asignadas en la ficha de los productos; fechas de registro permitidas para el periodo de prueba.",
+      "Datos de prueba: Excel con cabeceras en la fila 1 y cuatro columnas (vendedor en mayúsculas, categoría, % y fecha de inicio). La factura toma como fecha de registro la fecha de trabajo: comprobarla antes de registrar.",
+      "Para los abonos con el % de la factura original, rellenar Liq. por tipo documento = Factura y Liq. por nº documento con la factura."
+    ]
+  }
+}

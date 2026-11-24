@@ -4,7 +4,8 @@ codeunit 50000 "Commission Mgt._LDR"
     // because of the commission (if a condition is not met it exits without creating the entry).
     // UndoSettlement (TF0021) is called from the settlements list after the user confirms.
     Permissions = tabledata "Commission Entry_LDR" = rim,
-                  tabledata "Comm. Settlement_LDR" = rd;
+                  tabledata "Comm. Settlement_LDR" = rd,
+                  tabledata "Commission Rate_LDR" = r;
 
     procedure CreateFromSalesInvLine(SalesInvLine: Record "Sales Invoice Line"; SalesInvHeader: Record "Sales Invoice Header")
     begin
@@ -14,7 +15,7 @@ codeunit 50000 "Commission Mgt._LDR"
         CreateEntry(
             "Commission Document Type_LDR"::Invoice, SalesInvHeader."Posting Date", SalesInvLine."Document No.", SalesInvLine."Line No.",
             SalesInvHeader."Salesperson Code", SalesInvHeader."Sell-to Customer No.", SalesInvLine."No.", SalesInvLine.Quantity,
-            SalesInvLine.Amount, SalesInvHeader."Currency Code", SalesInvHeader."Currency Factor", 1);
+            SalesInvLine.Amount, SalesInvHeader."Currency Code", SalesInvHeader."Currency Factor", 1, '');
     end;
 
     procedure CreateFromSalesCrMemoLine(SalesCrMemoLine: Record "Sales Cr.Memo Line"; SalesCrMemoHeader: Record "Sales Cr.Memo Header")
@@ -25,12 +26,25 @@ codeunit 50000 "Commission Mgt._LDR"
         CreateEntry(
             "Commission Document Type_LDR"::"Credit Memo", SalesCrMemoHeader."Posting Date", SalesCrMemoLine."Document No.", SalesCrMemoLine."Line No.",
             SalesCrMemoHeader."Salesperson Code", SalesCrMemoHeader."Sell-to Customer No.", SalesCrMemoLine."No.", SalesCrMemoLine.Quantity,
-            SalesCrMemoLine.Amount, SalesCrMemoHeader."Currency Code", SalesCrMemoHeader."Currency Factor", -1);
+            SalesCrMemoLine.Amount, SalesCrMemoHeader."Currency Code", SalesCrMemoHeader."Currency Factor", -1,
+            GetOriginalInvoiceNo(SalesCrMemoHeader));
     end;
 
-    local procedure CreateEntry(DocumentType: Enum "Commission Document Type_LDR"; PostingDate: Date; DocumentNo: Code[20]; DocumentLineNo: Integer; SalespersonCode: Code[20]; CustomerNo: Code[20]; ItemNo: Code[20]; Quantity: Decimal; Amount: Decimal; CurrencyCode: Code[10]; CurrencyFactor: Decimal; Sign: Integer)
+    // TF0022 RF-2.1 (P1): the credit memo uses the % of the original invoice. It is found by "Applies-to Doc. No."
+    // and, if that is blank, by "Corrected Invoice No." (corrective credit memos).
+    local procedure GetOriginalInvoiceNo(SalesCrMemoHeader: Record "Sales Cr.Memo Header"): Code[20]
+    begin
+        if (SalesCrMemoHeader."Applies-to Doc. Type" = SalesCrMemoHeader."Applies-to Doc. Type"::Invoice) and
+           (SalesCrMemoHeader."Applies-to Doc. No." <> '')
+        then
+            exit(SalesCrMemoHeader."Applies-to Doc. No.");
+        exit(SalesCrMemoHeader."Corrected Invoice No.");
+    end;
+
+    local procedure CreateEntry(DocumentType: Enum "Commission Document Type_LDR"; PostingDate: Date; DocumentNo: Code[20]; DocumentLineNo: Integer; SalespersonCode: Code[20]; CustomerNo: Code[20]; ItemNo: Code[20]; Quantity: Decimal; Amount: Decimal; CurrencyCode: Code[10]; CurrencyFactor: Decimal; Sign: Integer; OriginalInvoiceNo: Code[20])
     var
         CommissionEntry: Record "Commission Entry_LDR";
+        ItemCategoryCode: Code[20];
         CommissionPct: Decimal;
         BaseAmountLCY: Decimal;
     begin
@@ -40,10 +54,12 @@ codeunit 50000 "Commission Mgt._LDR"
         // S-01 (RF-3.1): only lines with quantity greater than 0. Credit memo lines also come with positive quantity.
         if Quantity <= 0 then
             exit;
-        if IsItemExcluded(ItemNo) then
+        if IsItemExcluded(ItemNo, ItemCategoryCode) then
             exit;
         // RF-3.3: no salesperson or 0 % means no entry and no error.
-        CommissionPct := GetCommissionPct(SalespersonCode);
+        // TF0022 RF-2.2 / P-2: only the way to get the % changes; a rate with 0 % also means no entry.
+        if not GetOriginalInvoicePct(OriginalInvoiceNo, ItemNo, CommissionPct) then
+            CommissionPct := GetCommissionPct(SalespersonCode, ItemCategoryCode, PostingDate);
         if CommissionPct = 0 then
             exit;
 
@@ -73,26 +89,71 @@ codeunit 50000 "Commission Mgt._LDR"
         exit(GenJnlPostPreview.IsActive());
     end;
 
-    local procedure IsItemExcluded(ItemNo: Code[20]): Boolean
+    // TF0022 P-2: the item category is read from the item card in the same read as the exclusion flag.
+    local procedure IsItemExcluded(ItemNo: Code[20]; var ItemCategoryCode: Code[20]): Boolean
     var
         Item: Record Item;
     begin
-        Item.SetLoadFields("Exclude from Commission_LDR");
+        Item.SetLoadFields("Exclude from Commission_LDR", "Item Category Code");
         if not Item.Get(ItemNo) then
             exit(true);
+        ItemCategoryCode := Item."Item Category Code";
         exit(Item."Exclude from Commission_LDR");
     end;
 
-    local procedure GetCommissionPct(SalespersonCode: Code[20]): Decimal
+    // TF0022 RF-2.1 (P1): % of the commission entry of the same item in the original invoice. If there is no
+    // original invoice or it has no entry, the rate in force on the credit memo date is used.
+    local procedure GetOriginalInvoicePct(OriginalInvoiceNo: Code[20]; ItemNo: Code[20]; var CommissionPct: Decimal): Boolean
+    var
+        CommissionEntry: Record "Commission Entry_LDR";
+    begin
+        if OriginalInvoiceNo = '' then
+            exit(false);
+        CommissionEntry.SetCurrentKey("Document No.", "Posting Date");
+        CommissionEntry.SetRange("Document No.", OriginalInvoiceNo);
+        CommissionEntry.SetRange("Document Type", CommissionEntry."Document Type"::Invoice);
+        CommissionEntry.SetRange("Item No.", ItemNo);
+        CommissionEntry.SetLoadFields("Commission %");
+        if not CommissionEntry.FindFirst() then
+            exit(false);
+        CommissionPct := CommissionEntry."Commission %";
+        exit(true);
+    end;
+
+    // TF0022 RF-2.1: rate of the salesperson and item category in force on the posting date, then the rate of
+    // the salesperson with a blank category, then the "Commission %" of the salesperson card.
+    local procedure GetCommissionPct(SalespersonCode: Code[20]; ItemCategoryCode: Code[20]; PostingDate: Date): Decimal
     var
         SalespersonPurchaser: Record "Salesperson/Purchaser";
+        RatePct: Decimal;
     begin
         if SalespersonCode = '' then
             exit(0);
+        if ItemCategoryCode <> '' then
+            if FindRatePct(SalespersonCode, ItemCategoryCode, PostingDate, RatePct) then
+                exit(RatePct);
+        if FindRatePct(SalespersonCode, '', PostingDate, RatePct) then
+            exit(RatePct);
         SalespersonPurchaser.SetLoadFields("Commission %");
         if not SalespersonPurchaser.Get(SalespersonCode) then
             exit(0);
         exit(SalespersonPurchaser."Commission %");
+    end;
+
+    // The key ends with "Starting Date": the range 0D..PostingDate includes the blank date (always) and FindLast
+    // returns the most recent rate.
+    local procedure FindRatePct(SalespersonCode: Code[20]; ItemCategoryCode: Code[20]; PostingDate: Date; var RatePct: Decimal): Boolean
+    var
+        CommissionRate: Record "Commission Rate_LDR";
+    begin
+        CommissionRate.SetRange("Salesperson Code", SalespersonCode);
+        CommissionRate.SetRange("Item Category Code", ItemCategoryCode);
+        CommissionRate.SetRange("Starting Date", 0D, PostingDate);
+        CommissionRate.SetLoadFields("Commission %");
+        if not CommissionRate.FindLast() then
+            exit(false);
+        RatePct := CommissionRate."Commission %";
+        exit(true);
     end;
 
     // RF-3.4 / P-3: line amount without VAT converted to local currency like the standard, rounded with the
@@ -186,6 +247,123 @@ codeunit 50000 "Commission Mgt._LDR"
         exit(Round(BaseAmountLCY * CommissionPct / 100, GeneralLedgerSetup."Amount Rounding Precision"));
     end;
 
+    // TF0022 RF-4.1 / RF-4.2: exports the commission entries with the filters of the page to Excel with Excel
+    // Buffer. Returns false when the filters return no entries (no file is created).
+    procedure ExportToExcel(var CommissionEntryFilters: Record "Commission Entry_LDR"): Boolean
     var
+        CommissionEntry: Record "Commission Entry_LDR";
+        TempExcelBuffer: Record "Excel Buffer" temporary;
+    begin
+        CommissionEntry.CopyFilters(CommissionEntryFilters);
+        if CommissionEntry.IsEmpty() then
+            exit(false);
+
+        AddExcelHeader(TempExcelBuffer, CommissionEntry);
+        CommissionEntry.SetLoadFields(
+            "Posting Date", "Document Type", "Document No.", "Salesperson Code", "Customer No.", "Base Amount (LCY)",
+            "Commission %", "Commission Amount (LCY)", Liquidated, "Liquidation No.");
+        CommissionEntry.FindSet();
+        repeat
+            AddExcelLine(TempExcelBuffer, CommissionEntry);
+        until CommissionEntry.Next() = 0;
+
+        TempExcelBuffer.CreateNewBook(CopyStr(CommissionEntry.TableCaption(), 1, 250));
+        TempExcelBuffer.WriteSheet(CommissionEntry.TableCaption(), CompanyName(), UserId());
+        TempExcelBuffer.CloseBook();
+        TempExcelBuffer.SetFriendlyFilename(CommissionEntry.TableCaption());
+        TempExcelBuffer.OpenExcel();
+        exit(true);
+    end;
+
+    local procedure AddExcelHeader(var TempExcelBuffer: Record "Excel Buffer" temporary; CommissionEntry: Record "Commission Entry_LDR")
+    begin
+        TempExcelBuffer.NewRow();
+        AddHeaderColumn(TempExcelBuffer, CommissionEntry.FieldCaption("Posting Date"));
+        AddHeaderColumn(TempExcelBuffer, CommissionEntry.FieldCaption("Document Type"));
+        AddHeaderColumn(TempExcelBuffer, CommissionEntry.FieldCaption("Document No."));
+        AddHeaderColumn(TempExcelBuffer, CommissionEntry.FieldCaption("Salesperson Code"));
+        AddHeaderColumn(TempExcelBuffer, SalespersonNameTxt);
+        AddHeaderColumn(TempExcelBuffer, CommissionEntry.FieldCaption("Customer No."));
+        AddHeaderColumn(TempExcelBuffer, CustomerNameTxt);
+        AddHeaderColumn(TempExcelBuffer, CommissionEntry.FieldCaption("Base Amount (LCY)"));
+        AddHeaderColumn(TempExcelBuffer, CommissionEntry.FieldCaption("Commission %"));
+        AddHeaderColumn(TempExcelBuffer, CommissionEntry.FieldCaption("Commission Amount (LCY)"));
+        AddHeaderColumn(TempExcelBuffer, CommissionEntry.FieldCaption(Liquidated));
+        AddHeaderColumn(TempExcelBuffer, CommissionEntry.FieldCaption("Liquidation No."));
+    end;
+
+    local procedure AddHeaderColumn(var TempExcelBuffer: Record "Excel Buffer" temporary; Caption: Text)
+    begin
+        TempExcelBuffer.AddColumn(Caption, false, '', true, false, false, '', TempExcelBuffer."Cell Type"::Text);
+    end;
+
+    // P-8: the names are not stored in the entry; they are read from their tables when exporting.
+    local procedure AddExcelLine(var TempExcelBuffer: Record "Excel Buffer" temporary; CommissionEntry: Record "Commission Entry_LDR")
+    begin
+        TempExcelBuffer.NewRow();
+        TempExcelBuffer.AddColumn(CommissionEntry."Posting Date", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Date);
+        TempExcelBuffer.AddColumn(Format(CommissionEntry."Document Type"), false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        TempExcelBuffer.AddColumn(CommissionEntry."Document No.", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        TempExcelBuffer.AddColumn(CommissionEntry."Salesperson Code", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        TempExcelBuffer.AddColumn(GetSalespersonName(CommissionEntry."Salesperson Code"), false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        TempExcelBuffer.AddColumn(CommissionEntry."Customer No.", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        TempExcelBuffer.AddColumn(GetCustomerName(CommissionEntry."Customer No."), false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        TempExcelBuffer.AddColumn(CommissionEntry."Base Amount (LCY)", false, '', false, false, false, AmountFormatTxt, TempExcelBuffer."Cell Type"::Number);
+        TempExcelBuffer.AddColumn(CommissionEntry."Commission %", false, '', false, false, false, PctFormatTxt, TempExcelBuffer."Cell Type"::Number);
+        TempExcelBuffer.AddColumn(CommissionEntry."Commission Amount (LCY)", false, '', false, false, false, AmountFormatTxt, TempExcelBuffer."Cell Type"::Number);
+        TempExcelBuffer.AddColumn(Format(CommissionEntry.Liquidated), false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+        TempExcelBuffer.AddColumn(CommissionEntry."Liquidation No.", false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+    end;
+
+    local procedure GetSalespersonName(SalespersonCode: Code[20]): Text
+    var
+        SalespersonPurchaser: Record "Salesperson/Purchaser";
+    begin
+        SalespersonPurchaser.SetLoadFields(Name);
+        if SalespersonPurchaser.Get(SalespersonCode) then
+            exit(SalespersonPurchaser.Name);
+    end;
+
+    local procedure GetCustomerName(CustomerNo: Code[20]): Text
+    var
+        Customer: Record Customer;
+    begin
+        Customer.SetLoadFields(Name);
+        if Customer.Get(CustomerNo) then
+            exit(Customer.Name);
+    end;
+
+    // TF0022 RF-5.1 / RF-5.3: exports the filtered entries with the XMLport to a CSV file and downloads it as
+    // COMISIONES_AAAAMM.csv. Returns false when the filters return no entries (no file is created).
+    procedure ExportPayrollFile(var CommissionEntryFilters: Record "Commission Entry_LDR"): Boolean
+    var
+        CommissionEntry: Record "Commission Entry_LDR";
+        TempBlob: Codeunit "Temp Blob";
+        CommissionPayrollExport: XmlPort "Commission Payroll Export_LDR";
+        FileOutStream: OutStream;
+        FileInStream: InStream;
+        FileName: Text;
+    begin
+        CommissionEntry.CopyFilters(CommissionEntryFilters);
+        if CommissionEntry.IsEmpty() then
+            exit(false);
+
+        TempBlob.CreateOutStream(FileOutStream, TextEncoding::UTF8);
+        CommissionPayrollExport.SetTableView(CommissionEntry);
+        CommissionPayrollExport.SetDestination(FileOutStream);
+        CommissionPayrollExport.Export();
+
+        FileName := StrSubstNo(PayrollFileNameTxt, Format(CommissionPayrollExport.GetLatestPostingDate(), 0, '<Year4><Month,2>'));
+        TempBlob.CreateInStream(FileInStream, TextEncoding::UTF8);
+        DownloadFromStream(FileInStream, '', '', '', FileName);
+        exit(true);
+    end;
+
+    var
+        PayrollFileNameTxt: Label 'COMISIONES_%1.csv', Locked = true;
+        SalespersonNameTxt: Label 'Salesperson Name', Comment = 'ESP="Nombre vendedor"';
+        CustomerNameTxt: Label 'Customer Name', Comment = 'ESP="Nombre cliente"';
+        AmountFormatTxt: Label '#,##0.00', Locked = true;
+        PctFormatTxt: Label '0.00###', Locked = true;
         InvoicePostedErr: Label 'Purchase invoice %1 of settlement %2 has already been posted. The settlement cannot be undone.', Comment = 'ESP="La factura de compra %1 de la liquidación %2 ya está registrada. No se puede deshacer la liquidación." %1 = purchase invoice no., %2 = settlement no.';
 }

@@ -279,11 +279,191 @@
           <note from="Developer" annotates="general" priority="2">ESP="Id. usuario"</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Commission Entry_LDR - Field User ID - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 1339952751 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Commission Import Error</source>
+          <target state="translated">Error de importación de comisiones</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Error de importación de comisiones"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Import Error_LDR - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1339952751 - Field 3369789712 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies why the row was not imported.</source>
+          <target state="translated">Especifica por qué no se ha importado la fila.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica por qué no se ha importado la fila."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Import Error_LDR - Field Reason - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 1339952751 - Field 3369789712 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Reason</source>
+          <target state="translated">Motivo</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Motivo"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Import Error_LDR - Field Reason - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1339952751 - Field 2782707039 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the row of the Excel file.</source>
+          <target state="translated">Especifica la fila del fichero Excel.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica la fila del fichero Excel."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Import Error_LDR - Field Row No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 1339952751 - Field 2782707039 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Row No.</source>
+          <target state="translated">Nº fila</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Nº fila"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Import Error_LDR - Field Row No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1339952751 - Field 810147569 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the values of the row as they were read from the file.</source>
+          <target state="translated">Especifica los valores de la fila tal como se han leído del fichero.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica los valores de la fila tal como se han leído del fichero."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Import Error_LDR - Field Row Text - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 1339952751 - Field 810147569 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Row Text</source>
+          <target state="translated">Texto de la fila</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Texto de la fila"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Import Error_LDR - Field Row Text - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2454434334 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Commission Rate</source>
+          <target state="translated">Tarifa de comisión</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Tarifa de comisión"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Rate_LDR - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2454434334 - Field 399775988 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the commission percentage of the rate.</source>
+          <target state="translated">Especifica el porcentaje de comisión de la tarifa.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica el porcentaje de comisión de la tarifa."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Rate_LDR - Field Commission % - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2454434334 - Field 399775988 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Commission %</source>
+          <target state="translated">% comisión</target>
+          <note from="Developer" annotates="general" priority="2">ESP="% comisión"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Rate_LDR - Field Commission % - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2454434334 - Field 1037119892 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the item category the rate applies to. If it is blank, the rate applies to any category.</source>
+          <target state="translated">Especifica la categoría de producto a la que se aplica la tarifa. Si está en blanco, se aplica a cualquier categoría.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica la categoría de producto a la que se aplica la tarifa. Si está en blanco, se aplica a cualquier categoría."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Rate_LDR - Field Item Category Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2454434334 - Field 1037119892 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Item Category Code</source>
+          <target state="translated">Cód. categoría producto</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Cód. categoría producto"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Rate_LDR - Field Item Category Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2454434334 - Field 553464652 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the salesperson the rate applies to.</source>
+          <target state="translated">Especifica el vendedor al que se aplica la tarifa.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica el vendedor al que se aplica la tarifa."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Rate_LDR - Field Salesperson Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2454434334 - Field 553464652 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Salesperson Code</source>
+          <target state="translated">Cód. vendedor</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Cód. vendedor"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Rate_LDR - Field Salesperson Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2454434334 - Field 460889064 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the date from which the rate applies. If it is blank, the rate always applies.</source>
+          <target state="translated">Especifica la fecha desde la que se aplica la tarifa. Si está en blanco, se aplica siempre.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Especifica la fecha desde la que se aplica la tarifa. Si está en blanco, se aplica siempre."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Rate_LDR - Field Starting Date - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 2454434334 - Field 460889064 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Starting Date</source>
+          <target state="translated">Fecha inicio</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Fecha inicio"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Commission Rate_LDR - Field Starting Date - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1816461044 - NamedType 3599302989" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Customer Name</source>
+          <target state="translated">Nombre cliente</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Nombre cliente"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Commission Mgt._LDR - NamedType CustomerNameTxt</note>
+        </trans-unit>
         <trans-unit id="Codeunit 1816461044 - NamedType 1676189551" size-unit="char" translate="yes" xml:space="preserve">
           <source>Purchase invoice %1 of settlement %2 has already been posted. The settlement cannot be undone.</source>
           <target state="translated">La factura de compra %1 de la liquidación %2 ya está registrada. No se puede deshacer la liquidación.</target>
           <note from="Developer" annotates="general" priority="2">ESP="La factura de compra %1 de la liquidación %2 ya está registrada. No se puede deshacer la liquidación." %1 = purchase invoice no., %2 = settlement no.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Commission Mgt._LDR - NamedType InvoicePostedErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1816461044 - NamedType 608592422" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Salesperson Name</source>
+          <target state="translated">Nombre vendedor</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Nombre vendedor"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Commission Mgt._LDR - NamedType SalespersonNameTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 525364657 - NamedType 2026746326" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The starting date %1 is not a valid date.</source>
+          <target state="translated">La fecha de inicio %1 no es una fecha válida.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="La fecha de inicio %1 no es una fecha válida." %1 = value of the cell</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Commission Rate Import_LDR - NamedType DateNotValidErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 525364657 - NamedType 2866874571" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Excel files (*.xlsx)|*.xlsx</source>
+          <target state="translated">Ficheros Excel (*.xlsx)|*.xlsx</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Ficheros Excel (*.xlsx)|*.xlsx"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Commission Rate Import_LDR - NamedType ExcelFileFilterTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 525364657 - NamedType 3874001407" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Import finished. Rows imported: %1. Modified: %2. With error: %3.</source>
+          <target state="translated">Importación terminada. Filas importadas: %1. Modificadas: %2. Con error: %3.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Importación terminada. Filas importadas: %1. Modificadas: %2. Con error: %3." %1 = rows inserted, %2 = rows modified, %3 = rows with error</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Commission Rate Import_LDR - NamedType ImportResultMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 525364657 - NamedType 841892045" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The item category %1 does not exist.</source>
+          <target state="translated">La categoría de producto %1 no existe.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="La categoría de producto %1 no existe." %1 = item category code</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Commission Rate Import_LDR - NamedType ItemCategoryNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 525364657 - NamedType 321492496" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The sheet has no data after the header row. Nothing has been imported.</source>
+          <target state="translated">La hoja no tiene datos después de la fila de cabeceras. No se ha importado nada.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="La hoja no tiene datos después de la fila de cabeceras. No se ha importado nada."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Commission Rate Import_LDR - NamedType NoDataErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 525364657 - NamedType 631818450" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The commission percentage is missing.</source>
+          <target state="translated">Falta el porcentaje de comisión.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Falta el porcentaje de comisión."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Commission Rate Import_LDR - NamedType PctMissingErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 525364657 - NamedType 3071263216" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The commission percentage %1 is not a number.</source>
+          <target state="translated">El porcentaje de comisión %1 no es un número.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="El porcentaje de comisión %1 no es un número." %1 = value of the cell</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Commission Rate Import_LDR - NamedType PctNotNumericErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 525364657 - NamedType 2283588694" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The percentage must be between 0 and 100 (value: %1).</source>
+          <target state="translated">El porcentaje debe estar entre 0 y 100 (valor: %1).</target>
+          <note from="Developer" annotates="general" priority="2">ESP="El porcentaje debe estar entre 0 y 100 (valor: %1)." %1 = percentage</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Commission Rate Import_LDR - NamedType PctOutOfRangeErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 525364657 - NamedType 3401282565" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The salesperson %1 must be in capital letters and have 20 characters at most.</source>
+          <target state="translated">El vendedor %1 debe estar en mayúsculas y tener como máximo 20 caracteres.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="El vendedor %1 debe estar en mayúsculas y tener como máximo 20 caracteres." %1 = salesperson code</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Commission Rate Import_LDR - NamedType SalespersonFormatErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 525364657 - NamedType 1467448984" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The salesperson is missing.</source>
+          <target state="translated">Falta el vendedor.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Falta el vendedor."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Commission Rate Import_LDR - NamedType SalespersonMissingErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 525364657 - NamedType 4233454037" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The salesperson %1 does not exist.</source>
+          <target state="translated">El vendedor %1 no existe.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="El vendedor %1 no existe." %1 = salesperson code</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Commission Rate Import_LDR - NamedType SalespersonNotFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 525364657 - NamedType 494866634" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Select the Excel file with the commission rates</source>
+          <target state="translated">Seleccione el fichero Excel con las tarifas de comisión</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Seleccione el fichero Excel con las tarifas de comisión"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Commission Rate Import_LDR - NamedType SelectFileTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 2114176528 - NamedType 526312273" size-unit="char" translate="yes" xml:space="preserve">
           <source>Settlement %1 has a total of %2: no purchase invoice is created.</source>
@@ -315,6 +495,36 @@
           <note from="Developer" annotates="general" priority="2">ESP="Movimientos de comisión"</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Commission Entries_LDR - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 4144747430 - NamedType 3960405079" size-unit="char" translate="yes" xml:space="preserve">
+          <source>There are no commission entries to export with the current filters.</source>
+          <target state="translated">No hay movimientos de comisión que exportar con los filtros actuales.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="No hay movimientos de comisión que exportar con los filtros actuales."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Entries_LDR - NamedType NoEntriesToExportMsg</note>
+        </trans-unit>
+        <trans-unit id="Page 4144747430 - Action 1185729249 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Export the filtered commission entries to the CSV file of the payroll program.</source>
+          <target state="translated">Exporta los movimientos de comisión filtrados al fichero CSV del programa de nóminas.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Exporta los movimientos de comisión filtrados al fichero CSV del programa de nóminas."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Entries_LDR - Action ExportPayrollFile - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4144747430 - Action 1185729249 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Export payroll file</source>
+          <target state="translated">Exportar fichero nóminas</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Exportar fichero nóminas"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Entries_LDR - Action ExportPayrollFile - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4144747430 - Action 2851454604 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Export the filtered commission entries to an Excel file with the salesperson and customer names.</source>
+          <target state="translated">Exporta a un fichero Excel los movimientos de comisión filtrados, con los nombres de vendedor y cliente.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Exporta a un fichero Excel los movimientos de comisión filtrados, con los nombres de vendedor y cliente."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Entries_LDR - Action ExportToExcel - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4144747430 - Action 2851454604 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Export to Excel</source>
+          <target state="translated">Exportar a Excel</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Exportar a Excel"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Entries_LDR - Action ExportToExcel - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 4144747430 - Action 3538210097 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Find entries and documents that exist for the document number and posting date of the selected entry.</source>
           <target state="translated">Busca los movimientos y documentos que existen para el número de documento y la fecha de registro del movimiento seleccionado.</target>
@@ -326,6 +536,30 @@
           <target state="translated">Navegar...</target>
           <note from="Developer" annotates="general" priority="2">ESP="Navegar..."</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Commission Entries_LDR - Action Navigate - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2987467458 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Commission Rate Import Errors</source>
+          <target state="translated">Errores de importación de tarifas</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Errores de importación de tarifas"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Import Errors_LDR - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 483639139 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Commission Rates</source>
+          <target state="translated">Tarifas de comisión</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Tarifas de comisión"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Rates_LDR - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 483639139 - Action 3545432896 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Import commission rates from an Excel file with four columns (salesperson, item category, commission %, starting date) and the headers in row 1.</source>
+          <target state="translated">Importa tarifas de comisión desde un fichero Excel de cuatro columnas (vendedor, categoría, % comisión, fecha inicio) con las cabeceras en la fila 1.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Importa tarifas de comisión desde un fichero Excel de cuatro columnas (vendedor, categoría, % comisión, fecha inicio) con las cabeceras en la fila 1."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Rates_LDR - Action ImportFromExcel - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 483639139 - Action 3545432896 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Import from Excel</source>
+          <target state="translated">Importar desde Excel</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Importar desde Excel"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Commission Rates_LDR - Action ImportFromExcel - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 2266969290 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Commission Settlements</source>
@@ -501,11 +735,29 @@
           <note from="Developer" annotates="general" priority="2">ESP="Fecha hasta"</note>
           <note from="Xliff Generator" annotates="general" priority="3">Report Settle Salesp. Commissions_LDR - Control UpToDateField - Property Caption</note>
         </trans-unit>
+        <trans-unit id="XmlPort 2696831835 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Commission Payroll Export</source>
+          <target state="translated">Exportación de comisiones para nóminas</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Exportación de comisiones para nóminas"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">XmlPort Commission Payroll Export_LDR - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 1275301117 - Control 2770219397 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4145206282">
           <source>Commissions</source>
           <target state="translated">Comisiones</target>
           <note from="Developer" annotates="general" priority="2">ESP="Comisiones"</note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension Sales &amp; Receivables Setup_LDR - Control Commissions_LDR - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 148138762 - Action 483639139 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1258343441">
+          <source>View or edit the commission rates of the salesperson by item category and starting date.</source>
+          <target state="translated">Permite ver o modificar las tarifas de comisión del vendedor por categoría de producto y fecha de inicio.</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Permite ver o modificar las tarifas de comisión del vendedor por categoría de producto y fecha de inicio."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Salesperson/Purchaser_LDR - Action Commission Rates_LDR - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 148138762 - Action 483639139 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1258343441">
+          <source>Commission Rates</source>
+          <target state="translated">Tarifas de comisión</target>
+          <note from="Developer" annotates="general" priority="2">ESP="Tarifas de comisión"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Salesperson/Purchaser_LDR - Action Commission Rates_LDR - Property Caption</note>
         </trans-unit>
         <trans-unit id="TableExtension 798396108 - Field 1122100156 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 3276313895">
           <source>Specifies that sales of this item do not generate salesperson commission, for example freight or packaging.</source>
