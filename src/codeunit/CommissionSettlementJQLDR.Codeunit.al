@@ -149,14 +149,21 @@ codeunit 50007 "Commission Settlement JQ_LDR"
 
     // P1: the setup is checked once at the start. Otherwise the codeunit of TF0021 would fail for every
     // salesperson and the log would have one error line per salesperson.
+    // The account must also be a posting account with direct posting: otherwise the invoice line fails for every
+    // salesperson with a vendor (found in the tests: "Direct Posting must be equal to Yes").
     local procedure CheckSetup(CreatePurchaseInvoice: Boolean)
     var
         SalesReceivablesSetup: Record "Sales & Receivables Setup";
+        GLAccount: Record "G/L Account";
     begin
         SalesReceivablesSetup.Get();
         SalesReceivablesSetup.TestField("Commission Settlement Nos._LDR");
-        if CreatePurchaseInvoice then
-            SalesReceivablesSetup.TestField("Commission Account_LDR");
+        if not CreatePurchaseInvoice then
+            exit;
+        SalesReceivablesSetup.TestField("Commission Account_LDR");
+        GLAccount.Get(SalesReceivablesSetup."Commission Account_LDR");
+        GLAccount.TestField("Account Type", GLAccount."Account Type"::Posting);
+        GLAccount.TestField("Direct Posting", true);
     end;
 
     var
