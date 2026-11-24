@@ -726,6 +726,38 @@
         "tipo": "manual",
         "resultado": "OK",
         "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026), repetida tras activar Registro directo en la cuenta de comisiones: el vendedor A se liquida en Correcto por 10,00 € (comisiones del 15/10/2026) con factura de compra; la comisión del 05/11/2026 sigue pendiente; sin mensajes del proceso"
+      },
+      {
+        "id": "E-11",
+        "rf": "RF-2.2",
+        "escenario": "A-3",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026): registro no editable con lo más reciente arriba, líneas de una ejecución con el mismo Run ID y el usuario de la cola; Abrir liquidación abre la liquidación de A"
+      },
+      {
+        "id": "E-12",
+        "rf": "RF-2.1",
+        "escenario": "A-3",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026): cada ejecución deja una línea por vendedor con Run ID, inicio y fin, vendedor, estado, nº liquidación, mensaje y usuario"
+      },
+      {
+        "id": "E-13",
+        "rf": "RF-3.5",
+        "escenario": "A-9",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026): segunda ejecución seguida sin cambios: una sola línea Aviso Sin comisiones pendientes, ninguna liquidación nueva y la comisión del 05/11 de A sigue pendiente"
+      },
+      {
+        "id": "E-14",
+        "rf": "RF-3.4",
+        "escenario": "A-8",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026): con FACTURA=QUIZA;DIAS=0 y con FACTURA=SI;DIAS=-3 la ejecución termina en Error con el mensaje de parámetro no válido, sin liquidaciones ni líneas en el registro"
       }
     ],
     "desviaciones": [],
@@ -963,6 +995,34 @@
       },
       {
         "ts": "2026-11-24T11:46:40",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T11:51:10",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T11:51:11",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T11:51:13",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T11:51:14",
         "accion": "evidencia",
         "por": "",
         "usuario_gh": "AlejandroGallego-LiderIT",
