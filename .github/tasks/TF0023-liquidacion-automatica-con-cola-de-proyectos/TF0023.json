@@ -670,6 +670,30 @@
         "tipo": "al_compile",
         "resultado": "OK",
         "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos. FindJobQueueEntry y OnValidate de Next Run Date Formula comprobados en el estándar es-29 (JobQueueEntry.Table.al l. 292-306 y 1432). Commit 2fb3ad5"
+      },
+      {
+        "id": "E-04",
+        "rf": "RF-4.1",
+        "escenario": "A-10",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026): Programar liquidación automática crea la entrada de la cola para la codeunit 50007, recurrente, <CM+1D>, 02:00, inicio 01/12/2026 02:00, 3 intentos, 300 s, FACTURA=SI;DIAS=0"
+      },
+      {
+        "id": "E-05",
+        "rf": "RF-4.1",
+        "escenario": "A-11",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026): al pulsar de nuevo avisa de que ya está programada y sigue habiendo una sola entrada"
+      },
+      {
+        "id": "E-06",
+        "rf": "RF-3.5",
+        "escenario": "",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026): ejecución en primer plano sin comisiones pendientes hasta la fecha calculada; una sola línea Aviso «Sin comisiones pendientes hasta el 31/10/26», sin vendedor, sin liquidaciones nuevas, entrada de la cola en Correcto y sin mensajes del proceso (fecha hasta con Today correcta: último día del mes anterior)"
       }
     ],
     "desviaciones": [],
@@ -859,6 +883,27 @@
       {
         "ts": "2026-11-24T10:15:04",
         "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T10:36:56",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T10:36:57",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T11:00:07",
+        "accion": "evidencia",
         "por": "",
         "usuario_gh": "AlejandroGallego-LiderIT",
         "plugin": "0.4.0"
