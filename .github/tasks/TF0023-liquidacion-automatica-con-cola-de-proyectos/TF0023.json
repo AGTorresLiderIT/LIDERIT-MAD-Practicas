@@ -1418,8 +1418,20 @@
         "usuario_gh": "AlejandroGallego-LiderIT",
         "plugin": "0.4.0",
         "puerta": "P2"
+      },
+      {
+        "ts": "2026-11-24T16:47:21",
+        "accion": "pr",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
       }
-    ]
+    ],
+    "pr": {
+      "url": "https://github.com/AGTorresLiderIT/LIDERIT-MAD-Practicas/pull/104",
+      "numero": 104,
+      "fecha": "2026-11-24"
+    }
   },
   "documentacion": {
     "enlaces": {
