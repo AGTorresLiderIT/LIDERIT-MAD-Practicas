@@ -799,6 +799,14 @@
         "tipo": "al_compile",
         "resultado": "OK",
         "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos. Commit c4b4ccd"
+      },
+      {
+        "id": "E-19",
+        "rf": "RF-3.4",
+        "escenario": "",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026): con la cuenta de comisiones sin Registro directo y FACTURA=SI;DIAS=0 la ejecución termina en Error con el mensaje de Registro directo, sin líneas nuevas en el registro y sin liquidar; al reactivarlo se liquida en Correcto"
       }
     ],
     "desviaciones": [],
@@ -1099,6 +1107,13 @@
       },
       {
         "ts": "2026-11-24T12:06:16",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T12:58:06",
         "accion": "evidencia",
         "por": "",
         "usuario_gh": "AlejandroGallego-LiderIT",
