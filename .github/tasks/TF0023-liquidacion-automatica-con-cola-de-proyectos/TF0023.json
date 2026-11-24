@@ -643,6 +643,15 @@
         ],
         "commit": "2b99103",
         "resumen": "XLIFF g.xlf regenerado y es-ES completado con los ESP de TF0023"
+      },
+      {
+        "id": "C-11",
+        "rf": "RF-3.4",
+        "ficheros": [
+          "src/codeunit/CommissionSettlementJQLDR.Codeunit.al"
+        ],
+        "commit": "c4b4ccd",
+        "resumen": "CheckSetup: con FACTURA=SI la cuenta de comisiones debe existir, ser de tipo Auxiliar y tener Registro directo; si no, error antes de liquidar (decisión del programador tras el fallo de A en las pruebas)"
       }
     ],
     "extras": [],
@@ -774,6 +783,22 @@
         "tipo": "manual",
         "resultado": "OK",
         "referencia": "Prueba del programador AlejandroGallego-LiderIT en el sandbox (24/11/2026): el report manual Liquidar comisiones de TF0021 sigue mostrando la ventana de progreso y el mensaje final"
+      },
+      {
+        "id": "E-17",
+        "rf": "RF-1.1",
+        "escenario": "A-1",
+        "tipo": "manual",
+        "resultado": "OK",
+        "referencia": "Revisión de código por el programador AlejandroGallego-LiderIT (24/11/2026): el report 50000 de TF0021 y la codeunit de la cola 50007 llaman a Salesp. Comm. Settlement_LDR con SetParameters, Run, GetSettlementNo y GetWarningText; sin lógica de liquidación copiada; la única diferencia es Run sin if (todo o nada) frente a if Run (error aislado por vendedor); la codeunit de TF0021 no se modifica"
+      },
+      {
+        "id": "E-18",
+        "rf": "RF-3.4",
+        "escenario": "",
+        "tipo": "al_compile",
+        "resultado": "OK",
+        "referencia": "alc 18.1, símbolos 28.5, CodeCop+UICop+lider.ruleset: 0 errores, 0 avisos. Commit c4b4ccd"
       }
     ],
     "desviaciones": [],
@@ -1053,6 +1078,27 @@
       },
       {
         "ts": "2026-11-24T12:03:23",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T12:05:51",
+        "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T12:06:14",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T12:06:16",
         "accion": "evidencia",
         "por": "",
         "usuario_gh": "AlejandroGallego-LiderIT",
