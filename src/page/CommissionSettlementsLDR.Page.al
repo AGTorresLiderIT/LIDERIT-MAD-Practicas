@@ -87,6 +87,14 @@ page 50003 "Commission Settlements_LDR"
                 RunPageLink = "Liquidation No." = field("No.");
                 ToolTip = 'View the commission entries included in the selected settlement.', Comment = 'ESP="Muestra los movimientos de comisión incluidos en la liquidación seleccionada."';
             }
+            // TF0023 RF-2.2: log of the automatic settlement.
+            action(ProcessLog)
+            {
+                Caption = 'Process Log', Comment = 'ESP="Registro del proceso"';
+                Image = Log;
+                RunObject = page "Commission Process Log_LDR";
+                ToolTip = 'View the log of the automatic commission settlement.', Comment = 'ESP="Muestra el registro de la liquidación automática de comisiones."';
+            }
         }
         area(Promoted)
         {
