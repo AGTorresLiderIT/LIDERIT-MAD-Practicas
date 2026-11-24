@@ -809,6 +809,28 @@
         ],
         "commit": "df10ef2",
         "resumen": "El XMLport guarda la fecha de registro más reciente exportada (P-6) y el fichero se descarga con DownloadFromStream como COMISIONES_AAAAMM.csv"
+      },
+      {
+        "id": "C-14",
+        "rf": "RF-6.1",
+        "ficheros": [
+          ".github/tasks/TF0022-tarifas-de-comision-excel-y-xmlport/TF0022.json",
+          ".github/tasks/TF0022-tarifas-de-comision-excel-y-xmlport/TF0022 - Tarifas de comisión Excel y XMLport.docx",
+          ".github/tasks/TF0022-tarifas-de-comision-excel-y-xmlport/TF0022 - Tarifas de comisión Excel y XMLport.md"
+        ],
+        "commit": "13a5a1e",
+        "resumen": "Sección 3 del documento de tarea, punto 6 (comparativa Excel Buffer / XMLport / Abrir en Excel, decisiones y problemas) y pruebas con pies de captura"
+      },
+      {
+        "id": "C-15",
+        "rf": "RF-6.2",
+        "ficheros": [
+          ".github/tasks/TF0022-tarifas-de-comision-excel-y-xmlport/TF0022.json",
+          ".github/tasks/TF0022-tarifas-de-comision-excel-y-xmlport/TF0022 - Tarifas de comisión Excel y XMLport.docx",
+          ".github/tasks/TF0022-tarifas-de-comision-excel-y-xmlport/TF0022 - Tarifas de comisión Excel y XMLport.md"
+        ],
+        "commit": "13a5a1e",
+        "resumen": "Sección 3 del documento de tarea, punto 6 (comparativa Excel Buffer / XMLport / Abrir en Excel, decisiones y problemas) y pruebas con pies de captura"
       }
     ],
     "extras": [
@@ -1531,6 +1553,20 @@
       {
         "ts": "2026-11-23T17:46:48",
         "accion": "evidencia",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T09:07:09",
+        "accion": "cambio",
+        "por": "",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T09:07:11",
+        "accion": "cambio",
         "por": "",
         "usuario_gh": "AlejandroGallego-LiderIT",
         "plugin": "0.4.0"
