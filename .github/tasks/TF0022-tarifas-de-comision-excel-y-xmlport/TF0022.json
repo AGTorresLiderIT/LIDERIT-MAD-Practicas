@@ -1103,13 +1103,173 @@
         "referencia": "Revisión de código por el programador AlejandroGallego-LiderIT (23/11/2026) del diff de Commission Mgt._LDR frente a TF0021 (commit e4c9cba): CreateEntry solo cambia la obtención del % (GetOriginalInvoicePct / GetCommissionPct con categoría y fecha); comprobaciones, cálculo, campos e Insert de TF0020 sin cambios; sin lógica de creación duplicada"
       }
     ],
-    "desviaciones": [],
+    "desviaciones": [
+      {
+        "puerta": "escenarios",
+        "codigo": "A-17:sin-validar",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "escenarios",
+        "codigo": "A-18:sin-validar",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "trazabilidad",
+        "codigo": "RF-2.1:evidencia-ko",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "trazabilidad",
+        "codigo": "RF-3.1:evidencia-ko",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "trazabilidad",
+        "codigo": "RF-3.2:evidencia-ko",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "trazabilidad",
+        "codigo": "RF-3.3:evidencia-ko",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "trazabilidad",
+        "codigo": "RF-6.1:sin-evidencia",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "trazabilidad",
+        "codigo": "RF-6.2:sin-evidencia",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "herramientas",
+        "codigo": "uso:bcquality",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "fichero:\".github/tasks/TF0022-tarifas-de-comision-excel-y-xmlport/TF0022 - Tarifas de comisi/303/263n Excel y XMLport.docx\"",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "fichero:\".github/tasks/TF0022-tarifas-de-comision-excel-y-xmlport/TF0022 - Tarifas de comisi/303/263n Excel y XMLport.md\"",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:9bb7f36",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:ef6142a",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:33663de",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:9d6e51e",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:f42fdb7",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:a01dd9f",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:e9366ac",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:6259af3",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:44830c9",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:c65da67",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      },
+      {
+        "puerta": "alcance",
+        "codigo": "commit:16b3c67",
+        "motivo": "Práctica sin consultor disponible; los KO se corrigieron y se repitieron en OK; A-17 y A-18 sin evidencia registrada",
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24"
+      }
+    ],
     "firmas": {
       "P1": {
         "por": "AlejandroGallego-LiderIT",
         "fecha": "2026-11-23",
         "reformulacion": "Crearemos la tabla de tarifas editable con acceso desde la ficha del vendedor; las líneas se introducen a mano y también importando desde Excel. Cambiaremos el cálculo del % de TF0020 en CommissionMgtLDR, en GetCommissionPct, cambiando el orden a: 1. tarifa del vendedor + categoría del producto (con Starting Date <= fecha de registro, la más reciente); 2. tarifa del vendedor con categoría en blanco; 3. el «% Comisión» de la ficha del vendedor. No se duplica código de TF0020: solo cambia la función que obtiene el %. Importación con Excel Buffer (UploadIntoStream, SelectSheetsNameStream, OpenBookStream, ReadSheet), recorriendo las celdas por Row No. y saltando la fila 1; cada fila se valida (vendedor existente, categoría, Evaluate). Las líneas erróneas van a una tabla temporal de errores y el resto sigue; al final, un mensaje con filas importadas, modificadas y con error. Excel Buffer y no XMLport porque un XMLport no puede leer ficheros Excel. Exportación de movimientos con Excel Buffer desde Commission Entries, con los filtros del usuario pasados con Rec: columnas fecha registro, tipo y nº documento, vendedor, nombre vendedor, cliente, nombre cliente, base, %, comisión, liquidado, nº liquidación; cabecera en negrita y formato numérico en importes; CreateNewBook, WriteSheet, CloseBook, SetFriendlyFilename y OpenExcel. XMLport solo puede sacar texto y queremos Excel, por eso no es una opción válida frente a Excel Buffer. No se recalcularán los movimientos de comisión ya registrados; las nuevas tarifas solo se aplican a los movimientos que se generen después. Ejemplo: JR tiene una tarifa del 8 % para MOBILIARIO. Al registrar una factura el 15/01/2027 con una línea de 1.000 € sin IVA, se genera un movimiento con base 1.000 €, 8 % y comisión de 80 €. Otra línea de 1.000 € de una categoría sin tarifa específica aplica la tarifa general de JR del 4 % y genera otro movimiento de 40 €.",
         "validacion_omitida": "Prueba del procedimiento, no es trabajo real; consultor no disponible (palabras del programador)"
+      },
+      "P2": {
+        "por": "AlejandroGallego-LiderIT",
+        "fecha": "2026-11-24",
+        "reformulacion": "Se a creado la tabla de tarifas, se a ajustado la busqueda de las lineas al calcular el %, es del TF0020, no se duplicó el código, solo de como lo buscaba. Para meter las tarifas se creo la accion de importar desde excel, hecho con excel buffer, validando cada fila y ademas las lineas que salgan con error se van a una tabka temporal de errores, al final, un mensaje informado sobre cuantas se han añadido, modificado o tuvieron un error.\nLuego se creó la accion para exportar a excel los movimientos de comision,, con CreateNewBook, Write Sheet, CloseBook setFriendlyFileName y OpenExcel, y tambien se creo la opcion de exportar a CSV con xml port, con filtros con SetTableView, con propiedasdes Export, VariableText, FIeldSeparator, FieldDelimiter..."
       }
     },
     "subissues": {
@@ -1570,6 +1730,190 @@
         "por": "",
         "usuario_gh": "AlejandroGallego-LiderIT",
         "plugin": "0.4.0"
+      },
+      {
+        "ts": "2026-11-24T16:15:32",
+        "accion": "firma",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "P2"
+      },
+      {
+        "ts": "2026-11-24T16:18:21",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "escenarios"
+      },
+      {
+        "ts": "2026-11-24T16:18:22",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "escenarios"
+      },
+      {
+        "ts": "2026-11-24T16:18:23",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "trazabilidad"
+      },
+      {
+        "ts": "2026-11-24T16:18:24",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "trazabilidad"
+      },
+      {
+        "ts": "2026-11-24T16:18:25",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "trazabilidad"
+      },
+      {
+        "ts": "2026-11-24T16:18:27",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "trazabilidad"
+      },
+      {
+        "ts": "2026-11-24T16:18:28",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "trazabilidad"
+      },
+      {
+        "ts": "2026-11-24T16:18:29",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "trazabilidad"
+      },
+      {
+        "ts": "2026-11-24T16:18:30",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "herramientas"
+      },
+      {
+        "ts": "2026-11-24T16:18:43",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:18:44",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:18:45",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:18:47",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:18:48",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:18:49",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:18:50",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:18:52",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:18:53",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:18:55",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:18:56",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:18:57",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
+      },
+      {
+        "ts": "2026-11-24T16:18:59",
+        "accion": "desviacion",
+        "por": "AlejandroGallego-LiderIT",
+        "usuario_gh": "AlejandroGallego-LiderIT",
+        "plugin": "0.4.0",
+        "puerta": "alcance"
       }
     ]
   },
